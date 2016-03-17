@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/blue"
+    >
+    <Button
+        android:id="@+id/photo_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="图片选择对话框"
+        android:textColor="@color/red"
+        />
+    <Button
+        android:id="@+id/confirm_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="confirmdialog"
+        android:textColor="@color/red"
+        />
+    <Button
+        android:id="@+id/custom_alert_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="customalertdialog"
+        android:textColor="@color/red"
+        />
+
+</LinearLayout>
