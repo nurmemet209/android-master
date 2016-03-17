@@ -1,1 +1,1 @@
-include ':app' ,':sharesdk', ':autoupgrade', ':customlibrary'
+include ':app' ,':sharesdk', ':autoupgrade', ':customlibrary','pppcar'

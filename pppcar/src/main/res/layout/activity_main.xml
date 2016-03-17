@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+
+    <!--可滑动的布局内容-->
+    <com.cn.viewpager.CustomViewPager
+        android:id="@+id/vp_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/line"
+        />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/bottom_tab"
+        android:background="@color/lightgray"
+        />
+
+
+    <RadioGroup
+        android:id="@+id/bottom_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/home_sl"
+            android:gravity="center"
+            android:text="@string/home"
+            android:textColor="@drawable/text_sl"
+
+
+            />
+
+        <RadioButton
+            android:id="@+id/car_brand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/message_sl"
+            android:gravity="center"
+            android:text="@string/car_brand"
+            android:textColor="@drawable/text_sl"
+            />
+
+        <RadioButton
+            android:id="@+id/parts_brand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/message_sl"
+            android:gravity="center"
+            android:text="@string/parts_brand"
+            android:textColor="@drawable/text_sl"
+            />
+
+        <RadioButton
+            android:id="@+id/me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/me_sl"
+            android:gravity="center"
+            android:text="@string/me"
+            android:textColor="@drawable/text_sl"
+            />
+    </RadioGroup>
+</RelativeLayout>
