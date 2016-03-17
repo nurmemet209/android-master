@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/root_view"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="15dp"
+              android:visibility="invisible"
+    >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/share_dialog_bg"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:stretchColumns="0,1,2"
+
+        >
+
+        <TableRow
+
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:id="@+id/wechat_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/wechat_friend_sl"
+                android:gravity="center"
+                android:text="@string/wechat"
+                />
+
+
+            <TextView
+                android:id="@+id/wechat_timeline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/wechat_moment_sl"
+                android:gravity="center"
+                android:text="@string/wechatmoments"
+                />
+
+            <TextView
+                android:id="@+id/wechat_favrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/wechat_favorite_sl"
+                android:gravity="center"
+                android:text="@string/wechatfavorite"
+                />
+
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/qq_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/qq_friend_sl"
+                android:gravity="center"
+                android:text="@string/share_to_qq"
+                />
+
+            <TextView
+                android:id="@+id/qq_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/qq_zone_sl"
+                android:gravity="center"
+                android:text="@string/share_to_qzone"
+                />
+
+            <TextView
+                android:id="@+id/sina_blog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/sina_sl"
+                android:gravity="center"
+                android:text="@string/sinaweibo"
+                />
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/share_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/share_dialog_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/cancel_"
+        android:textColor="@color/red"
+        />
+
+</LinearLayout>
