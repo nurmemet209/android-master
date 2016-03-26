@@ -13,4 +13,11 @@
     <dimen name="divider">0.5dp</dimen>
 
     <dimen name="list_padding_rl">8dp</dimen>
+    <dimen name="padding_smallest">6dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_smaller">7dp</dimen>
+    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="padding_big">12dp</dimen>
+    <dimen name="padding_bigger">14dp</dimen>
+    <dimen name="padding_biggest">16dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.cn.pppcar.com.cn.adapter;
+package com.cn.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

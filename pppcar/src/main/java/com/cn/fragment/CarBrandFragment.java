@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.cn.pppcar.R;
 
-/**
- * Created by nurmemet on 2015/12/19.
+/**品牌
+ *  * Created by nurmemet on 2015/12/19.
  */
 public class CarBrandFragment extends Fragment {
 

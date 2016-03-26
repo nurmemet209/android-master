@@ -85,7 +85,7 @@ public class FileUtils {
 	/**
 	 * 获取目录文件个数
 	 * 
-	 * @param f
+	 * @param
 	 * @return
 	 */
 	public long getFileList(File dir) {

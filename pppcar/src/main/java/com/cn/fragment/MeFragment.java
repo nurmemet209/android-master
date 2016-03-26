@@ -1,5 +1,6 @@
 package com.cn.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cn.pppcar.R;
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by nurmemet on 2015/12/19.
@@ -15,10 +20,17 @@ import com.cn.pppcar.R;
 public class MeFragment extends Fragment{
     private View mainView;
 
+    @Bind(R.id.head_img)
+    public SimpleDraweeView headImg;
+    @Bind(R.id.head_bg)
+    public SimpleDraweeView headBgImg;
+
     public static MeFragment getInstance(){
         MeFragment frag=new MeFragment();
         return frag;
     }
+
+
 
 
     @Nullable
@@ -26,7 +38,13 @@ public class MeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mainView=inflater.inflate(R.layout.me_frag,null);
-
+        ButterKnife.bind(this,mainView);
+        bindData();
         return mainView;
+    }
+
+    private void bindData(){
+        headImg.setImageURI(Uri.parse("http://c.hiphotos.bdimg.com/imgad/pic/item/00e93901213fb80ec98291ed31d12f2eb93894bd.jpg"));
+        headBgImg.setImageURI(Uri.parse("http://pic10.nipic.com/20100926/5410600_133352002046_2.jpg"));
     }
 }

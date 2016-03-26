@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.cn.pppcar"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,7 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
@@ -29,4 +30,9 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile project(':customlibrary')
     compile project(':autoupgrade')
+
+    compile 'org.apache.commons:commons-collections4:4.0'
+
+    /*图片加载*/
+    compile 'com.facebook.fresco:fresco:0.9.0+'
 }

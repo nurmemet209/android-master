@@ -5,32 +5,30 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
 
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class WelcomeActivity extends AppCompatActivity {
-
+    private Handler mHandler=new Handler();
 
     @Bind(R.id.advertize)
     public SimpleDraweeView advertizeImg;
 
+    @Bind(R.id.welcome)
+    ImageView mWelcomeImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.welcome);
         ButterKnife.bind(this);
-
-        ImagePipeline pip= Fresco.getImagePipeline();
 
         advertizeImg.setImageURI(Uri.parse("http://c.hiphotos.bdimg.com/imgad/pic/item/00e93901213fb80ec98291ed31d12f2eb93894bd.jpg"));
         delaySwitch();
@@ -51,7 +49,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
-    private Handler mHandler=new Handler();
 
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

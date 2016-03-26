@@ -96,72 +96,7 @@ public class JsonRequest<T> extends Request<T> {
        if (cookieHandler!=null){
            cookieHandler.saveCookie(response.headers);
        }
-//        ApiHelper.headers = (HashMap<String,String>) response.headers.get("Set-Cookie");
-//
-//        Header[] headers =response.headers.get("Set-Cookie");
-//
-//
-//        if (headers.toString() == null)
-//            return ;
-//        // boolean isLogin = false;
-//        StringBuilder sb = new StringBuilder();
-//        for (int i = 0; i < headers.length; i++) {
-//            String cookie = headers[i].getValue();
-//            String[] cookievalues = cookie.split(";");
-//            for (int j = 0; j < cookievalues.length; j++) {
-//
-//                String[] keyPair = cookievalues[j].split("=");
-//                String key = keyPair[0].trim();
-//                String value = keyPair.length > 1 ? keyPair[1].trim() : "";
-//                //
-//                CookieContiner.put(key, value);
-//                sb.append(key).append(":\n").append(value).append("\n\n");
-//                if (key.equals(COOKIE_PREFIX + "auth") && !value.trim().equals("")) {
-//                    if (controller.getUser() == null) {
-//                        User user = new User();
-//                        user.setAuth(value);
-//                        controller.setUser(user);
-//                    }
-//
-//                }
-//                if (key.equals(COOKIE_PREFIX + "name") && !value.trim().equals("") && controller.getUser() != null) {
-//                    try {
-//                        String name = URLDecoder.decode(value, "utf-8");
-//                        controller.getUser().setName(value);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//                if (key.equals(COOKIE_PREFIX + "isEnable") && !value.trim().equals("") && controller.getUser() != null) {
-//                    if (value.equals("1"))
-//                        controller.getUser().setEnable(true);
-//                    else if (value.equals("0"))
-//                        controller.getUser().setEnable(false);
-//                }
-//                if (key.equals(COOKIE_PREFIX + "imgUrl") && !value.trim().equals("") && controller.getUser() != null) {
-//                    controller.getUser().setHeadUrl(value);
-//                }
-//                if (key.equals(COOKIE_PREFIX + "ID") && !value.trim().equals("") && controller.getUser() != null) {
-//                    controller.getUser().setPageId(value);
-//                }
-//                if (key.equals(COOKIE_PREFIX + "hasJobintention") && !value.trim().equals("") && controller.getUser() != null) {
-//                    if (value.equals("1")) {
-//                        controller.getUser().setHasJobIntesion(true);
-//                    } else if (value.equals("0")) {
-//                        controller.getUser().setHasJobIntesion(false);
-//                    }
-//
-//
-//                }
-//                if (key.equals(COOKIE_PREFIX + "location") && !value.trim().equals("") && controller.getUser() != null) {
-//                    controller.getUser().setLocation(value);
-//                }
-//
-//
-//            }
-//
-//            MyLogger.showLog(cookie);
+
 
     }
 }

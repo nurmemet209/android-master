@@ -4,4 +4,18 @@
     <string name="car_brand">汽车品牌</string>
     <string name="parts_brand">配件品牌</string>
     <string name="home">主页</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="my_integral">我的积分</string>
+    <string name="my_work">我的作业</string>
+    <string name="my_order">我的订单</string>
+    <string name="see_all_order">查看全部订单</string>
+    <string name="waiting_examine">待审核</string>
+    <string name="waiting_pay">待付款</string>
+    <string name="waiting_diliver">待发货</string>
+    <string name="waiting_receive">待收货</string>
+    <string name="return_goods">退货</string>
+    <string name="my_auction">我的竞拍</string>
+    <string name="integral_mall">积分商城</string>
+    <string name="sell_center">销售中心</string>
+    <string name="business_extension">销售推广</string>
 </resources>

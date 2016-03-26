@@ -76,4 +76,38 @@ public class IOUtils {
 
 	}
 
+	/**
+	 * assets目录下面的文件拷贝到程序数据目录下
+	 * @param applicationContext
+	 * @param fromRelativePath，如 assets/test/abc.txt,    test/abc.txt
+	 * @param toRelaytivePath ,如 data/data/com.cn.pppcar/files+ ,  toRelaytivePath
+     */
+	public static void copyAssetFile2ContextDir(Context applicationContext,String fromRelativePath,String toRelaytivePath){
+		int index = fromRelativePath.lastIndexOf("/");
+		String fileName="";
+		if(index!=-1){
+			fileName=fromRelativePath.substring(index,fromRelativePath.length());
+		}else{
+			fileName=fromRelativePath;
+		}
+		AssetManager assetManager =applicationContext.getAssets();
+		try {
+			InputStream inputStream = assetManager.open(fileName);
+			byte[] buffer = new byte[inputStream.available()];
+			inputStream.read(buffer);
+			inputStream.close();
+
+			String fileDir=applicationContext.getFilesDir() + "/+"+toRelaytivePath+"/" + fileName;
+			File of = new File(applicationContext.getFilesDir() + "/"+toRelaytivePath);
+			of.mkdir();
+			File file=new File(fileDir);
+			file.createNewFile();
+			FileOutputStream outputStream = new FileOutputStream(file);
+			outputStream.write(buffer);
+			outputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

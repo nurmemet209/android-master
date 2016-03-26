@@ -7,7 +7,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
-import com.cn.pppcar.com.cn.adapter.MainPageAdapter;
+import com.cn.adapter.MainPageAdapter;
+import com.cn.util.IOUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,14 +36,15 @@ public class MainPageAct extends FragmentActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setUpViewPager();
-
-
+        init();
        // UmengUpdateAgent.update(this);
-
-
-
     }
+    private void init() {
+        IOUtils.copyAssetFile2ContextDir(this.getApplicationContext(),"place.db","databases");
+        setUpViewPager();
+    }
+
+
 
 
 

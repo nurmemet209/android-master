@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-
+        android:background="@drawable/dialog_button_bg_sl"
         android:paddingBottom="15dp"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
@@ -49,6 +49,7 @@
         android:id="@+id/take_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/left_right_corner_btn_bg"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:paddingLeft="15dp"

@@ -16,10 +16,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 public class Util {
 
 	private static final String TAG = "SDK_Sample.Util";
+
+
+
+	public static boolean isNoteEmpty(List list){
+		if(list!=null&&!list.isEmpty()){
+			return true;
+		}
+		return false;
+	}
 
 	public static byte[] bmpToByteArray(final Bitmap bmp,
 			final boolean needRecycle) {
@@ -224,4 +234,6 @@ public class Util {
 
 		return null;
 	}
+
+
 }

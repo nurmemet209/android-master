@@ -1,4 +1,4 @@
-package com.cn.pppcar.com.cn.adapter;
+package com.cn.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
