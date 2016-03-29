@@ -34,6 +34,7 @@ public class PictureSelecctDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 v.setTag(FROM_ALBUM);
+                onClickListener.onClick(v);
                 dismiss();
             }
         });

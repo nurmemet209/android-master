@@ -20,4 +20,6 @@
     <dimen name="padding_big">12dp</dimen>
     <dimen name="padding_bigger">14dp</dimen>
     <dimen name="padding_biggest">16dp</dimen>
+    <!--模块与模块之间的距离-->
+    <dimen name="part_normal">4dp</dimen>
 </resources>

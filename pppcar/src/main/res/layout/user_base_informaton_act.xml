@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+
+    >
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:divider="@drawable/small_divider"
+          android:orientation="vertical"
+          android:showDividers="middle"
+          >
+
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/part_normal"
+             android:background="@color/lightgray_1"
+             />
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="uploadHeadPortrait"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/headportrait"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/head_portrait"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                fresco:actualImageScaleType="fitXY"
+                fresco:roundAsCircle="true"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyNickName"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/nieck_name"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/nieck_name"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyPhoneNumber"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/my_invitation_code"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/invitation_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/nieck_name"
+                android:textSize="@dimen/text_size_large"
+
+                />
+
+
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/phone_number"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/nieck_name"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyTelNumber"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/tel_number"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/tel_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/tel_number"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyEmail"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/email"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/email"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/part_normal"
+             android:background="@color/lightgray_1"
+             />
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="uploadLicenseImage"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/business_license"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/business_license"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                fresco:actualImageScaleType="fitXY"
+                fresco:roundAsCircle="false"
+
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="uploadShopImage"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/shop_img"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyLegelPerson"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/legal_person"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/legal_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/legal_person"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyCompanyName"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/comapny_name"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/comapny_name"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyLicenseRegistrationCode"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/business_license_registration_number"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/license_registration_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/business_license_registration_number"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyContactPerson"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/contact_person"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/contact_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/contact_person"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:onClick="modifyCompanyAddress"
+             android:padding="@dimen/padding_big"
+             android:background="@drawable/list_item_bg"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/company_address"
+                android:textSize="@dimen/text_size_large"
+                />
+
+            <TextView
+                android:id="@+id/company_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="@string/company_address"
+                android:textSize="@dimen/text_size_large"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+      </LinearLayout>
+
+
+   </ScrollView>
+
+</LinearLayout>

@@ -35,5 +35,7 @@ dependencies {
     'org.apache.commons:commons-collections4:4.1'
 
 
+    compile 'com.yalantis:ucrop:1.3.+'
+
 }
 

@@ -18,4 +18,21 @@
     <string name="integral_mall">积分商城</string>
     <string name="sell_center">销售中心</string>
     <string name="business_extension">销售推广</string>
+    <string name="headportrait">头像</string>
+    <string name="nieck_name">昵称</string>
+    <string name="my_invitation_code">我的邀请码</string>
+    <string name="phone_number">手机</string>
+    <string name="tel_number">固定电话</string>
+    <string name="email">邮箱</string>
+    <string name="business_license">营业执照</string>
+    <string name="shop_img">店铺照片</string>
+    <string name="legal_person">法人</string>
+    <string name="comapny_name">公司名称</string>
+    <string name="business_license_registration_number">营业执照注册号</string>
+    <string name="contact_person">联系人</string>
+    <string name="company_address">公司地址</string>
+    <string name="select_head_portrait">选择头像</string>
+    <string name="toast_cannot_retrieve_selected_image">Cannot retrieve selected image</string>
+    <string name="toast_cannot_retrieve_cropped_image">Cannot retrieve cropped image</string>
+    <string name="toast_unexpected_error">Unexpected error</string>
 </resources>
