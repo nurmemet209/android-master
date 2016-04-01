@@ -61,7 +61,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@drawable/small_divider"
+                android:divider="@drawable/divider_small"
                 android:dividerPadding="5dp"
                 android:showDividers="middle"
                 android:gravity="center"
@@ -87,7 +87,7 @@
                         android:paddingBottom="@dimen/padding_small"
 
                         android:text="@string/my_collection"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/padding_small"
                         android:text="@string/my_integral"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/padding_small"
                         android:text="@string/my_work"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -182,7 +182,7 @@
                     android:drawableLeft="@mipmap/my_order"
                     android:padding="@dimen/padding_big"
                     android:text="@string/my_order"
-                    android:textSize="@dimen/text_size_large"
+
                     />
 
                 <TextView
@@ -194,7 +194,7 @@
                     android:drawableRight="@mipmap/icon_right"
                     android:padding="@dimen/padding_normal"
                     android:text="@string/my_order"
-                    android:textSize="@dimen/text_size_normal"
+                    android:textSize="@dimen/text_size_small"
 
                     />
             </RelativeLayout>
@@ -223,7 +223,7 @@
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_examine"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -234,7 +234,7 @@
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_pay"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -245,7 +245,7 @@
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_diliver"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -256,7 +256,7 @@
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_receive"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                     <TextView
@@ -267,7 +267,7 @@
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/return_goods"
-                        android:textSize="@dimen/text_size_normal"
+                        android:textSize="@dimen/text_size_small"
                         />
 
                 </TableRow>
@@ -282,7 +282,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@drawable/small_divider"
+                android:divider="@drawable/divider_small"
                 android:dividerPadding="1dp"
                 android:orientation="vertical"
                 android:showDividers="middle"
@@ -294,7 +294,7 @@
                     android:drawableLeft="@mipmap/my_order"
                     android:padding="@dimen/padding_big"
                     android:text="@string/my_auction"
-                    android:textSize="@dimen/text_size_large"
+
                     />
 
                 <TextView
@@ -303,7 +303,7 @@
                     android:drawableLeft="@mipmap/integral_mall"
                     android:padding="@dimen/padding_big"
                     android:text="@string/integral_mall"
-                    android:textSize="@dimen/text_size_large"
+
                     />
 
                 <TextView
@@ -312,7 +312,7 @@
                     android:drawableLeft="@mipmap/sell_center"
                     android:padding="@dimen/padding_big"
                     android:text="@string/sell_center"
-                    android:textSize="@dimen/text_size_large"
+
                     />
 
                 <TextView
@@ -321,7 +321,7 @@
                     android:drawableLeft="@mipmap/spreed"
                     android:padding="@dimen/padding_big"
                     android:text="@string/business_extension"
-                    android:textSize="@dimen/text_size_large"
+
                     />
             </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cn.entity.CitySelectPage;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -22,16 +23,29 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     protected Context mContext;
 
-    protected ApiHelper apiHelper;
-    public final static String HOST = "http://ermaarip.blogbas.com/index.php";
+    private static ApiHelper apiHelper;
+    public final static String HOST = "http://192.168.1.101:8080/musicplayer";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
-    private static boolean isUyghurLanguage = true;
     private static int appVersion;
     private final static String LG_UG = "ug";
     private final static String LG_ZH = "zh";
 
     private final static String COOKIE_PREFIX = "ErCookie_";
 
+    private static ApiHandler handler;
+
+    private ApiHandler(Context context) {
+        this.mContext = context;
+        apiHelper=new ApiHelper(context);
+    }
+
+    public static ApiHandler getInstance(Context context) {
+        if (handler == null) {
+            handler = new ApiHandler(context);
+
+        }
+        return handler;
+    }
 
     @Override
     public Map<String, String> addCookie() {
@@ -45,9 +59,6 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     }
 
-    public static void setLanguage(boolean isUyghurLan) {
-        isUyghurLanguage = isUyghurLan;
-    }
 
     public static void setAppVersion(int appVer) {
         appVersion = appVer;
@@ -62,7 +73,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
 
     public void login(Response.Listener listener, final String userName, final String pasword) {
-        String url = getRootApi().append("user&a=login").toString();
+        String url = getRootApi().append("/user&a=login").toString();
         StringRequest request = new StringRequest(Request.Method.POST, url, listener, null) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -76,6 +87,18 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
+    public void getAllCityList(Response.Listener<CitySelectPage> listener,Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/citySelectPage/getAllCities").toString();
+        GsonRequest request = new GsonRequest<>(url, CitySelectPage.class, null, listener, errorListener);
+        addToRequestQueue(request);
+    }
+
+    public void getAllCity(Response.Listener<String> listener,Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/citySelectPage/getAllCities").toString();
+        StringRequest request = new StringRequest(url, listener, errorListener);
+        addToRequestQueue(request);
+    }
+
 
     protected void addToRequestQueue(Request req) {
         JsonRequest.setCookieHandler(this);
@@ -84,9 +107,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     protected HashMap<String, String> getDefaultPosData() {
         HashMap params = new HashMap();
-        if (isUyghurLanguage) {
-            params.put("lg", LG_UG);
-        } else {
+        {
             params.put("lg", LG_ZH);
         }
         params.put("version", Integer.toString(appVersion));
@@ -102,8 +123,6 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
 
-
-
     private static <T> T toObject(JSONObject str, Class<T> claxx) {
 
         if (str != null) {
@@ -117,6 +136,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
         return null;
     }
+
     private static <T> T toObject(String str, Class<T> claxx) {
 
         if (str != null) {

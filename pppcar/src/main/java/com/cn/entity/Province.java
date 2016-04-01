@@ -5,7 +5,16 @@ package com.cn.entity;
  */
 public class Province extends BaseEntity {
     private long provinceId;
-    private String name;
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    private String province;
 
     public long getProvinceId() {
         return provinceId;
@@ -15,11 +24,9 @@ public class Province extends BaseEntity {
         this.provinceId = provinceId;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getName() {
+        return province;
     }
 }

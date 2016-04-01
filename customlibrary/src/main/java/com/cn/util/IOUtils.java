@@ -97,7 +97,7 @@ public class IOUtils {
 			inputStream.read(buffer);
 			inputStream.close();
 
-			String fileDir=applicationContext.getFilesDir() + "/+"+toRelaytivePath+"/" + fileName;
+			String fileDir=applicationContext.getFilesDir() + "/"+toRelaytivePath+"/" + fileName;
 			File of = new File(applicationContext.getFilesDir() + "/"+toRelaytivePath);
 			of.mkdir();
 			File file=new File(fileDir);

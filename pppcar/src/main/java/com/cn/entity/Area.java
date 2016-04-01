@@ -6,12 +6,16 @@ package com.cn.entity;
 public class Area extends BaseEntity {
 
     private long areaId;
-
-
-
     private long cityId;
-    private String name;
+    private String area;
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public long getCityId() {
         return cityId;
@@ -30,11 +34,9 @@ public class Area extends BaseEntity {
         this.areaId = areaId;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getName() {
+        return area;
     }
 }

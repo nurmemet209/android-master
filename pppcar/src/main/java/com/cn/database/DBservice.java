@@ -28,12 +28,6 @@ public class DBservice {
         ArrayList<Province> provinceList=new ArrayList<>();
         SQLiteDatabase db = dbOpenHepler.getWritableDatabase();
         String sql="select id,province_id,province from pca_provinces";
-        String str="select name from sqlite_master where type='table' ";
-//        Cursor cursor=db.rawQuery(str,null);
-//        while (cursor.moveToNext()){
-//            String s=cursor.getString(cursor.getColumnIndex("name"));
-//            System.out.println(s);
-//        }
         Cursor cursor=db.rawQuery(sql,null);
         while (cursor.moveToNext()){
             long id = cursor.getLong(cursor.getColumnIndex("id"));
@@ -41,9 +35,33 @@ public class DBservice {
             String name=cursor.getString(cursor.getColumnIndex("province"));
             Province province=new Province();
             province.setId(id);
-            province.setName(name);
+            province.setProvince(name);
             province.setProvinceId(provinceId);
             provinceList.add(province);
+        }
+
+        return provinceList;
+    }
+    /**
+     * 查询所有的省份
+     * @return
+     */
+    public ArrayList<? extends BaseEntity> getAllCity(){
+        ArrayList<City> provinceList=new ArrayList<>();
+        SQLiteDatabase db = dbOpenHepler.getWritableDatabase();
+        String sql="select id,city_id,province_id,city from pca_cities";
+        Cursor cursor=db.rawQuery(sql,null);
+        while (cursor.moveToNext()){
+            long id = cursor.getLong(cursor.getColumnIndex("id"));
+            long provinceId=cursor.getLong(cursor.getColumnIndex("province_id"));
+            long cityId=cursor.getLong(cursor.getColumnIndex("city_id"));
+            String name=cursor.getString(cursor.getColumnIndex("city"));
+            City city=new City();
+            city.setId(id);
+            city.setCity(name);
+            city.setProvinceId(provinceId);
+            city.setCityId(cityId);
+            provinceList.add(city);
         }
 
         return provinceList;
@@ -65,7 +83,7 @@ public class DBservice {
             String name=cursor.getString(cursor.getColumnIndex("city"));
             City city=new City();
             city.setId(id);
-            city.setName(name);
+            city.setCity(name);
             city.setCityId(cityId);
             city.setProvinceId(provinceId);
             cityList.add(city);
@@ -91,7 +109,7 @@ public class DBservice {
             String name=cursor.getString(cursor.getColumnIndex("area"));
             Area area=new Area();
             area.setId(id);
-            area.setName(name);
+            area.setArea(name);
             area.setCityId(cityId);
             area.setAreaId(areaId);
             areaList.add(area);

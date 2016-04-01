@@ -3,10 +3,19 @@ package com.cn.entity;
 /**
  * Created by nurmemet on 2016/3/19.
  */
-public class City extends BaseEntity {
+public  class City extends BaseEntity {
     private long cityId;
     private long provinceId;
-    private String name;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city;
 
     public long getProvinceId() {
         return provinceId;
@@ -25,11 +34,8 @@ public class City extends BaseEntity {
     }
 
 
+    @Override
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return city;
     }
 }

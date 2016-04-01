@@ -44,6 +44,7 @@ public class CustomStack extends HurlStack {
     public CustomStack(OkHttpClient okHttpClient,UrlRewriter urlRewriter, SSLSocketFactory sslSocketFactory) {
         super(urlRewriter,sslSocketFactory);
         this.okHttpClient = okHttpClient;
+
     }
 
     @Override

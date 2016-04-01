@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+    >
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/main_red"
+        app:tabSelectedTextColor="@color/main_red"
+        app:tabTextColor="@color/main_text_color"
+        />
+
+
+    <com.cn.viewpager.CustomViewPager
+        android:id="@+id/product_detail_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/product_detail_bottom"
+        android:layout_below="@+id/tab_container"
+        />
+
+    <LinearLayout
+        android:id="@+id/product_detail_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/main_text_color"
+        >
+       <TextView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="@string/collect"
+           android:gravity="center"
+           android:textColor="@color/white"
+           android:drawableTop="@drawable/collect_sl"
+           android:drawablePadding="3dp"
+           android:textSize="@dimen/text_size_small"
+           android:paddingTop="@dimen/padding_smaller"
+           />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cart"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:drawableTop="@mipmap/cart"
+            android:drawablePadding="3dp"
+            android:paddingTop="@dimen/padding_smaller"
+            android:textSize="@dimen/text_size_small"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/put_into_cart"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/main_yellow"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/buy_immediatly"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/main_red"
+
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

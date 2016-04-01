@@ -4,18 +4,10 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
     >
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/main_page_recycle_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
-    <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/red"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="主页"
-        />
+    />
 </LinearLayout>

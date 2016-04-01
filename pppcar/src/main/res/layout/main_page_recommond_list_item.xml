@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="250dp"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:showDividers="middle"
+              android:divider="@drawable/divider_small"
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/recommond_item_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="fitXY"
+
+            />
+
+        <TextView
+            android:id="@+id/item_title_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_big"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/lightgray_1"
+            />
+
+        <TextView
+            android:id="@+id/price_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_big"
+            android:textColor="@color/red"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/recommond_item_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="fitXY"
+
+            />
+
+        <TextView
+            android:id="@+id/item_title_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_big"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/lightgray_1"
+            />
+
+        <TextView
+            android:id="@+id/price_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_big"
+            android:textColor="@color/red"
+            />
+    </LinearLayout>
+</LinearLayout>
