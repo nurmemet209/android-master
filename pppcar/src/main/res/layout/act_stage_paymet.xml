@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_gray"
+              android:orientation="vertical"
+
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/pay_stage_detail"
+            />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/main_big_divider_height"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                >
+
+                <TextView
+                    android:id="@+id/pay_amount_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/stage_amount_"
+                    />
+
+                <TextView
+                    android:id="@+id/pay_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/pay_amount_"
+                    android:text="$23424"
+                    android:textColor="@color/main_red"
+                    />
+
+                <TextView
+                    android:id="@+id/counter_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="$324324"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/counter_fee"
+                    android:text="@string/counter_fee_"
+                    />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_big_divider_height"
+                android:background="@color/white"
+                android:divider="@drawable/divider_small"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_1_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_1_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_1_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:scaleType="centerInside"
+                        android:tag="selector"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_3_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_3_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_3_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:tag="selector"
+                        android:scaleType="centerInside"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_6_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_6_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_6_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:tag="selector"
+                        android:scaleType="centerInside"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_9_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_9_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_9_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:tag="selector"
+                        android:scaleType="centerInside"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_12_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_12_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_12_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:tag="selector"
+                        android:scaleType="centerInside"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_18_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_18_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_18_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:scaleType="centerInside"
+                        android:tag="selector"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:background="@drawable/list_item_bg"
+                    android:clickable="true"
+                    android:onClick="selectPayStage"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/stage_24_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/padding_smallest"
+                            android:text="@string/order_number"
+                            android:textSize="@dimen/text_size_small"
+                            />
+
+                        <TextView
+                            android:id="@+id/stage_24_counter_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1243423432432"
+                            android:textSize="@dimen/text_size_smaller"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/stage_24_check_box"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/image_view_checkbox"
+                        android:scaleType="centerInside"
+                        android:tag="selector"
+                        />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sure"
+        android:background="@drawable/main_red_pressed_sl"
+        android:textColor="@color/white"
+        />
+
+
+</LinearLayout>

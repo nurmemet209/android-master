@@ -96,5 +96,9 @@
     <string name="sorry_pay_failed">抱歉，支付失败</string>
     <string name="error_reason">错误原因</string>
     <string name="pay_again">重新支付</string>
+    <string name="pay_stage_detail">分期详情</string>
+    <string name="stage_amount_">分期金额：</string>
+    <string name="counter_fee">手续费</string>
+    <string name="counter_fee_">手续费：</string>
 
 </resources>
