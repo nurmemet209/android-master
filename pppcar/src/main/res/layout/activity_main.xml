@@ -22,68 +22,11 @@
         />
 
 
-    <RadioGroup
+    <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
         android:id="@+id/bottom_tab"
-        android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        style="@style/pagertab_icon_style"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
-
-        <RadioButton
-            android:id="@+id/home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:checked="true"
-            android:drawableTop="@drawable/home_sl"
-            android:gravity="center"
-            android:text="@string/home"
-            android:textColor="@drawable/text_sl"
-
-
-            />
-
-        <RadioButton
-            android:id="@+id/car_brand"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/message_sl"
-            android:gravity="center"
-            android:text="@string/car_brand"
-            android:textColor="@drawable/text_sl"
-            />
-
-        <RadioButton
-            android:id="@+id/parts_brand"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/message_sl"
-            android:gravity="center"
-            android:text="@string/parts_brand"
-            android:textColor="@drawable/text_sl"
-            />
-
-        <RadioButton
-            android:id="@+id/me"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/me_sl"
-            android:gravity="center"
-            android:text="@string/me"
-            android:textColor="@drawable/text_sl"
-            />
-    </RadioGroup>
+        android:fillViewport="false"/>
 </RelativeLayout>

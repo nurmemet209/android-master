@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_gray"
+              android:orientation="vertical"
+
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/pay_center"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:background="@color/white"
+        android:divider="@drawable/divider_small"
+
+        android:orientation="vertical"
+        android:showDividers="middle"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/order_number"
+                />
+
+            <TextView
+                android:id="@+id/order_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="1243423432432"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/order_amount_of_money"
+                />
+
+            <TextView
+                android:id="@+id/order_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="￥200"
+                android:textColor="@color/main_red"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:background="@color/white"
+        android:divider="@drawable/divider_small"
+        android:orientation="vertical"
+        android:showDividers="middle"
+
+        >
+
+        <LinearLayout
+            android:id="@+id/pay_by_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <ImageView
+
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pay_by_card"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_by_card_"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/image_view_checkbox"
+                android:tag="selector"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pay_by_ali"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <ImageView
+
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pay_by_ali_pay"
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_by_ali_"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/image_view_checkbox"
+                android:tag="selector"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pay_by_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <ImageView
+
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/pay_by_wechat"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pay_by_wechat"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_by_wechat_"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/image_view_checkbox"
+                android:tag="selector"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pay_by_offline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <ImageView
+
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pay_by_offline"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_by_offline_"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/image_view_checkbox"
+                android:tag="selector"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:text="@string/payment_hint"
+        android:textSize="@dimen/text_size_small"
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:id="@+id/sure_to_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/padding_big"
+        android:background="@drawable/main_red_pressed_sl"
+        android:text="@string/sure_to_pay"
+        android:textColor="@color/white"
+
+        />
+
+</LinearLayout>

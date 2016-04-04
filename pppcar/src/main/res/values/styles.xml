@@ -10,4 +10,18 @@
         <item name="android:textColor">@color/main_text_color</item>
     </style>
 
+
+
+    <style name="pagertab_icon_style">
+        <item name="android:background">@color/main_text_color</item>
+        <item name="apTabBackground">@color/main_text_color</item>
+        <item name="android:textSize">11sp</item>
+        <item name="apTabUnderlineColor">@color/main_bg_gray</item>
+        <item name="apTabDividerColor">#00000000</item>
+        <item name="apTabShouldExpand">false</item>
+        <item name="apTabPaddingLeftRight">8dp</item>
+        <item name="apTabPaddingTopBottom">3dp</item>
+        <item name="apTabTextSelectColor">@color/white</item>
+        <item name="android:textColor">@color/main_sub_text_color</item>
+    </style>
 </resources>

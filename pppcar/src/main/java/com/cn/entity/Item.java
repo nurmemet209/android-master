@@ -10,6 +10,19 @@ public class Item {
     private String title;
     private float price;
 
+    public int getCollectNum() {
+        return collectNum;
+    }
+
+    public void setCollectNum(int collectNum) {
+        this.collectNum = collectNum;
+    }
+
+    /**
+     * 收藏次数
+     */
+   private int collectNum;
+
     public int getId() {
         return id;
     }

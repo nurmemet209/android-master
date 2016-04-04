@@ -9,15 +9,19 @@ import android.view.ViewGroup;
 
 import com.cn.pppcar.R;
 
+import butterknife.ButterKnife;
+
 /**
- * Created by nurmemet on 2015/12/19.
+ * 精装店
+ * Created by nurmemet on 2016/4/2.
  */
-public class PartsBrandFragment extends Fragment {
+public class RelicateShop extends Fragment {
 
     private View mainView;
 
-    public static PartsBrandFragment getInstance(){
-        PartsBrandFragment frag=new PartsBrandFragment();
+
+    public static RelicateShop getInstance() {
+        RelicateShop frag = new RelicateShop();
         return frag;
     }
 
@@ -25,7 +29,8 @@ public class PartsBrandFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mainView=inflater.inflate(R.layout.parts_brand,null);
+        mainView = inflater.inflate(R.layout.frag_relicate_shop, null);
+        ButterKnife.bind(this, mainView);
         return mainView;
     }
 }

@@ -28,10 +28,11 @@ public class ProductDetailFrag extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         mainView = inflater.inflate(R.layout.frag_product_detail, null);
         ButterKnife.bind(this, mainView);
+        init();
         return mainView;
     }
 
     private void init(){
-        webView.loadUrl("");
+        webView.loadUrl("http://www.pppcar.com");
     }
 }

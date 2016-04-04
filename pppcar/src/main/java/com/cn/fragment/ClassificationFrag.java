@@ -12,12 +12,12 @@ import com.cn.pppcar.R;
 /**品牌
  *  * Created by nurmemet on 2015/12/19.
  */
-public class CarBrandFragment extends Fragment {
+public class ClassificationFrag extends Fragment {
 
     private View mainView;
 
-    public static CarBrandFragment getInstance(){
-        CarBrandFragment frag=new CarBrandFragment();
+    public static ClassificationFrag getInstance(){
+        ClassificationFrag frag=new ClassificationFrag();
         return frag;
     }
 

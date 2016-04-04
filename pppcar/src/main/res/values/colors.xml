@@ -299,12 +299,14 @@
     <!--海军色 -->
 
     <color name="main_text_color">#3c3c3b</color>
-    <color name="sub_text_color">#999999</color>
+    <color name="main_sub_text_color">#999999</color>
     <color name="main_red">#be1522</color>
     <color name="main_bg_gray">#e6e6e6</color>
 
     <color name="main_yellow">#ffa200</color>
     <color name="main_indicator_alpha_gray">#AAe6e6e6</color>
+
     <color name="main_list_item_pressed">@color/lightgray_1</color>
-    <color name="main_yellow_pressed"></color>
+    <color name="main_yellow_pressed">#d98e0a</color>
+    <color name="main_red_pressed">#90101a</color>
 </resources>

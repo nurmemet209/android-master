@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <dimen name="text_size_smaller">10sp</dimen>
+    <dimen name="text_size_smallest">11sp</dimen>
+    <dimen name="text_size_smaller">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
@@ -23,4 +23,5 @@
     <!--模块与模块之间的距离-->
     <dimen name="part_normal">4dp</dimen>
     <dimen name="item_height">48dp</dimen>
+    <dimen name="icon_width">30dp</dimen>
 </resources>

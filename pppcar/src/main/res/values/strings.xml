@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">PPPCar</string>
     <string name="me">我</string>
+    <string name="my_papa">我的趴趴</string>
+    <string name="specification">分类</string>
+    <string name="find">发现</string>
     <string name="car_brand">汽车品牌</string>
     <string name="parts_brand">配件品牌</string>
-    <string name="home">主页</string>
+    <string name="home">首页</string>
     <string name="my_collection">我的收藏</string>
     <string name="my_integral">我的积分</string>
     <string name="my_work">我的作业</string>
@@ -68,5 +71,30 @@
     <string name="put_into_cart">加入购物车</string>
     <string name="buy_immediatly">立即购买</string>
     <string name="installment_payment">分期付款</string>
+    <string name="have_goods">有好货</string>
+    <string name="delicate_shop">精装店</string>
+    <string name="refit_work">改装作业</string>
+    <string name="empty_cart">您的购物车里还没有任何产品</string>
+    <string name="go_to_pay">去结算</string>
+    <string name="amount_of_money_of_product">商品金额合计</string>
+    <string name="go_to_buy">马上去逛逛</string>
+    <string name="selecte_all">全选</string>
+    <string name="move_to_collect">移入收藏夹</string>
+    <string name="edit">编辑</string>
+    <string name="complete">完成</string>
+    <string name="delete">删除</string>
+    <string name="pay_center">支付中心</string>
+    <string name="order_number">订单编号</string>
+    <string name="order_amount_of_money">订单金额</string>
+    <string name="pay_by_card">银行卡支付</string>
+    <string name="pay_by_ali_pay">支付宝支付</string>
+    <string name="pay_by_wechat">微信支付</string>
+    <string name="pay_by_offline">线下汇款</string>
+    <string name="payment_hint">请您在提交订单后24小时内完成支付，否则订单会自动取消</string>
+    <string name="sure_to_pay">确认付款</string>
+    <string name="pay_failed">支付失败</string>
+    <string name="sorry_pay_failed">抱歉，支付失败</string>
+    <string name="error_reason">错误原因</string>
+    <string name="pay_again">重新支付</string>
 
 </resources>

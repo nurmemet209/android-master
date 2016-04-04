@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        >
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/find_r_message"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="center"
+            android:src="@mipmap/message"
+
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/find_top_bar_l_img"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="center"
+            android:layout_centerHorizontal="true"
+            app:placeholderImage="@mipmap/find_title"
+            app:placeholderImageScaleType="center"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/find_title_img"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
+            app:actualImageScaleType="center"
+            android:layout_alignParentRight="true"
+            app:placeholderImage="@mipmap/message"
+            app:placeholderImageScaleType="center"
+
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_container"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/main_red"
+        app:tabSelectedTextColor="@color/main_red"
+        app:tabTextColor="@color/main_text_color"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+    <com.cn.viewpager.CustomViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

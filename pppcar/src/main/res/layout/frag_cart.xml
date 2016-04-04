@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/find_r_message"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/message"
+            app:actualImageScaleType="centerInside"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="@string/cart"
+            />
+
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/message"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:actualImageScaleType="center"
+            app:placeholderImage="@mipmap/message"
+            app:placeholderImageScaleType="centerInside"
+            />
+        <TextView
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="@string/edit"
+            android:layout_toLeftOf="@+id/message"
+            android:padding="@dimen/padding_big"
+            />
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/empty_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_bg_gray"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/empty_cart"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_big"
+                android:text="@string/empty_cart"
+                android:textColor="@color/main_sub_text_color"
+                />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/main_red_pressed_sl"
+                android:text="@string/go_to_buy"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ViewFlipper
+                android:id="@+id/view_flipper"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_alignParentBottom="true"
+                android:inAnimation="@anim/activity_exchange_right_in"
+                android:outAnimation="@anim/activity_exchange_left_out"
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_sub_text_color"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="2"
+                        android:button="@drawable/checkbox_item_"
+                        android:checked="false"
+                        android:paddingLeft="@dimen/padding_normal"
+                        android:text="@string/selecte_all"
+                        android:textColor="@color/white"
+
+
+                        />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/amount_of_money_of_product"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_smallest"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="$343242"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_large"
+                            />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/settle_order"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/main_red_pressed_sl"
+                        android:text="@string/go_to_pay"
+                        android:textColor="@color/white"
+
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_sub_text_color"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <CheckBox
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="2"
+                        android:button="@drawable/checkbox_item_"
+                        android:checked="false"
+                        android:paddingLeft="@dimen/padding_normal"
+                        android:text="@string/selecte_all"
+                        android:textColor="@color/white"
+
+
+                        />
+
+                    <Button
+                        android:id="@+id/move_to_collect"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/yellow_pressed_sl"
+                        android:text="@string/move_to_collect"
+
+                        />
+
+                    <Button
+                        android:id="@+id/delete_from_cart"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/main_red_pressed_sl"
+                        android:text="@string/delete"
+                        android:textColor="@color/white"
+
+                        />
+
+                </LinearLayout>
+            </ViewFlipper>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/view_flipper"
+                />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
