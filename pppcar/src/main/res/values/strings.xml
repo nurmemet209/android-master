@@ -100,5 +100,19 @@
     <string name="stage_amount_">分期金额：</string>
     <string name="counter_fee">手续费</string>
     <string name="counter_fee_">手续费：</string>
-
+    <string name="pay_settlement">订单结算</string>
+    <string name="receiver">收货人</string>
+    <string name="receiver_">收货人：</string>
+    <string name="receiver_address">收获地址</string>
+    <string name="receiver_address_">收获地址：</string>
+    <string name="pay_delivery">支付/送货</string>
+    <string name="pay_online">在线支付</string>
+    <string name="invoice_information">发票信息</string>
+    <string name="order_remark">订单备注</string>
+    <string name="order_remark_">订单备注：</string>
+    <string name="optional_to_supply_your_special_needs">可选，可填写你的特殊需求</string>
+    <string name="product_pay_amount">商品总金额</string>
+    <string name="stage_buy">分期购买</string>
+    <string name="select_stage_num">选择期数</string>
+    <string name="submit_stage_order">提交分期订单</string>
 </resources>
