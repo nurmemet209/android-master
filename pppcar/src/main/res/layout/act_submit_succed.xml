@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/main_bg_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/order_submit_succeed"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/fai"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/succed"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/congratulation_order_submit_succeed"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingBottom="@dimen/padding_small"
+                android:textSize="@dimen/text_size_largest"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_submit_succeed_hint"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingBottom="@dimen/padding_small"
+                android:textSize="@dimen/text_size_small"
+                />
+
+            <TextView
+                android:id="@+id/order_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单号：234234234234"
+                android:paddingLeft="@dimen/padding_big"
+                android:textSize="@dimen/text_size_smaller"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/padding_big"
+        android:background="@color/main_bg_gray"
+        >
+        <Button
+            android:id="@+id/see_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+
+            android:background="@drawable/main_red_pressed_sl"
+            android:text="@string/see_order"
+            android:textColor="@color/white"
+
+            android:onClick="seeOrder"
+
+            />
+        <Button
+            android:id="@+id/continue_buy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/padding_big"
+            android:background="@drawable/yellow_pressed_sl"
+            android:text="@string/continue_buy"
+            android:textColor="@color/white"
+            android:onClick="continueBuy"
+            />
+    </LinearLayout>
+
+</LinearLayout>

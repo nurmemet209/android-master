@@ -21,6 +21,10 @@ public class ConfirmDialog extends Dialog {
     private TextView mTitleTv;
     private String mTitleStr;
 
+
+    private float translationX=100;
+
+
     private View.OnClickListener onClickListener;
 
     public ConfirmDialog(Context context,View.OnClickListener clickListener) {
@@ -53,4 +57,14 @@ public class ConfirmDialog extends Dialog {
     public void SetTitle(String title){
         mTitleStr=title;
     }
+    public float getTranslationX() {
+        return translationX;
+    }
+
+    public void setTranslationX(float translationX) {
+        this.translationX = translationX;
+        getWindow().getDecorView().setTranslationX(translationX);
+        System.out.println("动画值："+translationX);
+    }
+
 }

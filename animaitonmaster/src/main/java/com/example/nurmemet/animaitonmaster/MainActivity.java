@@ -1,13 +1,16 @@
 package com.example.nurmemet.animaitonmaster;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
+import android.renderscript.Sampler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +19,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.CycleInterpolator;
 import android.widget.TextView;
+
+import com.cn.dialog.ConfirmDialog;
 
 import java.util.ArrayList;
 
@@ -67,11 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-                        AlertDialog dialog=builder.create();
-                        dialog.setTitle(list.get(position));
-                        dialog.setMessage(list.get(position));
-                        dialog.show();
+                        ConfirmDialog dlg=new ConfirmDialog(MainActivity.this,null);
+
+                        dlg.show();
 //                        AnimatorSet animatorSet=new AnimatorSet();
 //                        ObjectAnimator anim=ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "alpha", 1, 0, 1, 0, 1);
 //                        anim.setDuration(1000);
@@ -87,20 +91,28 @@ public class MainActivity extends AppCompatActivity {
                         switch (position){
                             //flash 闪烁
                             case 0:
-                                animatorSet.play(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"alpha",0,1,0,1,0,1));
+                                animatorSet.play(ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"alpha",0,1,0,1,0,1));
                                 animatorSet.start();
                                 break;
                             case 1:
-                                animatorSet.playTogether(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"scaleX", 1, 1.25f, 0.75f, 1.15f, 1),ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"scaleY",1, 0.75f, 1.25f, 0.85f, 1));
+                                animatorSet.playTogether(ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"scaleX", 1, 1.25f, 0.75f, 1.15f, 1),ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"scaleY",1, 0.75f, 1.25f, 0.85f, 1));
                                 animatorSet.start();
                                 break;
                             case 2:
                                 //shakeHorizontal
-                                animatorSet.playTogether(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"translationX", 10));
-                                animatorSet.setInterpolator(new CycleInterpolator(5));
-                                animatorSet.start();
+//                                animatorSet.playTogether(ObjectAnimator.ofFloat(dlg,"translationX",20));
+//                                animatorSet.setInterpolator(new CycleInterpolator(5));
+//                                animatorSet.start();
+                                ObjectAnimator animator=ObjectAnimator.ofFloat(dlg,"translationX",200);
+                                animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                                animator.setDuration(1000);
+                                animator.start();
+
                                 break;
                             case 3:
+//                                ValueAnimator animator=ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"translationX", 10);
+//                                animator.start();
+
                                 break;
                             case 4:
                                 break;

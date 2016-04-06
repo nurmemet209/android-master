@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/main_bg_gray"
+              android:orientation="vertical"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/query_logistic"
+            />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/main_bg_gray"
+
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_big"
+                android:layout_marginBottom="@dimen/main_big_divider_height"
+
+                >
+
+                <TextView
+                    android:id="@+id/order_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/order_number_"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/logistic_compay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding_big"
+                    android:text="@string/logistic_company_"
+                    android:textColor="@color/main_sub_text_color"
+                    />
+            </LinearLayout>
+
+            <com.cn.widget.TimeLine
+                android:id="@+id/time_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lineColor="@color/main_bg_gray"
+                app:startBallColor="@color/main_bg_gray"
+                app:otherBallColor="@color/main_bg_gray"
+                app:textColor="@color/main_sub_text_color"
+
+
+                />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

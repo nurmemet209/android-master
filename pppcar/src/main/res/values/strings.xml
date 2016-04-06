@@ -85,6 +85,7 @@
     <string name="delete">删除</string>
     <string name="pay_center">支付中心</string>
     <string name="order_number">订单编号</string>
+    <string name="order_number_">订单编号：</string>
     <string name="order_amount_of_money">订单金额</string>
     <string name="pay_by_card">银行卡支付</string>
     <string name="pay_by_ali_pay">支付宝支付</string>
@@ -115,4 +116,26 @@
     <string name="stage_buy">分期购买</string>
     <string name="select_stage_num">选择期数</string>
     <string name="submit_stage_order">提交分期订单</string>
+    <string name="query_logistic">物流查询</string>
+    <string name="logistic_company_">配送公司：</string>
+    <string name="continue_buy">继续购物</string>
+    <string name="see_order">查看订单</string>
+    <string name="order_submit_succeed">订单提交成功</string>
+    <string name="congratulation_order_submit_succeed">恭喜您，订单提交成功</string>
+    <string name="order_submit_succeed_hint">我们将在两个小时之内通知您审核结果！</string>
+    <string name="manage_order">订单管理</string>
+    <string name="all">全部</string>
+    <string name="order_detail">订单详情</string>
+    <string name="order_time_">下单时间：</string>
+    <string name="receive_address_">收货地址：</string>
+    <string name="apply_for_after_sales">申请售后</string>
+    <string name="all_amount">合计</string>
+    <string name="pay_way">支付方式</string>
+    <string name="logistic_information">配送信息</string>
+    <string name="common_invoice">普通发票</string>
+    <string name="invoice_header_">发票抬头：</string>
+    <string name="invoice_content_">发票内容：</string>
+    <string name="delete_order">删除订单</string>
+    <string name="shine_comment_order">评价晒单</string>
+    <string name="buy_again">再次购买</string>
 </resources>

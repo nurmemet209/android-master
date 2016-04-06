@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TimeLine">
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="lineColor" format="color"/>
+        <attr name="endItemTextColor" format="color"/>
+        <attr name="startBallColor" format="color"/>
+        <attr name="otherBallColor" format="color"/>
+    </declare-styleable>
+    <attr name="TimeLineAttr" format="reference"/>
+</resources>

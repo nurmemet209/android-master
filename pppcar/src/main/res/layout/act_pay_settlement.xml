@@ -376,10 +376,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
                 android:layout_marginTop="@dimen/main_big_divider_height"
-                android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_normal"
                 android:paddingRight="@dimen/padding_normal"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:onClick="selectePayWay"
                 >
 
                 <TextView
@@ -397,7 +399,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/checked"
+                    android:src="@drawable/image_view_checkbox"
+                    android:tag="selector"
                     />
 
             </RelativeLayout>
@@ -452,7 +455,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
-        android:background="@color/main_sub_text_color"
+        android:background="@color/main_text_color"
         android:orientation="horizontal"
 
         >

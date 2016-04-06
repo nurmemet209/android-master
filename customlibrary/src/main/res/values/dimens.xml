@@ -24,4 +24,5 @@
     <dimen name="part_normal">4dp</dimen>
     <dimen name="item_height">48dp</dimen>
     <dimen name="icon_width">30dp</dimen>
+    <dimen name="list_item_img_height">120dp</dimen>
 </resources>

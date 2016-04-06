@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+
+
+              android:showDividers="middle"
+              android:divider="@drawable/divider_small"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingTop="@dimen/padding_normal"
+        android:paddingBottom="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/title_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            />
+        <LinearLayout
+            android:id="@+id/deal_result_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/tarde_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易成功"
+                android:textColor="@color/main_red"
+                />
+            <TextView
+                android:id="@+id/sub_trade_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易成功"
+                android:layout_marginTop="@dimen/padding_normal"
+                android:textColor="@color/main_red"
+                android:textSize="@dimen/text_size_smaller"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="ldksfjslfjkdslfkjkld"
+            android:layout_toRightOf="@+id/title_img"
+            android:layout_toLeftOf="@+id/deal_result_container"
+            android:paddingLeft="@dimen/part_normal"
+            android:paddingRight="@dimen/part_normal"
+            android:maxLines="2"
+            android:ellipsize="end"
+            />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:gravity="right|center_vertical"
+        android:text="商品总1件 总价：￥3434 （含运费：￥454）"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/text_size_small"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:orientation="horizontal"
+        android:gravity="right|center_vertical"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23434"
+            android:background="@drawable/rectangle"
+            android:padding="@dimen/padding_smallest"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23434"
+            android:background="@drawable/rectangle"
+            android:padding="@dimen/padding_smallest"
+            android:layout_marginLeft="@dimen/padding_small"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23434"
+            android:background="@drawable/rectangle"
+            android:padding="@dimen/padding_smallest"
+            android:layout_marginLeft="@dimen/padding_small"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23434"
+            android:background="@drawable/rectangle"
+            android:padding="@dimen/padding_smallest"
+            android:layout_marginLeft="@dimen/padding_small"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23434"
+            android:background="@drawable/rectangle"
+            android:padding="@dimen/padding_smallest"
+            android:layout_marginLeft="@dimen/padding_small"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
