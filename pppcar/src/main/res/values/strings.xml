@@ -25,7 +25,9 @@
     <string name="nieck_name">昵称</string>
     <string name="my_invitation_code">我的邀请码</string>
     <string name="phone_number">手机</string>
+    <string name="phone_number_">手机：</string>
     <string name="tel_number">固定电话</string>
+    <string name="tel_number_">固定电话：</string>
     <string name="email">邮箱</string>
     <string name="business_license">营业执照</string>
     <string name="shop_img">店铺照片</string>
@@ -138,4 +140,12 @@
     <string name="delete_order">删除订单</string>
     <string name="shine_comment_order">评价晒单</string>
     <string name="buy_again">再次购买</string>
+    <string name="edit_receive_address">编辑收货地址</string>
+    <string name="region">地区</string>
+    <string name="region_">地区：</string>
+    <string name="detailed_address_">详细地址：</string>
+    <string name="zip_code_">邮编：</string>
+    <string name="is_default_address">是否默认地址</string>
+    <string name="hint_tel_num_or_phone_num_is_optional">手机号跟固话可只填写一个即可</string>
+    <string name="save_use">保存并使用</string>
 </resources>

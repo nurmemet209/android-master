@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_gray"
+              android:orientation="vertical"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/edit_receive_address"
+            />
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:background="@color/white"
+        android:divider="@drawable/divider_small"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        >
+
+        <TableRow
+
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:gravity="right|center_vertical"
+                android:text="@string/receiver_"
+                />
+
+            <EditText
+                android:id="@+id/receiver_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="@dimen/item_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:gravity="right|center_vertical"
+                android:text="@string/phone_number_"
+                />
+
+            <EditText
+                android:id="@+id/phone_num"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:gravity="right|center_vertical"
+                android:text="@string/tel_number_"
+                />
+
+            <EditText
+                android:id="@+id/tel_num"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                />
+        </TableRow>
+
+        <TableRow
+            android:background="@drawable/list_item_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:background="@color/transparent"
+                android:gravity="right|center_vertical"
+                android:text="@string/region_"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:paddingRight="@dimen/padding_big"
+                android:text="上海"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:scaleType="centerInside"
+                android:src="@mipmap/go"
+                />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:gravity="right|center_vertical"
+                android:text="@string/detailed_address_"
+                />
+
+            <EditText
+                android:id="@+id/detailed_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                />
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_height"
+                android:gravity="right|center_vertical"
+                android:text="@string/zip_code_"
+                />
+
+            <EditText
+                android:id="@+id/zip_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:onClick="selecteDetaultAddress"
+        android:background="@drawable/list_item_bg_"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/item_height"
+            android:gravity="left|center_vertical"
+            android:text="@string/is_default_address"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            />
+
+        <ImageView
+            android:id="@+id/is_default_address"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            android:src="@drawable/image_view_checkbox"
+            android:scaleType="centerInside"
+            android:tag="selector"
+            android:background="@color/transparent"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:background="@color/transparent"
+        android:text="@string/hint_tel_num_or_phone_num_is_optional"
+        android:textSize="@dimen/text_size_smaller"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_normal"
+        android:background="@drawable/main_red_pressed_sl"
+        android:text="@string/save_use"
+        android:textColor="@color/white"
+
+        />
+
+
+</LinearLayout>
