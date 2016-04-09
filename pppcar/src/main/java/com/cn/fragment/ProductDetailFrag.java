@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 import com.cn.pppcar.R;
 
@@ -29,6 +30,7 @@ public class ProductDetailFrag extends Fragment {
         mainView = inflater.inflate(R.layout.frag_product_detail, null);
         ButterKnife.bind(this, mainView);
         init();
+
         return mainView;
     }
 

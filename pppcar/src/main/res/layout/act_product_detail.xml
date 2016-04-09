@@ -31,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/main_text_color"
         android:orientation="horizontal"
+
         >
 
         <TextView
@@ -44,6 +45,7 @@
             android:text="@string/collect"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_smallest"
+            android:background="@color/transparent"
             />
 
         <TextView
@@ -57,6 +59,7 @@
             android:text="@string/cart"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_smallest"
+            android:background="@color/transparent"
             />
 
         <TextView

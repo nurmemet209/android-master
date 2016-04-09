@@ -305,6 +305,7 @@
 
     <color name="main_yellow">#ffa200</color>
     <color name="main_indicator_alpha_gray">#AAe6e6e6</color>
+    <color name="main_indicator_alpha_white">#AAFFFFFF</color>
 
     <color name="main_list_item_pressed">@color/lightgray_1</color>
     <color name="main_yellow_pressed">#d98e0a</color>

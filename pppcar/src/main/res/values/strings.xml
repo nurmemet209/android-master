@@ -130,6 +130,7 @@
     <string name="order_detail">订单详情</string>
     <string name="order_time_">下单时间：</string>
     <string name="receive_address_">收货地址：</string>
+    <string name="receive_address">收货地址</string>
     <string name="apply_for_after_sales">申请售后</string>
     <string name="all_amount">合计</string>
     <string name="pay_way">支付方式</string>
@@ -145,7 +146,17 @@
     <string name="region_">地区：</string>
     <string name="detailed_address_">详细地址：</string>
     <string name="zip_code_">邮编：</string>
-    <string name="is_default_address">是否默认地址</string>
+    <string name="is_default_address">是否设为默认地址</string>
     <string name="hint_tel_num_or_phone_num_is_optional">手机号跟固话可只填写一个即可</string>
     <string name="save_use">保存并使用</string>
+    <string name="add_receive_address">新增收货地址</string>
+    <string name="search_hint">请输入车型，品牌，商品信息</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="search_history">搜索历史</string>
+    <string name="clear_search_history">清空索索历史</string>
+    <string name="most_new">最新</string>
+    <string name="universal">综合</string>
+    <string name="price">价格</string>
+    <string name="filter">筛选</string>
+    <string name="not_found_hint">抱歉，没找到符合条件的产品</string>
 </resources>

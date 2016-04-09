@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.recycle_view)
     protected RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter ;
+    private RecyclerView.Adapter adapter;
 
-    private ArrayList<String> list=new ArrayList<>();
+    private ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +46,19 @@ public class MainActivity extends AppCompatActivity {
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         list.add("flash");
         list.add("RubberBand");
         list.add("shakeHorizontal");
-        adapter=new RecyclerView.Adapter() {
+        list.add("shakeVertical");
+        list.add("swing");
+        adapter = new RecyclerView.Adapter() {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View mainView= LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item,null);
-                mainView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,RecyclerView.LayoutParams.WRAP_CONTENT));
-                TextView tv=(TextView)mainView.findViewById(R.id.item);
-                RecyclerView.ViewHolder holder=new RecyclerView.ViewHolder(mainView) {
+                View mainView = LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item, null);
+                mainView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
+                TextView tv = (TextView) mainView.findViewById(R.id.item);
+                RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(mainView) {
                     @Override
                     public String toString() {
                         return super.toString();
@@ -68,53 +70,47 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-                TextView tv= (TextView)holder.itemView.findViewById(R.id.item);
+                TextView tv = (TextView) holder.itemView.findViewById(R.id.item);
                 tv.setText(list.get(position));
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ConfirmDialog dlg=new ConfirmDialog(MainActivity.this,null);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        AlertDialog dialog = builder.create();
+                        dialog.setMessage("ljdfldsfkkdslf");
+                        dialog.setTitle("alert");
+                        dialog.show();
 
-                        dlg.show();
-//                        AnimatorSet animatorSet=new AnimatorSet();
-//                        ObjectAnimator anim=ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "alpha", 1, 0, 1, 0, 1);
-//                        anim.setDuration(1000);
-//                        anim.start();
-//                        AnimatorSet animatorSet=new AnimatorSet();
-//                        ObjectAnimator animator = ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "translationY", -10, 10);
-//                        animator.setInterpolator(new CycleInterpolator(5));
-//                        animator.start();
-                        //animatorSet.playTogether(animator);
-
-                        AnimatorSet animatorSet=new AnimatorSet();
+                        AnimatorSet animatorSet = new AnimatorSet();
                         animatorSet.setDuration(1000);
-                        switch (position){
+                        switch (position) {
                             //flash 闪烁
                             case 0:
-                                animatorSet.play(ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"alpha",0,1,0,1,0,1));
+                                animatorSet.play(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "alpha", 0, 1, 0, 1, 0, 1));
                                 animatorSet.start();
                                 break;
                             case 1:
-                                animatorSet.playTogether(ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"scaleX", 1, 1.25f, 0.75f, 1.15f, 1),ObjectAnimator.ofFloat(dlg.getWindow().getDecorView(),"scaleY",1, 0.75f, 1.25f, 0.85f, 1));
+                                animatorSet.playTogether(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "scaleX", 1, 1.25f, 0.75f, 1.15f, 1), ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "scaleY", 1, 0.75f, 1.25f, 0.85f, 1));
                                 animatorSet.start();
                                 break;
                             case 2:
                                 //shakeHorizontal
-//                                animatorSet.playTogether(ObjectAnimator.ofFloat(dlg,"translationX",20));
-//                                animatorSet.setInterpolator(new CycleInterpolator(5));
-//                                animatorSet.start();
-                                ObjectAnimator animator=ObjectAnimator.ofFloat(dlg,"translationX",200);
-                                animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                                animator.setDuration(1000);
-                                animator.start();
+                                animatorSet.playTogether(ObjectAnimator.ofFloat(dialog, "translationX", 20));
 
+                                animatorSet.start();
                                 break;
                             case 3:
-//                                ValueAnimator animator=ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"translationX", 10);
-//                                animator.start();
+                                //shakeVertical
+                                ValueAnimator animator = ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(), "translationY", -10, 10);
+                                animatorSet.playTogether(animator);
+                                animatorSet.setInterpolator(new CycleInterpolator(5));
+                                animatorSet.start();
 
                                 break;
-                            case 4:
+                            case 4://swing
+                                animatorSet.playTogether(ObjectAnimator.ofFloat(dialog.getWindow().getDecorView(),"rotation", 0, 10, -10, 6, -6, 3, -3, 0));
+                                animatorSet.setInterpolator(new CycleInterpolator(5));
+                                animatorSet.start();
                                 break;
                             case 5:
                                 break;
@@ -139,11 +135,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
 
     }
-
 
 
     class DividerItemDecoration extends RecyclerView.ItemDecoration {
@@ -155,14 +150,14 @@ public class MainActivity extends AppCompatActivity {
         /**
          * dp为单位
          */
-        private float height=1;
+        private float height = 1;
 
         private GradientDrawable mDivider;
 
         private int mOrientation;
 
         public DividerItemDecoration(Context context, int orientation) {
-            mDivider=new GradientDrawable();
+            mDivider = new GradientDrawable();
             mDivider.setColor(Color.parseColor("#FFEBEBEB"));
 
             setOrientation(orientation);
@@ -196,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                         .getLayoutParams();
                 final int top = child.getBottom() + params.bottomMargin;
-                final int bottom = top + dip2px(MainActivity.this,height);
+                final int bottom = top + dip2px(MainActivity.this, height);
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(c);
             }

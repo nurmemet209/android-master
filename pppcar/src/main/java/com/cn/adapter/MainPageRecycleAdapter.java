@@ -1,19 +1,25 @@
 package com.cn.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.Item;
 import com.cn.entity.MainPage;
 import com.cn.pppcar.R;
+import com.cn.pppcar.SearchAct;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.hp.hpl.sparta.Text;
 
 import java.util.ArrayList;
 
@@ -86,6 +92,17 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     }
 
     private void setHeaderData(View view) {
+        //search
+        {
+            TextView search=(TextView) view.findViewById(R.id.search_edit_text);
+            search.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivitySwitcher.toSearchAct((Activity) mContext);
+                }
+            });
+
+        }
         if (mainPage == null)
             return;
         //轮播
@@ -113,10 +130,18 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
 
         }
         //趴趴头条
-        if (Util.isNoteEmpty(mainPage.getPapaHeadLines())) {
-            ArrayList<Item> papaHeadLine = mainPage.getPapaHeadLines();
-            TextView tv = (TextView) view.findViewById(R.id.papa_headline);
-            tv.setText(papaHeadLine.get(0).getTitle());
+        if (true/*Util.isNoteEmpty(mainPage.getPapaHeadLines())*/) {
+//            ArrayList<Item> papaHeadLine = mainPage.getPapaHeadLines();
+//            TextView tv = (TextView) view.findViewById(R.id.papa_headline);
+//            tv.setText(papaHeadLine.get(0).getTitle());
+
+            AdapterViewFlipper flipper=(AdapterViewFlipper)view.findViewById(R.id.headline_flipper);
+            HeadLineFlipperAdapter headLineAdapter=new HeadLineFlipperAdapter(null,mContext);;
+            flipper.setAdapter(headLineAdapter);
+
+            flipper.setOutAnimation(mContext,R.anim.obj_bottom_out);
+            flipper.setInAnimation(mContext,R.anim.obj_top_in);
+            //flipper.startFlipping();
         }
         //综合
         if (Util.isNoteEmpty(mainPage.getUniversalItems())) {

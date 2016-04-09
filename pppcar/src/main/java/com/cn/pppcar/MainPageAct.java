@@ -3,8 +3,6 @@ package com.cn.pppcar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 
 import com.cn.adapter.MainPageAdapter;
@@ -29,7 +27,7 @@ public class MainPageAct extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.act_main_page);
         ButterKnife.bind(this);
         init();
        // UmengUpdateAgent.update(this);

@@ -9,6 +9,24 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textColor">@color/main_text_color</item>
         <item name="android:background">@color/white</item>
+        <item name="android:buttonStyle">@style/custom_button_style</item>
+        <item name="android:textViewStyle">@style/custom_text_view_style</item>
+        <item name="android:editTextStyle">@style/custom_eidt_text_style</item>
+        <item name="android:imageButtonStyle">@style/custom_image_view_style</item>
+    </style>
+
+    <style name="custom_button_style" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@color/transparent</item>
+    </style>
+    <style name="custom_text_view_style" >
+        <item name="android:background">@color/transparent</item>
+    </style>
+    <style name="custom_eidt_text_style" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="custom_image_view_style" parent="@style/Widget.AppCompat.ImageButton">
+        <item name="android:background">@color/transparent</item>
     </style>
 
 

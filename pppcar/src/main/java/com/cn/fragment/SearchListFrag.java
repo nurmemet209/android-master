@@ -3,19 +3,16 @@ package com.cn.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cn.adapter.CustomItemDecoration;
-import com.cn.adapter.GoodsAdapter;
-import com.cn.adapter.WorkFragAdapter;
+import com.cn.adapter.GridItemDecoration;
+import com.cn.adapter.SearchListFragAdapter;
 import com.cn.entity.Item;
 import com.cn.pppcar.R;
-import com.cn.util.UIHelper;
 
 import java.util.ArrayList;
 
@@ -23,29 +20,40 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by nurmemet on 2016/3/31.
+ * Created by nurmemet on 2016/4/8.
  */
-public class WorkFrag extends Fragment {
+public class SearchListFrag extends Fragment {
     private View mainView;
+
+    private int searchType = 1;
 
     @Bind(R.id.recycle_view)
     protected RecyclerView recyclerView;
 
-    WorkFragAdapter adapter;
+    SearchListFragAdapter adapter;
+
+    public static SearchListFrag getInstance() {
+        SearchListFrag frag = new SearchListFrag();
+        return frag;
+    }
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mainView=inflater.inflate(R.layout.frag_work,null);
-        ButterKnife.bind(this,mainView);
+        mainView = inflater.inflate(R.layout.frag_search_list, null);
+        ButterKnife.bind(this, mainView);
         init();
         return mainView;
     }
 
     private void init() {
-        adapter=new WorkFragAdapter(getActivity(),getList());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
+        adapter = new SearchListFragAdapter(getActivity(), getList());
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(manager);
+        //suggestRecyclerView.setBackgroundColor(getResources().getColor(R.color.main_bg_gray));
+        GridItemDecoration decoration = new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
 
     }
@@ -74,5 +82,6 @@ public class WorkFrag extends Fragment {
         item.setCollectNum(230565);
         return item;
     }
+
 
 }
