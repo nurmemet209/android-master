@@ -42,7 +42,7 @@
             android:maxLines="1"
             android:paddingLeft="@dimen/padding_normal"
             android:paddingRight="@dimen/padding_normal"
-            android:textCursorDrawable="@nu ll"
+            android:textCursorDrawable="@null"
             android:clickable="true"
             android:ellipsize="end"
             />
@@ -176,11 +176,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_order_l"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:clickable="true"
             >
 
             <ImageView

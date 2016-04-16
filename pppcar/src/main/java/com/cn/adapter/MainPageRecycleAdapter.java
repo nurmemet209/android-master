@@ -117,6 +117,12 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
                 Uri uri = Uri.parse(item.getImgAddress());
                 img.setImageURI(uri);
                 viewList.add(img);
+                img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
             BannerAdapter adapter = new BannerAdapter(mContext, viewList);
             banner.setAdapter(adapter);
@@ -129,6 +135,14 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             indicator.setViewPager(banner);
 
         }
+        //品牌中心
+        View myOrder=view.findViewById(R.id.my_order_l);
+        myOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitySwitcher.toMyOrderAct((Activity)mContext);
+            }
+        });
         //趴趴头条
         if (true/*Util.isNoteEmpty(mainPage.getPapaHeadLines())*/) {
 //            ArrayList<Item> papaHeadLine = mainPage.getPapaHeadLines();

@@ -114,6 +114,7 @@ public class SearchAct extends BaseAct {
         super.finish();
         overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
     }
+
 }
 
 

@@ -3,6 +3,7 @@ package com.cn.pppcar;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import com.cn.adapter.MyOrderViewPagerAdapter;
 import com.cn.viewpager.CustomViewPager;
@@ -14,7 +15,7 @@ import butterknife.ButterKnife;
 /**
  * Created by nurmemet on 2016/4/5.
  */
-public class MyOrderAct extends FragmentActivity {
+public class MyOrderAct extends BaseAct {
 
     @Bind(R.id.view_pager)
     protected CustomViewPager viewPager;
@@ -39,4 +40,11 @@ public class MyOrderAct extends FragmentActivity {
         tabLayout.showDot(1);
 
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
+    }
+
 }
