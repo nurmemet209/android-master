@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/main_bg_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="OnBack"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/want_bid"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingBottom="@dimen/padding_big"
+        android:paddingTop="@dimen/padding_big"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/title_img"
+            android:layout_width="@dimen/list_item_img_height"
+            android:layout_height="@dimen/list_item_img_height"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_img_height"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/title_img"
+            android:paddingLeft="@dimen/padding_normal"
+            >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:text="D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:id="@+id/current_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="当前价：123"
+                    android:textSize="@dimen/text_size_normal"
+                    />
+                <TextView
+                    android:id="@+id/fixed_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="一口价：123"
+                    android:textSize="@dimen/text_size_normal"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_price_"
+                    android:layout_gravity="bottom"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_marginRight="@dimen/padding_normal"
+                    />
+                <TextView
+                    android:id="@+id/my_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:padding="@dimen/padding_smallest"
+                    android:background="@drawable/rectangle"
+                    android:text="23432"
+                    android:visibility="invisible"
+                     />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的加价幅度"
+            android:textSize="@dimen/text_size_large"
+            />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:id="@+id/bid_level_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+                >
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkffdsfdsfdsfdsf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!---->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding_small"-->
+                    <!--android:background="@drawable/circle_red_sl"-->
+                    <!--android:clickable="true"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/padding_smallest"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="@dimen/text_size_smaller"-->
+                    <!--/>-->
+
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/main_bg_gray"
+        android:paddingTop="@dimen/padding_big"
+        android:paddingLeft="@dimen/padding_normal"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bid_regular"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/first_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="起拍价格：123"
+            android:paddingTop="@dimen/padding_normal"
+            />
+
+        <TextView
+            android:id="@+id/min_auction_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最低成交价：123"
+            android:paddingTop="@dimen/padding_normal"
+            />
+        <TextView
+            android:id="@+id/min_bid_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最小加价幅度：123"
+            android:paddingTop="@dimen/padding_normal"
+            />
+        <TextView
+            android:id="@+id/max_bid_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最大加价幅度：123"
+            android:paddingTop="@dimen/padding_normal"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:orientation="horizontal"
+        android:background="@color/main_text_color"
+        >
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/transparent"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/yellow_pressed_sl"
+            android:text="@string/bid_fixed_price"
+            android:textColor="@color/white"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/main_red_pressed_sl"
+            android:text="@string/submit_bid"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

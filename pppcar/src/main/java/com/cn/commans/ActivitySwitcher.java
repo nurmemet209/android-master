@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.cn.pppcar.AuctionAct;
 import com.cn.pppcar.MyOrderAct;
 import com.cn.pppcar.R;
 import com.cn.pppcar.SearchAct;
@@ -22,6 +23,11 @@ public class ActivitySwitcher {
     }
     static public void toMyOrderAct(Activity activity){
         Intent intent=new Intent(activity, MyOrderAct.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
+    }
+    static public void toAuctionAct(Activity activity){
+        Intent intent=new Intent(activity, AuctionAct.class);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
     }

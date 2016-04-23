@@ -159,4 +159,21 @@
     <string name="price">价格</string>
     <string name="filter">筛选</string>
     <string name="not_found_hint">抱歉，没找到符合条件的产品</string>
+    <string name="win_coin_island">夺宝岛</string>
+    <string name="left_time">还剩</string>
+    <string name="current_price_">当前价：</string>
+    <string name="fixed_price_">一口价：</string>
+    <string name="bid_number_">出价次数：</string>
+    <string name="over">已结束</string>
+    <string name="year">年</string>
+    <string name="all_auction">全部竞拍</string>
+    <string name="auction_ing">正在竞拍</string>
+    <string name="auction_success">竞拍成功</string>
+    <string name="auction_failed">竞拍失败</string>
+    <string name="bid_history">出价记录</string>
+    <string name="want_bid">我要出价</string>
+    <string name="bid_regular">出价规则</string>
+    <string name="bid_fixed_price">一口价拍下</string>
+    <string name="submit_bid">提交报价</string>
+    <string name="my_price_">我的报价：</string>
 </resources>

@@ -2,35 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-
-
-              android:showDividers="middle"
               android:divider="@drawable/divider_small"
+
+
+              android:orientation="vertical"
+              android:showDividers="middle"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:paddingTop="@dimen/padding_normal"
         android:paddingBottom="@dimen/padding_normal"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_normal"
         >
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/title_img"
             android:layout_width="@dimen/list_item_img_height"
             android:layout_height="@dimen/list_item_img_height"
             />
+
         <LinearLayout
             android:id="@+id/deal_result_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:gravity="center"
+            android:orientation="vertical"
             >
+
             <TextView
                 android:id="@+id/tarde_result"
                 android:layout_width="wrap_content"
@@ -38,29 +40,40 @@
                 android:text="交易成功"
                 android:textColor="@color/main_red"
                 />
-            <TextView
-                android:id="@+id/sub_trade_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="交易成功"
-                android:layout_marginTop="@dimen/padding_normal"
-                android:textColor="@color/main_red"
-                android:textSize="@dimen/text_size_smaller"
-                />
+
+
         </LinearLayout>
-        <TextView
-            android:id="@+id/item_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="ldksfjslfjkdslfkjkld"
-            android:layout_toRightOf="@+id/title_img"
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_item_img_height"
             android:layout_toLeftOf="@+id/deal_result_container"
+            android:layout_toRightOf="@+id/title_img"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/part_normal"
             android:paddingRight="@dimen/part_normal"
-            android:maxLines="2"
-            android:ellipsize="end"
-            />
+            >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="ldksfjslfjkdslfkjkld"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="123"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
 
 
     </RelativeLayout>
@@ -69,61 +82,67 @@
         android:id="@+id/price"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
-        android:gravity="right|center_vertical"
-        android:text="商品总1件 总价：￥3434 （含运费：￥454）"
-        android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/text_size_small"
+        android:gravity="right|center_vertical"
+        android:maxLines="1"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
+        android:text="商品总1件 总价：￥3434 （含运费：￥454）"
+        android:textSize="@dimen/text_size_small"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
-        android:orientation="horizontal"
         android:gravity="right|center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23434"
             android:background="@drawable/rectangle"
             android:padding="@dimen/padding_smallest"
+            android:text="23434"
 
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23434"
+            android:layout_marginLeft="@dimen/padding_small"
             android:background="@drawable/rectangle"
             android:padding="@dimen/padding_smallest"
-            android:layout_marginLeft="@dimen/padding_small"
+            android:text="23434"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23434"
+            android:layout_marginLeft="@dimen/padding_small"
             android:background="@drawable/rectangle"
             android:padding="@dimen/padding_smallest"
-            android:layout_marginLeft="@dimen/padding_small"
+            android:text="23434"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23434"
+            android:layout_marginLeft="@dimen/padding_small"
             android:background="@drawable/rectangle"
             android:padding="@dimen/padding_smallest"
-            android:layout_marginLeft="@dimen/padding_small"
+            android:text="23434"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23434"
+            android:layout_marginLeft="@dimen/padding_small"
             android:background="@drawable/rectangle"
             android:padding="@dimen/padding_smallest"
-            android:layout_marginLeft="@dimen/padding_small"
+            android:text="23434"
             />
 
     </LinearLayout>

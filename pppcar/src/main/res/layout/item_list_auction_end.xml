@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            android:scaleType="centerInside"
+            android:src="@mipmap/auction"
+            />
+
+        <TextView
+            android:id="@+id/auction_stage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"
+            android:text="第一期"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_bg_gray"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/title_img"
+            android:layout_width="@dimen/list_item_img_height"
+            android:layout_height="@dimen/list_item_img_height"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_img_height"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/title_img"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_normal"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="sldfjldsfjdsfkldskfl"
+                android:textStyle="bold"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/over"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/main_sub_text_color"
+                android:textStyle="bold"
+                />
+
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

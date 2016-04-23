@@ -143,6 +143,15 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
                 ActivitySwitcher.toMyOrderAct((Activity)mContext);
             }
         });
+        //拍卖中心
+        View auctionCenter=view.findViewById(R.id.auction_center_l);
+        auctionCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitySwitcher.toAuctionAct((Activity)mContext);
+            }
+        });
+
         //趴趴头条
         if (true/*Util.isNoteEmpty(mainPage.getPapaHeadLines())*/) {
 //            ArrayList<Item> papaHeadLine = mainPage.getPapaHeadLines();

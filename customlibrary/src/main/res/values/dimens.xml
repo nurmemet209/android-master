@@ -14,15 +14,12 @@
 
     <dimen name="list_padding_rl">8dp</dimen>
     <dimen name="padding_smallest">6dp</dimen>
+    <dimen name="padding_smallest_">4dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_smaller">7dp</dimen>
     <dimen name="padding_normal">10dp</dimen>
     <dimen name="padding_big">14dp</dimen>
     <dimen name="padding_bigger">16dp</dimen>
     <dimen name="padding_biggest">18dp</dimen>
-    <!--模块与模块之间的距离-->
-    <dimen name="part_normal">4dp</dimen>
-    <dimen name="item_height">48dp</dimen>
-    <dimen name="icon_width">30dp</dimen>
-    <dimen name="list_item_img_height">100dp</dimen>
+
 </resources>

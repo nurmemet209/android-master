@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/padding_normal"
+    >
+    <ImageView
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_width"
+        android:src="@mipmap/head_portrait"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_vertical"
+        />
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_small"
+            android:layout_alignParentLeft="true"
+            >
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/main_red"
+                android:text="$44534534"
+                android:paddingBottom="@dimen/padding_smallest_"
+                android:textSize="@dimen/text_size_small"
+
+                />
+            <TextView
+                android:id="@+id/tel_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="13072182811"
+                android:textSize="@dimen/text_size_small"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="领先"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/padding_small"
+            android:textSize="@dimen/text_size_small"
+            />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-12-23"
+            android:layout_toRightOf="@+id/group"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/state"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_size_small"
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
