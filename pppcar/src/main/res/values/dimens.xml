@@ -10,5 +10,9 @@
     <dimen name="item_height">48dp</dimen>
     <dimen name="icon_width">30dp</dimen>
     <dimen name="list_item_img_height">100dp</dimen>
+    <dimen name="list_item_img_height_bigger">200dp</dimen>
+
+    <dimen name="round_rect_radius">4dp</dimen>
+    <dimen name="main_grid_layout_item_offset">15dp</dimen>
 
 </resources>

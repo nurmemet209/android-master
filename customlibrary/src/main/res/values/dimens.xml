@@ -21,5 +21,6 @@
     <dimen name="padding_big">14dp</dimen>
     <dimen name="padding_bigger">16dp</dimen>
     <dimen name="padding_biggest">18dp</dimen>
+    <dimen name="padding_biggest_">25dp</dimen>
 
 </resources>

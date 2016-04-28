@@ -24,7 +24,12 @@ public abstract class BaseAct extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         spanHelper=new SpanHelper(this);
+    }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(actFinishAnimInResId, actFinishAnimOutResId);
     }
 
     public void OnBack(View view){

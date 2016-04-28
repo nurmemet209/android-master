@@ -31,7 +31,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+
+        >
         <!--高德地图定位-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -40,7 +42,7 @@
         <service android:name="com.amap.api.location.APSService">
         </service>
 
-        <activity android:name=".AuctionBid">
+        <activity android:name=".IntegralMallAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -57,6 +59,11 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".SearchAct"/>
         <activity android:name=".AuctionAct"/>
+        <activity android:name=".IntegralProductDetail"/>
+        <activity android:name=".IntegralPaySettelmentAct"
+                  android:windowSoftInputMode="stateAlwaysHidden"
+            />
+        <activity android:name=".OrderSubmitSuccedAct"/>
     </application>
 
 </manifest>

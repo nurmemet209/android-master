@@ -113,6 +113,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int positon = parent.getChildAdapterPosition(view);
         int index = positon + 1;
+
         if (index % span == 1) {
             outRect.set(height, height, height / 2, 0);
         } else if (index % span == 0) {
@@ -120,6 +121,5 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         } else {
             outRect.set(height / 2, height, height / 2, 0);
         }
-
     }
 }

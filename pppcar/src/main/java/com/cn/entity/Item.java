@@ -16,6 +16,55 @@ public class Item {
     private float currentPrice;
     private float fixedPrice;
     private ArrayList<String> bannerAddressList;
+    /**
+     * 起拍价
+     */
+    private float startPrice;
+    /**
+     * 最低成交价
+     */
+    private float minAucitionPrice;
+    /**
+     * 最小加价幅度
+     */
+    private float minAddPrice;
+
+    public float getMaxAddPrice() {
+        return maxAddPrice;
+    }
+
+    public void setMaxAddPrice(float maxAddPrice) {
+        this.maxAddPrice = maxAddPrice;
+    }
+
+    public float getMinAddPrice() {
+        return minAddPrice;
+    }
+
+    public void setMinAddPrice(float minAddPrice) {
+        this.minAddPrice = minAddPrice;
+    }
+
+    public float getMinAucitionPrice() {
+        return minAucitionPrice;
+    }
+
+    public void setMinAucitionPrice(float minAucitionPrice) {
+        this.minAucitionPrice = minAucitionPrice;
+    }
+
+    public float getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(float startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    /**
+     * 最大加价幅度
+     */
+    private float maxAddPrice;
 
     public ArrayList<String> getBannerAddressList() {
         return bannerAddressList;

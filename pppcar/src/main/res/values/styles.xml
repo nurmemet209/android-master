@@ -13,6 +13,8 @@
         <item name="android:textViewStyle">@style/custom_text_view_style</item>
         <item name="android:editTextStyle">@style/custom_eidt_text_style</item>
         <item name="android:imageButtonStyle">@style/custom_image_view_style</item>
+        <item name="android:textCursorDrawable">@null</item>
+
     </style>
 
     <style name="custom_button_style" parent="@style/Widget.AppCompat.Button">
@@ -59,6 +61,27 @@
         <item name="apTabShouldExpand">false</item>
         <item name="apTabPaddingLeftRight">0dp</item>
         <item name="apTabDrawMode">normal</item>
+        <!--选中的tab的文字的颜色-->
+        <item name="apTabTextSelectColor">@color/main_red</item>
+    </style>
+
+    <!--pager tab 灰色背景-->
+    <style name="pagertab_style_">
+        <item name="android:background">@color/main_bg_gray</item>
+        <item name="apTabBackground">@color/transparent</item>
+        <!--<item name="android:textSize">13sp</item>-->
+        <!--<item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>-->
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="apTabIndicatorColor">@color/main_red</item>
+        <item name="apTabUnderlineColor">@color/transparent</item>
+
+        <!--每一个tab之间的分割线-->
+        <item name="apTabDividerColor">#00000000</item>
+        <item name="apTabShouldExpand">false</item>
+        <item name="apTabPaddingLeftRight">0dp</item>
+        <item name="apTabDrawMode">normal</item>
+        <item name="apTabUnderlineHeight">1dp</item>
+        <!--<item name="apTabIndicatorHeight">1dp</item>-->
         <!--选中的tab的文字的颜色-->
         <item name="apTabTextSelectColor">@color/main_red</item>
     </style>
