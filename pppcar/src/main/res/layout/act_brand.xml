@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
 
@@ -25,7 +24,7 @@
             />
 
         <TextView
-            android:id="@+id/tile"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -42,15 +41,61 @@
         />
 
 
-    <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
-        android:id="@+id/tab_container"
-        style="@style/pagertab_style"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_bottom_bar_height"
-        android:fillViewport="false"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bg_gray"
 
-        />
+        >
 
+        <LinearLayout
+            android:id="@+id/filer_container"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_bottom_bar_height"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:background="@color/main_bg_gray"
+            android:paddingBottom="@dimen/padding_normal"
+            android:paddingTop="@dimen/padding_normal"
+            >
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/main_bottom_bar_height"
+                android:background="@color/main_sub_text_color"
+
+                />
+            <com.cn.widget.CustomTextView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:background="@color/main_bg_gray"
+                android:drawablePadding="@dimen/padding_smallest_"
+                android:drawableRight="@mipmap/filter"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:text="筛选"
+                android:layout_marginLeft="1dp"
+                />
+
+        </LinearLayout>
+
+        <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
+            android:id="@+id/tab_container"
+            style="@style/pagertab_style_"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_bottom_bar_height"
+            android:layout_toLeftOf="@+id/filer_container"
+            android:fillViewport="false"
+
+            />
+
+
+
+
+    </RelativeLayout>
 
     <com.cn.viewpager.CustomViewPager
         android:id="@+id/view_pager"

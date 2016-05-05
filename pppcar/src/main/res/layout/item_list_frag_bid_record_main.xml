@@ -3,7 +3,10 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:padding="@dimen/padding_normal"
+              android:paddingLeft="@dimen/padding_normal"
+              android:paddingRight="@dimen/padding_normal"
+              android:paddingBottom="@dimen/padding_small"
+              android:paddingTop="@dimen/padding_small"
     >
     <ImageView
         android:layout_width="@dimen/icon_width"
@@ -32,7 +35,6 @@
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/main_red"
                 android:text="$44534534"
-                android:paddingBottom="@dimen/padding_smallest_"
                 android:textSize="@dimen/text_size_small"
 
                 />
@@ -54,7 +56,10 @@
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/padding_small"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingTop="@dimen/padding_smallest_"
+            android:paddingBottom="@dimen/padding_smallest_"
             android:textSize="@dimen/text_size_small"
             />
         <TextView

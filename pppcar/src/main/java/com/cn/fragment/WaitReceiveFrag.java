@@ -49,11 +49,11 @@ public class WaitReceiveFrag extends Fragment {
 
 
     private void init() {
-        adapter=new OrderAdapter(getList(),getActivity(),1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CustomItemDecoration decoration=new CustomItemDecoration(getActivity(),getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
-        recyclerView.addItemDecoration(decoration);
-        recyclerView.setAdapter(adapter);
+//        adapter=new OrderAdapter(getList(),getActivity(),1);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        CustomItemDecoration decoration=new CustomItemDecoration(getActivity(),getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
+//        recyclerView.addItemDecoration(decoration);
+//        recyclerView.setAdapter(adapter);
 
     }
 
@@ -75,8 +75,8 @@ public class WaitReceiveFrag extends Fragment {
 
     private Item getItem(String str) {
         Item item = new Item();
-        item.setImgAddress(str);
-        item.setTitle("D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5");
+        item.setImg(str);
+        item.setName("D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5");
         item.setPrice(123);
         item.setCollectNum(230565);
         return item;

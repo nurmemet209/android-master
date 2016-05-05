@@ -13,14 +13,13 @@ import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.Item;
 import com.cn.pppcar.R;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.hp.hpl.sparta.Text;
 
 import java.util.ArrayList;
 
 /**
  * Created by nurmemet on 2016/4/27.
  */
-public class IntegralMallFragAdapter extends BaseListAdapter {
+public class IntegralMallFragAdapter extends BaseListAdapter<Item> {
 
     public IntegralMallFragAdapter(Context mContext, ArrayList<Item> list) {
         super(mContext, list);
@@ -41,8 +40,8 @@ public class IntegralMallFragAdapter extends BaseListAdapter {
         SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView price = (TextView) view.findViewById(R.id.price);
-        img.setImageURI(Uri.parse(list.get(position).getImgAddress()));
-        title.setText(list.get(position).getTitle());
+        img.setImageURI(Uri.parse(list.get(position).getImg()));
+        title.setText(list.get(position).getName());
         price.setText("1213.3432");
 
         view.setOnClickListener(new View.OnClickListener() {

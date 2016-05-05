@@ -14,7 +14,6 @@ import com.cn.entity.Item;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.nostra13.universalimageloader.utils.L;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,9 +48,9 @@ public class CarFragAdapter extends RecyclerView.Adapter {
         TextView price=(TextView)view.findViewById(R.id.item_price);
         TextView size=(TextView)view.findViewById(R.id.item_item_size);
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
-        title.setText(list.get(position).getTitle());
+        title.setText(list.get(position).getName());
         price.setText(String.valueOf(1234));
-        img.setImageURI(Uri.parse(list.get(position).getImgAddress()));
+        img.setImageURI(Uri.parse(list.get(position).getImg()));
         size.setText("黑色");
 
         TextView minus=(TextView)view.findViewById(R.id.minus);

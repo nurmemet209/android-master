@@ -4,6 +4,16 @@ package com.cn.entity;
  * Created by nurmemet on 2016/3/19.
  */
 public  class City extends BaseEntity {
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    private long id;
     private long cityId;
     private long provinceId;
 
@@ -38,4 +48,6 @@ public  class City extends BaseEntity {
     public String getName() {
         return city;
     }
+
+
 }

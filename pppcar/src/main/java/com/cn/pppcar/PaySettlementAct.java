@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import butterknife.ButterKnife;
+
 /**
  * 订单结算
  * Created by nurmemet on 2016/4/4.
  */
-public class PaySettlement extends Activity {
+public class PaySettlementAct extends BaseAct {
 
     boolean payStageSelected = false;
 
@@ -16,6 +18,7 @@ public class PaySettlement extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_pay_settlement);
+        ButterKnife.bind(this);
     }
 
 

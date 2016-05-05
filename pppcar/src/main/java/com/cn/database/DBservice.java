@@ -34,7 +34,7 @@ public class DBservice {
             long provinceId=cursor.getLong(cursor.getColumnIndex("province_id"));
             String name=cursor.getString(cursor.getColumnIndex("province"));
             Province province=new Province();
-            province.setId(id);
+           // province.setId(id);
             province.setProvince(name);
             province.setProvinceId(provinceId);
             provinceList.add(province);
@@ -57,7 +57,7 @@ public class DBservice {
             long cityId=cursor.getLong(cursor.getColumnIndex("city_id"));
             String name=cursor.getString(cursor.getColumnIndex("city"));
             City city=new City();
-            city.setId(id);
+            //city.setId(id);
             city.setCity(name);
             city.setProvinceId(provinceId);
             city.setCityId(cityId);
@@ -82,7 +82,7 @@ public class DBservice {
             long cityId=cursor.getLong(cursor.getColumnIndex("city_Id"));
             String name=cursor.getString(cursor.getColumnIndex("city"));
             City city=new City();
-            city.setId(id);
+            //city.setId(id);
             city.setCity(name);
             city.setCityId(cityId);
             city.setProvinceId(provinceId);
@@ -108,7 +108,7 @@ public class DBservice {
             long areaId=cursor.getLong(cursor.getColumnIndex("area_Id"));
             String name=cursor.getString(cursor.getColumnIndex("area"));
             Area area=new Area();
-            area.setId(id);
+           // area.setId(id);
             area.setArea(name);
             area.setCityId(cityId);
             area.setAreaId(areaId);
@@ -210,7 +210,7 @@ public class DBservice {
 //        String sql = "insert into collection(id,title,money,thumb,totaltime,teacher) values(?,?,?,?,?,?)";
 //        db.execSQL(
 //                sql,
-//                new Object[]{info.getId(), info.getTitle(), info.getMoney(),
+//                new Object[]{info.getId(), info.getName(), info.getMoney(),
 //                        info.getThumb(), info.getTotaltime(), info.getTeacher()});
 //    }
 //
@@ -248,7 +248,7 @@ public class DBservice {
 //
 //            MainPgeListItem copyItem = new MainPgeListItem();
 //            copyItem.setId(id);
-//            copyItem.setTitle(title);
+//            copyItem.setName(title);
 //            copyItem.setMoney(money);
 //            copyItem.setThumb(thumb);
 //            copyItem.setTotaltime(totaltime);

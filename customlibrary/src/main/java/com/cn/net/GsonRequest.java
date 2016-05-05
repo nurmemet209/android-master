@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,17 +30,31 @@ public class GsonRequest<T> extends Request<T> {
      * @param headers Map of request headers
      */
     public GsonRequest(String url, Class<T> clazz, Map<String, String> headers,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+                         Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
         this.clazz = clazz;
         this.headers = headers;
         this.listener = listener;
     }
-
+    public GsonRequest(String url, Class<T> clazz,
+                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(Method.GET, url, errorListener);
+        this.clazz = clazz;
+        this.listener = listener;
+        this.headers=null;
+    }
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        return headers != null ? headers : super.getHeaders();
+        if (headers==null){
+            Map<String, String> h=new HashMap<>();
+            h.put("Accept", "application/json");
+            h.put("Content-Type", "application/json; charset=UTF-8");
+            return h;
+        }
+        return headers;
     }
+
+
 
     @Override
     protected void deliverResponse(T response) {
@@ -52,6 +67,7 @@ public class GsonRequest<T> extends Request<T> {
             String json = new String(
                     response.data,
                     HttpHeaderParser.parseCharset(response.headers));
+            System.out.println(json);
             return Response.success(
                     gson.fromJson(json, clazz),
                     HttpHeaderParser.parseCacheHeaders(response));
@@ -60,5 +76,19 @@ public class GsonRequest<T> extends Request<T> {
         } catch (JsonSyntaxException e) {
             return Response.error(new ParseError(e));
         }
+    }
+
+    private  <T> T toObject(String str, Class<T> claxx) {
+
+        if (str != null) {
+            Gson gson = new Gson();
+            try {
+                return gson.fromJson(str.toString(), claxx);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 }

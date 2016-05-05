@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import com.cn.adapter.GoodsAdapter;
 import com.cn.entity.Item;
 import com.cn.pppcar.R;
-import com.cn.util.UIHelper;
 
 import java.util.ArrayList;
 
@@ -76,8 +74,8 @@ public class Goods extends Fragment{
 
     private Item getItem(String str) {
         Item item = new Item();
-        item.setImgAddress(str);
-        item.setTitle("D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5");
+        item.setImg(str);
+        item.setName("D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5");
         item.setPrice(123);
         item.setCollectNum(230565);
         return item;

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cn.commans.ActivitySwitcher;
 import com.cn.pppcar.R;
 import com.cn.pppcar.UserBaseInformationAct;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -20,8 +21,7 @@ import butterknife.OnClick;
 /**
  * Created by nurmemet on 2015/12/19.
  */
-public class MeFragment extends Fragment{
-    private View mainView;
+public class MeFragment extends BaseFrag{
 
     @Bind(R.id.head_img)
     public SimpleDraweeView headImg;
@@ -40,11 +40,15 @@ public class MeFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mainView=inflater.inflate(R.layout.me_frag,null);
         ButterKnife.bind(this,mainView);
         bindData();
         setListener();
         return mainView;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.me_frag;
     }
 
     private void bindData(){
@@ -64,6 +68,11 @@ public class MeFragment extends Fragment{
     public void toUserBaseInformation(View view){
         Intent it=new Intent(getActivity(), UserBaseInformationAct.class);
         getActivity().startActivity(it);
+    }
+    @OnClick(R.id.my_order)
+    public void toMyOrderAct(View view){
+        ActivitySwitcher.toMyOrderAct(getActivity());
+
     }
 
 

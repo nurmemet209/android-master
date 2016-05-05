@@ -16,7 +16,6 @@ public class IntegralDetailAct extends BaseViewPagerAct {
 
     IntegralDetailViewPagerAdapter adapter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +27,6 @@ public class IntegralDetailAct extends BaseViewPagerAct {
     @Override
     protected void init() {
         adapter = new IntegralDetailViewPagerAdapter(getSupportFragmentManager(), this);
-
         setUpViewPager(adapter);
     }
 }

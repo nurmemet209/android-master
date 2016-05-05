@@ -51,8 +51,8 @@ public class AuctionAdapter extends RecyclerView.Adapter {
         View view=holder.itemView;
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
         TextView title=(TextView)view.findViewById(R.id.item_title);
-        img.setImageURI(Uri.parse(list.get(position).getImgAddress()));
-        title.setText(list.get(position).getTitle());
+        img.setImageURI(Uri.parse(list.get(position).getImg()));
+        title.setText(list.get(position).getName());
 
     }
 

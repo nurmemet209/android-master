@@ -38,7 +38,7 @@ public abstract  class BaseStateFragment extends Fragment implements StateOneAda
     public static final  String SELECTED="selected";
 
     private View mainView;
-    @Bind(R.id.list)
+    @Bind(R.id.children)
     protected RecyclerView recyclerView;
     @Bind(R.id.swipe_refresh_widget)
     protected SwipeRefreshLayout swipeRefreshLayout;

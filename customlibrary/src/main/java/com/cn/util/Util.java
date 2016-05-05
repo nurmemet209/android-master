@@ -17,12 +17,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Util {
 
 	private static final String TAG = "SDK_Sample.Util";
 
+	public static  boolean isSucced(String str){
+		if (str!=null&&str.equals("000000")){
+			return true;
+		}
+		return false;
 
+	}
 
 	public static boolean isNoteEmpty(List list){
 		if(list!=null&&!list.isEmpty()){

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/tools"
               xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -38,10 +39,11 @@
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="100dp"
+                    android:background="@color/transparent"
                     fresco:actualImageScaleType="centerInside"
                     fresco:roundAsCircle="true"
-                    fresco:roundingBorderWidth="2.5dp"
                     fresco:roundingBorderColor="@color/white"
+                    fresco:roundingBorderWidth="2.5dp"
                     />
 
                 <TextView
@@ -63,10 +65,10 @@
                 android:layout_height="wrap_content"
                 android:divider="@drawable/divider_small"
                 android:dividerPadding="5dp"
-                android:showDividers="middle"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="@dimen/padding_normal"
+                android:showDividers="middle"
 
 
                 >
@@ -165,24 +167,29 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="@color/lightgray_1"
+                android:layout_height="1dp"
+                android:background="@color/main_bg_gray"
                 />
 
             <RelativeLayout
+                android:id="@+id/my_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/dialog_button_bg_sl"
+                android:clickable="true"
                 >
 
-                <TextView
+                <com.cn.widget.CustomTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/item_height"
                     android:layout_alignParentLeft="true"
                     android:layout_toLeftOf="@+id/my_all_order"
                     android:drawableLeft="@mipmap/my_order"
-                    android:padding="@dimen/padding_big"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_normal"
                     android:text="@string/my_order"
-
+                    app:leftDrawableSize="10dp"
                     />
 
                 <TextView
@@ -190,8 +197,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:drawablePadding="3dp"
-                    android:drawableRight="@mipmap/icon_right"
+                    android:drawableRight="@mipmap/go"
                     android:padding="@dimen/padding_normal"
                     android:text="@string/my_order"
                     android:textSize="@dimen/text_size_small"
@@ -219,6 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_smallest"
                         android:drawableTop="@mipmap/wait_examining"
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
@@ -230,44 +239,52 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_smallest"
                         android:drawableTop="@mipmap/wait_pay"
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_pay"
                         android:textSize="@dimen/text_size_small"
+
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_smallest"
                         android:drawableTop="@mipmap/wait_deliver"
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_diliver"
                         android:textSize="@dimen/text_size_small"
+
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_smallest"
                         android:drawableTop="@mipmap/wait_receive"
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/waiting_receive"
                         android:textSize="@dimen/text_size_small"
+
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_smallest"
                         android:drawableTop="@mipmap/return_goods"
                         android:gravity="center"
                         android:padding="@dimen/padding_big"
                         android:text="@string/return_goods"
                         android:textSize="@dimen/text_size_small"
+
                         />
 
                 </TableRow>
@@ -275,8 +292,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/part_normal"
-                android:background="@color/lightgray_1"
+                android:layout_height="@dimen/main_big_divider_height"
+                android:background="@color/main_bg_gray"
                 />
 
             <LinearLayout
@@ -288,40 +305,50 @@
                 android:showDividers="middle"
                 >
 
-                <TextView
+                <com.cn.widget.CustomTextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/my_order"
-                    android:padding="@dimen/padding_big"
+                    android:layout_height="@dimen/item_height"
+                    android:drawableLeft="@mipmap/my_auction"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_normal"
                     android:text="@string/my_auction"
-
+                    android:background="@drawable/dialog_button_bg_sl"
+                    android:clickable="true"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/item_height"
                     android:drawableLeft="@mipmap/integral_mall"
-                    android:padding="@dimen/padding_big"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_normal"
                     android:text="@string/integral_mall"
-
+                    android:background="@drawable/dialog_button_bg_sl"
+                    android:clickable="true"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/item_height"
                     android:drawableLeft="@mipmap/sell_center"
-                    android:padding="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:text="@string/sell_center"
-
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:background="@drawable/dialog_button_bg_sl"
+                    android:clickable="true"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/item_height"
                     android:drawableLeft="@mipmap/spreed"
-                    android:padding="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:text="@string/business_extension"
-
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:background="@drawable/dialog_button_bg_sl"
+                    android:clickable="true"
                     />
             </LinearLayout>
 

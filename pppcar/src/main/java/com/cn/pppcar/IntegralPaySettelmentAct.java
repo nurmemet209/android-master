@@ -40,4 +40,8 @@ public class IntegralPaySettelmentAct extends BaseAct {
     public void submitOrder(View view) {
         ActivitySwitcher.toOrderSubmitSuccedAct(this);
     }
+
+    public void selectAddress(View view){
+        ActivitySwitcher.toReceiveAddressListAct(this);
+    }
 }

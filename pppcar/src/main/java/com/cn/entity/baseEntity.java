@@ -7,15 +7,11 @@ import java.io.Serializable;
  */
 public abstract class BaseEntity implements Serializable{
 
-    public long getId() {
-        return id;
-    }
+   abstract public long getId() ;
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    protected long id;
+
+
 
     public abstract String getName();
 
@@ -29,4 +25,47 @@ public abstract class BaseEntity implements Serializable{
         }
         return false;
     }
+
+     public String getImageAddress(){
+         return "";
+     };
+
+    private int totalPage;
+    private int page;
+    private int totalSize;
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getTotalSize() {
+        return totalSize;
+    }
+
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    private int pageSize;
+
 }

@@ -3,7 +3,6 @@ package com.cn.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +44,9 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.CustomViewHo
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img) ;
         TextView collectedNum=(TextView)view.findViewById(R.id.collect_num);
         price.setText(Float.toString(list.get(position).getPrice()));
-        title.setText(list.get(position).getTitle());
+        title.setText(list.get(position).getName());
         collectedNum.setText(Integer.toString(list.get(position).getCollectNum()));
-        img.setImageURI(Uri.parse(list.get(position).getImgAddress()));
+        img.setImageURI(Uri.parse(list.get(position).getImg()));
 
 
 

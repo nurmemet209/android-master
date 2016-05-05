@@ -1,35 +1,24 @@
 package com.cn.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterViewFlipper;
-import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.cn.adapter.BannerAdapter;
-import com.cn.adapter.HeadLineFlipperAdapter;
+import com.cn.adapter.GridItemDecoration;
 import com.cn.adapter.MainPageRecycleAdapter;
 import com.cn.entity.Item;
 import com.cn.entity.MainPage;
 import com.cn.pppcar.R;
-import com.cn.pppcar.SearchAct;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 /**
  * Created by nurmemet on 2015/12/19.
@@ -71,7 +60,19 @@ public class MainFragment extends Fragment {
         mainPage.setHotRecommand(getList());
         mainPage.setShockAbsorber(getList());
         adapter = new MainPageRecycleAdapter(mainPage, getActivity());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        GridLayoutManager manager=new GridLayoutManager(getActivity(),2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position==0){
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        recyclerView.setLayoutManager(manager);
+        recyclerView.addItemDecoration(new GridItemDecoration(getActivity(),getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)/2,2,true));
         recyclerView.setAdapter(adapter);
 
 
@@ -99,8 +100,8 @@ public class MainFragment extends Fragment {
 
     private Item getItem(String str) {
         Item item = new Item();
-        item.setImgAddress(str);
-        item.setTitle("nurmemet");
+        item.setImg(str);
+        item.setName("nurmemet");
         return item;
     }
 

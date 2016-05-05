@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import com.cn.commans.Constants;
 import com.cn.commans.DateUtil;
+import com.cn.commans.SpanHelper;
+import com.cn.entity.AuctionBidResBean;
+import com.cn.entity.AuctionTimeResBean;
+import com.cn.entity.CollectAuctionDetailResBean;
 import com.cn.entity.Item;
+import com.cn.pppcar.AuctionBid;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -25,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.Bind;
@@ -36,32 +42,28 @@ import me.relex.circleindicator.CircleIndicator;
  */
 public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private ArrayList<Item> list;
-
-    private Item headContent;
+    private List<AuctionTimeResBean> list;
     private ArrayList<Object> objectList = new ArrayList<>();
+    private CollectAuctionDetailResBean bean;
+    private SpanHelper spanHelper;
 
-    public MyAuctionDetailAdapter(Context mContext, ArrayList<Item> lsit,Item headContent) {
+    public MyAuctionDetailAdapter(Context mContext, CollectAuctionDetailResBean bean) {
         this.mContext = mContext;
-        this.list = lsit;
-        this.headContent=headContent;
-        revert();
+        if (bean != null) {
+            this.list = bean.getAuctionTimeResBeans();
+            if (Util.isNoteEmpty(list)) {
+                revert();
+            }
+        }
+        this.bean = bean;
+        spanHelper = new SpanHelper(mContext);
     }
 
     private void revert() {
-
-        if (Util.isNoteEmpty(list)) {
-            String temp = "";
-            String date = "";
-            for (int i = 0; i < list.size(); i++) {
-                temp = DateUtil.convertTime(list.get(i).getTime());
-                if (!temp.equals(date)) {
-                    objectList.add(temp);
-                    objectList.add(list.get(i));
-                } else {
-                    objectList.add(list.get(i));
-                }
-                date = temp;
+        for (int i = 0; i < list.size(); i++) {
+            objectList.add(list.get(i).getDate());
+            for (int j = 0; j < list.get(i).getAuctionBidResBean().size(); j++) {
+                objectList.add(list.get(i).getAuctionBidResBean().get(j));
             }
         }
     }
@@ -73,7 +75,7 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
             view = LayoutInflater.from(mContext).inflate(R.layout.header_auction_product_frag, null);
         } else if (viewType == 1) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_list_frag_bid_record_date, null);
-        } else {
+        } else  if (viewType==2){
             view = LayoutInflater.from(mContext).inflate(R.layout.item_list_frag_bid_record_main, null);
         }
         RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(view) {
@@ -83,27 +85,26 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position == 0) {
-            bindHeadData(holder.itemView,headContent);
-        }
-        else if (objectList.get(position-1) instanceof String){
-            String date=(String)objectList.get(position-1);
-            View view=holder.itemView;
-            TextView dateTv=(TextView) view.findViewById(R.id.time);
+        if (getItemViewType(position)==0) {
+            bindHeadData(holder.itemView);
+        } else if (getItemViewType(position)==1) {
+            String date = (String) objectList.get(position - 1);
+            View view = holder.itemView;
+            TextView dateTv = (TextView) view.findViewById(R.id.time);
             dateTv.setText(date);
-        }else{
-            Item item=(Item)objectList.get(position-1);
-            View view=holder.itemView;
-            TextView price=(TextView) view.findViewById(R.id.price);
-            price.setText(Float.toString(item.getPrice()));
-            TextView date=(TextView)view.findViewById(R.id.time);
-            date.setText(DateUtil.convertTime(item.getTime()));
+        } else {
+            AuctionBidResBean item = (AuctionBidResBean) objectList.get(position - 1);
+            View view = holder.itemView;
+            TextView price = (TextView) view.findViewById(R.id.price);
+            price.setText(Double.toString(item.getBidPrice()));
+            TextView date = (TextView) view.findViewById(R.id.time);
+            date.setText(item.getBidDate());
 
-            TextView telNum=(TextView)view.findViewById(R.id.tel_num);
-            telNum.setText(item.getPhoneNum());
+            TextView telNum = (TextView) view.findViewById(R.id.tel_num);
+            telNum.setText(item.getMobileNumber());
             //状态，出局，或领先
-            TextView state=(TextView)view.findViewById(R.id.state);
-            GradientDrawable dr=(GradientDrawable)mContext.getResources().getDrawable(R.drawable.round_rect);
+            TextView state = (TextView) view.findViewById(R.id.state);
+            GradientDrawable dr = (GradientDrawable) mContext.getResources().getDrawable(R.drawable.round_rect);
             dr.setColor(mContext.getResources().getColor(R.color.main_red));
             state.setBackground(dr);
             state.setTextColor(mContext.getResources().getColor(R.color.white));
@@ -118,73 +119,79 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (position == 0) {
             return 0;
-        } else {
-            if (objectList.get(position-1) instanceof String) {
-                return 1;
-            } else {
-                return 2;
-            }
+        } else if (objectList.get(position-1) instanceof String) {
+            return 1;
 
+        } else if (objectList.get(position-1) instanceof AuctionBidResBean) {
+            return 2;
         }
+        return 0;
+
+
     }
 
     @Override
     public int getItemCount() {
-        if (Util.isNoteEmpty(list)) {
-            return list.size();
+        if (Util.isNoteEmpty(objectList)) {
+            return objectList.size()+1;
         }
-        return 0;
+        return 1;
     }
 
 
-    private void bindHeadData(View view,Item item) {
+
+
+    private void bindHeadData(View view) {
 
         AutoScrollViewPager banner = (AutoScrollViewPager) view.findViewById(R.id.banner);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
-        ArrayList<String> list = getList();
+        String[] list = bean.getImgUrl().split(",");
         ArrayList viewList = new ArrayList();
-        for (int i = 0; i < list.size(); i++) {
-            SimpleDraweeView img = new SimpleDraweeView(mContext);
-            Uri uri = Uri.parse(list.get(i));
-            img.setImageURI(uri);
-            viewList.add(img);
+        if (list != null) {
+            for (int i = 0; i < list.length; i++) {
+                SimpleDraweeView img = new SimpleDraweeView(mContext);
+                Uri uri = Uri.parse(list[i]);
+                img.setImageURI(uri);
+                viewList.add(img);
+            }
         }
         BannerAdapter adapter = new BannerAdapter(mContext, viewList);
         banner.setAdapter(adapter);
         banner.setInterval(4000);
         // banner.setScrollDurationFactor(5);
         banner.setCycle(true);
-        banner.setOffscreenPageLimit(list.size());
+        banner.setOffscreenPageLimit(list.length);
         banner.setBorderAnimation(true);
         banner.startAutoScroll();
         indicator.setViewPager(banner);
 
-        TextView title=(TextView)view.findViewById(R.id.title);
-        title.setText(item.getTitle());
+        TextView title = (TextView) view.findViewById(R.id.title);
+        title.setText(bean.getProductName());
 
-        TextView bidCount=(TextView)view.findViewById(R.id.bid_number);
-        SpannableStringBuilder builder = new SpannableStringBuilder(mContext.getString(R.string.bid_number_));
-        int start = builder.length();
-        builder.append("23");
-        // builder.setSpan(new AbsoluteSizeSpan(16,true),start,builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        bidCount.setText(builder);
+        TextView bidCount = (TextView) view.findViewById(R.id.bid_number);
+        bidCount.setText(spanHelper.priceSpan(R.string.bid_number_, bean.getBidNumber()));
+
+        TextView curPrice = (TextView) view.findViewById(R.id.current_price);
+        curPrice.setText(spanHelper.priceSpan(R.string.current_price_, bean.getCurrentPrice()));
+
+        TextView fixedPrice = (TextView) view.findViewById(R.id.fixed_price);
+        fixedPrice.setText(spanHelper.priceSpan(R.string.fixed_price_, bean.getaPrice()));
+
+        TextView marketPrice = (TextView) view.findViewById(R.id.market_price);
+        marketPrice.setText(spanHelper.priceSpan(R.string.market_price_, bean.getRetailPrice()));
+
+        TextView term=(TextView)view.findViewById(R.id.term);
+        term.setText("第"+bean.getTerm()+"期");
+
+        TextView leftTime=(TextView)view.findViewById(R.id.left_time);
+
+        long left=bean.getEndTime()-bean.getCurrentTime();
+        leftTime.setText(spanHelper.auctionTime(left));
+
+        TextView history=(TextView)view.findViewById(R.id.bid_history_time);
+        history.setText("（自"+DateUtil.convertTime(bean.getStartTime())+"开始）");
 
     }
 
 
-    private ArrayList<String> getList() {
-        ArrayList<String> imageUrlList = new ArrayList<>();
-        imageUrlList
-                .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList
-                .add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList
-                .add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-        imageUrlList
-                .add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-        imageUrlList
-                .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        return imageUrlList;
-    }
 }

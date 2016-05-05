@@ -5,11 +5,18 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/3/30.
  */
-public class Item {
-    private String imgAddress;
+public class Item extends BaseEntity{
+    private String img;
     private int type ;
-    private int id;
-    private String title;
+    private long id;
+
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    private String name;
     private float price;
     private long auctionLeftTime;
     private long time;
@@ -172,20 +179,26 @@ public class Item {
      */
    private int collectNum;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
+
+
+
+
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getImgAddress() {
-        return imgAddress;
+    public String getImg() {
+        if (img==null)
+            return "";
+        return img;
     }
 
-    public void setImgAddress(String imgAddress) {
-        this.imgAddress = imgAddress;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public float getPrice() {
@@ -196,12 +209,10 @@ public class Item {
         this.price = price;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getType() {

@@ -41,7 +41,7 @@
 
         />
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_normal"
@@ -61,6 +61,7 @@
         android:paddingRight="@dimen/padding_normal"
         >
     <TextView
+        android:id="@+id/current_price"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -68,6 +69,7 @@
         android:gravity="bottom"
         />
         <TextView
+            android:id="@+id/fixed_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -77,6 +79,7 @@
             android:gravity="bottom"
             />
         <TextView
+            android:id="@+id/market_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -92,14 +95,15 @@
         android:paddingRight="@dimen/padding_normal"
         >
         <TextView
+            android:id="@+id/term"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:text="当前价"
             android:gravity="center_vertical"
             />
 
         <TextView
+            android:id="@+id/left_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -175,8 +179,8 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="@dimen/text_size_smaller"
             android:textColor="@color/main_sub_text_color"
+            android:paddingLeft="@dimen/padding_normal"
             />
     </LinearLayout>
   <View

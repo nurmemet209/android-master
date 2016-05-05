@@ -18,4 +18,6 @@ public interface Constants {
     public static final String DATE_FORMAT_2="yy/MM/dd HH:mm:ss pm";
     public static final String DATE_FORMAT_3="yy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_4="yy-MM-dd HH:mm:ss am";
+
+    public static final String LIST_IMG_SIZE="/300/225/80";
 }

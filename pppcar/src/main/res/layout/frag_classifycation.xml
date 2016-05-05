@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_normal"
+
+
+        >
+
+
+        <TextView
+            android:id="@+id/search_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_width"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/padding_normal"
+            android:layout_weight="1"
+            android:background="@drawable/search_bg"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/search_hint"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            android:textCursorDrawable="@null"
+            />
+
+        <ImageButton
+            android:layout_width="@dimen/item_height"
+            android:layout_height="@dimen/item_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/message"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"
+        />
+
+    <LinearLayout
+        android:id="@+id/select_car_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:background="@drawable/dialog_button_bg_sl"
+        >
+
+        <ImageButton
+            android:layout_width="@dimen/item_height"
+            android:layout_height="@dimen/item_height"
+            android:scaleType="centerInside"
+            android:src="@mipmap/car"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/select_car_type_to_find_exactly_one"
+            />
+
+        <ImageButton
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
+            android:src="@mipmap/go"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/navigation"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/main_bg_gray"
+            ></android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_normal"
+            ></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+
+</LinearLayout>

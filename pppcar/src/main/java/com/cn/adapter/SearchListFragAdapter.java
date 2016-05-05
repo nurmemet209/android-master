@@ -42,8 +42,8 @@ public class SearchListFragAdapter extends RecyclerView.Adapter {
         TextView title=(TextView)view.findViewById(R.id.title);
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
         TextView price=(TextView)view.findViewById(R.id.price);
-        title.setText(list.get(position).getTitle());
-        img.setImageURI(Uri.parse(list.get(position).getImgAddress()));
+        title.setText(list.get(position).getName());
+        img.setImageURI(Uri.parse(list.get(position).getImg()));
         price.setText(Float.toString(list.get(position).getPrice()));
     }
 

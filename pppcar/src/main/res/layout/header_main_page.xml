@@ -98,11 +98,13 @@
         >
 
         <LinearLayout
+            android:id="@+id/brand_center_l"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:clickable="true"
             >
 
             <ImageView
@@ -191,7 +193,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="centerInside"
-                android:src="@mipmap/my_order"
+                android:src="@mipmap/my_order_home"
                 />
 
             <TextView

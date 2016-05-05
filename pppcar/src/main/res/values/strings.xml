@@ -222,5 +222,13 @@
     <string name="integral_price_">积分价：</string>
     <string name="exchange_quickly">立即兑换</string>
     <string name="submit_order">提交订单</string>
+    <string name="market_price_">市场价：</string>
+    <string name="select_car_type_to_find_exactly_one">选择车型，精确查询配件</string>
+    <string name="product_num_and_total_price">共1$件商品 总价：2$</string>
+    <string name="view_logistics">查看物流</string>
+    <string name="evaluation_sun">评价晒单</string>
+    <string name="pay">付款</string>
+    <string name="cancel_order">取消订单</string>
+    <string name="apply_refund">申请退款</string>
 
 </resources>

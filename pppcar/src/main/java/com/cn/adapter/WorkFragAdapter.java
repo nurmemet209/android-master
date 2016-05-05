@@ -13,7 +13,6 @@ import com.cn.pppcar.R;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 
 /**
@@ -40,14 +39,14 @@ public class WorkFragAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         View view = holder.itemView;
         TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText(list.get(position).getTitle());
+        title.setText(list.get(position).getName());
         TextView subTitle = (TextView) view.findViewById(R.id.sub_title);
-        subTitle.setText(list.get(position).getTitle());
+        subTitle.setText(list.get(position).getName());
         SimpleDraweeView titleImg = (SimpleDraweeView) view.findViewById(R.id.title_img);
-        titleImg.setImageURI(Uri.parse(list.get(position).getImgAddress()));
+        titleImg.setImageURI(Uri.parse(list.get(position).getImg()));
 
         SimpleDraweeView headImg = (SimpleDraweeView) view.findViewById(R.id.head_portrait);
-        //headImg.setImageURI(Uri.parse(list.get(position).getImgAddress()));
+        //headImg.setImageURI(Uri.parse(list.get(position).getImg()));
 
 
         TextView phoneNum = (TextView) view.findViewById(R.id.phone_num);

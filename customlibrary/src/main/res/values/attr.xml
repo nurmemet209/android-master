@@ -9,4 +9,11 @@
         <attr name="otherBallColor" format="color"/>
     </declare-styleable>
     <attr name="TimeLineAttr" format="reference"/>
+
+    <declare-styleable name="CustomTextView">
+        <attr name="leftDrawableSize" format="dimension"/>
+        <attr name="topDrawableSize" format="dimension"/>
+        <attr name="rightDrawableSize" format="dimension"/>
+        <attr name="bottomDrawableSize" format="dimension"/>
+    </declare-styleable>
 </resources>

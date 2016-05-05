@@ -11,6 +11,7 @@
 
 
     <dimen name="divider">0.5dp</dimen>
+    <dimen name="divider_">1dp</dimen>
 
     <dimen name="list_padding_rl">8dp</dimen>
     <dimen name="padding_smallest">6dp</dimen>

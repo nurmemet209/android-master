@@ -7,7 +7,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,8 +59,8 @@ public class AuctionBid extends BaseAct {
 
     private void bindData() {
 
-        item.setImgAddress("http://img.pppcar.com/image/getImage/570dd7104d5d393c32095af7/820/0/80/WaterMark");
-        item.setTitle("RS高品制燃油添加剂 24瓶/一箱（重性能 增加燃油辛烷值5个点 减少引擎爆震）");
+        item.setImg("http://img.pppcar.com/image/getImage/570dd7104d5d393c32095af7/820/0/80/WaterMark");
+        item.setName("RS高品制燃油添加剂 24瓶/一箱（重性能 增加燃油辛烷值5个点 减少引擎爆震）");
         item.setCurrentPrice(123.00F);
         item.setFixedPrice(2344.00F);
         item.setMinAucitionPrice(4455.00F);
@@ -70,8 +69,8 @@ public class AuctionBid extends BaseAct {
         item.setStartPrice(345454F);
 
 
-        titleImg.setImageURI(Uri.parse(item.getImgAddress()));
-        title.setText(item.getTitle());
+        titleImg.setImageURI(Uri.parse(item.getImg()));
+        title.setText(item.getName());
         currentPrice.setText(spanHelper.priceSpan(R.string.current_price_,item.getCurrentPrice()));
         fixedPrice.setText(spanHelper.priceSpan(R.string.fixed_price_,item.getFixedPrice()));
         addBidLevel();

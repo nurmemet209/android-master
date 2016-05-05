@@ -53,7 +53,6 @@
             android:id="@+id/title_img"
             android:layout_width="@dimen/list_item_img_height"
             android:layout_height="@dimen/list_item_img_height"
-
             />
 
         <LinearLayout
@@ -66,7 +65,7 @@
             >
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -119,7 +118,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-
                 android:orientation="horizontal"
 
 

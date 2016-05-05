@@ -2,9 +2,7 @@ package com.cn.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.BinderThread;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +62,7 @@ public class IntegralProductDetailFrag extends BaseFrag {
         for (int i = 0; i < list.size(); i++) {
 
             SimpleDraweeView img = new SimpleDraweeView(getActivity());
-            Uri uri = Uri.parse(list.get(i).getImgAddress());
+            Uri uri = Uri.parse(list.get(i).getImg());
             img.setImageURI(uri);
             viewList.add(img);
         }

@@ -34,16 +34,16 @@ public class MyOrderViewPagerAdapter extends FragmentPagerAdapter {
                 frag = AllOrderFrag.getInstance();
                 break;
             case 1:
-                frag = WaitEximinateFrag.getInstance();
+                frag = AllOrderFrag.getInstance();
                 break;
             case 2:
-                frag = WaitPayFrag.getInstance();
+                frag = AllOrderFrag.getInstance();
                 break;
             case 3:
-                frag = WaitDeliverFrag.getInstance();
+                frag = AllOrderFrag.getInstance();
                 break;
             case 4:
-                frag = WaitReceiveFrag.getInstance();
+                frag = AllOrderFrag.getInstance();
                 break;
             default:
                 break;

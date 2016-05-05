@@ -2,7 +2,6 @@ package com.cn.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.Item;
 import com.cn.entity.MainPage;
 import com.cn.pppcar.R;
-import com.cn.pppcar.SearchAct;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -38,14 +35,14 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     public MainPageRecycleAdapter(MainPage mainPage, Context mContext) {
         this.mainPage = mainPage;
         this.mContext = mContext;
-        recommonds=mainPage.getHotRecommand();
+        recommonds = mainPage.getHotRecommand();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position==0){
+        if (position == 0) {
             return 0;
-        }else{
+        } else {
             return 1;
         }
 
@@ -54,7 +51,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     @Override
     public MainPageRecycleAdapter.CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
-            View headerView = LayoutInflater.from(mContext).inflate(R.layout.main_page_header, null);
+            View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_main_page, null);
             CustomViewHolder holder = new CustomViewHolder(headerView);
             return holder;
         } else {
@@ -70,7 +67,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         if (position == 0) {
             setHeaderData(holder.itemView);
         } else {
-            setRecommond(holder.itemView,position-1);
+            setRecommond(holder.itemView, position - 1);
         }
 
     }
@@ -78,11 +75,13 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     @Override
     public int getItemCount() {
         if (recommonds != null) {
-            int size=(int)Math.ceil(recommonds.size()/(float)2);
+            int size = (int) Math.ceil(recommonds.size()+1);
             return size;
         }
         return 0;
     }
+
+
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
 
@@ -94,7 +93,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     private void setHeaderData(View view) {
         //search
         {
-            TextView search=(TextView) view.findViewById(R.id.search_edit_text);
+            TextView search = (TextView) view.findViewById(R.id.search_edit_text);
             search.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,13 +107,13 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         //轮播
         if (Util.isNoteEmpty(mainPage.getBannerImages())) {
             AutoScrollViewPager banner = (AutoScrollViewPager) view.findViewById(R.id.banner);
-            CircleIndicator indicator=(CircleIndicator)view.findViewById(R.id.banner_indicator);
+            CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
 
             ArrayList viewList = new ArrayList();
             for (int i = 0; i < mainPage.getBannerImages().size(); i++) {
                 Item item = mainPage.getBannerImages().get(i);
                 SimpleDraweeView img = new SimpleDraweeView(mContext);
-                Uri uri = Uri.parse(item.getImgAddress());
+                Uri uri = Uri.parse(item.getImg());
                 img.setImageURI(uri);
                 viewList.add(img);
                 img.setOnClickListener(new View.OnClickListener() {
@@ -136,19 +135,27 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
 
         }
         //品牌中心
-        View myOrder=view.findViewById(R.id.my_order_l);
+        View brandCenter=view.findViewById(R.id.brand_center_l);
+        brandCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitySwitcher.toBrandCenterAct((Activity) mContext);
+            }
+        });
+        //我的订单
+        View myOrder = view.findViewById(R.id.my_order_l);
         myOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toMyOrderAct((Activity)mContext);
+                ActivitySwitcher.toMyOrderAct((Activity) mContext);
             }
         });
         //拍卖中心
-        View auctionCenter=view.findViewById(R.id.auction_center_l);
+        View auctionCenter = view.findViewById(R.id.auction_center_l);
         auctionCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toAuctionAct((Activity)mContext);
+                ActivitySwitcher.toAuctionAct((Activity) mContext);
             }
         });
 
@@ -156,14 +163,15 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         if (true/*Util.isNoteEmpty(mainPage.getPapaHeadLines())*/) {
 //            ArrayList<Item> papaHeadLine = mainPage.getPapaHeadLines();
 //            TextView tv = (TextView) view.findViewById(R.id.papa_headline);
-//            tv.setText(papaHeadLine.get(0).getTitle());
+//            tv.setText(papaHeadLine.get(0).getName());
 
-            AdapterViewFlipper flipper=(AdapterViewFlipper)view.findViewById(R.id.headline_flipper);
-            HeadLineFlipperAdapter headLineAdapter=new HeadLineFlipperAdapter(null,mContext);;
+            AdapterViewFlipper flipper = (AdapterViewFlipper) view.findViewById(R.id.headline_flipper);
+            HeadLineFlipperAdapter headLineAdapter = new HeadLineFlipperAdapter(null, mContext);
+            ;
             flipper.setAdapter(headLineAdapter);
 
-            flipper.setOutAnimation(mContext,R.anim.obj_bottom_out);
-            flipper.setInAnimation(mContext,R.anim.obj_top_in);
+            flipper.setOutAnimation(mContext, R.anim.obj_bottom_out);
+            flipper.setInAnimation(mContext, R.anim.obj_top_in);
             //flipper.startFlipping();
         }
         //综合
@@ -176,55 +184,55 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             SimpleDraweeView universal_2_1 = (SimpleDraweeView) view.findViewById(R.id.universal_2_1);
             SimpleDraweeView universal_2_2 = (SimpleDraweeView) view.findViewById(R.id.universal_2_2);
             SimpleDraweeView universal_2_3 = (SimpleDraweeView) view.findViewById(R.id.universal_2_3);
-            universal_1_big.setImageURI(Uri.parse(universalItems.get(0).getImgAddress()));
-            universal_1_right.setImageURI(Uri.parse(universalItems.get(getIndex(1, size)).getImgAddress()));
-            universal_2_1.setImageURI(Uri.parse(universalItems.get(getIndex(2, size)).getImgAddress()));
-            universal_2_2.setImageURI(Uri.parse(universalItems.get(getIndex(3, size)).getImgAddress()));
-            universal_2_3.setImageURI(Uri.parse(universalItems.get(getIndex(4, size)).getImgAddress()));
+            universal_1_big.setImageURI(Uri.parse(universalItems.get(0).getImg()));
+            universal_1_right.setImageURI(Uri.parse(universalItems.get(getIndex(1, size)).getImg()));
+            universal_2_1.setImageURI(Uri.parse(universalItems.get(getIndex(2, size)).getImg()));
+            universal_2_2.setImageURI(Uri.parse(universalItems.get(getIndex(3, size)).getImg()));
+            universal_2_3.setImageURI(Uri.parse(universalItems.get(getIndex(4, size)).getImg()));
 
         }
         //排气
-        if (Util.isNoteEmpty(mainPage.getExhaustList())){
+        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
             ArrayList<Item> list = mainPage.getUniversalItems();
             int size = list.size();
-            SimpleDraweeView  exhaust_left_big= (SimpleDraweeView) view.findViewById(R.id.exhaust_left_big);
+            SimpleDraweeView exhaust_left_big = (SimpleDraweeView) view.findViewById(R.id.exhaust_left_big);
             SimpleDraweeView exhaust_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_1_1);
             SimpleDraweeView exhaust_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_2_1);
             SimpleDraweeView exhaust_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_2_2);
 
-            exhaust_left_big.setImageURI(Uri.parse(list.get(0).getImgAddress()));
-            exhaust_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImgAddress()));
-            exhaust_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImgAddress()));
-            exhaust_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImgAddress()));
+            exhaust_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
+            exhaust_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
+            exhaust_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
+            exhaust_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
         }
         //避震
-        if(Util.isNoteEmpty(mainPage.getExhaustList())){
+        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
             ArrayList<Item> list = mainPage.getUniversalItems();
             int size = list.size();
-            SimpleDraweeView  shock_left_big= (SimpleDraweeView) view.findViewById(R.id.shock_left_big);
+            SimpleDraweeView shock_left_big = (SimpleDraweeView) view.findViewById(R.id.shock_left_big);
             SimpleDraweeView shock_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.shock_right_1_1);
             SimpleDraweeView shock_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.shock_right_2_1);
             SimpleDraweeView shock_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.shock_right_2_2);
 
-            shock_left_big.setImageURI(Uri.parse(list.get(0).getImgAddress()));
-            shock_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImgAddress()));
-            shock_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImgAddress()));
-            shock_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImgAddress()));
+            shock_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
+            shock_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
+            shock_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
+            shock_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
 
         }
         //轮毂
-        if(Util.isNoteEmpty(mainPage.getExhaustList())){
+        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
             ArrayList<Item> list = mainPage.getUniversalItems();
             int size = list.size();
-            SimpleDraweeView  hob_left_big= (SimpleDraweeView) view.findViewById(R.id.hob_left_big);
+            SimpleDraweeView hob_left_big = (SimpleDraweeView) view.findViewById(R.id.hob_left_big);
             SimpleDraweeView hob_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.hob_right_1_1);
             SimpleDraweeView hob_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.hob_right_2_1);
             SimpleDraweeView hob_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.hob_right_2_2);
 
-            hob_left_big.setImageURI(Uri.parse(list.get(0).getImgAddress()));
-            hob_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImgAddress()));
-            hob_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImgAddress()));
-            hob_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImgAddress()));
+            hob_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
+            hob_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
+            hob_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
+            hob_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
 
         }
     }
@@ -233,33 +241,28 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         return size > index ? index : 0;
     }
 
-    private void setRecommond(View view,int position){
-        if (mainPage==null)
-            return;;
-        if (Util.isNoteEmpty(mainPage.getHotRecommand())){
-            SimpleDraweeView leftImg=(SimpleDraweeView) view.findViewById(R.id.recommond_item_left);
-            TextView titleLeft=(TextView)view.findViewById(R.id.item_title_left);
-            TextView priceLeft=(TextView)view.findViewById(R.id.price_left);
+    private void setRecommond(View view, int position) {
+        if (mainPage == null)
+            return;
+        ;
+        if (Util.isNoteEmpty(mainPage.getHotRecommand())) {
 
-            SimpleDraweeView rightImg=(SimpleDraweeView) view.findViewById(R.id.recommond_item_right);
-            TextView titleRight=(TextView)view.findViewById(R.id.item_title_right);
-            TextView priceRight=(TextView)view.findViewById(R.id.price_right);
-            int realPos=position*2;
-            Item left,right;
-            left=mainPage.getHotRecommand().get(realPos);
-            if (mainPage.getHotRecommand().size()>realPos+1)
-            {
-                right=mainPage.getHotRecommand().get(realPos+1);
-                rightImg.setImageURI(Uri.parse(right.getImgAddress()));
-                titleRight.setText(right.getTitle());
-                String price=String.valueOf(right.getPrice());
-                priceRight.setText(price);
+
+            SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
+            TextView title = (TextView) view.findViewById(R.id.title);
+            TextView price = (TextView) view.findViewById(R.id.price);
+
+
+            Item item = mainPage.getHotRecommand().get(position );
+            if (mainPage.getHotRecommand().size() > position ) {
+
+                img.setImageURI(Uri.parse(item.getImg()));
+                title.setText(item.getName());
+                String priceStr = String.valueOf(item.getPrice());
+                price.setText(priceStr);
             }
 
-            leftImg.setImageURI(Uri.parse(left.getImgAddress()));
-            titleLeft.setText(left.getTitle());
-            String price=String.valueOf(left.getPrice());
-            priceLeft.setText(price);
+
         }
 
     }

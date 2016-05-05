@@ -4,6 +4,17 @@ package com.cn.entity;
  * Created by nurmemet on 2016/3/19.
  */
 public class Province extends BaseEntity {
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    private long id;
     private long provinceId;
 
     public String getProvince() {
