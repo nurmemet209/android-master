@@ -11,6 +11,7 @@ import com.cn.pppcar.IntegralPaySettelmentAct;
 import com.cn.pppcar.IntegralProductDetail;
 import com.cn.pppcar.MyOrderAct;
 import com.cn.pppcar.OrderSubmitSuccedAct;
+import com.cn.pppcar.ProductDetailAct;
 import com.cn.pppcar.R;
 import com.cn.pppcar.ReceiveAddressEditAct;
 import com.cn.pppcar.ReceiveAddressListAct;
@@ -87,6 +88,12 @@ public class ActivitySwitcher {
     }
     static public void toIntegralMallAct(Activity activity){
         Intent intent=new Intent(activity, IntegralMallAct.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
+    }
+
+    static public void toProductDetailAct(Activity activity){
+        Intent intent=new Intent(activity, ProductDetailAct.class);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
     }

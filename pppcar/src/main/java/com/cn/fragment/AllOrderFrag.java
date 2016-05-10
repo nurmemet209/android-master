@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
  */
 public class AllOrderFrag extends BaseFrag {
 
+    private int orderType = 1;
+
 
     @Bind(R.id.recycle_view)
     protected RecyclerView recyclerView;
@@ -35,15 +37,20 @@ public class AllOrderFrag extends BaseFrag {
     private OrderAdapter adapter;
     PageResPersonalCenterOrder allOrder;
 
-    public static AllOrderFrag getInstance() {
+    public static AllOrderFrag getInstance(int orderType) {
         AllOrderFrag frag = new AllOrderFrag();
+        Bundle bd = new Bundle();
+        bd.putInt("orderType", orderType);
+        frag.setArguments(bd);
         return frag;
     }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        orderType=getArguments().getInt("orderType");
         ButterKnife.bind(this, mainView);
         init();
         return mainView;
@@ -67,12 +74,12 @@ public class AllOrderFrag extends BaseFrag {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (NetUtil.isSucced(response)) {
-                            allOrder = apiHandler.toObject(NetUtil.getData(response), PageResPersonalCenterOrder.class);
+                            allOrder = apiHandler.toObject(NetUtil.getArrayData(response), PageResPersonalCenterOrder.class);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     if (allOrder != null && Util.isNoteEmpty(allOrder.getResOrders())) {
-                                        adapter = new OrderAdapter(allOrder.getResOrders(), getActivity(), 1);
+                                        adapter = new OrderAdapter(allOrder.getResOrders(), getActivity(), orderType);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         CustomItemDecoration decoration = new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
                                         recyclerView.addItemDecoration(decoration);

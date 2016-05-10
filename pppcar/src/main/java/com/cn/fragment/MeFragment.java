@@ -74,6 +74,14 @@ public class MeFragment extends BaseFrag{
         ActivitySwitcher.toMyOrderAct(getActivity());
 
     }
+    @OnClick(R.id.integral_mall)
+    public void toIntegralMall(View view){
+        ActivitySwitcher.toIntegralMallAct(getActivity());
+    }
+    @OnClick(R.id.my_auction)
+    public void toMyAuction(View view){
+        ActivitySwitcher.toProductDetailAct(getActivity());
+    }
 
 
 }

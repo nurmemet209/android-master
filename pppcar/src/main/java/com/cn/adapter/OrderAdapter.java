@@ -34,7 +34,9 @@ public class OrderAdapter extends BaseListAdapter<ResOrder> {
     //待发货
     public final static int WAIT_DELIVER = 4;
     //待收货
-    public final static int WAIT_RECEIVE = 1;
+    public final static int WAIT_RECEIVE = 5;
+    //预订单
+    public final static int PRE_ORDER=6;
     private SpanHelper spanHelper;
     private int imgWidth;
 
@@ -84,7 +86,13 @@ public class OrderAdapter extends BaseListAdapter<ResOrder> {
             ResOrderProduct pro = list.get(position).getOrderProducts().get(0);
             img.setImageURI(Uri.parse(pro.getImgs()));
             img.setVisibility(View.VISIBLE);
-            title.setText(pro.getName());
+            if (adapterType==PRE_ORDER){
+                title.setText(spanHelper.span("[预订单]",pro.getName()));
+            }else{
+                title.setText(pro.getName());
+            }
+
+
             title.setVisibility(View.VISIBLE);
             productNum=pro.getProNum();
 

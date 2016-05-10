@@ -1,8 +1,8 @@
 package com.cn.entity;
 
-import org.dozer.Mapping;
 
-public class ResProperty {
+
+public class ResProperty extends BaseEntity{
 
 	private Long id;
 	
@@ -12,15 +12,21 @@ public class ResProperty {
 	
 	private Integer isShow;
 
-	public Long getId() {
-		return id;
+
+	@Override
+	public long getId() {
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		return propertyValue;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Mapping(value="propertyName.propertyName")
 	public String getPropertyName() {
 		return propertyName;
 	}

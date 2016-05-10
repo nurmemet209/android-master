@@ -42,10 +42,11 @@
         <service android:name="com.amap.api.location.APSService">
         </service>
 
-        <activity android:name=".MainPageAct">
+        <activity android:name=".ProductDetailAct"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -70,6 +71,7 @@
         <activity android:name=".AuctionAct"/>
         <activity android:name=".BrandAct"/>
         <activity android:name=".IntegralMallAct"/>
+        <!--<activity android:name=".ProductDetailAct"/>-->
     </application>
 
 </manifest>

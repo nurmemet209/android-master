@@ -13,7 +13,6 @@
         android:background="@color/main_bg_gray"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
 
 
@@ -21,10 +20,11 @@
 
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
             android:scaleType="centerInside"
             android:src="@mipmap/back"
+            android:onClick="OnBack"
 
             />
 
@@ -38,13 +38,13 @@
             android:layout_marginRight="@dimen/padding_normal"
             android:layout_weight="1"
             android:background="@drawable/search_bg"
+            android:gravity="center_vertical"
             android:hint="@string/search_hint"
             android:maxLines="1"
             android:onClick="search"
             android:paddingLeft="@dimen/padding_normal"
             android:paddingRight="@dimen/padding_normal"
             android:textCursorDrawable="@null"
-            android:gravity="center_vertical"
             />
 
         <ImageButton
@@ -60,11 +60,18 @@
             />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_sub_text_color"
+        />
+
     <ViewFlipper
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -307,24 +314,26 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-      <!--未搜到-->
+        <!--未搜到-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:paddingBottom="80dp"
             >
+
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:src="@mipmap/not_found"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/not_found_hint"
                 android:paddingTop="@dimen/padding_big"
+                android:text="@string/not_found_hint"
                 android:textColor="@color/main_sub_text_color"
                 />
 
@@ -336,13 +345,61 @@
             android:orientation="vertical"
             >
 
-            <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
-                android:id="@+id/tab_container"
-                style="@style/pagertab_style"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/main_bottom_bar_height"
-                android:fillViewport="false"
-                />
+                android:layout_height="wrap_content"
+                android:background="@color/main_bg_gray"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/filer_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/main_bottom_bar_height"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/main_bg_gray"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_normal"
+                    >
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/main_bottom_bar_height"
+                        android:background="@color/main_sub_text_color"
+
+                        />
+
+                    <com.cn.widget.CustomTextView
+                        android:id="@+id/filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/main_bg_gray"
+                        android:drawablePadding="@dimen/padding_smallest_"
+                        android:drawableRight="@mipmap/filter"
+                        android:paddingLeft="@dimen/padding_normal"
+                        android:paddingRight="@dimen/padding_normal"
+                        android:text="筛选"
+                        />
+
+                </LinearLayout>
+
+                <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
+                    android:id="@+id/tab_container"
+                    style="@style/pagertab_style_"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_bottom_bar_height"
+                    android:layout_toLeftOf="@+id/filer_container"
+                    android:fillViewport="false"
+
+                    />
+
+
+            </RelativeLayout>
 
 
             <com.cn.viewpager.CustomViewPager

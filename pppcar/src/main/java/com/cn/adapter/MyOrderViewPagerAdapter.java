@@ -31,19 +31,19 @@ public class MyOrderViewPagerAdapter extends FragmentPagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = AllOrderFrag.getInstance();
+                frag = AllOrderFrag.getInstance(1);
                 break;
             case 1:
-                frag = AllOrderFrag.getInstance();
+                frag = AllOrderFrag.getInstance(2);
                 break;
             case 2:
-                frag = AllOrderFrag.getInstance();
+                frag = AllOrderFrag.getInstance(3);
                 break;
             case 3:
-                frag = AllOrderFrag.getInstance();
+                frag = AllOrderFrag.getInstance(4);
                 break;
             case 4:
-                frag = AllOrderFrag.getInstance();
+                frag = AllOrderFrag.getInstance(5);
                 break;
             default:
                 break;

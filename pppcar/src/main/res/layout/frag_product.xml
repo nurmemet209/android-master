@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/main_bg_gray"
         >
 
         <RelativeLayout
@@ -35,6 +36,7 @@
                 app:ci_drawable_unselected="@drawable/indicator_gray_radius"
                 app:ci_height="8dp"
                 app:ci_width="8dp"
+                android:background="@color/transparent"
                 />
         </RelativeLayout>
 
@@ -44,18 +46,18 @@
             android:background="@color/lightgray_1"
             />
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_normal"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
             >
 
-            <TableRow
 
-                >
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_span="2"
@@ -63,11 +65,7 @@
                     android:text="英國Ispiri ISR6(19X9.5J ET:40 5/112 灰色亮面)"
                     android:textSize="@dimen/text_size_largest"
                     />
-            </TableRow>
 
-            <TableRow
-
-                >
 
                 <TextView
                     android:id="@+id/sub_title"
@@ -80,60 +78,92 @@
                     android:text="Ispiri Wheels秉承百年汽车工业设计理念，所设计产品透露出英伦的设计感以及百年工艺的技术也代表流行的指标，前后配Concave深凹设计风格贯穿整个产品系列，其所带来的视觉张力和产品美感，是近几年各大轮毂品牌所追逐的目标。Ispiri Wheels另外一项诱人的设计， 其所有产品是基于Brembo制动卡钳安装数据量身打造，既能满足最具张力的视觉外观，又能满足性能玩具的更高要求。"
                     android:textColor="@color/main_sub_text_color"
                     />
-            </TableRow>
 
-            <TableRow
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 >
-
                 <TextView
+                    android:id="@+id/pre_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/retail_price_"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥17000.00"
+                    android:text="零售价：￥17000.00"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="@dimen/text_size_normal"
                     />
-            </TableRow>
 
-            <TableRow
+                <TextView
+                    android:id="@+id/retail_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="零售价：￥17000.00"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_normal"
+                    android:layout_marginLeft="@dimen/padding_normal"
+                    />
 
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_normal"
                 >
-
                 <TextView
+                    android:id="@+id/whole_sale_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wholesale_price_"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥17000.00"
+                    android:text="批发价：￥17000.00"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="@dimen/text_size_normal"
                     />
-            </TableRow>
-        </TableLayout>
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:src="@mipmap/share"
+                    android:scaleType="centerInside"
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_big_divider_height"
-            android:background="@color/main_bg_gray"
-            />
+
+        </LinearLayout>
+
 
         <RelativeLayout
+            android:id="@+id/preferential_valume_rl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg"
+            android:background="@drawable/list_item_bg_"
             android:clickable="true"
             android:paddingLeft="@dimen/padding_small"
             android:paddingRight="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
+            >
+
+            <TextView
+                android:id="@+id/preferential_valume"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:text="@string/preferential_package"
+                android:textColor="@color/main_red"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg_"
+            android:clickable="true"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
             >
 
             <TextView
@@ -148,20 +178,18 @@
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_big_divider_height"
-            android:background="@color/main_bg_gray"
 
-            />
 
         <RelativeLayout
+            android:id="@+id/stage_pay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg"
+            android:background="@drawable/list_item_bg_"
             android:clickable="true"
             android:paddingLeft="@dimen/padding_normal"
             android:paddingRight="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
+
             >
 
             <TextView
@@ -186,17 +214,14 @@
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_big_divider_height"
-            android:background="@color/main_bg_gray"
-            />
+
 
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
             >
 
             <TableRow>
@@ -233,7 +258,7 @@
                     android:id="@+id/brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="00001"
                     />
             </TableRow>
@@ -281,58 +306,50 @@
             </TableRow>
         </TableLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_big_divider_height"
-            android:background="@color/main_bg_gray"
-            />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg"
-            android:clickable="true"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical"
-                android:text="@string/product_evaluate"
-                />
 
 
-            <TextView
-                android:id="@+id/hundred_good_evaluate"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:drawablePadding="5dp"
-                android:drawableRight="@mipmap/go"
-                android:gravity="center_vertical"
-                android:text="好评"
-                />
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/item_height"-->
+            <!--android:background="@drawable/list_item_bg_"-->
+            <!--android:clickable="true"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--&gt;-->
+
+            <!--<TextView-->
+
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="@string/product_evaluate"-->
+                <!--/>-->
 
 
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/hundred_good_evaluate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:drawableRight="@mipmap/go"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="好评"-->
+                <!--/>-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lightgray_1"
-            />
 
-        <LinearLayout
-            android:id="@+id/evaluate_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-        </LinearLayout>
+        <!--</RelativeLayout>-->
+
+
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/evaluate_container"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--&gt;-->
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>

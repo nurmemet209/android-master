@@ -26,7 +26,7 @@ public class CommonOrderAndProOrderAdapter extends FragmentPagerAdapter {
                 fragment= MyOrderFrag.getInstance();
                 break;
             case 1:
-                fragment= AllOrderFrag.getInstance();
+                fragment= AllOrderFrag.getInstance(6);
                 break;
 
             default:

@@ -3,6 +3,7 @@ package com.cn.pppcar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +22,8 @@ import com.cn.adapter.SearchSeggestAdapter;
 import com.cn.util.UIHelper;
 import com.cn.viewpager.CustomViewPager;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,6 +66,7 @@ public class SearchAct extends BaseAct {
     private void init() {
         adapter = new SearchClassificationViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setViewPager(viewPager);
         searchSeggestAdapter = new SearchSeggestAdapter(this, null, new View.OnClickListener() {
             @Override
@@ -96,8 +100,40 @@ public class SearchAct extends BaseAct {
 
             }
         });
+        setDrawables();
     }
+    private void setDrawables() {
 
+        Drawable d = getResources().getDrawable(R.mipmap.top_bottom);
+        d.setBounds(0,0,d.getIntrinsicWidth(), d.getIntrinsicHeight());
+        int drawablePadding = getResources().getDimensionPixelOffset(R.dimen.padding_smallest_);
+        TextView time = (TextView) tabLayout.getTabAt(2).findViewById(R.id.id_tab_txt);
+        time.setCompoundDrawablePadding(drawablePadding);
+        time.setCompoundDrawables(null, null, d, null);
+        time.setTag("up");
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv=(TextView)v;
+                //Toast.makeText(IntegralMallAct.this,"clicked",Toast.LENGTH_LONG).show();
+                viewPager.setCurrentItem(2);
+                if (v.getTag().equals("up")){
+                    Drawable d = getResources().getDrawable(R.mipmap.top_bottom);
+                    d.setBounds(0,0,d.getIntrinsicWidth(), d.getIntrinsicHeight());
+                    tv.setCompoundDrawables(null, null, d, null);
+                    v.setTag("down");
+
+                }else{
+                    Drawable d = getResources().getDrawable(R.mipmap.top_bottom);
+                    d.setBounds(0,0,d.getIntrinsicWidth(), d.getIntrinsicHeight());
+                    tv.setCompoundDrawables(null, null, d, null);
+                    v.setTag("up");
+
+                }
+                EventBus.getDefault().post("refresh");
+            }
+        });
+    }
 
     public void search(View view){
 //        if (state==SEARCH_STATE)
@@ -108,12 +144,12 @@ public class SearchAct extends BaseAct {
 
     }
 
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
-    }
+//
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
+//    }
 
 }
 

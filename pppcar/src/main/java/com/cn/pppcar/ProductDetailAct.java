@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.cn.adapter.ProductDetailAdapter;
 import com.cn.viewpager.CustomViewPager;
+import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -14,10 +15,10 @@ import butterknife.ButterKnife;
 /**
  * Created by nurmemet on 2016/3/31.
  */
-public class ProductDetailAct extends FragmentActivity {
+public class ProductDetailAct extends BaseAct {
 
     @Bind(R.id.tab_container)
-    protected TabLayout tabContainer;
+    protected AdvancedPagerSlidingTabStrip tabContainer;
     @Bind(R.id.product_detail_view_pager)
     protected CustomViewPager viewPager;
 
@@ -33,7 +34,7 @@ public class ProductDetailAct extends FragmentActivity {
 
         ProductDetailAdapter adapter=new ProductDetailAdapter(this.getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-       tabContainer.setupWithViewPager(viewPager);
+       tabContainer.setViewPager(viewPager);
         //tabContainer.setTabMode(TabLayout.MODE_FIXED);
 
 
@@ -42,7 +43,6 @@ public class ProductDetailAct extends FragmentActivity {
 
 
     }
-
 
 
 }

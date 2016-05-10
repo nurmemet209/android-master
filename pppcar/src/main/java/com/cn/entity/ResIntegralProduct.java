@@ -1,10 +1,15 @@
 package com.cn.entity;
 
-public class ResIntegralProduct {
-	
-	private Long id;//产品ID
+public class ResIntegralProduct extends BaseEntity {
 
-	private String productNumber;//产品编号
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	private long id;
+
+
+
 	
 	private String name;//产品名称
 	
@@ -12,20 +17,9 @@ public class ResIntegralProduct {
 	
 	private Integer integralPrice;//积分价格
 
-	public Long getId() {
+	@Override
+	public long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getProductNumber() {
-		return productNumber;
-	}
-
-	public void setProductNumber(String productNumber) {
-		this.productNumber = productNumber;
 	}
 
 	public String getName() {

@@ -1,14 +1,14 @@
 package com.cn.entity;
 
+import java.util.ArrayList;
 import java.util.List;
-import org.dozer.Mapping;
 
 /**
  * 产品详情
  * @author chendongdong
  *
  */
-public class ResProduct{
+public class ResProduct extends BaseEntity{
 	
 	private Long id;//产品id
 	
@@ -28,7 +28,7 @@ public class ResProduct{
 	
 	private String stockNumber;// 库存 
 	
-	private List<ResProperty> resProperties;//当前产品属性
+	private ArrayList<ResProperty> resProperties;//当前产品属性
 	
 	private Integer orderGoodsCycle=0;//预定规则，付款后几天之内发货
 	
@@ -40,7 +40,7 @@ public class ResProduct{
 	
 	private Integer isFlagFavorites;//是否已经收藏  0、表示是 1、表示否
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -98,8 +98,6 @@ public class ResProduct{
 	}
 
 	public String getStockNumber() {
-		int stockNum=Integer.parseInt(stockNumber);
-		stockNumber=stockNum>0?"现货":"缺货";
 		return stockNumber;
 	}
 
@@ -107,7 +105,7 @@ public class ResProduct{
 		this.stockNumber = stockNumber;
 	}
 
-	@Mapping(value="brand.name")
+
 	public String getBrandName() {
 		return brandName;
 	}
@@ -116,11 +114,11 @@ public class ResProduct{
 		this.brandName = brandName;
 	}
 
-	public List<ResProperty> getResProperties() {
+	public ArrayList<ResProperty> getResProperties() {
 		return resProperties;
 	}
 
-	public void setResProperties(List<ResProperty> resProperties) {
+	public void setResProperties(ArrayList<ResProperty> resProperties) {
 		this.resProperties = resProperties;
 	}
 

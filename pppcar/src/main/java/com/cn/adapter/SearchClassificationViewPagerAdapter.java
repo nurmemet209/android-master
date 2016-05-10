@@ -37,9 +37,7 @@ public class SearchClassificationViewPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 frag = SearchListFrag.getInstance();
                 break;
-            case 3:
-                frag = SearchListFrag.getInstance();
-                break;
+
             default:
                 break;
         }
@@ -48,7 +46,7 @@ public class SearchClassificationViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -64,9 +62,7 @@ public class SearchClassificationViewPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 str = mContext.getString(R.string.price);
                 break;
-            case 3:
-                str = mContext.getString(R.string.filter);
-                break;
+
 
             default:
                 break;

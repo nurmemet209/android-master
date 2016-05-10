@@ -2,85 +2,168 @@ package com.cn.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.cn.adapter.BannerAdapter;
+import com.cn.commans.NetUtil;
 import com.cn.entity.Item;
+import com.cn.entity.ResIntegralProductDetail;
+import com.cn.entity.ResProduct;
 import com.cn.pppcar.R;
+import com.cn.pppcar.widget.PreferentialPackageDlg;
+import com.cn.pppcar.widget.StagePayDlg;
+import com.cn.sharesdk.ShareDialogEx;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by nurmemet on 2016/3/31.
  */
-public class ProductFrag extends Fragment {
+public class ProductFrag extends BaseFrag {
 
-    private View mainView;
 
     @Bind(R.id.banner)
     protected AutoScrollViewPager banner;
     @Bind(R.id.banner_indicator)
     protected CircleIndicator indicator;
 
+    @Bind(R.id.title)
+    protected TextView mTitle;
+
+    @Bind(R.id.sub_title)
+    protected TextView mSubTitle;
+    @Bind(R.id.retail_price)
+    protected TextView mRetailPrice;
+    @Bind(R.id.whole_sale_price)
+    protected TextView mWholeSalePrice;
+    @Bind(R.id.factory_number)
+    protected TextView mFactoryNumber;
+    @Bind(R.id.brand)
+    protected TextView mBrand;
+    @Bind(R.id.stock_num)
+    protected TextView mStockNum;
+    @Bind(R.id.freight)
+    protected TextView mFreight;
+
+    private ResProduct productDetail;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mainView=inflater.inflate(R.layout.frag_product,null);
-        ButterKnife.bind(this,mainView);
+
+        ButterKnife.bind(this, mainView);
         init();
         return mainView;
     }
 
-    private void init(){
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.frag_product;
+    }
+
+    private void init() {
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (NetUtil.isSucced(response)) {
+                            productDetail = apiHandler.toObject_(NetUtil.getData(response), ResProduct.class);
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    if (productDetail != null) {
+                                        ArrayList viewList = new ArrayList();
+                                        String[] imgList = productDetail.getImgs().split(",");
+                                        for (int i = 0; i < imgList.length; i++) {
+                                            SimpleDraweeView img = new SimpleDraweeView(getActivity());
+                                            Uri uri = Uri.parse(imgList[i]);
+                                            img.setImageURI(uri);
+                                            viewList.add(img);
+                                        }
+                                        BannerAdapter adapter = new BannerAdapter(getActivity(), viewList);
+                                        banner.setAdapter(adapter);
+                                        banner.setInterval(4000);
+                                        // banner.setScrollDurationFactor(5);
+                                        banner.setCycle(true);
+                                        banner.setOffscreenPageLimit(viewList.size());
+                                        banner.setBorderAnimation(true);
+                                        banner.startAutoScroll();
+                                        indicator.setViewPager(banner);
+
+
+                                        mTitle.setText(productDetail.getName());
+                                        mSubTitle.setText(productDetail.getName());
+                                        mRetailPrice.setText(String.valueOf(productDetail.getRetailPrice()));
+                                        mFactoryNumber.setText(productDetail.getManufacturingCode());
+                                        mWholeSalePrice.setText(String.valueOf(productDetail.getTradePrice()));
+                                        mBrand.setText(productDetail.getBrandName());
+                                        mStockNum.setText(String.valueOf(productDetail.getStockNumber()));
+                                        mFreight.setText("到付");
+
+
+                                    }
+                                }
+                            });
+
+                        } else {
+
+                            showToast(NetUtil.getError(response));
+                        }
+                    }
+                }, null);
+            }
+        }).start();
+
+
         setUpData();
     }
 
-    private void setUpData(){
+    private void setUpData() {
 
-        ArrayList<String> list=getList();
-        ArrayList viewList = new ArrayList();
-        for (int i = 0; i <list.size(); i++) {
 
-            SimpleDraweeView img = new SimpleDraweeView(getActivity());
-            Uri uri = Uri.parse(list.get(i));
-            img.setImageURI(uri);
-            viewList.add(img);
-        }
-        BannerAdapter adapter = new BannerAdapter(getActivity(), viewList);
-        banner.setAdapter(adapter);
-        banner.setInterval(4000);
-        // banner.setScrollDurationFactor(5);
-        banner.setCycle(true);
-        banner.setOffscreenPageLimit(list.size());
-        banner.setBorderAnimation(true);
-        banner.startAutoScroll();
-        indicator.setViewPager(banner);
     }
 
-    private ArrayList<String> getList() {
-        ArrayList<String> imageUrlList = new ArrayList<>();
-        imageUrlList
-                .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
-        imageUrlList
-                .add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
-        imageUrlList
-                .add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
-        imageUrlList
-                .add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
-        imageUrlList
-                .add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+    private Handler mHandler = new Handler();
 
-        return imageUrlList;
+    @OnClick(R.id.stage_pay)
+    public void stagePay(View veiw) {
+        StagePayDlg dlg = new StagePayDlg(getActivity());
+        dlg.show();
     }
+
+    @OnClick(R.id.preferential_valume_rl)
+    public void preferentialValume(View view) {
+//        PreferentialPackageDlg dlg = new PreferentialPackageDlg(getActivity(), null);
+//        dlg.show();
+
+        ShareDialogEx dlg=new ShareDialogEx(getContext());
+        dlg.show();
+
+    }
+
+
 }

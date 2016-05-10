@@ -1,5 +1,6 @@
 package com.cn.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.Item;
+import com.cn.entity.PageProductBean;
+import com.cn.entity.ProductBean;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -18,11 +22,11 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchListFragAdapter extends RecyclerView.Adapter {
-    private Context mContext;
-    private ArrayList<Item> list;
+public class SearchListFragAdapter extends BaseListAdapter<ProductBean>{
 
-    public SearchListFragAdapter( Context mContext,ArrayList<Item> list) {
+
+    public SearchListFragAdapter( Context mContext,ArrayList<ProductBean> list) {
+        super(mContext,list);
         this.list = list;
         this.mContext = mContext;
     }
@@ -30,6 +34,7 @@ public class SearchListFragAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(mContext).inflate(R.layout.item_list_frag_search,null);
+        view.setClickable(true);
         RecyclerView.ViewHolder holder=new RecyclerView.ViewHolder(view) {
         };
 
@@ -44,7 +49,13 @@ public class SearchListFragAdapter extends RecyclerView.Adapter {
         TextView price=(TextView)view.findViewById(R.id.price);
         title.setText(list.get(position).getName());
         img.setImageURI(Uri.parse(list.get(position).getImg()));
-        price.setText(Float.toString(list.get(position).getPrice()));
+        price.setText("￥"+Float.toString(list.get(position).getPrice()));
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitySwitcher.toProductDetailAct((Activity) mContext);
+            }
+        });
     }
 
     @Override

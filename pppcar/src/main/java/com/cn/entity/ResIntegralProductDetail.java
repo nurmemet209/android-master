@@ -1,6 +1,6 @@
 package com.cn.entity;
 
-import org.dozer.Mapping;
+
 /**
  * 积分产品详情
  * @author chendongdong
@@ -82,7 +82,6 @@ public class ResIntegralProductDetail {
 		this.briefDescripe = briefDescripe;
 	}
 
-	@Mapping(value="type.name")
 	public String getTypeName() {
 		return typeName;
 	}

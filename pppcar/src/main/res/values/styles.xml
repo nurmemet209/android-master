@@ -20,9 +20,11 @@
     <style name="custom_button_style" parent="@style/Widget.AppCompat.Button">
         <item name="android:background">@color/transparent</item>
     </style>
-    <style name="custom_text_view_style" >
+
+    <style name="custom_text_view_style">
         <item name="android:background">@color/transparent</item>
     </style>
+
     <style name="custom_eidt_text_style" parent="@style/Widget.AppCompat.EditText">
         <item name="android:background">@color/transparent</item>
     </style>
@@ -30,7 +32,6 @@
     <style name="custom_image_view_style" parent="@style/Widget.AppCompat.ImageButton">
         <item name="android:background">@color/transparent</item>
     </style>
-
 
 
     <style name="pagertab_icon_style">
@@ -84,5 +85,28 @@
         <!--<item name="apTabIndicatorHeight">1dp</item>-->
         <!--选中的tab的文字的颜色-->
         <item name="apTabTextSelectColor">@color/main_red</item>
+    </style>
+
+
+    <style name="pay_stage_dialog_style"  >
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:buttonStyle">@style/confirm_dialog_button_style</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
+
+
+
+
+    <style name="window_anim" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
     </style>
 </resources>

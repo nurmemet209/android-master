@@ -65,7 +65,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/name"
+                        android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_span="2"
@@ -104,6 +104,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/integral_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="17000积分"
@@ -123,6 +124,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/retail_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="￥17000.00"
@@ -186,7 +188,6 @@
                         android:id="@+id/factory_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="00001"
                         />
                 </TableRow>

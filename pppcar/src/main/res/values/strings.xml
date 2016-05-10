@@ -67,6 +67,8 @@
     <string name="wholesale_price">批发价</string>
     <string name="wholesale_price_">批发价：</string>
     <string name="please_select_specification">请选择规格</string>
+    <string name="preferential_volume">优惠卷</string>
+    <string name="preferential_package">优惠套餐</string>
     <string name="product_evaluate">商品评价</string>
     <string name="collect">收藏</string>
     <string name="cart">购物车</string>
@@ -230,5 +232,11 @@
     <string name="pay">付款</string>
     <string name="cancel_order">取消订单</string>
     <string name="apply_refund">申请退款</string>
+    <string name="company_authentication_buy">企业认证优惠购</string>
+    <string name="service_declare">服务说明</string>
+    <string name="stage_pay_1" formatted="false">该商品支持分期购买分, 3期1.65%, 6期3.6%, 9期5.4%, 12期7.2%, 18期11.7%, 24期15.6%, 一次性收取手续费。</string>
+    <string name="shut_down">关闭</string>
+    <string name="preferential_price_">套餐价：</string>
+    <string name="original_price_">原价：</string>
 
 </resources>

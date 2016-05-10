@@ -2,6 +2,7 @@ package com.cn.net;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,7 +36,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     protected Context mContext;
 
     private static ApiHelper apiHelper;
-   // public final static String HOST = "http://pppcar.f3322.net:8084";
+    // public final static String HOST = "http://pppcar.f3322.net:8084";
 
     public final static String HOST = "http://192.168.0.79:8080";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
@@ -120,6 +121,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     /**
      * 分类页面，ClassifycationFrag
+     *
      * @param listener
      * @param errorListener
      */
@@ -131,6 +133,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     /**
      * 获取品牌
+     *
      * @param listener
      * @param errorListener
      */
@@ -143,6 +146,28 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     public void getMyOrder(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         String url = getRootApi().append("/v1/account/order/list").toString();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        addToRequestQueue(request);
+    }
+
+    public void getIntegralProduct(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/v1/integral/queryIntegralProductall").toString();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        addToRequestQueue(request);
+    }
+
+    public void getIntegralProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/v1/integral/queryIntegralProductDetailById?proId=1").toString();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        addToRequestQueue(request);
+    }
+    public void getProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/v1/product/queryProductbyId?proId=29").toString();
+        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        addToRequestQueue(request);
+    }
+    public void getProductList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        String url = getRootApi().append("/v1/search/product/list").toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
         addToRequestQueue(request);
     }
@@ -197,9 +222,23 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
         return null;
     }
-    public  <T> List<T> JSONArray2List(JSONArray arr, Class<T> clazz) {
+
+    public <T> T toObject_(String str, Class<T> claxx) {
+
+        if (str != null) {
+            try {
+                return JSON.parseObject(str, claxx);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    public <T> List<T> JSONArray2List(JSONArray arr, Class<T> clazz) {
         List list = new ArrayList<T>();
-        if (arr != null && arr.length()!=0) {
+        if (arr != null && arr.length() != 0) {
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = null;
@@ -215,15 +254,16 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         }
         return list;
     }
-    public  <T> List<T> JSONArray2List(String str, Class<T> clazz) {
-        JSONArray arr= null;
+
+    public <T> List<T> JSONArray2List(String str, Class<T> clazz) {
+        JSONArray arr = null;
         try {
             arr = new JSONArray(str);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         List list = new ArrayList<T>();
-        if (arr != null && arr.length()!=0) {
+        if (arr != null && arr.length() != 0) {
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = null;

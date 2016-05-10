@@ -1,77 +1,33 @@
 package com.cn.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class PageProductBean {
-	private int page;
-	
-	private int size;
-	
-	private int totalPage;
-	
-	private int totalSize;
-	
-	private int upPage;
-	
-	private int nextPage;
-	
-	private List<ProductBean> productBean;
-	
-	public int getPage() {
-		return page;
-	}
+public class PageProductBean extends BaseEntity {
 
-	public void setPage(int page) {
-		this.page = page;
-	}
 
-	public int getSize() {
-		return size;
-	}
+    private ArrayList<ProductBean> productBean;
 
-	public void setSize(int size) {
-		this.size = size;
-	}
 
-	public int getTotalPage() {
-		return totalPage;
-	}
+    @Override
+    public long getId() {
+        return 0;
+    }
 
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
+    @Override
+    public String getName() {
+        return null;
+    }
 
-	public int getTotalSize() {
-		return totalSize;
-	}
 
-	public void setTotalSize(int totalSize) {
-		this.totalSize = totalSize;
-	}
-	public int getUpPage() {
-		return page<=1?1:page-1;
-	}
+    public ArrayList<ProductBean> getProductBean() {
+        return productBean;
+    }
 
-	public void setUpPage(int upPage) {
-		this.upPage = upPage;
-	}
+    public void setProductBean(ArrayList<ProductBean> productBean) {
+        this.productBean = productBean;
+    }
 
-	public int getNextPage() {
-		return page<totalPage?page+1:totalPage;
-	}
 
-	public void setNextPage(int nextPage) {
-		this.nextPage = nextPage;
-	}
-
-	public List<ProductBean> getProductBean() {
-		return productBean;
-	}
-
-	public void setProductBean(List<ProductBean> productBean) {
-		this.productBean = productBean;
-	}
-	
-	
 }
