@@ -1,26 +1,30 @@
 package com.cn.entity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+
 
 /**
  * 产品详情
  * @author chendongdong
  *
  */
-public class ResProduct extends BaseEntity{
+public class ResProductApp{
 	
 	private Long id;//产品id
-	
-//	private String productNumber;//产品sku 
 	
 	private String imgs;//产品图片
 	
 	private String name;//产品名称
 	
-	private double retailPrice;	//零售价
+	private String briefDescribe;// 产品简介 
 	
-	private double tradePrice;// 批发价
+	private Double retailPrice;	//零售价
+	
+	private Double tradePrice;// 批发价
+	
+	private Double activityPrice; //活动价
 	
 	private String brandName;// 产品所属品牌 名称	
 	
@@ -28,7 +32,7 @@ public class ResProduct extends BaseEntity{
 	
 	private String stockNumber;// 库存 
 	
-	private ArrayList<ResProperty> resProperties;//当前产品属性
+	private List<ResPropertyApp> resProperties;//当前产品属性
 	
 	private Integer orderGoodsCycle=0;//预定规则，付款后几天之内发货
 	
@@ -40,21 +44,17 @@ public class ResProduct extends BaseEntity{
 	
 	private Integer isFlagFavorites;//是否已经收藏  0、表示是 1、表示否
 	
-	public long getId() {
+	private Map<String,Map<String,ProductAttrBean>> productAttrs;//属性规格
+	
+	private List<ResGroupApp> resGroupApps;//优惠套餐
+	
+	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-//	public String getProductNumber() {
-//		return productNumber;
-//	}
-//
-//	public void setProductNumber(String productNumber) {
-//		this.productNumber = productNumber;
-//	}
 
 	public String getImgs() {
 		return imgs;
@@ -98,6 +98,7 @@ public class ResProduct extends BaseEntity{
 	}
 
 	public String getStockNumber() {
+
 		return stockNumber;
 	}
 
@@ -114,11 +115,11 @@ public class ResProduct extends BaseEntity{
 		this.brandName = brandName;
 	}
 
-	public ArrayList<ResProperty> getResProperties() {
+	public List<ResPropertyApp> getResProperties() {
 		return resProperties;
 	}
 
-	public void setResProperties(ArrayList<ResProperty> resProperties) {
+	public void setResProperties(List<ResPropertyApp> resProperties) {
 		this.resProperties = resProperties;
 	}
 
@@ -161,6 +162,48 @@ public class ResProduct extends BaseEntity{
 	public void setIsFlagFavorites(Integer isFlagFavorites) {
 		this.isFlagFavorites = isFlagFavorites;
 	}
+
+	public String getBriefDescribe() {
+		return briefDescribe;
+	}
+
+	public void setBriefDescribe(String briefDescribe) {
+		this.briefDescribe = briefDescribe;
+	}
+
+	public Double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(Double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+
+	public Map<String,Map<String,ProductAttrBean>> getProductAttrs() {
+		return productAttrs;
+	}
+
+	public void setProductAttrs(Map<String,Map<String,ProductAttrBean>> productAttrs) {
+		this.productAttrs = productAttrs;
+	}
+
+	public void setRetailPrice(Double retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+
+	public void setTradePrice(Double tradePrice) {
+		this.tradePrice = tradePrice;
+	}
+
+	public List<ResGroupApp> getResGroupApps() {
+		return resGroupApps;
+	}
+
+	public void setResGroupApps(List<ResGroupApp> resGroupApps) {
+		this.resGroupApps = resGroupApps;
+	}
+	
 	
 	
 }

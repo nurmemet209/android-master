@@ -1,53 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@android:color/transparent"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:orientation="vertical"
     >
 
-    <com.cn.pppcar.widget.TagGroupLayout
-        android:id="@+id/tag_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_normal"
-        ></com.cn.pppcar.widget.TagGroupLayout>
-
     <LinearLayout
-        android:id="@+id/container"
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@drawable/divider_small"
+        android:layout_marginBottom="15dp"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:showDividers="middle"
         >
+
+        <com.cn.pppcar.widget.TagGroupLayout
+            android:id="@+id/tag_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_normal"
+            ></com.cn.pppcar.widget.TagGroupLayout>
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_small"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            >
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/preferential_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_normal"
+
+                    android:text="套餐价：￥3434"
+                    />
+
+                <com.cn.widget.CustomTextView
+                    android:id="@+id/original_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/padding_normal"
+                    android:layout_marginTop="@dimen/padding_small"
+
+                    android:text="原价：￥233243"
+                    android:textColor="@color/main_sub_text_color"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_rect_yellow_pressed_sl"
+                android:text="@string/put_into_cart"
+                android:textColor="@color/white"
+                android:padding="@dimen/padding_normal"
+                />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/preferential_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:paddingLeft="@dimen/padding_normal"
-        android:text="套餐价：￥3434"
-        />
 
-    <com.cn.widget.CustomTextView
-        android:id="@+id/original_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_small"
-        android:paddingLeft="@dimen/padding_normal"
-        android:text="原价：￥233243"
-        android:textColor="@color/main_sub_text_color"
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_width"
+        android:layout_alignBottom="@+id/parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-15dp"
         android:background="@android:color/transparent"
-        android:gravity="center"
-        android:text="exit"
+        android:scaleType="centerInside"
+        android:src="@mipmap/close"
         />
-</LinearLayout>
+</RelativeLayout>

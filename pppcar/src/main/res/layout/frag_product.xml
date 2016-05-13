@@ -157,6 +157,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/select_product_attr"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
             android:background="@drawable/list_item_bg_"
@@ -173,6 +174,29 @@
                 android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
                 android:text="@string/please_select_specification"
+                />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/select_pre_order"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height"
+            android:background="@drawable/list_item_bg_"
+            android:clickable="true"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_normal"
+            android:layout_marginBottom="@dimen/main_big_divider_height"
+            >
+
+            <TextView
+                android:id="@+id/pre_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:textColor="@color/main_red"
+                android:text="@string/preferential_package"
                 />
 
 

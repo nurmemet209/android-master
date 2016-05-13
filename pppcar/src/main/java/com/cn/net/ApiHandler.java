@@ -38,7 +38,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
     // public final static String HOST = "http://pppcar.f3322.net:8084";
 
-    public final static String HOST = "http://192.168.0.79:8080";
+    public final static String HOST = "http://192.168.0.183:8080";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -162,7 +162,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
     public void getProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = getRootApi().append("/v1/product/queryProductbyId?proId=29").toString();
+        String url = getRootApi().append("/v1/app/product/queryProductbyId?proId=29").toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
         addToRequestQueue(request);
     }

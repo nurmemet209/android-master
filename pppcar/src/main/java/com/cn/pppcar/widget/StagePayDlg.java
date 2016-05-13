@@ -1,32 +1,33 @@
 package com.cn.pppcar.widget;
 
-import android.app.ActionBar;
-import android.app.Dialog;
 import android.content.Context;
-import android.view.Display;
+import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.cn.pppcar.R;
 
 /**
  * Created by nurmemet on 2016/5/9.
  */
-public class StagePayDlg extends Dialog {
+public class StagePayDlg extends AppCompatDialog {
 
 
     private Button mCancelButton;
 
 
     public StagePayDlg(Context context) {
-        super(context, R.style.pay_stage_dialog_style);
+        super(context, R.style.dlg_pay_stage);
+
         setContentView(R.layout.dlg_stage_pay);
-        getWindow().setLayout(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        getWindow().setGravity(Gravity.BOTTOM);
-        getWindow().setWindowAnimations(R.style.window_anim);
+        Window dialogWindow = this.getWindow();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width=WindowManager.LayoutParams.MATCH_PARENT;
+        dialogWindow.setAttributes(lp);
+        dialogWindow.setGravity(Gravity.BOTTOM);
         mCancelButton=(Button)findViewById(com.cn.customlibrary.R.id.cancel_btn);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +42,10 @@ public class StagePayDlg extends Dialog {
     @Override
     public void dismiss() {
         super.dismiss();
+    }
+
+    @Override
+    public void show() {
+        super.show();
     }
 }

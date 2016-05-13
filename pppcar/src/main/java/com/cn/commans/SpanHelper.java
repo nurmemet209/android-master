@@ -69,9 +69,9 @@ public class SpanHelper {
 
     }
 
-    public String convertToPrice(int resId, float price) {
+    public String convertToPrice(int resId, double price) {
         builderEx.clear();
-        builderEx.append(mContext.getString(resId)).append("￥").append(Float.toString(price));
+        builderEx.append(mContext.getString(resId)).append("￥").append(Double.toString(price));
         return builderEx.toString();
     }
 

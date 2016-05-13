@@ -26,5 +26,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':customlibrary')
-    compile project(':sharesdk')
 }

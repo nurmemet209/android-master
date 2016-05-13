@@ -14,8 +14,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,39 +42,35 @@ public class PreferentialPackageDlg extends AppCompatDialog implements TagGroupL
 
     private ArrayList<ResProperty> list;
 
-    private Button mCancelButton;
+    private ImageButton mCancelButton;
     private Context mContext;
     private ViewGroup container;
 
 
     public PreferentialPackageDlg(Context context, ArrayList<ResProperty> list) {
-        super(context, R.style.pay_stage_dialog_style);
+        super(context,R.style.preferential_package_dlg);
         this.mContext = context;
         this.list = list;
-        setContentView(R.layout.dlg_preferential_package);
-        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        getWindow().setGravity(Gravity.BOTTOM);
-        //getWindow().setWindowAnimations(R.style.window_anim);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        getWindow().setBackgroundDrawable(null);
+
+        setContentView(R.layout.dlg_preferential_package);
+        Window dialogWindow = this.getWindow();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width=WindowManager.LayoutParams.MATCH_PARENT;
+        dialogWindow.setAttributes(lp);
+        dialogWindow.setGravity(Gravity.TOP);
         container = (ViewGroup) findViewById(R.id.container);
-//        mCancelButton=(Button)findViewById(com.cn.customlibrary.R.id.cancel_btn);
-//        mCancelButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dismiss();
-//            }
-//        });
+        mCancelButton=(ImageButton)findViewById(com.cn.customlibrary.R.id.cancel_btn);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         bindData();
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawable(null);
-    }
 
     @Override
     public void dismiss() {
@@ -130,5 +128,10 @@ public class PreferentialPackageDlg extends AppCompatDialog implements TagGroupL
     @Override
     public void onItemClick(int position, Object data) {
 
+    }
+
+    @Override
+    public void show() {
+        super.show();
     }
 }

@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,12 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.cn.adapter.BannerAdapter;
 import com.cn.commans.NetUtil;
-import com.cn.entity.Item;
-import com.cn.entity.ResIntegralProductDetail;
-import com.cn.entity.ResProduct;
+import com.cn.entity.ResProductApp;
 import com.cn.pppcar.R;
+import com.cn.pppcar.widget.PreOrderDlg;
 import com.cn.pppcar.widget.PreferentialPackageDlg;
+import com.cn.pppcar.widget.ProductAttrDlg;
 import com.cn.pppcar.widget.StagePayDlg;
-import com.cn.sharesdk.ShareDialogEx;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.json.JSONObject;
@@ -61,7 +59,7 @@ public class ProductFrag extends BaseFrag {
     @Bind(R.id.freight)
     protected TextView mFreight;
 
-    private ResProduct productDetail;
+    private ResProductApp productDetail;
 
 
     @Nullable
@@ -90,7 +88,7 @@ public class ProductFrag extends BaseFrag {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (NetUtil.isSucced(response)) {
-                            productDetail = apiHandler.toObject_(NetUtil.getData(response), ResProduct.class);
+                            productDetail = apiHandler.toObject_(NetUtil.getData(response), ResProductApp.class);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -157,12 +155,25 @@ public class ProductFrag extends BaseFrag {
 
     @OnClick(R.id.preferential_valume_rl)
     public void preferentialValume(View view) {
-//        PreferentialPackageDlg dlg = new PreferentialPackageDlg(getActivity(), null);
-//        dlg.show();
-
-        ShareDialogEx dlg=new ShareDialogEx(getContext());
+        PreferentialPackageDlg dlg = new PreferentialPackageDlg(getActivity(), null);
         dlg.show();
 
+//        ShareDialogEx dlg=new ShareDialogEx(getContext());
+//        dlg.show();
+
+    }
+
+    @OnClick(R.id.select_pre_order)
+    public void selectPreOrder(View view) {
+        PreOrderDlg dlg = new PreOrderDlg(getActivity());
+        dlg.show();
+    }
+
+
+    @OnClick(R.id.select_product_attr)
+    public void selectProductAttr(View veiw) {
+        ProductAttrDlg dlg = new ProductAttrDlg(getActivity(),productDetail);
+        dlg.show();
     }
 
 
