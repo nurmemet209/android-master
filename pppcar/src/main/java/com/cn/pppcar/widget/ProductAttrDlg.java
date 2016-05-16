@@ -19,6 +19,10 @@ import com.cn.pppcar.R;
 import com.cn.util.UIHelper;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -46,6 +50,7 @@ public class ProductAttrDlg extends AppCompatDialog {
     @Bind(R.id.retail_price)
     protected TextView retailPrice;
     private ResProductApp productDetail;
+    private ArrayList<String> keyList=new ArrayList<>();
 
     public ProductAttrDlg(Context context, ResProductApp productDetail) {
         super(context, R.style.dlg_product_attr_select);
@@ -68,11 +73,22 @@ public class ProductAttrDlg extends AppCompatDialog {
     }
 
     private void bindData() {
-        container.init();
+        container.init(productDetail.getId());
         int pd = getContext().getResources().getDimensionPixelSize(R.dimen.padding_normal);
         container.setPad(pd, pd);
-        for (String key : map.keySet()) {
-            container.addItem(key, map.get(key));
+
+//        List<String> keyList = new ArrayList<String>(map.keySet());
+//        //对key键值按字典升序排序
+//        Collections.sort(keyList);
+        keyList.add("尺寸");
+        keyList.add("宽度");
+        keyList.add("ET值");
+        keyList.add("颜色");
+        keyList.add("圆心距");
+        int index=0;
+        for (String key : keyList) {
+            container.addItem(key, map.get(key),index);
+            index++;
         }
         titleImg.setImageURI(Uri.parse(productDetail.getImgs()));
         title.setText(productDetail.getName());
@@ -80,6 +96,8 @@ public class ProductAttrDlg extends AppCompatDialog {
         retailPrice.setText(spanHelper.priceSpan(R.string.retail_price_,productDetail.getRetailPrice()));
 
     }
+
+
 
     @OnClick(R.id.put_into_cart)
     public void putIntoCart(View view) {

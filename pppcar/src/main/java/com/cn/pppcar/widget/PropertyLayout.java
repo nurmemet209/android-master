@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,7 +22,10 @@ import com.cn.pppcar.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by nurmemet on 2016/5/11.
@@ -30,12 +34,13 @@ public class PropertyLayout extends TableLayout {
     private int mColumnNum = 4;
     private int mItemPaddingLeftRight;
     private int mItemPaddingTopBottom;
-    private Map<String, View> mSelectedViewList;
+    private List<View> viewList;
+    private List<ProductAttr> parentList;
+    private long productId = -1;
     /**
      * 以dp为单位
      */
     private int mRowMargin = 5;
-
     public void setPad(int rl, int tb) {
         mItemPaddingLeftRight = rl;
         mItemPaddingTopBottom = tb;
@@ -49,31 +54,35 @@ public class PropertyLayout extends TableLayout {
         super(context, attrs);
     }
 
-    public void init() {
+    public void init(long id) {
         setShowDividers(SHOW_DIVIDER_MIDDLE);
         setDividerDrawable(getCustomDividerDrawable());
-        mSelectedViewList = new HashMap<>();
+        viewList = new ArrayList<>();
+        parentList = new ArrayList<>();
+        productId = id;
     }
 
-    public void addItem(String parent, Map<String, ProductAttrBean> map) {
+    public void addItem(String parent, Map<String, ProductAttrBean> map, int index) {
         boolean isFirst = true;
         Map<String, ProductAttrBean> subMap = new HashMap<>();
-        ArrayList<View> viewList = new ArrayList<>();
-        mSelectedViewList.put(parent, null);
+        ProductAttr attr = new ProductAttr();
+        attr.parent = parent;
+        attr.start = viewList.size();
+        attr.size = map.size();
         for (String key : map.keySet()) {
             if (subMap.size() == mColumnNum) {
-                add(parent, subMap, isFirst, viewList);
+                add(parent, subMap, isFirst, index, attr);
                 subMap = new HashMap<>();
                 isFirst = false;
             }
             subMap.put(key, map.get(key));
         }
-        add(parent, subMap, isFirst, viewList);
-
+        add(parent, subMap, isFirst, index, attr);
+        parentList.add(attr);
 
     }
 
-    private void add(final String parent, final Map<String, ProductAttrBean> map, boolean isFirst, final ArrayList<View> viewList) {
+    private void add(final String parent, final Map<String, ProductAttrBean> map, boolean isFirst, int index, final ProductAttr attr) {
         TableRow row = new TableRow(getContext());
         TextView title = new TextView(getContext());
         title.setGravity(Gravity.RIGHT);
@@ -84,8 +93,12 @@ public class PropertyLayout extends TableLayout {
         if (isFirst) {
             title.setText(parent);
         }
-        for (String key : map.keySet()) {
+        for (final String key : map.keySet()) {
             TextView item = new TextView(getContext());
+            item.setTag(R.id.parent_index, index);
+            item.setTag(R.id.parent_name, parent);
+            item.setTag(R.id.state, map.get(key));
+            viewList.add(item);
             item.setText(key);
             item.setTag(parent);
             item.setGravity(Gravity.CENTER);
@@ -97,10 +110,9 @@ public class PropertyLayout extends TableLayout {
             param.width = 0;
             param.weight = 1;
             row.addView(item, param);
-            viewList.add(item);
             if ("selected".equals(map.get(key).getState())) {
                 item.setSelected(true);
-                mSelectedViewList.put(parent, item);
+                attr.view = item;
             } else if ("no_selected".equals(map.get(key).getState())) {
                 item.setEnabled(false);
             } else {
@@ -109,13 +121,71 @@ public class PropertyLayout extends TableLayout {
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    for (View view : viewList) {
-                        if (view.isSelected()) {
-                            view.setSelected(false);
-                        }
-                        v.setSelected(true);
-                        mSelectedViewList.put(parent, v);
+                    v.setSelected(true);
+                    ProductAttrBean bean;
+                    Set<Long> seletedSet = new HashSet<>();
+                    int index ;
+                    boolean isFirst = true;
+                    index = (Integer) v.getTag(R.id.parent_index);
+                    if (parentList.get(index).view != null) {
+                        parentList.get(index).view.setSelected(false);
                     }
+                    //先求出已选中的属性的交集
+                    parentList.get(index).view = v;
+                    for (int i = 0; i < index; i++) {
+                        ProductAttr attr = parentList.get(i);
+                        for (int j = attr.start; j < attr.start + attr.size; j++) {
+
+                            if (viewList.get(j).isSelected()) {
+                                bean = (ProductAttrBean) viewList.get(j).getTag(R.id.state);
+                                if (isFirst) {
+                                    seletedSet.addAll(bean.getProductId());
+                                    isFirst = false;
+                                } else {
+                                    seletedSet.retainAll(bean.getProductId());
+                                }
+                            }
+                        }
+                    }
+                    for (int i = index; i < parentList.size(); i++) {
+                        ProductAttr attr = parentList.get(i);
+                        for (int j = attr.start; j < attr.start + attr.size; j++) {
+                            bean = (ProductAttrBean) viewList.get(j).getTag(R.id.state);
+                            //如果点击的不是第一个属性，即index!=0
+                            if (!seletedSet.isEmpty()) {
+                                if (isSelectable(bean.getProductId(), seletedSet)) {
+                                    viewList.get(j).setEnabled(true);
+                                    bean.setState("can_selected");
+                                } else {
+                                    if (viewList.get(j).isSelected()) {
+                                        attr.view = null;
+                                    }
+                                    viewList.get(j).setEnabled(false);
+                                    viewList.get(j).setSelected(false);
+
+                                    bean.setState("no_selected");
+                                }
+                            }
+                        }
+                        //如果点击的是第一个属性，即index=0
+                        if (seletedSet.isEmpty()) {
+                            bean = (ProductAttrBean) attr.view.getTag(R.id.state);
+                            seletedSet.addAll(bean.getProductId());
+                        }
+                        //该属性存在已选中的属性值，取交集
+                        if (attr.view != null) {
+                            bean = (ProductAttrBean) attr.view.getTag(R.id.state);
+                            seletedSet.retainAll(bean.getProductId());
+                        }
+                    }
+                    bean = (ProductAttrBean) v.getTag(R.id.state);
+                    seletedSet.retainAll(bean.getProductId());
+                    if (!seletedSet.isEmpty() && seletedSet.size() == 1) {
+                        Object[] id =  seletedSet.toArray();
+                        Long l=(Long)id[0];
+                        System.out.println(l);
+                    }
+
                 }
             });
 
@@ -133,6 +203,17 @@ public class PropertyLayout extends TableLayout {
         this.addView(row);
 
     }
+
+    private boolean isSelectable(Set<Long> parent, Set<Long> child) {
+
+        for (Long key : parent) {
+            if (child.contains(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public int dip2px(float dpValue) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
@@ -196,5 +277,26 @@ public class PropertyLayout extends TableLayout {
         int[] colorList = new int[]{ContextCompat.getColor(getContext(), R.color.main_sub_text_color), ContextCompat.getColor(getContext(), R.color.main_red), ContextCompat.getColor(getContext(), R.color.main_text_color)};
         ColorStateList colorStateList = new ColorStateList(stateList, colorList);
         return colorStateList;
+    }
+
+
+    class ProductAttr {
+        String parent;
+        int start;
+        int size;
+        View view;
+
+        @Override
+        public boolean equals(Object o) {
+            if (o != null) {
+                ProductAttr attr = (ProductAttr) o;
+                if (parent != null) {
+                    if (parent.equals(attr.parent)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

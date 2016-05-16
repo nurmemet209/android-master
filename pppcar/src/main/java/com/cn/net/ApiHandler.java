@@ -38,7 +38,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
     // public final static String HOST = "http://pppcar.f3322.net:8084";
 
-    public final static String HOST = "http://192.168.0.183:8080";
+    public final static String HOST = "http://192.168.0.200:8888";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
