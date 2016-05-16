@@ -37,10 +37,19 @@ public class PropertyLayout extends TableLayout {
     private List<View> viewList;
     private List<ProductAttr> parentList;
     private long productId = -1;
+
+    interface ItemClick {
+        void onItemClick(long id);
+    }
+    ItemClick onItemClick;
+    public void setItemClick(ItemClick itemClick) {
+        this.onItemClick = itemClick;
+    }
     /**
      * 以dp为单位
      */
     private int mRowMargin = 5;
+
     public void setPad(int rl, int tb) {
         mItemPaddingLeftRight = rl;
         mItemPaddingTopBottom = tb;
@@ -124,7 +133,7 @@ public class PropertyLayout extends TableLayout {
                     v.setSelected(true);
                     ProductAttrBean bean;
                     Set<Long> seletedSet = new HashSet<>();
-                    int index ;
+                    int index;
                     boolean isFirst = true;
                     index = (Integer) v.getTag(R.id.parent_index);
                     if (parentList.get(index).view != null) {
@@ -135,7 +144,6 @@ public class PropertyLayout extends TableLayout {
                     for (int i = 0; i < index; i++) {
                         ProductAttr attr = parentList.get(i);
                         for (int j = attr.start; j < attr.start + attr.size; j++) {
-
                             if (viewList.get(j).isSelected()) {
                                 bean = (ProductAttrBean) viewList.get(j).getTag(R.id.state);
                                 if (isFirst) {
@@ -155,7 +163,12 @@ public class PropertyLayout extends TableLayout {
                             if (!seletedSet.isEmpty()) {
                                 if (isSelectable(bean.getProductId(), seletedSet)) {
                                     viewList.get(j).setEnabled(true);
-                                    bean.setState("can_selected");
+                                    if (viewList.get(j).isSelected()){
+                                        bean.setState("selected");
+                                    }else{
+                                        bean.setState("can_selected");
+                                    }
+
                                 } else {
                                     if (viewList.get(j).isSelected()) {
                                         attr.view = null;
@@ -178,13 +191,28 @@ public class PropertyLayout extends TableLayout {
                             seletedSet.retainAll(bean.getProductId());
                         }
                     }
-                    bean = (ProductAttrBean) v.getTag(R.id.state);
-                    seletedSet.retainAll(bean.getProductId());
-                    if (!seletedSet.isEmpty() && seletedSet.size() == 1) {
-                        Object[] id =  seletedSet.toArray();
-                        Long l=(Long)id[0];
-                        System.out.println(l);
+
+                    boolean isAllSelected = true;
+                    for (int i = 0; i < parentList.size(); i++) {
+                        if (parentList.get(i).view == null) {
+                            isAllSelected = false;
+                            break;
+                        }
                     }
+                    if (isAllSelected) {
+                        bean = (ProductAttrBean) v.getTag(R.id.state);
+                        seletedSet.retainAll(bean.getProductId());
+                        if (!seletedSet.isEmpty() && seletedSet.size() == 1) {
+                            Object[] id = seletedSet.toArray();
+                            Long l = (Long) id[0];
+                            System.out.println(l);
+
+                            if (onItemClick!=null){
+                                onItemClick.onItemClick(l);
+                            }
+                        }
+                    }
+
 
                 }
             });

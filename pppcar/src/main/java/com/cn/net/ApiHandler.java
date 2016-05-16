@@ -161,8 +161,8 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
         addToRequestQueue(request);
     }
-    public void getProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = getRootApi().append("/v1/app/product/queryProductbyId?proId=29").toString();
+    public void getProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener,long id) {
+        String url = getRootApi().append("/v1/app/product/queryProductbyId?proId=").append(id).toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
         addToRequestQueue(request);
     }

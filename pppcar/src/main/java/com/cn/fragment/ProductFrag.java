@@ -132,7 +132,7 @@ public class ProductFrag extends BaseFrag {
                             showToast(NetUtil.getError(response));
                         }
                     }
-                }, null);
+                }, null,29);
             }
         }).start();
 
