@@ -48,6 +48,7 @@
             />
 
         <ImageButton
+            android:id="@+id/search_btn"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_width"
             android:layout_alignParentRight="true"
@@ -88,119 +89,118 @@
                 android:textStyle="bold"
                 />
 
-            <HorizontalScrollView
+            <com.cn.pppcar.widget.TagGroupLayout
+                android:id="@+id/hot_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fadeScrollbars="false"
-                android:scrollbars="none"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
                 >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    >
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal"-->
+                    <!---->
+                    <!--&gt;-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkffdsfdsfdsfdsf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkffdsfdsfdsfdsf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/padding_small"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="@dimen/padding_small"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:padding="@dimen/padding_smallest"
-                        android:text="lskdfjdkf"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_smaller"
-                        />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="@dimen/padding_small"-->
+                        <!--android:background="@drawable/circle_red_sl"-->
+                        <!--android:clickable="true"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="@dimen/padding_smallest"-->
+                        <!--android:text="lskdfjdkf"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/text_size_smaller"-->
+                        <!--/>-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
 
-            </HorizontalScrollView>
+            </com.cn.pppcar.widget.TagGroupLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -209,69 +209,76 @@
                 android:paddingRight="@dimen/padding_normal"
                 android:text="@string/search_history"
                 android:textStyle="bold"
+                android:layout_marginBottom="@dimen/padding_normal"
                 />
 
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/history_search_recycle_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:divider="@drawable/divider_small"
-                android:orientation="vertical"
-                android:showDividers="middle"
                 >
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/list_item_bg"
-                    android:clickable="true"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:text="lskdfjdkf"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/list_item_bg"
-                    android:clickable="true"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:text="lskdfjdkf"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/list_item_bg"
-                    android:clickable="true"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:text="lskdfjdkf"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/list_item_bg"
-                    android:clickable="true"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:text="lskdfjdkf"
-                    />
+            </android.support.v7.widget.RecyclerView>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:divider="@drawable/divider_small"-->
+                <!--android:orientation="vertical"-->
+                <!--android:showDividers="middle"-->
+                <!--&gt;-->
 
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/list_item_bg"-->
+                    <!--android:clickable="true"-->
+                    <!--android:paddingBottom="@dimen/padding_big"-->
+                    <!--android:paddingLeft="@dimen/padding_normal"-->
+                    <!--android:paddingRight="@dimen/padding_normal"-->
+                    <!--android:paddingTop="@dimen/padding_big"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/list_item_bg"-->
+                    <!--android:clickable="true"-->
+                    <!--android:paddingBottom="@dimen/padding_big"-->
+                    <!--android:paddingLeft="@dimen/padding_normal"-->
+                    <!--android:paddingRight="@dimen/padding_normal"-->
+                    <!--android:paddingTop="@dimen/padding_big"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/list_item_bg"-->
+                    <!--android:clickable="true"-->
+                    <!--android:paddingBottom="@dimen/padding_big"-->
+                    <!--android:paddingLeft="@dimen/padding_normal"-->
+                    <!--android:paddingRight="@dimen/padding_normal"-->
+                    <!--android:paddingTop="@dimen/padding_big"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/list_item_bg"-->
+                    <!--android:clickable="true"-->
+                    <!--android:paddingBottom="@dimen/padding_big"-->
+                    <!--android:paddingLeft="@dimen/padding_normal"-->
+                    <!--android:paddingRight="@dimen/padding_normal"-->
+                    <!--android:paddingTop="@dimen/padding_big"-->
+                    <!--android:text="lskdfjdkf"-->
+                    <!--/>-->
+
+
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -388,9 +395,8 @@
 
                 </LinearLayout>
 
-                <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
+                <com.cn.pppcar.widget.CustomTabLayout
                     android:id="@+id/tab_container"
-                    style="@style/pagertab_style_"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/main_bottom_bar_height"
                     android:layout_toLeftOf="@+id/filer_container"

@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/main_bg_gray"
               android:orientation="vertical"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
@@ -15,10 +17,10 @@
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_width"
             android:layout_centerVertical="true"
-            android:scaleType="centerInside"
-            android:src="@mipmap/back"
             android:clickable="true"
             android:onClick="OnBack"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
             />
 
         <TextView
@@ -35,6 +37,35 @@
         android:layout_height="1dp"
         android:background="@color/main_text_color"
         />
+
+    <RelativeLayout
+        android:id="@+id/year_select"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:clickable="true"
+        >
+
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/go"
+            />
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"

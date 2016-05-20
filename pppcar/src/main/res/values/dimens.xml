@@ -14,5 +14,6 @@
 
     <dimen name="round_rect_radius">4dp</dimen>
     <dimen name="main_grid_layout_item_offset">15dp</dimen>
+    <dimen name="main_dlg_max_width">250dp</dimen>
 
 </resources>

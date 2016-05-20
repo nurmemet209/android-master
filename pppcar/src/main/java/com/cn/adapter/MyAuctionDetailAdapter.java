@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cn.commans.AuctionHelper;
 import com.cn.commans.Constants;
 import com.cn.commans.DateUtil;
 import com.cn.commans.SpanHelper;
@@ -46,6 +48,9 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
     private ArrayList<Object> objectList = new ArrayList<>();
     private CollectAuctionDetailResBean bean;
     private SpanHelper spanHelper;
+    private View headerView;
+    private Handler mHandler;
+    private AuctionHelper auctionHelper;
 
     public MyAuctionDetailAdapter(Context mContext, CollectAuctionDetailResBean bean) {
         this.mContext = mContext;
@@ -57,6 +62,8 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
         }
         this.bean = bean;
         spanHelper = new SpanHelper(mContext);
+        mHandler=new Handler();
+        update();
     }
 
     private void revert() {
@@ -72,7 +79,7 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == 0) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.header_auction_product_frag, null);
+            headerView=view = LayoutInflater.from(mContext).inflate(R.layout.header_auction_product_frag, null);
         } else if (viewType == 1) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_list_frag_bid_record_date, null);
         } else  if (viewType==2){
@@ -142,7 +149,9 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
 
 
     private void bindHeadData(View view) {
-
+        if (auctionHelper==null){
+            auctionHelper=new AuctionHelper();
+        }
         AutoScrollViewPager banner = (AutoScrollViewPager) view.findViewById(R.id.banner);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
         String[] list = bean.getImgUrl().split(",");
@@ -192,6 +201,20 @@ public class MyAuctionDetailAdapter extends RecyclerView.Adapter {
         history.setText("（自"+DateUtil.convertTime(bean.getStartTime())+"开始）");
 
     }
+
+    private void update(){
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                TextView leftTime=(TextView) headerView.findViewById(R.id.left_time);
+                leftTime.setText(spanHelper.auctionTime(bean.getCurrentTime()+auctionHelper.getDelta(), bean.getEndTime()));
+
+                update();
+            }
+        },1000);
+    }
+
 
 
 }

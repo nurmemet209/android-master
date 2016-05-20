@@ -11,9 +11,9 @@ import java.util.Map;
  *
  */
 public class ResProductApp{
-	
+
 	private Long id;//产品id
-	
+
 	private String imgs;//产品图片
 	
 	private String name;//产品名称
@@ -36,13 +36,13 @@ public class ResProductApp{
 	
 	private Integer orderGoodsCycle=0;//预定规则，付款后几天之内发货
 	
-	private Integer isFlagGroup;//是否有优惠套餐 0、表示有 1、表示没有
+	private Boolean isFlagGroup;//是否有优惠套餐 0、表示有 1、表示没有
 	
-	private Integer isFlagProperty;//是否有属性规格 0、表示有 1、表示没有
+	private Boolean isFlagProperty;//是否有属性规格 0、表示有 1、表示没有
 	
-	private Integer isFlagBorC;//0、是B端，1、是C端
+	private Boolean isFlagBorC;//0、是B端，1、是C端
 	
-	private Integer isFlagFavorites;//是否已经收藏  0、表示是 1、表示否
+	private Boolean isFlagFavorites;//是否已经收藏  0、表示是 1、表示否
 	
 	private Map<String,Map<String,ProductAttrBean>> productAttrs;//属性规格
 	
@@ -131,35 +131,35 @@ public class ResProductApp{
 		this.orderGoodsCycle = orderGoodsCycle;
 	}
 
-	public Integer getIsFlagGroup() {
+	public Boolean getIsFlagGroup() {
 		return isFlagGroup;
 	}
 
-	public void setIsFlagGroup(Integer isFlagGroup) {
+	public void setIsFlagGroup(Boolean isFlagGroup) {
 		this.isFlagGroup = isFlagGroup;
 	}
 
-	public Integer getIsFlagProperty() {
+	public Boolean getIsFlagProperty() {
 		return isFlagProperty;
 	}
 
-	public void setIsFlagProperty(Integer isFlagProperty) {
+	public void setIsFlagProperty(Boolean isFlagProperty) {
 		this.isFlagProperty = isFlagProperty;
 	}
 
-	public Integer getIsFlagBorC() {
+	public Boolean getIsFlagBorC() {
 		return isFlagBorC;
 	}
 
-	public void setIsFlagBorC(Integer isFlagBorC) {
+	public void setIsFlagBorC(Boolean isFlagBorC) {
 		this.isFlagBorC = isFlagBorC;
 	}
 
-	public Integer getIsFlagFavorites() {
+	public Boolean getIsFlagFavorites() {
 		return isFlagFavorites;
 	}
 
-	public void setIsFlagFavorites(Integer isFlagFavorites) {
+	public void setIsFlagFavorites(Boolean isFlagFavorites) {
 		this.isFlagFavorites = isFlagFavorites;
 	}
 

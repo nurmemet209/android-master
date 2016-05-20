@@ -64,7 +64,7 @@ public class IntegralMallFrag extends BaseFrag  {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (NetUtil.isSucced(response)) {
-                            resPageIntegral = apiHandler.toObject_(NetUtil.getData(response), ResPageIntegral.class);
+                            resPageIntegral = apiHandler.toObject(NetUtil.getData(response), ResPageIntegral.class);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

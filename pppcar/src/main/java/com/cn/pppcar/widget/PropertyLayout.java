@@ -130,6 +130,9 @@ public class PropertyLayout extends TableLayout {
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (v.isSelected()){
+                        return;
+                    }
                     v.setSelected(true);
                     ProductAttrBean bean;
                     Set<Long> seletedSet = new HashSet<>();
@@ -175,7 +178,6 @@ public class PropertyLayout extends TableLayout {
                                     }
                                     viewList.get(j).setEnabled(false);
                                     viewList.get(j).setSelected(false);
-
                                     bean.setState("no_selected");
                                 }
                             }

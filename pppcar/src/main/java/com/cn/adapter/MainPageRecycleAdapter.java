@@ -12,13 +12,18 @@ import android.widget.AdapterViewFlipper;
 import android.widget.TextView;
 
 import com.cn.commans.ActivitySwitcher;
-import com.cn.entity.Item;
-import com.cn.entity.MainPage;
+import com.cn.entity.ResIndexBanner;
+import com.cn.entity.ResIndexBrandType;
+import com.cn.entity.ResIndexPublicElement;
+import com.cn.entity.ResIndexRecommendType;
+import com.cn.entity.ResRemonmendPro;
 import com.cn.pppcar.R;
+import com.cn.util.UIHelper;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import me.relex.circleindicator.CircleIndicator;
@@ -27,15 +32,15 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by nurmemet on 2016/3/30.
  */
 public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycleAdapter.CustomViewHolder> {
-    private MainPage mainPage;
-    private ArrayList<Item> recommonds;
+    private ResIndexPublicElement mainPage;
+    private List<ResRemonmendPro> recommonds;
     private Context mContext = null;
 
 
-    public MainPageRecycleAdapter(MainPage mainPage, Context mContext) {
+    public MainPageRecycleAdapter(ResIndexPublicElement mainPage, Context mContext) {
         this.mainPage = mainPage;
         this.mContext = mContext;
-        recommonds = mainPage.getHotRecommand();
+        this.recommonds=mainPage.getPageResRemonmendPro().getResRemonmendPros();
     }
 
     @Override
@@ -75,12 +80,11 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     @Override
     public int getItemCount() {
         if (recommonds != null) {
-            int size = (int) Math.ceil(recommonds.size()+1);
+            int size = (int) Math.ceil(recommonds.size() + 1);
             return size;
         }
         return 0;
     }
-
 
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -105,15 +109,15 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         if (mainPage == null)
             return;
         //轮播
-        if (Util.isNoteEmpty(mainPage.getBannerImages())) {
+        if (Util.isNoteEmpty(mainPage.getResIndexBanners())) {
             AutoScrollViewPager banner = (AutoScrollViewPager) view.findViewById(R.id.banner);
             CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
 
             ArrayList viewList = new ArrayList();
-            for (int i = 0; i < mainPage.getBannerImages().size(); i++) {
-                Item item = mainPage.getBannerImages().get(i);
+            for (int i = 0; i < mainPage.getResIndexBanners().size(); i++) {
+                ResIndexBanner item = mainPage.getResIndexBanners().get(i);
                 SimpleDraweeView img = new SimpleDraweeView(mContext);
-                Uri uri = Uri.parse(item.getImg());
+                Uri uri = Uri.parse(item.getImgUrl());
                 img.setImageURI(uri);
                 viewList.add(img);
                 img.setOnClickListener(new View.OnClickListener() {
@@ -128,14 +132,14 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             banner.setInterval(4000);
             // banner.setScrollDurationFactor(5);
             banner.setCycle(true);
-            banner.setOffscreenPageLimit(mainPage.getBannerImages().size());
+            banner.setOffscreenPageLimit(mainPage.getResIndexBanners().size());
             banner.setBorderAnimation(true);
             banner.startAutoScroll();
             indicator.setViewPager(banner);
 
         }
         //品牌中心
-        View brandCenter=view.findViewById(R.id.brand_center_l);
+        View brandCenter = view.findViewById(R.id.brand_center_l);
         brandCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,64 +179,45 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             //flipper.startFlipping();
         }
         //综合
-        if (Util.isNoteEmpty(mainPage.getUniversalItems())) {
+        if (Util.isNoteEmpty(mainPage.getResIndexRecommendTypes())) {
 
-            ArrayList<Item> universalItems = mainPage.getUniversalItems();
-            int size = universalItems.size();
-            SimpleDraweeView universal_1_big = (SimpleDraweeView) view.findViewById(R.id.universal_1_big);
-            SimpleDraweeView universal_1_right = (SimpleDraweeView) view.findViewById(R.id.universal_1_right);
-            SimpleDraweeView universal_2_1 = (SimpleDraweeView) view.findViewById(R.id.universal_2_1);
-            SimpleDraweeView universal_2_2 = (SimpleDraweeView) view.findViewById(R.id.universal_2_2);
-            SimpleDraweeView universal_2_3 = (SimpleDraweeView) view.findViewById(R.id.universal_2_3);
-            universal_1_big.setImageURI(Uri.parse(universalItems.get(0).getImg()));
-            universal_1_right.setImageURI(Uri.parse(universalItems.get(getIndex(1, size)).getImg()));
-            universal_2_1.setImageURI(Uri.parse(universalItems.get(getIndex(2, size)).getImg()));
-            universal_2_2.setImageURI(Uri.parse(universalItems.get(getIndex(3, size)).getImg()));
-            universal_2_3.setImageURI(Uri.parse(universalItems.get(getIndex(4, size)).getImg()));
-
+            List<ResIndexRecommendType> universalItems = mainPage.getResIndexRecommendTypes();
+            int m=1;
+            for (int i=0;i<universalItems.size();i++){
+                ResIndexRecommendType item=universalItems.get(i);
+                SimpleDraweeView img=null;
+                if (!item.getIsLarge()) {
+                    img=(SimpleDraweeView) view.findViewWithTag("universal_big");
+                }else{
+                    img=(SimpleDraweeView) view.findViewWithTag("universal_small_"+m);
+                    m++;
+                }
+                img.setImageURI(Uri.parse(item.getImgUrl()));
+            }
         }
-        //排气
-        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
-            ArrayList<Item> list = mainPage.getUniversalItems();
-            int size = list.size();
-            SimpleDraweeView exhaust_left_big = (SimpleDraweeView) view.findViewById(R.id.exhaust_left_big);
-            SimpleDraweeView exhaust_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_1_1);
-            SimpleDraweeView exhaust_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_2_1);
-            SimpleDraweeView exhaust_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.exhaust_right_2_2);
 
-            exhaust_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
-            exhaust_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
-            exhaust_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
-            exhaust_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
-        }
-        //避震
-        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
-            ArrayList<Item> list = mainPage.getUniversalItems();
-            int size = list.size();
-            SimpleDraweeView shock_left_big = (SimpleDraweeView) view.findViewById(R.id.shock_left_big);
-            SimpleDraweeView shock_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.shock_right_1_1);
-            SimpleDraweeView shock_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.shock_right_2_1);
-            SimpleDraweeView shock_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.shock_right_2_2);
+        ViewGroup container=(ViewGroup)view.findViewById(R.id.container);
+        for (int i = 0; i < mainPage.getResIndexBrandTypes().size(); i++) {
+            ResIndexBrandType item = mainPage.getResIndexBrandTypes().get(i);
+            View v = LayoutInflater.from(mContext).inflate(R.layout.item_main_page, null);
+            TextView title = (TextView) v.findViewById(R.id.title);
+            TextView price = (TextView) v.findViewById(R.id.price);
+            TextView productName=(TextView) v.findViewById(R.id.product_name);
+            SimpleDraweeView leftBig = (SimpleDraweeView) v.findViewById(R.id.left_big);
+            SimpleDraweeView rightBig = (SimpleDraweeView) v.findViewById(R.id.right_big);
+            SimpleDraweeView leftSmall = (SimpleDraweeView) v.findViewById(R.id.left_small);
+            SimpleDraweeView rightSmall = (SimpleDraweeView) v.findViewById(R.id.right_small);
 
-            shock_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
-            shock_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
-            shock_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
-            shock_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
+            leftBig.setImageURI(Uri.parse(item.getImgUrl()));
+            rightBig.setImageURI(Uri.parse(item.getBsProduct().getImgs()));
+            leftSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(0).getBrandImg()));
+            rightSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(1).getBrandImg()));
 
-        }
-        //轮毂
-        if (Util.isNoteEmpty(mainPage.getExhaustList())) {
-            ArrayList<Item> list = mainPage.getUniversalItems();
-            int size = list.size();
-            SimpleDraweeView hob_left_big = (SimpleDraweeView) view.findViewById(R.id.hob_left_big);
-            SimpleDraweeView hob_right_1_1 = (SimpleDraweeView) view.findViewById(R.id.hob_right_1_1);
-            SimpleDraweeView hob_right_2_1 = (SimpleDraweeView) view.findViewById(R.id.hob_right_2_1);
-            SimpleDraweeView hob_right_2_2 = (SimpleDraweeView) view.findViewById(R.id.hob_right_2_2);
+            title.setText(item.getTitle());
+            price.setText(String.valueOf(item.getBsProduct().getRetailPrice()));
+            productName.setText(item.getBsProduct().getName());
 
-            hob_left_big.setImageURI(Uri.parse(list.get(0).getImg()));
-            hob_right_1_1.setImageURI(Uri.parse(list.get(getIndex(1, size)).getImg()));
-            hob_right_2_1.setImageURI(Uri.parse(list.get(getIndex(2, size)).getImg()));
-            hob_right_2_2.setImageURI(Uri.parse(list.get(getIndex(3, size)).getImg()));
+            container.addView(v);
 
         }
     }
@@ -245,25 +230,26 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         if (mainPage == null)
             return;
         ;
-        if (Util.isNoteEmpty(mainPage.getHotRecommand())) {
-
+        if (Util.isNoteEmpty(mainPage.getPageResRemonmendPro().getResRemonmendPros())) {
 
             SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
             TextView title = (TextView) view.findViewById(R.id.title);
             TextView price = (TextView) view.findViewById(R.id.price);
 
 
-            Item item = mainPage.getHotRecommand().get(position );
-            if (mainPage.getHotRecommand().size() > position ) {
-
-                img.setImageURI(Uri.parse(item.getImg()));
-                title.setText(item.getName());
-                String priceStr = String.valueOf(item.getPrice());
-                price.setText(priceStr);
-            }
-
+            ResRemonmendPro item = mainPage.getPageResRemonmendPro().getResRemonmendPros().get(position);
+            img.setImageURI(Uri.parse(item.getImgs()));
+            title.setText(item.getName());
+            String priceStr = String.valueOf(item.getRetailPrice());
+            price.setText(priceStr);
 
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivitySwitcher.toProductDetailAct((Activity) mContext);
+            }
+        });
 
     }
 }

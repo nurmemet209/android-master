@@ -29,13 +29,13 @@ public class SearchClassificationViewPagerAdapter extends FragmentPagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = SearchListFrag.getInstance();
+                frag = SearchListFrag.getInstance(1);
                 break;
             case 1:
-                frag = SearchListFrag.getInstance();
+                frag = SearchListFrag.getInstance(2);
                 break;
             case 2:
-                frag = SearchListFrag.getInstance();
+                frag = SearchListFrag.getInstance(3);
                 break;
 
             default:

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:orientation="vertical"
     >
 
     <RelativeLayout
@@ -24,12 +24,12 @@
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
+            android:background="@color/transparent"
             app:ci_animator="@anim/indicator_no_animator"
             app:ci_drawable="@drawable/indicator_red_radius"
             app:ci_drawable_unselected="@drawable/indicator_gray_radius"
             app:ci_height="8dp"
             app:ci_width="8dp"
-            android:background="@color/transparent"
             />
     </RelativeLayout>
 
@@ -40,19 +40,21 @@
 
 
         />
+
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/padding_big"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
-        android:paddingBottom="@dimen/padding_big"
         android:paddingTop="@dimen/padding_big"
-        android:textSize="@dimen/text_size_large"
         android:text="sfdsfdsfdsfdsfdsfdsfdsf"
-        android:maxLines="2"
-        android:ellipsize="end"
+        android:textSize="@dimen/text_size_large"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
@@ -60,33 +62,37 @@
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
-    <TextView
-        android:id="@+id/current_price"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="当前价"
-        android:gravity="bottom"
-        />
+
+        <TextView
+            android:id="@+id/current_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:text="当前价"
+            />
+
         <TextView
             android:id="@+id/fixed_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:text="一口价"
             android:gravity="bottom"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_normal"
+            android:text="一口价"
             />
+
         <TextView
             android:id="@+id/market_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="市场价"
             android:gravity="bottom"
+            android:text="市场价"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
@@ -94,12 +100,13 @@
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
+
         <TextView
             android:id="@+id/term"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="当前价"
             android:gravity="center_vertical"
+            android:text="当前价"
             />
 
         <TextView
@@ -107,12 +114,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="市场价"
             android:gravity="center_vertical|right"
+            android:text="市场价"
             android:textSize="@dimen/text_size_small"
 
             />
     </LinearLayout>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
@@ -123,6 +131,7 @@
         android:progress="50"
         android:progressDrawable="@drawable/progress_horizontal"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
@@ -130,13 +139,14 @@
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
+
         <TextView
             android:id="@+id/bid_number"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
-            android:text="出价次数：23"
             android:gravity="center_vertical"
+            android:text="出价次数：23"
             android:textSize="@dimen/text_size_small"
             />
 
@@ -144,8 +154,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="参拍条件：会员"
             android:gravity="center_vertical|right"
+            android:text="参拍条件：会员"
             android:textSize="@dimen/text_size_small"
 
             />
@@ -156,36 +166,41 @@
         android:layout_height="@dimen/main_big_divider_height"
         android:background="@color/main_bg_gray"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_big"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
-        android:paddingBottom="@dimen/padding_big"
         android:paddingTop="@dimen/padding_big"
-        android:orientation="horizontal"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/bid_history"
             />
+
         <TextView
             android:id="@+id/bid_history_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:textColor="@color/main_sub_text_color"
+            android:maxLines="1"
             android:paddingLeft="@dimen/padding_normal"
+            android:textColor="@color/main_sub_text_color"
             />
     </LinearLayout>
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:background="@color/main_bg_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/main_bg_gray"
+        />
 
 </LinearLayout>

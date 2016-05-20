@@ -95,7 +95,12 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden|stateHidden</item>
 
+    </style>
+    <style name="year_select_dlg" parent="base_dialog">
+        <item name="android:background">@drawable/round_rect</item>
+        <item name="android:windowBackground">@drawable/round_rect</item>
     </style>
 
     <style name="preferential_package_dlg" parent="base_dialog">

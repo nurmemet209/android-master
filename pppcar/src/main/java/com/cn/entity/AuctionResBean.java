@@ -10,35 +10,35 @@ public class AuctionResBean extends ReturnBean{
 	/**
 	 * 拍卖id
 	 */
-	private Long auctionId;
+	private long auctionId;
 	/**
 	 * 拍卖期数
 	 */
-	private Long term;
+	private long term;
 	/**
 	 * 当前价格
 	 */
-	private Double currentPrice;
+	private double currentPrice;
 	/**
 	 * 一口价
 	 */
-	private Double aPrice;
+	private long aPrice;
 	/**
 	 * 出价次数
 	 */
-	private Integer bidNumber;
+	private int bidNumber;
 	/**
 	 * 拍卖状态 50010:(未开始) 50011:(正在进行) 50012:(结束)
 	 */
-	private Integer state;
+	private int state;
 	/**
 	 * 开始时间
 	 */
-	private Long startTime;
+	private long startTime;
 	/**
 	 * 结束时间
 	 */
-	private Long endTime;
+	private long endTime;
 	/**
 	 * 拍卖产品图片
 	 */
@@ -46,7 +46,7 @@ public class AuctionResBean extends ReturnBean{
 	/**
 	 * 拍卖产品id
 	 */
-	private Long productId;
+	private long productId;
 	/**
 	 * 产品名称
 	 */
@@ -54,55 +54,55 @@ public class AuctionResBean extends ReturnBean{
 	/**
 	 * 当前时间
 	 */
-	private Long currentTime;
+	private long currentTime;
 	
 
 
-	public Long getCurrentTime() {
+	public long getCurrentTime() {
 		return currentTime;
 	}
 
-	public void setCurrentTime(Long currentTime) {
+	public void setCurrentTime(long currentTime) {
 		this.currentTime = currentTime;
 	}
 
-	public Long getTerm() {
+	public long getTerm() {
 		return term;
 	}
 
-	public void setTerm(Long term) {
+	public void setTerm(long term) {
 		this.term = term;
 	}
 
-	public Double getCurrentPrice() {
+	public double getCurrentPrice() {
 		return currentPrice;
 	}
 
-	public void setCurrentPrice(Double currentPrice) {
+	public void setCurrentPrice(double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 
-	public Double getaPrice() {
+	public long getaPrice() {
 		return aPrice;
 	}
 
-	public void setaPrice(Double aPrice) {
+	public void setaPrice(long aPrice) {
 		this.aPrice = aPrice;
 	}
 
-	public Integer getBidNumber() {
+	public int getBidNumber() {
 		return bidNumber;
 	}
 
-	public void setBidNumber(Integer bidNumber) {
+	public void setBidNumber(int bidNumber) {
 		this.bidNumber = bidNumber;
 	}
 
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 
@@ -110,7 +110,7 @@ public class AuctionResBean extends ReturnBean{
 		return startTime;
 	}
 
-	public void setStartTime(Long startTime) {
+	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
 
@@ -118,7 +118,7 @@ public class AuctionResBean extends ReturnBean{
 		return endTime;
 	}
 
-	public void setEndTime(Long endTime) {
+	public void setEndTime(long endTime) {
 		this.endTime = endTime;
 	}
 
@@ -135,7 +135,7 @@ public class AuctionResBean extends ReturnBean{
 		return productId;
 	}
 
-	public void setProductId(Long productId) {
+	public void setProductId(long productId) {
 		this.productId = productId;
 	}
 
@@ -153,7 +153,7 @@ public class AuctionResBean extends ReturnBean{
 		return auctionId;
 	}
 
-	public void setAuctionId(Long auctionId) {
+	public void setAuctionId(long auctionId) {
 		this.auctionId = auctionId;
 	}
 

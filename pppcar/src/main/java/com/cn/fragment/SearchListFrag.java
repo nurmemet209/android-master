@@ -19,6 +19,7 @@ import com.cn.commans.NetUtil;
 import com.cn.entity.Item;
 import com.cn.entity.PageProductBean;
 import com.cn.entity.ResPageIntegral;
+import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
@@ -37,7 +38,25 @@ import butterknife.ButterKnife;
  */
 public class SearchListFrag extends BaseFrag {
 
-    private int searchType = 1;
+    public static String keyWord = "";
+
+    public final static String SORT_TYPE_MOST_NEW = "putWayTime_desc";
+    /**
+     * 价格降序
+     */
+    public final static String SORT_TYPE_PRICE_DESC = "price_asc";
+    /**
+     * 价格升序
+     */
+    public final static String SORT_TYPE_PRICE_ASC = "price_asc";
+
+
+    private String priceSort;
+
+    /**
+     * 1 综合，2 最新，3 价格顺序
+     */
+    private int searchType = 0;
 
     @Bind(R.id.recycle_view)
     protected RecyclerView recyclerView;
@@ -45,8 +64,11 @@ public class SearchListFrag extends BaseFrag {
     SearchListFragAdapter adapter;
     private PageProductBean pageProductBean;
 
-    public static SearchListFrag getInstance() {
+    public static SearchListFrag getInstance(int type) {
         SearchListFrag frag = new SearchListFrag();
+        Bundle bd = new Bundle();
+        bd.putInt("type", type);
+        frag.setArguments(bd);
         return frag;
     }
 
@@ -54,6 +76,9 @@ public class SearchListFrag extends BaseFrag {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        if (getArguments() != null) {
+            searchType = getArguments().getInt("type");
+        }
         ButterKnife.bind(this, mainView);
         init();
         return mainView;
@@ -65,60 +90,61 @@ public class SearchListFrag extends BaseFrag {
     }
 
     private void init() {
-
-
-
-
         EventBus.getDefault().register(this);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                apiHandler.getProductList(new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (NetUtil.isSucced(response)) {
-                            pageProductBean = apiHandler.toObject_(NetUtil.getData(response), PageProductBean.class);
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (pageProductBean != null && Util.isNoteEmpty(pageProductBean.getProductBean())) {
-                                        adapter = new SearchListFragAdapter(getActivity(), pageProductBean.getProductBean());
-                                        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
-                                        recyclerView.setLayoutManager(manager);
-                                        //suggestRecyclerView.setBackgroundColor(getResources().getColor(R.color.main_bg_gray));
-                                        GridItemDecoration decoration = new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
-                                        recyclerView.addItemDecoration(decoration);
-                                        recyclerView.setAdapter(adapter);
-                                    }
-                                }
-                            });
-
-                        } else {
-
-                            showToast(NetUtil.getError(response));
-                        }
-                    }
-                }, null);
-            }
-        }).start();
-
-
-
-
-
-
     }
 
-    private Handler mHandler=new Handler();
 
     @Subscribe
-    public void onEventMainThread(String event) {
-        if ("refresh".equals(event)){
-            Toast.makeText(getActivity(), "refresh", Toast.LENGTH_SHORT).show();
+    public void onEventMainThread(EventBusEv event) {
+        String st = null;
+        if ("sort".equals(event.getEvent())) {
+            String sortType = (String) event.getData();
+            if ("up".equals(sortType)) {
+                st = SORT_TYPE_PRICE_ASC;
+            } else if ("down".equals(sortType)) {
+                st = SORT_TYPE_PRICE_DESC;
+            }
+            priceSort=st;
+            // Toast.makeText(getActivity(), "refresh", Toast.LENGTH_SHORT).show();
+        } else if ("search".equals(event.getEvent())) {
+            //最新
+            if (searchType == 1) {
+                st = SORT_TYPE_MOST_NEW;
+            }else if (searchType==2){
+                st=priceSort;
+            }
         }
+        apiHandler.getProductList(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    pageProductBean = apiHandler.toObject(NetUtil.getData(response), PageProductBean.class);
 
+                    if (pageProductBean != null && Util.isNoteEmpty(pageProductBean.getProductBean())) {
 
+                        if (adapter == null) {
+                            adapter = new SearchListFragAdapter(getActivity(), pageProductBean.getProductBean());
+                            GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+                            recyclerView.setLayoutManager(manager);
+                            //suggestRecyclerView.setBackgroundColor(getResources().getColor(R.color.main_bg_gray));
+                            GridItemDecoration decoration = new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
+                            recyclerView.addItemDecoration(decoration);
+                            recyclerView.setAdapter(adapter);
+                        } else {
+                            adapter.setList(pageProductBean.getProductBean());
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                } else {
+                    showToast(NetUtil.getError(response));
+                }
+            }
+        }, keyWord, st);
     }
+
+
+
+
+
 }

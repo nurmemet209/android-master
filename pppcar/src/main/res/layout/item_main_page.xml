@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/main_big_divider_height"
+              android:orientation="vertical"
+              android:background="@color/main_bg_gray"
+    >
+    <!--排气-->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/rectangle_red"
+        android:drawablePadding="@dimen/padding_small"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:padding="1dp"
+        android:divider="@drawable/divider_small"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:background="@color/main_bg_gray"
+
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/left_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:actualImageScaleType="centerInside"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:divider="@drawable/divider_small"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:weightSum="2"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/right_big"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    app:actualImageScaleType="centerInside"
+                    android:layout_alignParentRight="true"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_normal"
+                    android:background="@color/transparent"
+                    android:layout_toLeftOf="@+id/right_big"
+                    android:layout_alignParentLeft="true"
+                    >
+
+                    <TextView
+                        android:id="@+id/product_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="dfss"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_red"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:background="@color/transparent"
+                        android:textSize="@dimen/text_size_small"
+                        />
+                    />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:divider="@drawable/divider_small"
+                android:orientation="horizontal"
+                android:showDividers="middle"
+                android:weightSum="2"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/left_small"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:actualImageScaleType="fitXY"
+                    />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/right_small"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:actualImageScaleType="fitXY"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+

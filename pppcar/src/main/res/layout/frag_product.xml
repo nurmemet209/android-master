@@ -87,21 +87,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-                <TextView
+                <com.cn.widget.CustomTextView
                     android:id="@+id/pre_order_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="零售价：￥17000.00"
-                    android:textColor="@color/red"
                     android:textSize="@dimen/text_size_normal"
                     />
 
-                <TextView
+                <com.cn.widget.CustomTextView
                     android:id="@+id/retail_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="零售价：￥17000.00"
-                    android:textColor="@color/red"
+
                     android:textSize="@dimen/text_size_normal"
                     android:layout_marginLeft="@dimen/padding_normal"
                     />
@@ -112,12 +111,11 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/padding_normal"
                 >
-                <TextView
+                <com.cn.widget.CustomTextView
                     android:id="@+id/whole_sale_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="批发价：￥17000.00"
-                    android:textColor="@color/red"
                     android:textSize="@dimen/text_size_normal"
                     />
                 <ImageView
@@ -196,7 +194,7 @@
                 android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
                 android:textColor="@color/main_red"
-                android:text="@string/preferential_package"
+                android:text="@string/pre_order_way"
                 />
 
 

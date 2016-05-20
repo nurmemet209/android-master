@@ -44,12 +44,10 @@ dependencies {
     //支持消息提示的viewpager
     compile 'homhomlin.lib:apsts:1.3.0'
     compile 'homhomlin.lib:frescoimageview:1.2.0'
-
     compile 'com.alibaba:fastjson:1.2.11'
     compile 'org.greenrobot:eventbus:3.0.0'
     //标签控件
     compile 'me.gujun.android.taggroup:library:1.4@aar'
-
-
     compile project(path: ':sharesdk')
+    compile files('libs/lite-async-1.0.0.jar')
 }

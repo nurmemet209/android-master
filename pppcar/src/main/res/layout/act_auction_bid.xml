@@ -65,7 +65,7 @@
             >
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -154,120 +154,11 @@
             android:textSize="@dimen/text_size_large"
             />
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fadeScrollbars="false"
-            android:scrollbars="none"
-            >
-
-            <LinearLayout
-                android:id="@+id/bid_level_container"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
-                >
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkffdsfdsfdsfdsf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!---->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="@dimen/padding_small"-->
-                <!--android:background="@drawable/circle_red_sl"-->
-                <!--android:clickable="true"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="@dimen/padding_smallest"-->
-                <!--android:text="lskdfjdkf"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_size_smaller"-->
-                <!--/>-->
-
-            </LinearLayout>
-
-
-        </HorizontalScrollView>
+       <com.cn.pppcar.widget.TagGroupLayout
+           android:id="@+id/tag_group"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           ></com.cn.pppcar.widget.TagGroupLayout>
 
     </LinearLayout>
 

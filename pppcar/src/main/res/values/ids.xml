@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="parent_index" type="id">1</item>
+    <item name="state" type="id">2</item>
+    <item name="parent_name" type="id">3</item>
+</resources>

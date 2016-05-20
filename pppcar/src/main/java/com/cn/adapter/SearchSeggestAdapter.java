@@ -1,6 +1,7 @@
 package com.cn.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +11,17 @@ import com.cn.pppcar.R;
 import com.cn.util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchSeggestAdapter extends RecyclerView.Adapter {
-    private Context mContext;
-    private ArrayList<String> list;
+public class SearchSeggestAdapter extends BaseListAdapter<String> {
     private View.OnClickListener onClickListener;
 
-    public SearchSeggestAdapter(Context mContext, ArrayList<String> list, View.OnClickListener onClickListener) {
-        this.list = list;
-        this.mContext = mContext;
+    public SearchSeggestAdapter(Context mContext, List<String> list, View.OnClickListener onClickListener) {
+        super(mContext,list);
         this.onClickListener = onClickListener;
-        this.list = list = new ArrayList<>();
-        list.add("nur");
-        list.add("dsfs");
-        list.add("nudfdsr");
-        list.add("dfs");
-        list.add("nusdfdsr");
-
     }
 
     @Override
@@ -38,7 +30,7 @@ public class SearchSeggestAdapter extends RecyclerView.Adapter {
         int left = mContext.getResources().getDimensionPixelSize(R.dimen.padding_normal);
         int top = mContext.getResources().getDimensionPixelSize(R.dimen.padding_big);
         tv.setPadding(left, top, left, top);
-        tv.setBackground(mContext.getResources().getDrawable(R.drawable.list_item_bg));
+        tv.setBackground(ContextCompat.getDrawable(mContext,R.drawable.list_item_bg));
         tv.setClickable(true);
         RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT);
         tv.setLayoutParams(params);
@@ -56,11 +48,4 @@ public class SearchSeggestAdapter extends RecyclerView.Adapter {
         tv.setText(list.get(position));
     }
 
-    @Override
-    public int getItemCount() {
-        if (Util.isNoteEmpty(list)) {
-            return list.size();
-        }
-        return 0;
-    }
 }

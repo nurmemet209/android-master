@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cn.adapter.BannerAdapter;
 import com.cn.commans.NetUtil;
 import com.cn.commans.SpanHelper;
@@ -23,8 +24,10 @@ import com.cn.entity.ProductAttrBean;
 import com.cn.entity.ResProductApp;
 import com.cn.net.ApiHandler;
 import com.cn.pppcar.R;
+import com.cn.util.MyLogger;
 import com.cn.util.UIHelper;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.litesuits.android.async.SimpleTask;
 
 import org.json.JSONObject;
 
@@ -41,7 +44,7 @@ import butterknife.OnClick;
 /**
  * Created by nurmemet on 2016/5/11.
  */
-public class ProductAttrDlg extends AppCompatDialog {
+public class ProductAttrDlg extends BaseDialog {
 
     private Map<String, Map<String, ProductAttrBean>> map;
     @Bind(R.id.container)
@@ -60,8 +63,7 @@ public class ProductAttrDlg extends AppCompatDialog {
     protected TextView retailPrice;
     private ResProductApp productDetail;
     private ArrayList<String> keyList = new ArrayList<>();
-    private ApiHandler apiHandler;
-    private Handler mHandler = new Handler();
+    SimpleTask simpleTask;
 
     public ProductAttrDlg(Context context, ResProductApp productDetail) {
         super(context, R.style.dlg_product_attr_select);
@@ -69,11 +71,7 @@ public class ProductAttrDlg extends AppCompatDialog {
         this.map = productDetail.getProductAttrs();
         setContentView(R.layout.dlg_product_attr);
         ButterKnife.bind(this);
-        Window dialogWindow = this.getWindow();
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        dialogWindow.setAttributes(lp);
-        dialogWindow.setGravity(Gravity.BOTTOM);
+        set2FullWidth(Gravity.BOTTOM);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +85,6 @@ public class ProductAttrDlg extends AppCompatDialog {
         container.init(productDetail.getId());
         int pd = getContext().getResources().getDimensionPixelSize(R.dimen.padding_normal);
         container.setPad(pd, pd);
-
-//        List<String> keyList = new ArrayList<String>(map.keySet());
-//        //对key键值按字典升序排序
-//        Collections.sort(keyList);
         keyList.add("尺寸");
         keyList.add("宽度");
         keyList.add("ET值");
@@ -106,60 +100,56 @@ public class ProductAttrDlg extends AppCompatDialog {
         SpanHelper spanHelper = new SpanHelper(getContext());
         retailPrice.setText(spanHelper.priceSpan(R.string.retail_price_, productDetail.getRetailPrice()));
         container.setItemClick(new PropertyLayout.ItemClick() {
-            @Override
-            public void onItemClick(final long id) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        apiHandler = ApiHandler.getInstance(getContext());
-                        apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                if (NetUtil.isSucced(response)) {
-                                    final ResProductApp detail = apiHandler.toObject_(NetUtil.getData(response), ResProductApp.class);
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (detail != null) {
-                                                productDetail.setId(detail.getId());
-                                                productDetail.setImgs(detail.getImgs());
-                                                productDetail.setName(detail.getName());
+                                   @Override
+                                   public void onItemClick(final long id) {
 
-                                                titleImg.setImageURI(Uri.parse(productDetail.getImgs()));
-                                                title.setText(productDetail.getName());
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    showToast(NetUtil.getError(response));
-                                }
-                            }
-                        }, null,id);
-                    }
-                }).start();
-            }
-        });
+                                       apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
+                                           @Override
+                                           public void onResponse(JSONObject response) {
+                                               if (NetUtil.isSucced(response)) {
+                                                   ResProductApp detail = apiHandler.toObject(NetUtil.getData(response), ResProductApp.class);
+                                                   if (detail != null) {
+                                                       productDetail.setId(detail.getId());
+                                                       productDetail.setImgs(detail.getImgs());
+                                                       productDetail.setName(detail.getName());
+                                                       String urls[]=productDetail.getImgs().split(",");
+                                                       titleImg.setImageURI(Uri.parse(urls[0]));
+                                                       title.setText(productDetail.getName());
+
+                                                       MyLogger.showLog(productDetail.getImgs());
+                                                       MyLogger.showLog(productDetail.getName());
+                                                   }
+                                               } else {
+                                                   showToast(NetUtil.getError(response));
+                                               }
+                                           }
+                                       }, null, id);
+                                   }
+                               }
+
+        );
 
     }
 
 
     @OnClick(R.id.put_into_cart)
     public void putIntoCart(View view) {
-
-    }
-
-    protected void showToast(final String msg){
-        if (Thread.currentThread() == Looper.getMainLooper().getThread()){
-            UIHelper.showToast(getContext(),msg, Toast.LENGTH_LONG);
-
-        }else{
-            new android.os.Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    UIHelper.showToast(getContext(),msg, Toast.LENGTH_LONG);
-                }
-            });
+        int num=numEdit.getNum();
+        if (num==0){
+            UIHelper.showToast(getContext(),"产品数量不能为零", Toast.LENGTH_SHORT);
+            return;
         }
-
+        apiHandler.add2Cart(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)){
+                    UIHelper.showToast(getContext(),"加入购物车成功", Toast.LENGTH_SHORT);
+                }else {
+                    showToast(NetUtil.getError(response));
+                }
+            }
+        },productDetail.getId(),num,1);
     }
+
+
 }

@@ -3,6 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:resco="http://schemas.android.com/tools"
               android:background="@color/main_bg_gray"
               android:orientation="vertical"
     >
@@ -37,14 +38,14 @@
             android:layout_marginLeft="@dimen/padding_normal"
             android:layout_weight="1"
             android:background="@drawable/search_bg"
+            android:clickable="true"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="@string/search_hint"
             android:maxLines="1"
             android:paddingLeft="@dimen/padding_normal"
             android:paddingRight="@dimen/padding_normal"
             android:textCursorDrawable="@null"
-            android:clickable="true"
-            android:ellipsize="end"
             />
 
         <ImageButton
@@ -102,9 +103,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:clickable="true"
             >
 
             <ImageView
@@ -130,9 +131,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:clickable="true"
             >
 
             <ImageView
@@ -184,9 +185,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:clickable="true"
             >
 
             <ImageView
@@ -226,12 +227,13 @@
         android:showDividers="middle"
         >
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@mipmap/papa_head_line"
+            app:placeholderImageScaleType="centerInside"
+            app:placeholderImage="@mipmap/papa_head_line"
+            android:padding="@dimen/padding_normal"
             />
 
         <AdapterViewFlipper
@@ -284,18 +286,18 @@
             >
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/universal_1_big"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:tag="universal_big"
                 app:actualImageScaleType="fitXY"
                 />
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/universal_1_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:tag="universal_small_1"
                 app:actualImageScaleType="fitXY"
                 />
 
@@ -311,316 +313,325 @@
             >
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/universal_2_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:tag="universal_small_2"
                 app:actualImageScaleType="fitXY"
                 />
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/universal_2_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:tag="universal_small_3"
                 app:actualImageScaleType="fitXY"
                 />
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/universal_2_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:tag="universal_small_4"
                 app:actualImageScaleType="fitXY"
                 />
 
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/padding_big"
-        android:background="@color/lightgray_1"
-        />
-    <!--排气-->
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:background="@color/main_bg_gray"
         >
 
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/rectangle_red"
-            android:drawablePadding="@dimen/padding_small"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_big"
-            android:text="@string/exhaust"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/red"
-            android:divider="@drawable/divider_small"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            >
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/exhaust_left_big"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:actualImageScaleType="fitXY"
-
-                />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:divider="@drawable/divider_small"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:weightSum="2"
-                >
-
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/exhaust_right_1_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    app:actualImageScaleType="fitXY"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/blue"
-                    android:divider="@drawable/divider_small"
-                    android:orientation="horizontal"
-                    android:showDividers="middle"
-                    android:weightSum="2"
-                    >
-
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/exhaust_right_2_1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
-
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/exhaust_right_2_2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
     </LinearLayout>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/padding_big"-->
+    <!--android:background="@color/lightgray_1"-->
+    <!--/>-->
+    <!--&lt;!&ndash;排气&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:orientation="vertical"-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/padding_big"
-        android:background="@color/lightgray_1"
-        />
-    <!--避震-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical"
+    <!--&gt;-->
 
-        >
+    <!--<TextView-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/rectangle_red"
-            android:drawablePadding="@dimen/padding_small"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_big"
-            android:text="@string/shock_absorber"
-            />
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"-->
+    <!--android:drawableLeft="@drawable/rectangle_red"-->
+    <!--android:drawablePadding="@dimen/padding_small"-->
+    <!--android:paddingBottom="@dimen/padding_big"-->
+    <!--android:paddingLeft="@dimen/padding_small"-->
+    <!--android:paddingRight="@dimen/padding_small"-->
+    <!--android:paddingTop="@dimen/padding_big"-->
+    <!--android:text="@string/exhaust"-->
+    <!--/>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/red"
-            android:divider="@drawable/divider_small"
-            android:showDividers="middle"
-            >
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/red"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:showDividers="middle"-->
+    <!--&gt;-->
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/shock_left_big"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:actualImageScaleType="fitXY"
-                />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/exhaust_left_big"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:divider="@drawable/divider_small"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:weightSum="2"
-                >
+    <!--/>-->
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/shock_right_1_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    app:actualImageScaleType="fitXY"
-                    />
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="vertical"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/blue"
-                    android:divider="@drawable/divider_small"
-                    android:orientation="horizontal"
-                    android:showDividers="middle"
-                    android:weightSum="2"
-                    >
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/exhaust_right_1_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/shock_right_2_1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@color/blue"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/shock_right_2_2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/exhaust_right_2_1"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-                </LinearLayout>
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/exhaust_right_2_2"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-            </LinearLayout>
-        </LinearLayout>
+    <!--</LinearLayout>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/padding_big"
-        android:background="@color/lightgray_1"
-        />
-    <!--轮毂-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical"
+    <!--</LinearLayout>-->
 
-        >
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/padding_big"-->
+    <!--android:background="@color/lightgray_1"-->
+    <!--/>-->
+    <!--&lt;!&ndash;避震&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:orientation="vertical"-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/rectangle_red"
-            android:drawablePadding="@dimen/padding_small"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_big"
-            android:text="@string/hob"
-            />
+    <!--&gt;-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/red"
-            android:divider="@drawable/divider_small"
-            android:showDividers="middle"
-            >
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"-->
+    <!--android:drawableLeft="@drawable/rectangle_red"-->
+    <!--android:drawablePadding="@dimen/padding_small"-->
+    <!--android:paddingBottom="@dimen/padding_big"-->
+    <!--android:paddingLeft="@dimen/padding_small"-->
+    <!--android:paddingRight="@dimen/padding_small"-->
+    <!--android:paddingTop="@dimen/padding_big"-->
+    <!--android:text="@string/shock_absorber"-->
+    <!--/>-->
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/hob_left_big"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:actualImageScaleType="fitXY"
-                />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/red"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:showDividers="middle"-->
+    <!--&gt;-->
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:divider="@drawable/divider_small"
-                android:orientation="vertical"
-                android:showDividers="middle"
-                android:weightSum="2"
-                >
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/shock_left_big"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/hob_right_1_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    app:actualImageScaleType="fitXY"
-                    />
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="vertical"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/blue"
-                    android:divider="@drawable/divider_small"
-                    android:orientation="horizontal"
-                    android:showDividers="middle"
-                    android:weightSum="2"
-                    >
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/shock_right_1_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/hob_right_2_1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@color/blue"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/hob_right_2_2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:actualImageScaleType="fitXY"
-                        />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/shock_right_2_1"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-                </LinearLayout>
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/shock_right_2_2"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
 
-            </LinearLayout>
-        </LinearLayout>
+    <!--</LinearLayout>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/padding_big"-->
+    <!--android:background="@color/lightgray_1"-->
+    <!--/>-->
+    <!--&lt;!&ndash;轮毂&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:orientation="vertical"-->
+
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"-->
+    <!--android:drawableLeft="@drawable/rectangle_red"-->
+    <!--android:drawablePadding="@dimen/padding_small"-->
+    <!--android:paddingBottom="@dimen/padding_big"-->
+    <!--android:paddingLeft="@dimen/padding_small"-->
+    <!--android:paddingRight="@dimen/padding_small"-->
+    <!--android:paddingTop="@dimen/padding_big"-->
+    <!--android:text="@string/hob"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/red"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:showDividers="middle"-->
+    <!--&gt;-->
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/hob_left_big"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="vertical"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/hob_right_1_1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@color/blue"-->
+    <!--android:divider="@drawable/divider_small"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:showDividers="middle"-->
+    <!--android:weightSum="2"-->
+    <!--&gt;-->
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/hob_right_2_1"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+    <!--android:id="@+id/hob_right_2_2"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--app:actualImageScaleType="fitXY"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

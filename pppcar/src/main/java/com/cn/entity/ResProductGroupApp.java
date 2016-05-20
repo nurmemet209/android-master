@@ -17,6 +17,16 @@ public class ResProductGroupApp {
 	
 	private double tradePrice;// 批发价
 
+	public int getProductNum() {
+		return productNum;
+	}
+
+	public void setProductNum(int productNum) {
+		this.productNum = productNum;
+	}
+
+	private int productNum;
+
 	public Long getId() {
 		return id;
 	}

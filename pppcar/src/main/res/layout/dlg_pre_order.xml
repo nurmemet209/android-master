@@ -45,7 +45,7 @@
                     android:textColor="@color/main_sub_text_color"
                     />
                 <TextView
-                    android:id="@+id/perferential_price"
+                    android:id="@+id/preferential_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

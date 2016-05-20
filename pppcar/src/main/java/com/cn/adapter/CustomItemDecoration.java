@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -18,7 +19,7 @@ public class CustomItemDecoration extends RecyclerView.ItemDecoration {
     int height=1;
     public CustomItemDecoration(Context context, int dividerHeight/*px为单位*/) {
         drawable=new GradientDrawable();
-        drawable.setColor(context.getResources().getColor(R.color.main_bg_gray));
+        drawable.setColor(ContextCompat.getColor(context,R.color.main_bg_gray));
         height = dividerHeight;
     }
 

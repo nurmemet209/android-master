@@ -2,7 +2,8 @@ package com.cn.entity;
 
 import java.util.List;
 
-public class CollectAuctionResBean {
+public class CollectAuctionResBean extends BaseEntity{
+
 	/**
 	 * 返回查询的时间
 	 */
@@ -34,4 +35,13 @@ public class CollectAuctionResBean {
 				+ auctionResBeans + "]";
 	}
 
+	@Override
+	public long getId() {
+		return -1;
+	}
+
+	@Override
+	public String getName() {
+		return "";
+	}
 }

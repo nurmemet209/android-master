@@ -8,7 +8,9 @@ import android.view.MotionEvent;
 /**
  * Created by nurmemet on 2015/12/19.
  */
-public class CustomViewPager extends ViewPager{
+public class CustomViewPager extends ViewPager {
+
+    private boolean canScroll;
 
     public CustomViewPager(Context context) {
         super(context);
@@ -19,4 +21,13 @@ public class CustomViewPager extends ViewPager{
     }
 
 
+    @Override
+    public void scrollTo(int x, int y) {
+        if (!canScroll)
+            super.scrollTo(x, y);
+    }
+
+    public void setCanScroll(boolean canScroll) {
+        this.canScroll = canScroll;
+    }
 }

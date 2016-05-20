@@ -1,18 +1,26 @@
 package com.cn.pppcar;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.cn.adapter.AuctionCenterAdapter;
 import com.cn.adapter.CustomItemDecoration;
-import com.cn.entity.Item;
+import com.cn.commans.NetUtil;
+import com.cn.component.OnItemSelected;
+import com.cn.entity.CollectAuctionResBean;
+import com.cn.pppcar.widget.YearSelectDlg;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by nurmemet on 2016/4/17.
@@ -21,9 +29,15 @@ public class AuctionAct extends BaseAct {
 
 
     @Bind(R.id.recycle_view)
-   protected RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
+    @Bind(R.id.year)
+    protected TextView mYear;
 
     private AuctionCenterAdapter adapter;
+    private CollectAuctionResBean auctionPage;
+    private LinearLayoutManager linearLayoutManager;
+    private int selectedYear = -1;
+    private Handler mHandler;
 
 
     @Override
@@ -32,47 +46,81 @@ public class AuctionAct extends BaseAct {
         setContentView(R.layout.act_auction_list);
         ButterKnife.bind(this);
         init();
+
+    }
+    private void init(){
+        mHandler=new Handler();
+        loadData();
+    }
+    private void loadData() {
+
+        apiHandler.getAuctionList(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    auctionPage = apiHandler.toObject(NetUtil.getData(response), CollectAuctionResBean.class);
+                    if (adapter == null) {
+                        adapter = new AuctionCenterAdapter(AuctionAct.this,recyclerView, auctionPage.getAuctionResBeans());
+                        linearLayoutManager = new LinearLayoutManager(AuctionAct.this);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        CustomItemDecoration decoration = new CustomItemDecoration(AuctionAct.this, getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
+                        recyclerView.addItemDecoration(decoration);
+                        recyclerView.setAdapter(adapter);
+                        update();
+                    } else {
+                        adapter.setList(auctionPage.getAuctionResBeans());
+                        adapter.notifyDataSetChanged();
+                    }
+                    mYear.setText(getSelectedYear());
+                } else {
+                    showToast(NetUtil.getError(response));
+                }
+            }
+        }, selectedYear == -1 ? "" : String.valueOf(selectedYear));
+
+
     }
 
-    private void init() {
-        ArrayList<Item> l=getList();
-        l.get(0).setState(1);
-        adapter=new AuctionCenterAdapter(this,l);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CustomItemDecoration decoration=new CustomItemDecoration(this,getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
-        recyclerView.addItemDecoration(decoration);
-        recyclerView.setAdapter(adapter);
+    @OnClick(R.id.year_select)
+    public void selectYear(View view) {
+
+        YearSelectDlg dlg = new YearSelectDlg(this, new OnItemSelected() {
+            @Override
+            public void onItemSelected(View view, int position, Object data) {
+
+                String year = (String) data;
+                if ("全部".equals(year)) {
+                    selectedYear = -1;
+                } else {
+                    selectedYear = Integer.valueOf(year);
+                }
+
+            }
+        }, selectedYear);
+        dlg.show();
+    }
+
+    private String getSelectedYear() {
+        if (selectedYear == -1) {
+            return "全部";
+        } else {
+            return String.valueOf(selectedYear);
+        }
+    }
+
+    private void update() {
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int start = linearLayoutManager.findFirstVisibleItemPosition();
+                int end = linearLayoutManager.findLastVisibleItemPosition();
+                adapter.update(start, end);
+
+                update();
+            }
+        },1000);
     }
 
 
-    protected ArrayList<Item> getList() {
-        ArrayList<Item> imageUrlList = new ArrayList<>();
-        imageUrlList
-                .add(getItem("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg"));
-        imageUrlList
-                .add(getItem("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg"));
-        imageUrlList
-                .add(getItem("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg"));
-        imageUrlList
-                .add(getItem("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg"));
-        imageUrlList
-                .add(getItem("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg"));
-
-        return imageUrlList;
-    }
-
-    protected Item getItem(String str) {
-        Item item = new Item();
-        item.setImg(str);
-        item.setName("D Forged 轮毂 S11系列 规格:18*8.5J  PCD:5*120 表面处理:中银拉丝（宝马3 宝马4 君威 迈锐宝）ET值:35 中心孔:72.5");
-        item.setPrice(123);
-        item.setCollectNum(230565);
-        return item;
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
-    }
 }

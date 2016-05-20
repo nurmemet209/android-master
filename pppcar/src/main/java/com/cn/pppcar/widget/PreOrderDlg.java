@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.cn.entity.ResProductApp;
 import com.cn.pppcar.R;
 
 import butterknife.Bind;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
 /**
  * Created by nurmemet on 2016/5/11.
  */
-public class PreOrderDlg extends AppCompatDialog {
+public class PreOrderDlg extends BaseDialog {
 
     private CheckableLayout container;
     private ImageButton mCancelButton;
@@ -41,16 +42,13 @@ public class PreOrderDlg extends AppCompatDialog {
      */
     @Bind(R.id.preferential_price)
     protected TextView preferentialPrice;
+    ResProductApp productDetail;
 
-    public PreOrderDlg(Context context) {
+    public PreOrderDlg(Context context,ResProductApp productDetail) {
         super(context, R.style.dlg_pre_order);
         setContentView(R.layout.dlg_pre_order);
         ButterKnife.bind(this);
-        Window dialogWindow = this.getWindow();
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        dialogWindow.setAttributes(lp);
-        dialogWindow.setGravity(Gravity.BOTTOM);
+        set2FullWidth(Gravity.BOTTOM);
         container = (CheckableLayout) findViewById(R.id.container);
         mCancelButton = (ImageButton) findViewById(com.cn.customlibrary.R.id.cancel_btn);
         mCancelButton.setOnClickListener(new View.OnClickListener() {

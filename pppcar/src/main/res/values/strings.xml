@@ -238,5 +238,8 @@
     <string name="shut_down">关闭</string>
     <string name="preferential_price_">套餐价：</string>
     <string name="original_price_">原价：</string>
+    <string name="pre_order_way">预定方案</string>
+    <string name="collect_successed">收藏成功</string>
+    <string name="uncollect_successed">取消收藏成功</string>
 
 </resources>

@@ -51,7 +51,7 @@ public class SpanHelper {
         start = builder.length();
         builder.append("￥").append(Double.toString(price));
         builder.setSpan(new AbsoluteSizeSpan(mContext.getResources().getDimensionPixelSize(R.dimen.text_size_large), false), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext,R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
 
     }
@@ -69,29 +69,49 @@ public class SpanHelper {
 
     }
 
+    public SpannableStringBuilder priceSpanSmaller(int resId, double price) {
+
+        SpannableStringBuilder builder = new SpannableStringBuilder(mContext.getString(resId));
+        int start = 0;
+        builder.setSpan(new AbsoluteSizeSpan(mContext.getResources().getDimensionPixelSize(R.dimen.text_size_smaller), false), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        start = builder.length();
+        builder.append("￥").append(Double.toString(price));
+        builder.setSpan(new AbsoluteSizeSpan(mContext.getResources().getDimensionPixelSize(R.dimen.text_size_smaller), false), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+
+    }
+
     public String convertToPrice(int resId, double price) {
         builderEx.clear();
         builderEx.append(mContext.getString(resId)).append("￥").append(Double.toString(price));
         return builderEx.toString();
     }
 
+    public SpannableStringBuilder auctionTime(long begin, long end) {
+        return auctionTime(end - begin);
+    }
+
     public SpannableStringBuilder auctionTime(long leftTime) {
-        String hour = DateUtil.getHour(leftTime);
-        String minute = DateUtil.getMinute(leftTime);
-        String second = DateUtil.getSecond(leftTime);
+        DateUtil.AuctionTime auctionTime=DateUtil.getAuctionTime(leftTime);
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.replace(0, builder.length(), "");
-        builder.append(" ").append(hour).append(" ");
-        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.white)), 0, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.black)), 0, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.append("：");
+        builder.append(" ").append(auctionTime.dayStr).append(" ");
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_text_color)), 0, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.white)), 0, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         int start = builder.length();
-        builder.append(" ").append(minute).append(" ");
+        builder.append(" ").append(auctionTime.hourStr).append(" ");
         builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.white)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.black)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.append("：");
         start = builder.length();
-        builder.append(" ").append(String.valueOf(second)).append(" ");
+        builder.append(" ").append(auctionTime.minuteStr).append(" ");
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.white)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.black)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append("：");
+        start = builder.length();
+        builder.append(" ").append(auctionTime.secondStr).append(" ");
         builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.white)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.black)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -121,4 +141,6 @@ public class SpanHelper {
         builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
     }
+
+
 }

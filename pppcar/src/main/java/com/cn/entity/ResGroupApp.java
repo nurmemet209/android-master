@@ -14,6 +14,8 @@ public class ResGroupApp {
 	private String title;//标题
 	
 	private Set<ResProductGroupApp> bsProduct;//套餐产品
+	private double totalRetailPrice;
+	private double totalTradePrice;
 
 
 	public Long getId() {
@@ -40,5 +42,27 @@ public class ResGroupApp {
 		this.bsProduct = bsProduct;
 	}
 
-	
+	@Override
+	public String toString() {
+		if (title!=null){
+			return title;
+		}
+		return super.toString();
+	}
+
+	public double getTotalTradePrice() {
+		return totalTradePrice;
+	}
+
+	public void setTotalTradePrice(double totalTradePrice) {
+		this.totalTradePrice = totalTradePrice;
+	}
+
+	public double getTotalRetailPrice() {
+		return totalRetailPrice;
+	}
+
+	public void setTotalRetailPrice(double totalRetailPrice) {
+		this.totalRetailPrice = totalRetailPrice;
+	}
 }

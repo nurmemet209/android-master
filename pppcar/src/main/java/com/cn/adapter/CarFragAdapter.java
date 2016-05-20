@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cn.entity.CartBean;
 import com.cn.entity.Item;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
@@ -18,26 +19,25 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nurmemet on 2016/4/3.
  */
-public class CarFragAdapter extends RecyclerView.Adapter {
+public class CarFragAdapter extends BaseListAdapter<CartBean> {
 
-    private ArrayList<Item> list;
-    private Context mConte;
 
-    public CarFragAdapter(ArrayList<Item> list, Context mConte) {
+
+    public CarFragAdapter(List<CartBean> list, Context mContext) {
+        super(mContext,list);
         this.list = list;
-        this.mConte = mConte;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mainView = LayoutInflater.from(mConte).inflate(R.layout.item_list_cart, null);
+        View mainView = LayoutInflater.from(mContext).inflate(R.layout.item_list_cart, null);
         ViewHolder holder = new ViewHolder(mainView){
         };
-
         return holder;
     }
 
@@ -48,9 +48,9 @@ public class CarFragAdapter extends RecyclerView.Adapter {
         TextView price=(TextView)view.findViewById(R.id.item_price);
         TextView size=(TextView)view.findViewById(R.id.item_item_size);
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
-        title.setText(list.get(position).getName());
+        title.setText(list.get(position).getBsProduct().getName());
         price.setText(String.valueOf(1234));
-        img.setImageURI(Uri.parse(list.get(position).getImg()));
+        img.setImageURI(Uri.parse(list.get(position).getBsProduct().getImgs()));
         size.setText("黑色");
 
         TextView minus=(TextView)view.findViewById(R.id.minus);

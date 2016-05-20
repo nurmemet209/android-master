@@ -1,5 +1,7 @@
 package com.cn.commans;
 
+import java.net.PortUnreachableException;
+
 /**
  * Created by nurmemet on 2016/3/28.
  */
@@ -20,4 +22,11 @@ public interface Constants {
     public static final String DATE_FORMAT_4="yy-MM-dd HH:mm:ss am";
 
     public static final String LIST_IMG_SIZE="/300/225/80";
+
+    //正在拍卖
+    public static final  int AUCTION_STATE_ING=50011;
+    //未开始
+    public static final  int AUCTION_STATE_WAIT=50010;
+    //拍卖结束
+    public static final  int AUCTION_STATE_OVER=50012;
 }

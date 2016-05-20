@@ -141,6 +141,7 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:background="@color/transparent"
                         >
 
                         <TextView

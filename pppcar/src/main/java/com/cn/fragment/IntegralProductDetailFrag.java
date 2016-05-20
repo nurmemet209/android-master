@@ -96,7 +96,7 @@ public class IntegralProductDetailFrag extends BaseFrag {
                     @Override
                     public void onResponse(JSONObject response) {
                         if (NetUtil.isSucced(response)) {
-                            integralProductDetail = apiHandler.toObject_(NetUtil.getData(response), ResIntegralProductDetail.class);
+                            integralProductDetail = apiHandler.toObject(NetUtil.getData(response), ResIntegralProductDetail.class);
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {

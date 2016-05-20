@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cn.pppcar.R;
+import com.cn.util.UIHelper;
 
 /**
  * 推荐尺寸 100*40 以dp为单位
@@ -26,6 +28,7 @@ import com.cn.pppcar.R;
  */
 public class NumEditLayout extends LinearLayout {
 
+    private EditText editText;
     private int mBorderColor = Color.BLACK;
     /**
      * 以px为单位
@@ -56,17 +59,17 @@ public class NumEditLayout extends LinearLayout {
         TextView plus = new TextView(getContext());
         plus.setGravity(Gravity.CENTER);
         plus.setText("+");
-        this.addView(plus, paramsPlus);
+
 
         LinearLayout.LayoutParams paramsEditText = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         paramsEditText.weight = 2;
         paramsEditText.gravity = Gravity.CENTER_VERTICAL;
-        final EditText editText = new EditText(getContext());
+        editText = new EditText(getContext());
         editText.setGravity(Gravity.CENTER);
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setCursorVisible(false);
         editText.setText("0");
-        this.addView(editText, paramsEditText);
+
 
         LinearLayout.LayoutParams paramsMinus = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         paramsMinus.weight = 1;
@@ -74,7 +77,11 @@ public class NumEditLayout extends LinearLayout {
         final TextView minus = new TextView(getContext());
         minus.setGravity(Gravity.CENTER);
         minus.setText("-");
+
         this.addView(minus, paramsMinus);
+        this.addView(editText, paramsEditText);
+        this.addView(plus, paramsPlus);
+
         minus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,5 +131,10 @@ public class NumEditLayout extends LinearLayout {
     public float dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return dp * scale + 0.5f;
+    }
+
+    public int  getNum(){
+        int num=Integer.valueOf(editText.getText().toString());
+        return num;
     }
 }

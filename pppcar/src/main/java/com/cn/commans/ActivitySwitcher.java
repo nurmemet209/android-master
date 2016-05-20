@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.cn.pppcar.AuctionAct;
+import com.cn.pppcar.AuctionBid;
 import com.cn.pppcar.AuctionDetailAct;
 import com.cn.pppcar.BrandAct;
 import com.cn.pppcar.IntegralMallAct;
@@ -94,6 +95,16 @@ public class ActivitySwitcher {
 
     static public void toProductDetailAct(Activity activity){
         Intent intent=new Intent(activity, ProductDetailAct.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
+    }
+
+    /**
+     * 我要出家
+     * @param activity
+     */
+    static public void toAuctionBid(Activity activity){
+        Intent intent=new Intent(activity, AuctionBid.class);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId,actStartAnimOutResId);
     }
