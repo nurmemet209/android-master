@@ -21,26 +21,24 @@ import butterknife.OnClick;
 /**
  * Created by nurmemet on 2015/12/19.
  */
-public class MeFragment extends BaseFrag{
+public class MeFragment extends BaseFrag {
 
     @Bind(R.id.head_img)
     public SimpleDraweeView headImg;
     @Bind(R.id.head_bg)
     public SimpleDraweeView headBgImg;
 
-    public static MeFragment getInstance(){
-        MeFragment frag=new MeFragment();
+    public static MeFragment getInstance() {
+        MeFragment frag = new MeFragment();
         return frag;
     }
-
-
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this,mainView);
+        ButterKnife.bind(this, mainView);
         bindData();
         setListener();
         return mainView;
@@ -51,11 +49,12 @@ public class MeFragment extends BaseFrag{
         return R.layout.me_frag;
     }
 
-    private void bindData(){
+    private void bindData() {
         headImg.setImageURI(Uri.parse("http://c.hiphotos.bdimg.com/imgad/pic/item/00e93901213fb80ec98291ed31d12f2eb93894bd.jpg"));
         headBgImg.setImageURI(Uri.parse("http://pic10.nipic.com/20100926/5410600_133352002046_2.jpg"));
     }
-    private void setListener(){
+
+    private void setListener() {
 //        headImg.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -64,24 +63,33 @@ public class MeFragment extends BaseFrag{
 //            }
 //        });
     }
+
     @OnClick(R.id.head_img)
-    public void toUserBaseInformation(View view){
-        Intent it=new Intent(getActivity(), UserBaseInformationAct.class);
-        getActivity().startActivity(it);
+    public void toUserBaseInformation(View view) {
+//        Intent it = new Intent(getActivity(), UserBaseInformationAct.class);
+//        getActivity().startActivity(it);
+        ActivitySwitcher.toLoginAct(getActivity());
     }
+
     @OnClick(R.id.my_order)
-    public void toMyOrderAct(View view){
+    public void toMyOrderAct(View view) {
         ActivitySwitcher.toMyOrderAct(getActivity());
 
     }
+
     @OnClick(R.id.integral_mall)
-    public void toIntegralMall(View view){
+    public void toIntegralMall(View view) {
         ActivitySwitcher.toIntegralMallAct(getActivity());
     }
+
     @OnClick(R.id.my_auction)
-    public void toMyAuction(View view){
-        ActivitySwitcher.toProductDetailAct(getActivity());
+    public void toMyAuction(View view) {
+       // ActivitySwitcher.toProductDetailAct(getActivity(),);
     }
 
 
+    @OnClick(R.id.my_collect)
+    public void myCollect(View view){
+        ActivitySwitcher.toCollectTemp(getActivity());
+    }
 }

@@ -1,11 +1,14 @@
 package com.cn.net;
 
 import android.content.Context;
+import android.os.Debug;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
+import com.cn.customlibrary.BuildConfig;
 import com.cn.customlibrary.R;
 
 
@@ -18,6 +21,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -31,7 +35,7 @@ import okhttp3.OkHttpClient;
  */
 public class ApiHelper {
 
-    private final static int rTimeOut = 15000;// request time out
+    private final static int rTimeOut = 50000;// request time out
     private final static int sTimeOut = 15000;// data response time out
     public static final String TAG = "VolleyPatterns";
     private Context mContext;
@@ -46,14 +50,12 @@ public class ApiHelper {
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-            OkHttpClient client= new OkHttpClient();
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.connectTimeout(rTimeOut, TimeUnit.MILLISECONDS);
+            OkHttpClient client = builder.build();
 
-           // client.setConnectTimeout();
-           // OkHttpStack stack = new OkHttpStack(client);
 
-
-            mRequestQueue = Volley.newRequestQueue(mContext,new CustomStack(null));
-
+            mRequestQueue = Volley.newRequestQueue(mContext, new CustomStack(client, null));
         }
         return mRequestQueue;
     }
@@ -64,8 +66,10 @@ public class ApiHelper {
 
 
     public void addToRequestQueue(Request req) {
+        req.setRetryPolicy(new DefaultRetryPolicy(sTimeOut,//默认超时时间，应设置一个稍微大点儿的，例如本处的500000
+                1,//默认最大尝试次数
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         req.setTag(TAG);
-
         getRequestQueue().add(req);
     }
 
@@ -77,10 +81,9 @@ public class ApiHelper {
 
     }
 
-    private void initClient(){
+    private void initClient() {
 
     }
-
 
 
 //    private HurlStack getSslStack(){
@@ -101,20 +104,19 @@ public class ApiHelper {
 //        return stack;
 //    }
 
-    public   SSLSocketFactory createSslFactory(){
+    public SSLSocketFactory createSslFactory() {
         try {
 
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             // From https://www.washington.edu/itconnect/security/ca/load-der.crt
             InputStream caInput = new BufferedInputStream(new FileInputStream("load-der.crt"));
-            Certificate ca=null;
+            Certificate ca = null;
             try {
                 ca = cf.generateCertificate(caInput);
                 System.out.println("ca=" + ((X509Certificate) ca).getSubjectDN());
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 caInput.close();
             }
             // Create a KeyStore containing our trusted CAs
@@ -131,7 +133,7 @@ public class ApiHelper {
             context.init(null, tmf.getTrustManagers(), null);
             return context.getSocketFactory();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

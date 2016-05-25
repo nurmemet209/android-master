@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.cn.adapter.BannerAdapter;
@@ -28,6 +27,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -70,14 +70,19 @@ public class ProductFrag extends BaseFrag {
 
     private ResProductApp productDetail;
 
+    private long proId;
+    private BannerAdapter bannerAdapter;
+    private List bannerViewList;
+    private ProductAttrDlg productAttrDlg;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        proId = getActivity().getIntent().getLongExtra("proId", -1);
         ButterKnife.bind(this, mainView);
-        EventBus.getDefault().register(this);
-        init();
+        loadData();
         return mainView;
     }
 
@@ -86,59 +91,72 @@ public class ProductFrag extends BaseFrag {
         return R.layout.frag_product;
     }
 
-    private void init() {
-
+    private void loadData() {
         apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 if (NetUtil.isSucced(response)) {
                     productDetail = apiHandler.toObject(NetUtil.getData(response), ResProductApp.class);
                     if (productDetail != null) {
-                        ArrayList viewList = new ArrayList();
-                        String[] imgList = productDetail.getImgs().split(",");
-                        for (int i = 0; i < imgList.length; i++) {
-                            SimpleDraweeView img = new SimpleDraweeView(getActivity());
-                            Uri uri = Uri.parse(imgList[i]);
-                            img.setImageURI(uri);
-                            viewList.add(img);
-                        }
-                        BannerAdapter adapter = new BannerAdapter(getActivity(), viewList);
-                        banner.setAdapter(adapter);
-                        banner.setInterval(4000);
-                        // banner.setScrollDurationFactor(5);
-                        banner.setCycle(true);
-                        banner.setOffscreenPageLimit(viewList.size());
-                        banner.setBorderAnimation(true);
-                        banner.startAutoScroll();
-                        indicator.setViewPager(banner);
-
-                        mTitle.setText(productDetail.getName());
-                        mSubTitle.setText(productDetail.getBriefDescribe());
-                        mRetailPrice.setText(String.valueOf(productDetail.getRetailPrice()));
-                        mRetailPrice.setLine(true);
-                        mWholeSalePrice.setText(String.valueOf(productDetail.getTradePrice()));
-                        mPreOrderPrice.setText(String.valueOf(productDetail.getActivityPrice()));
-                        mFactoryNumber.setText(productDetail.getManufacturingCode());
-                        mBrand.setText(productDetail.getBrandName());
-                        mStockNum.setText(String.valueOf(productDetail.getStockNumber()));
-                        mFreight.setText("到付");
-                        //收藏
-                        View c=getActivity().findViewById(R.id.collect);
-                        c.setSelected(productDetail.getIsFlagFavorites());
-
+                        bindData();
                     }
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
-        }, null, 29);
+        }, null, proId);
 
 
     }
 
+    private void bindData() {
 
-    private Handler mHandler = new Handler();
+        if (bannerViewList == null) {
+            bannerViewList = new ArrayList();
+        } else {
+            bannerViewList.clear();
+        }
+        String[] imgList = productDetail.getImgs().split(",");
+        for (int i = 0; i < imgList.length; i++) {
+            SimpleDraweeView img = new SimpleDraweeView(getActivity());
+            Uri uri = Uri.parse(imgList[i]);
+            img.setImageURI(uri);
+            bannerViewList.add(img);
+        }
+        if (bannerAdapter == null) {
+            bannerAdapter = new BannerAdapter(getActivity(), bannerViewList);
+            banner.setAdapter(bannerAdapter);
+            banner.setInterval(4000);
+            // banner.setScrollDurationFactor(5);
+            banner.setCycle(true);
+            banner.setOffscreenPageLimit(bannerViewList.size());
+            banner.setBorderAnimation(true);
+            banner.startAutoScroll();
+            indicator.setViewPager(banner);
+        } else {
+            bannerAdapter.setViewList(bannerViewList);
+            bannerAdapter.notifyDataSetChanged();
+        }
+
+        mTitle.setText(productDetail.getName());
+        mSubTitle.setText(productDetail.getBriefDescribe());
+        mRetailPrice.setText(String.valueOf(productDetail.getRetailPrice()));
+        mRetailPrice.setLine(true);
+        mWholeSalePrice.setText(String.valueOf(productDetail.getTradePrice()));
+        mPreOrderPrice.setText(String.valueOf(productDetail.getActivityPrice()));
+        mFactoryNumber.setText(productDetail.getManufacturingCode());
+        mBrand.setText(productDetail.getBrandName());
+        mStockNum.setText(String.valueOf(productDetail.getStockNumber()));
+        mFreight.setText("到付");
+        //收藏
+        View c = getActivity().findViewById(R.id.collect);
+        c.setSelected(productDetail.getIsFlagFavorites());
+
+        if (productAttrDlg!=null&&productAttrDlg.isShowing()) {
+            productAttrDlg.updateData();
+        }
+    }
+
 
     @OnClick(R.id.stage_pay)
     public void stagePay(View veiw) {
@@ -161,11 +179,11 @@ public class ProductFrag extends BaseFrag {
      *
      * @param view
      */
-    @OnClick(R.id.select_pre_order)
-    public void selectPreOrder(View view) {
-        PreOrderDlg dlg = new PreOrderDlg(getActivity(), productDetail);
-        dlg.show();
-    }
+//    @OnClick(R.id.select_pre_order)
+//    public void selectPreOrder(View view) {
+//        PreOrderDlg dlg = new PreOrderDlg(getActivity(), productDetail);
+//        dlg.show();
+//    }
 
     /**
      * 产品规格
@@ -174,8 +192,7 @@ public class ProductFrag extends BaseFrag {
      */
     @OnClick(R.id.select_product_attr)
     public void selectProductAttr(View veiw) {
-        ProductAttrDlg dlg = new ProductAttrDlg(getActivity(), productDetail);
-        dlg.show();
+        showProductAttrSelectDlg();
     }
 
     /**
@@ -194,23 +211,48 @@ public class ProductFrag extends BaseFrag {
                         View view = (View) event.getData();
                         boolean isSelected = view.isSelected();
                         if (isSelected) {
-                            Toast.makeText(getActivity(), getString(R.string.uncollect_successed), Toast.LENGTH_SHORT).show();
+                            showToast(NetUtil.getMessage(response));
+                            //Toast.makeText(getActivity(), getString(R.string.uncollect_successed), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getActivity(), getString(R.string.collect_successed), Toast.LENGTH_SHORT).show();
+                            showToast(NetUtil.getMessage(response));
+                            //Toast.makeText(getActivity(), getString(R.string.collect_successed), Toast.LENGTH_SHORT).show();
                         }
                         view.setSelected(!isSelected);
-                    }else {
-                        showToast(NetUtil.getError(response));
+                    } else {
+                        showToast(NetUtil.getMessage(response));
                     }
                 }
-            }, 29);
-        }
+            }, productDetail != null ? productDetail.getId() : -1);
+        } else if (ADD_2_CART.equals(event.getEvent())) {
+            showProductAttrSelectDlg();
 
-        else if(ADD_2_CART.equals(event.getEvent())){
-            ProductAttrDlg dlg = new ProductAttrDlg(getActivity(), productDetail);
-            dlg.show();
+        }
+    }
+
+    private void showProductAttrSelectDlg() {
+        if (productAttrDlg != null) {
+            productAttrDlg.show();
+        } else {
+            productAttrDlg = new ProductAttrDlg(getActivity(), productDetail, new Runnable() {
+                @Override
+                public void run() {
+                    loadData();
+                }
+            });
+            productAttrDlg.show();
         }
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
 }

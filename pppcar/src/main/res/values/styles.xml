@@ -13,7 +13,7 @@
         <item name="android:textViewStyle">@style/custom_text_view_style</item>
         <item name="android:editTextStyle">@style/custom_eidt_text_style</item>
         <item name="android:imageButtonStyle">@style/custom_image_view_style</item>
-        <item name="android:textCursorDrawable">@null</item>
+
 
     </style>
 
@@ -27,6 +27,7 @@
 
     <style name="custom_eidt_text_style" parent="@style/Widget.AppCompat.EditText">
         <item name="android:background">@color/transparent</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
     </style>
 
     <style name="custom_image_view_style" parent="@style/Widget.AppCompat.ImageButton">

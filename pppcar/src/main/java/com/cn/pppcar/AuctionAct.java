@@ -73,7 +73,7 @@ public class AuctionAct extends BaseAct {
                     }
                     mYear.setText(getSelectedYear());
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         }, selectedYear == -1 ? "" : String.valueOf(selectedYear));

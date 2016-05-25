@@ -82,7 +82,7 @@ public class ClassificationFrag extends BaseFrag implements OnItemSelected {
                             }
 
                         } else {
-                            showToast(NetUtil.getError(response));
+                            showToast(NetUtil.getMessage(response));
                         }
 
 

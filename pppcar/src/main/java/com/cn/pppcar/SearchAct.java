@@ -1,6 +1,5 @@
 package com.cn.pppcar;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,13 +26,14 @@ import com.cn.pppcar.widget.CustomTabLayout;
 import com.cn.pppcar.widget.TagGroupLayout;
 import com.cn.util.Util;
 import com.cn.viewpager.CustomViewPager;
-import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,6 +88,7 @@ public class SearchAct extends BaseAct {
         adapter = new SearchClassificationViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
+        tabLayout.setDrawablePadding(getResources().getDimensionPixelSize(R.dimen.padding_smallest_));
         tabLayout.setViewPager(viewPager, new CustomTabLayout.BindView() {
             @Override
             public void OnBindView(TextView tv, ImageView img, int position) {
@@ -96,6 +97,7 @@ public class SearchAct extends BaseAct {
                 if (position == 2) {
                     img.setTag("down");
                     img.setBackgroundResource(R.mipmap.bottom_selected);
+
                 }
 
 
@@ -114,7 +116,10 @@ public class SearchAct extends BaseAct {
                     }
                     //价格
                     SearchListFrag.keyWord = searchEditText.getText().toString();
-                    EventBusEv ev = new EventBusEv("sort", tag);
+                    Map<String,String> map=new HashMap<>();
+                    map.put("sortType",tag);
+                    map.put("fragType","3");
+                    EventBusEv ev = new EventBusEv("sort", map);
                     EventBus.getDefault().post(ev);
 
                 }
@@ -178,7 +183,7 @@ public class SearchAct extends BaseAct {
                     bindData();
 
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         }, "");

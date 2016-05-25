@@ -4,16 +4,18 @@
                 android:layout_height="120dp"
                 android:orientation="vertical"
     >
+
     <CheckBox
         android:id="@+id/cart_item"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/padding_big"
-        android:paddingRight="@dimen/padding_big"
         android:button="@drawable/checkbox_item"
         android:checked="false"
+        android:paddingRight="@dimen/padding_big"
         />
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/title_img"
         android:layout_width="100dp"
@@ -21,6 +23,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/cart_item"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -29,6 +32,7 @@
         android:orientation="vertical"
         android:padding="@dimen/padding_normal"
         >
+
         <TextView
             android:id="@+id/item_title"
             android:layout_width="match_parent"
@@ -36,6 +40,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             />
+
         <TextView
             android:id="@+id/item_item_size"
             android:layout_width="match_parent"
@@ -43,11 +48,13 @@
             android:layout_below="@+id/item_title"
             android:textColor="@color/main_sub_text_color"
             />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             >
+
             <TextView
                 android:id="@+id/item_price"
                 android:layout_width="wrap_content"
@@ -57,44 +64,13 @@
                 android:text="￥150"
                 android:textColor="@color/main_red"
                 />
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <com.cn.pppcar.widget.NumEditLayout
+                android:id="@+id/num_eidt"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/change_item_num"
-                >
-
-                <TableRow
-                    android:divider="@drawable/divider_small"
-                    android:showDividers="middle"
-                    >
-
-                    <TextView
-                        android:id="@+id/minus"
-                        android:layout_width="25dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="-"
-                        />
-                    <EditText
-                        android:id="@+id/item_num_et"
-                        android:layout_width="45dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="3"
-                        android:background="@drawable/transparent"
-                        android:padding="@dimen/padding_smallest"
-                        android:inputType="number"
-                        />
-                    <TextView
-                        android:id="@+id/plus"
-                        android:layout_width="25dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="+"
-                        />
-                </TableRow>
-            </TableLayout>
+                ></com.cn.pppcar.widget.NumEditLayout>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

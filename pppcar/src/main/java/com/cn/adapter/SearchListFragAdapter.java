@@ -42,7 +42,7 @@ public class SearchListFragAdapter extends BaseListAdapter<ProductBean>{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         View view=holder.itemView;
         TextView title=(TextView)view.findViewById(R.id.title);
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
@@ -53,7 +53,7 @@ public class SearchListFragAdapter extends BaseListAdapter<ProductBean>{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toProductDetailAct((Activity) mContext);
+                ActivitySwitcher.toProductDetailAct((Activity) mContext,list.get(position).getId());
             }
         });
     }

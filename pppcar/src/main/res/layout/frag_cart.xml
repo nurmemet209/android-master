@@ -122,6 +122,7 @@
                     >
 
                     <CheckBox
+                        android:id="@+id/select_all"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -131,7 +132,7 @@
                         android:paddingLeft="@dimen/padding_normal"
                         android:text="@string/selecte_all"
                         android:textColor="@color/white"
-
+                        android:background="@color/transparent"
 
                         />
 
@@ -185,6 +186,7 @@
                     >
 
                     <CheckBox
+                        android:id="@+id/select_all_"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -194,6 +196,7 @@
                         android:paddingLeft="@dimen/padding_normal"
                         android:text="@string/selecte_all"
                         android:textColor="@color/white"
+                        android:background="@color/transparent"
 
 
                         />

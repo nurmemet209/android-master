@@ -15,9 +15,11 @@ import com.cn.fragment.WorkFrag;
 public class ProductDetailAdapter extends FragmentPagerAdapter {
 
 
+
     public ProductDetailAdapter(FragmentManager fm) {
         super(fm);
     }
+
 
     @Override
     public Fragment getItem(int position) {

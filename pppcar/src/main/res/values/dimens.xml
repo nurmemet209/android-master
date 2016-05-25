@@ -16,4 +16,6 @@
     <dimen name="main_grid_layout_item_offset">15dp</dimen>
     <dimen name="main_dlg_max_width">250dp</dimen>
 
+    <dimen name="main_login_btn">35dp</dimen>
+
 </resources>

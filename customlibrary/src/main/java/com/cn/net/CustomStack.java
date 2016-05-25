@@ -33,8 +33,8 @@ public class CustomStack extends HurlStack {
     /**
      * Create a OkHttpStack with default OkHttpClient.
      */
-    public CustomStack(SSLSocketFactory factory) {
-        this(new OkHttpClient(),null,factory);
+    public CustomStack(OkHttpClient client,SSLSocketFactory factory) {
+        this(client,null,factory);
     }
 
     /**

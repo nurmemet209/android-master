@@ -90,7 +90,7 @@ public class AllOrderFrag extends BaseFrag {
 
                         } else {
 
-                            showToast(NetUtil.getError(response));
+                            showToast(NetUtil.getMessage(response));
                         }
 
 

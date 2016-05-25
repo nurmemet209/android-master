@@ -15,7 +15,6 @@ import com.cn.adapter.GridItemDecoration;
 import com.cn.adapter.IntegralMallFragAdapter;
 import com.cn.commans.NetUtil;
 import com.cn.entity.ResPageIntegral;
-import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 
@@ -54,7 +53,7 @@ public class IntegralMallFrag extends BaseFrag  {
     }
 
     private void init() {
-        EventBus.getDefault().register(this);
+
 
         new Thread(new Runnable() {
             @Override
@@ -81,7 +80,7 @@ public class IntegralMallFrag extends BaseFrag  {
 
                         } else {
 
-                            showToast(NetUtil.getError(response));
+                            showToast(NetUtil.getMessage(response));
                         }
                     }
                 }, null);
@@ -105,5 +104,17 @@ public class IntegralMallFrag extends BaseFrag  {
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -226,7 +226,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         return size > index ? index : 0;
     }
 
-    private void setRecommond(View view, int position) {
+    private void setRecommond(View view, final int position) {
         if (mainPage == null)
             return;
         ;
@@ -247,7 +247,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toProductDetailAct((Activity) mContext);
+                ActivitySwitcher.toProductDetailAct((Activity) mContext,recommonds.get(position).getId());
             }
         });
 

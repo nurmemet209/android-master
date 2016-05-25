@@ -26,7 +26,7 @@ public class NetUtil {
         return false;
     }
 
-    public static String getError(JSONObject rt) {
+    public static String getMessage(JSONObject rt) {
         if (rt != null) {
             try {
                 String msg = rt.getString("returnMsg");

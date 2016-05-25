@@ -6,16 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nurmemet on 2015/12/19.
  */
 public class BannerAdapter extends PagerAdapter {
 
-    private ArrayList<View> viewList;
+    private List<View> viewList;
     private Context mContext;
 
-    public BannerAdapter(Context mContext, ArrayList<View> viewList) {
+    public BannerAdapter(Context mContext, List<View> viewList) {
         this.mContext = mContext;
         this.viewList = viewList;
     }
@@ -42,6 +43,10 @@ public class BannerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(viewList.get(position));//删除页卡
+    }
+
+    public void setViewList(List<View> list){
+        this.viewList=list;
     }
 
 

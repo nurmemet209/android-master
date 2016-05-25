@@ -2,7 +2,6 @@ package com.cn.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,15 +12,10 @@ import com.android.volley.Response;
 import com.cn.adapter.GridItemDecoration;
 import com.cn.adapter.MainPageRecycleAdapter;
 import com.cn.commans.NetUtil;
-import com.cn.entity.CartResBean;
-import com.cn.entity.Item;
 import com.cn.entity.ResIndexPublicElement;
 import com.cn.pppcar.R;
-import com.cn.util.Util;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,7 +79,7 @@ public class MainFragment extends BaseFrag {
                     recyclerView.addItemDecoration(new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2, true));
                     recyclerView.setAdapter(adapter);
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         });

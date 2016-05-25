@@ -78,7 +78,7 @@ public class AuctionBid extends BaseAct {
                     maxAddPrice.setText(spanHelper.convertToPrice(R.string.max_add_price_, item.getMaxRangPrice()));
 
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         }, null);
@@ -144,7 +144,7 @@ public class AuctionBid extends BaseAct {
                    if (NetUtil.isSucced(response)){
                        UIHelper.showToast(AuctionBid.this, "报价成功", Toast.LENGTH_SHORT);
                    }else{
-                       showToast(NetUtil.getError(response));
+                       showToast(NetUtil.getMessage(response));
                    }
                }
            },29,price);
@@ -162,7 +162,7 @@ public class AuctionBid extends BaseAct {
                     if (NetUtil.isSucced(response)){
                         UIHelper.showToast(AuctionBid.this, "报价成功", Toast.LENGTH_SHORT);
                     }else{
-                        showToast(NetUtil.getError(response));
+                        showToast(NetUtil.getMessage(response));
                     }
                 }
             },29,price);

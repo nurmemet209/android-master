@@ -98,13 +98,13 @@ public abstract class BaseFrag extends Fragment {
 
     protected void showToast(final String msg){
         if (Thread.currentThread() == Looper.getMainLooper().getThread()){
-            UIHelper.showToast(getActivity(),msg, Toast.LENGTH_LONG);
+            UIHelper.showToast(getActivity(),msg, Toast.LENGTH_SHORT);
 
         }else{
             new android.os.Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    UIHelper.showToast(getActivity(),msg, Toast.LENGTH_LONG);
+                    UIHelper.showToast(getActivity(),msg, Toast.LENGTH_SHORT);
                 }
             });
         }

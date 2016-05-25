@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_normal"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/title_img"
+        android:layout_width="@dimen/list_item_img_height"
+        android:layout_height="@dimen/list_item_img_height"
+        android:layout_marginRight="@dimen/padding_normal"
+        app:actualImageScaleType="centerInside"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_img_height"
+        android:layout_toRightOf="@+id/title_img"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/bottom_l"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/icon_width"
+            android:layout_alignParentBottom="true"
+
+            >
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_width"
+                android:text="$34434"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textColor="@color/main_red"
+                />
+
+            <ImageButton
+                android:id="@+id/add_to_cart"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_width"
+                android:scaleType="centerInside"
+                android:src="@mipmap/cart"
+                android:background="@color/main_red"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+
+                />
+            <TextView
+                android:id="@+id/uncollect"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_width"
+                android:layout_toLeftOf="@+id/add_to_cart"
+                android:gravity="center"
+                android:text="取消收藏"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/padding_normal"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:background="@drawable/rectangle"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingLeft="@dimen/padding_normal"
+                />
+
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="sdfdsfdsfdsfdsfd"
+            android:layout_above="@+id/bottom_l"
+            />
+    </RelativeLayout>
+</RelativeLayout>

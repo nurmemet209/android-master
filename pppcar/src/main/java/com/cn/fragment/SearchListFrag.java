@@ -1,26 +1,19 @@
 package com.cn.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.cn.adapter.GridItemDecoration;
-import com.cn.adapter.IntegralMallFragAdapter;
 import com.cn.adapter.SearchListFragAdapter;
 import com.cn.commans.NetUtil;
-import com.cn.entity.Item;
 import com.cn.entity.PageProductBean;
-import com.cn.entity.ResPageIntegral;
 import com.cn.localutils.EventBusEv;
-import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 
@@ -28,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,7 +37,7 @@ public class SearchListFrag extends BaseFrag {
     /**
      * 价格降序
      */
-    public final static String SORT_TYPE_PRICE_DESC = "price_asc";
+    public final static String SORT_TYPE_PRICE_DESC = "price_desc";
     /**
      * 价格升序
      */
@@ -90,7 +83,7 @@ public class SearchListFrag extends BaseFrag {
     }
 
     private void init() {
-        EventBus.getDefault().register(this);
+
 
     }
 
@@ -99,7 +92,13 @@ public class SearchListFrag extends BaseFrag {
     public void onEventMainThread(EventBusEv event) {
         String st = null;
         if ("sort".equals(event.getEvent())) {
-            String sortType = (String) event.getData();
+            Map<String,String> map=(Map<String,String>)event.getData();
+
+            String sortType = map.get("sortType");
+            String fragType=map.get("fragType");
+            if (!fragType.equals(String.valueOf(searchType))){
+                return;
+            }
             if ("up".equals(sortType)) {
                 st = SORT_TYPE_PRICE_ASC;
             } else if ("down".equals(sortType)) {
@@ -137,10 +136,23 @@ public class SearchListFrag extends BaseFrag {
                         }
                     }
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         }, keyWord, st);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 
 

@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,10 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.cn.adapter.BannerAdapter;
-import com.cn.adapter.GridItemDecoration;
-import com.cn.adapter.IntegralMallFragAdapter;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
-import com.cn.entity.Item;
 import com.cn.entity.ResIntegralProductDetail;
-import com.cn.entity.ResPageIntegral;
-import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.R;
-import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.json.JSONObject;
@@ -138,7 +131,7 @@ public class IntegralProductDetailFrag extends BaseFrag {
 
                         } else {
 
-                            showToast(NetUtil.getError(response));
+                            showToast(NetUtil.getMessage(response));
                         }
                     }
                 }, null);

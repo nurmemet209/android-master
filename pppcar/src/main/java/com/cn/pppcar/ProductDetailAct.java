@@ -43,7 +43,6 @@ public class ProductDetailAct extends BaseAct {
     }
 
     private void init() {
-
         ProductDetailAdapter adapter = new ProductDetailAdapter(this.getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabContainer.setViewPager(viewPager);

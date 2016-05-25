@@ -3,20 +3,15 @@ package com.cn.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.volley.Response;
 import com.cn.adapter.BrandAdapter;
-import com.cn.adapter.ClassifycationAdapter;
-import com.cn.adapter.ClassifycationNavigationAdapter;
 import com.cn.adapter.GridItemDecoration;
 import com.cn.commans.NetUtil;
-import com.cn.entity.Child;
 import com.cn.entity.Item;
 import com.cn.util.Util;
-import com.cn.widget.recycleview.GridSpacingItemDecoration;
 import com.cn.pppcar.R;
 
 import org.json.JSONObject;
@@ -81,7 +76,7 @@ public class BrandFrag extends BaseFrag {
                             }
 
                         } else {
-                            showToast(NetUtil.getError(response));
+                            showToast(NetUtil.getMessage(response));
                         }
 
 

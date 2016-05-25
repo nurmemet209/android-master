@@ -70,6 +70,8 @@
         <activity android:name=".IntegralMallAct"/>
         <activity android:name=".ProductDetailAct"/>
         <activity android:name=".AuctionBid"/>
+        <activity android:name=".LoginAct"/>
+        <activity android:name=".CollectActTemp"/>
     </application>
 
 </manifest>

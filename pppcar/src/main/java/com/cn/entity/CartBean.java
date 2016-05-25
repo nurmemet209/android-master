@@ -8,7 +8,7 @@ public class CartBean {
 	private long id;
 	private int number; //购买数量
 	private CartProduct bsProduct;
-	private int checked; /* 1代表选中  ，0代表未选中*/
+	private boolean checked; /* 1代表选中  ，0代表未选中*/
 	
 	private double discountPrice;//折扣单价
 	private double totalDiscountPrice;//折扣总价
@@ -70,13 +70,13 @@ public class CartBean {
 	/**
 	 * @return the checked
 	 */
-	public int getChecked() {
+	public boolean getChecked() {
 		return checked;
 	}
 	/**
 	 * @param checked the checked to set
 	 */
-	public void setChecked(int checked) {
+	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
 	/**

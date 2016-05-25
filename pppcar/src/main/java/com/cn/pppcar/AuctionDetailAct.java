@@ -11,15 +11,8 @@ import com.cn.adapter.MyAuctionDetailAdapter;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.entity.CollectAuctionDetailResBean;
-import com.cn.entity.Item;
-import com.cn.entity.ReturnBean;
-import com.cn.net.ApiHandler;
-import com.cn.util.UIHelper;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,7 +46,7 @@ public class AuctionDetailAct extends BaseAct {
                     recyclerView.setLayoutManager(new LinearLayoutManager(AuctionDetailAct.this));
                     recyclerView.setAdapter(adapter);
                 } else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         }, null);

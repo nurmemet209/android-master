@@ -1,14 +1,17 @@
 package com.cn.pppcar.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cn.pppcar.R;
@@ -21,6 +24,7 @@ public class CustomTabLayout extends LinearLayout {
     private ViewPager viewPager;
     private BindView bindView;
     private CustomOnItemClick itemClick;
+    private int drawablePadding;
     ;
 
     public CustomTabLayout(Context context) {
@@ -38,7 +42,11 @@ public class CustomTabLayout extends LinearLayout {
 
     private void init() {
         this.setOrientation(HORIZONTAL);
-        setBackgroundColor(ContextCompat.getColor(getContext(),R.color.main_bg_gray));
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.main_bg_gray));
+    }
+
+    public void setDrawablePadding(int padding){
+        this.drawablePadding=padding;
     }
 
     public void setViewPager(ViewPager viewPager, BindView bindView, CustomOnItemClick onItemClick) {
@@ -51,39 +59,41 @@ public class CustomTabLayout extends LinearLayout {
         this.itemClick = onItemClick;
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            View v = getTab(i, adapter.getPageTitle(i).toString());
-            addView(v);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            params.weight = 1;
+            RelativeLayout container = new RelativeLayout(getContext());
+            container.setLayoutParams(params);
+            container.setClickable(true);
+            View v = getTab(i, adapter.getPageTitle(i).toString(),container);
+            container.addView(v);
+            addView(container);
+
         }
 
     }
 
 
-    private View getTab(final int position, String title) {
+    private View getTab(final int position, String title,View container) {
         LinearLayout tab = new LinearLayout(getContext());
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        param.weight = 1;
-        param.gravity = Gravity.CENTER_HORIZONTAL;
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        param.addRule(RelativeLayout.CENTER_IN_PARENT);
         tab.setLayoutParams(param);
-        tab.setOrientation(HORIZONTAL);
-
-        LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        textParam.gravity=Gravity.CENTER;
-        LinearLayout.LayoutParams imgParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        imgParam.gravity=Gravity.CENTER;
         final TextView text = new TextView(getContext());
         text.setText(title);
         text.setGravity(Gravity.CENTER);
-        text.setLayoutParams(textParam);
         tab.addView(text);
         final ImageView img = new ImageView(getContext());
-        img.setLayoutParams(imgParam);
+
+        LinearLayout.LayoutParams  params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.leftMargin=drawablePadding;
+        params.gravity= Gravity.CENTER;
+        img.setLayoutParams(params);
         tab.addView(img);
         if (bindView != null) {
             bindView.OnBindView(text, img, position);
         }
-
-        tab.setClickable(true);
-        tab.setOnClickListener(new OnClickListener() {
+        container.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 int oldPosition = viewPager.getCurrentItem();

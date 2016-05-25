@@ -9,6 +9,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -27,13 +28,26 @@ import com.cn.util.UIHelper;
  * Created by nurmemet on 2016/5/11.
  */
 public class NumEditLayout extends LinearLayout {
-
+    private int defaultWidth;
+    private int defaultHeight;
     private EditText editText;
     private int mBorderColor = Color.BLACK;
     /**
      * 以px为单位
      */
     private int mBorderWidth;
+
+    private boolean isInputEnabled = true;
+
+    public interface NumChange {
+        void OnNumChange(int num, Object data);
+    }
+
+    private NumChange onNumChanged;
+
+    public void setOnNumChanged(NumChange onNumChanged) {
+        this.onNumChanged = onNumChanged;
+    }
 
     public NumEditLayout(Context context) {
         super(context);
@@ -48,7 +62,17 @@ public class NumEditLayout extends LinearLayout {
         init();
     }
 
+
+    public void setIsInputEnabled(boolean isInputEnabled) {
+        this.isInputEnabled = isInputEnabled;
+        editText.setEnabled(isInputEnabled);
+    }
+
     private void init() {
+        defaultWidth = (int) dp2px(getContext(), 100);
+        defaultHeight = (int) dp2px(getContext(), 30);
+        ViewGroup.LayoutParams params = new LinearLayoutCompat.LayoutParams(defaultWidth, defaultHeight);
+        setLayoutParams(params);
         mBorderWidth = (int) dp2px(getContext(), 1);
         this.setDividerDrawable(getCustomDividerDrawable());
         this.setShowDividers(SHOW_DIVIDER_MIDDLE);
@@ -69,6 +93,7 @@ public class NumEditLayout extends LinearLayout {
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setCursorVisible(false);
         editText.setText("0");
+        editText.setEnabled(isInputEnabled);
 
 
         LinearLayout.LayoutParams paramsMinus = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -92,6 +117,9 @@ public class NumEditLayout extends LinearLayout {
                 int num = Integer.valueOf(numStr);
                 num--;
                 editText.setText(num + "");
+                if (onNumChanged != null) {
+                    onNumChanged.OnNumChange(num, null);
+                }
             }
         });
         plus.setOnClickListener(new OnClickListener() {
@@ -101,6 +129,10 @@ public class NumEditLayout extends LinearLayout {
                 int num = Integer.valueOf(numStr);
                 num++;
                 editText.setText(num + "");
+
+                if (onNumChanged != null) {
+                    onNumChanged.OnNumChange(num, null);
+                }
             }
         });
 
@@ -119,9 +151,10 @@ public class NumEditLayout extends LinearLayout {
     private Drawable getCustomDividerDrawable() {
         RectShape shape = new RectShape();
 
+
         ShapeDrawable drawable = new ShapeDrawable(shape);
         drawable.setIntrinsicHeight(mBorderWidth);
-        drawable.setIntrinsicWidth(mBorderWidth);
+        drawable.setIntrinsicWidth(mBorderWidth - 1);
         drawable.getPaint().setStyle(Paint.Style.FILL);
         drawable.getPaint().setColor(mBorderColor);
         drawable.getPaint().setAntiAlias(true);
@@ -133,8 +166,12 @@ public class NumEditLayout extends LinearLayout {
         return dp * scale + 0.5f;
     }
 
-    public int  getNum(){
-        int num=Integer.valueOf(editText.getText().toString());
+    public int getNum() {
+        int num = Integer.valueOf(editText.getText().toString());
         return num;
+    }
+
+    public void setNum(int num) {
+        editText.setText(String.valueOf(num));
     }
 }

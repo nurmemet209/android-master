@@ -9,9 +9,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.cn.entity.AppUserInfo;
 import com.cn.entity.CitySelectPage;
 import com.cn.fragment.SearchListFrag;
 import com.cn.localutils.MD5;
+import com.cn.util.MyLogger;
 import com.google.gson.Gson;
 
 
@@ -30,7 +32,8 @@ import java.util.Map;
  */
 public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
-
+    private static String PAGE_SIZE = "10";
+    public static AppUserInfo appUserInfo;
     public static String code = "";
     public static String msg = "";
     protected Context mContext;
@@ -38,7 +41,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
     // public final static String HOST = "http://pppcar.f3322.net:8084";
 
-    public final static String HOST = "http://192.168.0.52:8080";
+    public final static String HOST = "http://192.168.0.219:8080";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -86,20 +89,85 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
 
-    public void login(Response.Listener listener, final String userName, final String pasword) {
-        String url = getRootApi().append("/user&a=login").toString();
-        StringRequest request = new StringRequest(Request.Method.POST, url, listener, null) {
+    public void login(Response.Listener<JSONObject> listener, final String userName, final String pasword, final String verifycationCode, final String varifycationCodeTk) {
+        StringBuilder builder = getRootApi().append("/v1/user/login");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = getDefaultPosData();
-                params.put("username", userName);
-                params.put("password", pasword);
+                params.put("username", "15520138623");
+                params.put("password", "123456");
+                params.put("captcha", "123456");
+                params.put("captchaToken", "123456");
+//                params.put("captcha", verifycationCode);
+//                params.put("captchaToken", varifycationCodeTk);
                 return params;
             }
 
         };
         addToRequestQueue(request);
     }
+
+//    public void login(Response.Listener<JSONObject> listener, final String userName, final String pasword, final String verifycationCode, final String varifycationCodeTk) {
+//        StringBuilder builder = getRootApi().append("/v1/user/login");
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("username", userName);
+//        params.put("password", pasword);
+//        params.put("captcha", verifycationCode);
+//        params.put("captchaToken", varifycationCodeTk);
+//        //JSONObject object = new JSONObject(params);
+//        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), params, listener, this);
+//        addToRequestQueue(request);
+//    }
+
+    /**
+     * 收藏及取消收藏
+     *
+     * @param listener
+     * @param id
+     */
+    public void collect(Response.Listener<JSONObject> listener, final long id) {
+        //v1/account/auth/
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/updateFavorites?");
+        Map<String, String> map = new HashMap<>();
+        map.put("proId", String.valueOf(id));
+        setSign(builder, map);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, builder.toString(), null, listener, this);
+        addToRequestQueue(request);
+    }
+
+    /**
+     * 收藏列表
+     *
+     * @param listener
+     */
+    public void collectList(Response.Listener<JSONObject> listener, int page) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/queryFavorites?");
+        Map<String, String> map = new HashMap();
+        map.put("page", String.valueOf(page));
+        map.put("size", PAGE_SIZE);
+        setSign(builder, map);
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.GET, builder.toString(), listener, this);
+        addToRequestQueue(request);
+    }
+//
+//    public void unCollect(Response.Listener<JSONObject> listener, final int id) {
+//        //v1/account/auth/
+//        StringBuilder builder = getRootApi().append("/v1/account/auth/delFavorites");
+//        final CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params=new HashMap<>();
+//                params.put("favId",String.valueOf(id));
+//                params.put("sign",getSign4Post(params));
+//                return super.getParams();
+//            }
+//        };
+//        addToRequestQueue(request);
+//    }
+
 
     public void getAllCityList(Response.Listener<CitySelectPage> listener, Response.ErrorListener errorListener) {
         String url = getRootApi().append("/citySelectPage/getAllCities").toString();
@@ -168,9 +236,9 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-    public void getProductList(Response.Listener<JSONObject> listener,String keyWord,String sortType) {
+    public void getProductList(Response.Listener<JSONObject> listener, String keyWord, String sortType) {
         StringBuilder builder = getRootApi().append("/v1/search/product/list?search_searchContent=").append(keyWord);
-        if (sortType!=null&&"".equals(sortType)){
+        if (sortType != null && !"".equals(sortType)) {
             builder.append("&search_sortType=").append(sortType);
         }
 //        if (SearchListFrag.SORT_TYPE_MOST_NEW ==searchType){//最新
@@ -187,31 +255,14 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-    /**
-     * @param listener
-     * @param id
-     */
-    public void collect(Response.Listener<JSONObject> listener, final long id) {
-        String url = getRootApi().append("/updateFavorites?proId=").append(id).toString();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, listener, this) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = getDefaultPosData();
-                params.put("proId", String.valueOf(id));
-                return params;
-            }
-
-        };
-        addToRequestQueue(request);
-    }
 
     /**
      * @param listener
-     * @param id
+     * @param id       套餐id或者产品id
      * @param num
      * @param flag     1表示普通商品放入购物车，2表示套餐商品放入购物车
      */
-    public void add2Cart(Response.Listener<JSONObject> listener, final long id, int num, final int flag) {
+    public void add2Cart(Response.Listener<JSONObject> listener, final long id, final int num, final int flag) {
         String url = "";
         if (flag == 1) {
             //普通商品加入购物车
@@ -220,18 +271,17 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             //套餐商品加入购物策划
             url = getRootApi().append("/v1/cart/auth/addFittingPro").toString();
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, listener, this) {
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, url, listener, this) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = getDefaultPosData();
-
-
+                Map<String, String> params = new HashMap<>();
                 if (flag == 1) {
                     params.put("proId", String.valueOf(id));
-                    params.put("number", String.valueOf(id));
+                    params.put("number", String.valueOf(num));
                 } else if (flag == 2) {
                     params.put("groupId", String.valueOf(id));
                 }
+                setSign4Post(params);
                 return params;
             }
         };
@@ -269,10 +319,10 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      */
     public void auctionBid(Response.Listener<JSONObject> listener, final long id, final double price) {
         String url = getRootApi().append("/v1/auction/auth/offerAuctionPrice").append(id).toString();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, listener, this) {
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, null, listener, this) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = getDefaultPosData();
+                HashMap<String, String> params = new HashMap();
                 params.put("auctionId", String.valueOf(id));
                 params.put("bidPrice ", String.valueOf(price));
                 return params;
@@ -310,8 +360,70 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param listener
      */
     public void getCartPage(Response.Listener<JSONObject> listener) {
-        String url = getRootApi().append("/v1/cart/auth/cartListByTenant").toString();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        if (appUserInfo != null) {
+            StringBuilder builder = getRootApi().append("/v1/cart/auth/list?");
+            setSign(builder, null);
+            CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+            addToRequestQueue(request);
+        }
+
+    }
+
+    /**
+     * '
+     *
+     * @param listener
+     * @param cartItemId
+     */
+    public void delFromCart(Response.Listener<JSONObject> listener, final String cartItemId) {
+        StringBuilder builder = getRootApi().append("/v1/cart/auth/delCartGoods");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("cartIds", cartItemId);
+                setSign4Post(params);
+                return params;
+            }
+        };
+        addToRequestQueue(request);
+
+    }
+
+    /**
+     * '
+     *
+     * @param listener
+     * @param cartItemId
+     */
+    public void move2Collect(Response.Listener<JSONObject> listener, final String cartItemId) {
+        StringBuilder builder = getRootApi().append("/v1/cart/auth/moveGoods2favorite");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("cartIds", cartItemId);
+                setSign4Post(params);
+                return params;
+            }
+        };
+        addToRequestQueue(request);
+
+    }
+
+    public void updateCart(Response.Listener<JSONObject> listener, final String cartId, final int num, final boolean isChecked) {
+        StringBuilder builder = getRootApi().append("/v1/cart/auth/updateCart");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("cartId", cartId);
+                params.put("checked", isChecked ? "1" : "0");
+                params.put("number", String.valueOf(num));
+                setSign4Post(params);
+                return params;
+            }
+        };
         addToRequestQueue(request);
     }
 
@@ -326,7 +438,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-    public void getSearchPage(Response.Listener<JSONObject> listener,String keyWord) {
+    public void getSearchPage(Response.Listener<JSONObject> listener, String keyWord) {
         String url = getRootApi().append("/v1/search/product/searchPrompt?searchVal=").append(keyWord).toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
         addToRequestQueue(request);
@@ -350,8 +462,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
-        System.out.print(error.getMessage());
+        MyLogger.showError(error.getMessage());
     }
 
 
@@ -471,16 +582,16 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
 
-    private void encode() {
-        String token = "dlkjfldkfj";
-        String userId = "6";
-        String number = "1";
-        String proId = "6";
+    private void setSign4Post(Map<String, String> map) {
+        if (map == null) {
+            new IllegalStateException("map can not be null");
+        }
         List<String> aa = new ArrayList<String>();
-        aa.add(token);
-        aa.add(userId);
-        aa.add(number);
-        aa.add(proId);
+        map.put("appToken", appUserInfo.getAppToken());
+        map.put("userId", String.valueOf(appUserInfo.getUserId()));
+        for (String key : map.keySet()) {
+            aa.add(map.get(key));
+        }
         aa.add("29afef854578396a6a63d76a40e0d5ba");
         Collections.sort(aa);
         StringBuilder builder = new StringBuilder();
@@ -488,8 +599,33 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             builder.append(value);
         }
         String newSig = MD5.md5Encode(builder.toString());
+        map.put("sign", newSig);
         //url后面带上一个sig的值
-        System.out.println(newSig);
+        return;
+    }
+
+    private void setSign(StringBuilder builder, Map<String, String> map) {
+        List<String> aa = new ArrayList<String>();
+        if (map == null) {
+            map = new HashMap<>();
+        }
+        map.put("appToken", appUserInfo.getAppToken());
+        map.put("userId", String.valueOf(appUserInfo.getUserId()));
+        for (String key : map.keySet()) {
+            aa.add(map.get(key));
+            builder.append(key).append("=").append(map.get(key)).append("&");
+        }
+
+        aa.add("29afef854578396a6a63d76a40e0d5ba");
+        Collections.sort(aa);
+        StringBuilder bl = new StringBuilder();
+        for (String value : aa) {
+            bl.append(value);
+        }
+        String newSig = MD5.md5Encode(bl.toString());
+        builder.append("sign=").append(newSig);
+        //url后面带上一个sig的值
+        return;
     }
 
 }

@@ -13,11 +13,9 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.cn.commans.NetUtil;
-import com.cn.commans.SpanHelper;
 import com.cn.entity.ResGroupApp;
 import com.cn.entity.ResProductGroupApp;
 import com.cn.pppcar.R;
-import com.cn.util.MyLogger;
 import com.cn.util.UIHelper;
 import com.cn.util.Util;
 import com.cn.widget.CustomTextView;
@@ -141,7 +139,7 @@ public class PreferentialPackageDlg extends BaseDialog implements TagGroupLayout
                 if (NetUtil.isSucced(response)){
                     UIHelper.showToast(getContext(),"加入购物车成功", Toast.LENGTH_SHORT);
                 }else {
-                    showToast(NetUtil.getError(response));
+                    showToast(NetUtil.getMessage(response));
                 }
             }
         },r.getId(),-1,2);
