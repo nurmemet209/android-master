@@ -1,12 +1,14 @@
 package com.cn.entity;
 
-public class Consignee {
+import java.io.Serializable;
 
-    private long id;
+public class Consignee implements Serializable{
+
+    private long id=-1;
     private String mobileNumber;
     private String address;
     private String consignee;
-    private int isDefault;
+    private boolean isDefault;
     private String telNumber;
 
 
@@ -24,14 +26,14 @@ public class Consignee {
     /**
      * @return the isDefault
      */
-    public int getIsDefault() {
+    public boolean getIsDefault() {
         return isDefault;
     }
 
     /**
      * @param isDefault the isDefault to set
      */
-    public void setIsDefault(int isDefault) {
+    public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
 

@@ -38,7 +38,7 @@ public class IntegralPaySettelmentAct extends BaseAct {
 
     @OnClick(R.id.submit_order)
     public void submitOrder(View view) {
-        ActivitySwitcher.toOrderSubmitSuccedAct(this);
+        ActivitySwitcher.toOrderSubmitSuccedAct(this,-1);
     }
 
     public void selectAddress(View view){

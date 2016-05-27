@@ -20,7 +20,7 @@
         android:layout_gravity="center_vertical"
         android:scaleType="centerInside"
         android:src="@drawable/image_view_checkbox"
-        android:tag="selector"
+
         />
 
     <LinearLayout
@@ -33,20 +33,22 @@
         >
 
         <TextView
-            android:id="@+id/logistic_result"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="张三 13879921613"
             />
 
         <TextView
-            android:id="@+id/logistic_time"
+            android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_big"
             android:text="上海嘉定南翔镇"
             android:textColor="@color/main_sub_text_color"
             android:textSize="@dimen/text_size_small"
+            android:maxLines="1"
+            android:ellipsize="end"
             />
     </LinearLayout>
     <View

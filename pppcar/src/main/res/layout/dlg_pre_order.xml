@@ -16,7 +16,7 @@
         android:background="@color/white"
         >
 
-        <com.cn.pppcar.widget.CheckableLayout
+        <com.cn.pppcar.widget.SelectableLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:paddingRight="@dimen/padding_normal"
             >
 
-        </com.cn.pppcar.widget.CheckableLayout>
+        </com.cn.pppcar.widget.SelectableLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -28,4 +28,15 @@ public class EventBusEv {
     public void setEvent(String event) {
         this.event = event;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o!=null){
+            EventBusEv ev= (EventBusEv) o;
+            if (event.equals(ev.getEvent())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

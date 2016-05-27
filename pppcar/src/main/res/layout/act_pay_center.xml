@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
 
@@ -22,6 +21,7 @@
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:src="@mipmap/back"
+            android:onClick="OnBack"
             />
 
         <TextView
@@ -99,7 +99,8 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <com.cn.pppcar.widget.SelectecableLinearLayout
+        android:id="@+id/pay_way_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_big_divider_height"
@@ -127,16 +128,19 @@
                 android:layout_height="@dimen/icon_width"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
+                android:background="@color/transparent"
                 android:scaleType="centerInside"
+                android:src="@mipmap/bank_pay"
+                android:tag="selected_"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_normal"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/pay_by_card"
-
 
                 />
 
@@ -147,7 +151,8 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:src="@drawable/image_view_checkbox"
-                android:tag="selector"
+                android:tag="selector_"
+                android:background="@color/transparent"
                 />
 
         </LinearLayout>
@@ -168,12 +173,15 @@
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_width"
                 android:layout_gravity="center_vertical"
+                android:background="@color/transparent"
                 android:scaleType="centerInside"
+                android:src="@mipmap/ali_pay"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_normal"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/pay_by_ali_pay"
@@ -187,7 +195,8 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:src="@drawable/image_view_checkbox"
-                android:tag="selector"
+                android:tag="selector_"
+                android:background="@color/transparent"
                 />
 
         </LinearLayout>
@@ -208,17 +217,19 @@
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_width"
                 android:layout_gravity="center_vertical"
+                android:background="@color/transparent"
                 android:scaleType="centerInside"
+                android:src="@mipmap/wechat_pay"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_normal"
                 android:layout_toRightOf="@id/pay_by_wechat"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/pay_by_wechat"
-
 
                 />
 
@@ -230,7 +241,8 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:src="@drawable/image_view_checkbox"
-                android:tag="selector"
+                android:tag="selector_"
+                android:background="@color/transparent"
                 />
 
         </LinearLayout>
@@ -251,17 +263,19 @@
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_width"
                 android:layout_gravity="center_vertical"
+                android:background="@color/transparent"
                 android:scaleType="centerInside"
+                android:src="@mipmap/offline_pay"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_normal"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
+
                 android:text="@string/pay_by_offline"
-
-
                 />
 
             <ImageView
@@ -271,13 +285,14 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:src="@drawable/image_view_checkbox"
-                android:tag="selector"
+                android:tag="selector_"
+                android:background="@color/transparent"
                 />
 
         </LinearLayout>
 
 
-    </LinearLayout>
+    </com.cn.pppcar.widget.SelectecableLinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -294,6 +309,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/main_bg_gray"
         />
 
     <Button

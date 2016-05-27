@@ -74,11 +74,17 @@ public class ReserveGoodsDetailResBean{
 	public double getTotalPrice() {
 		return totalPrice;
 	}
+	public String getTotalPriceStr() {
+		return String.valueOf(totalPrice);
+	}
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 	public double getFirstPrice() {
 		return firstPrice;
+	}
+	public String getFirstPriceStr() {
+		return String.valueOf(firstPrice);
 	}
 	public void setFirstPrice(double firstPrice) {
 		this.firstPrice = firstPrice;
@@ -86,11 +92,18 @@ public class ReserveGoodsDetailResBean{
 	public double getLastPrice() {
 		return lastPrice;
 	}
+
+	public String getLastPriceStr() {
+		return String.valueOf(lastPrice);
+	}
 	public void setLastPrice(double lastPrice) {
 		this.lastPrice = lastPrice;
 	}
 	public double getMeetPrice() {
 		return meetPrice;
+	}
+	public String getMeetPriceStr() {
+		return String.valueOf(meetPrice);
 	}
 	public void setMeetPrice(double meetPrice) {
 		this.meetPrice = meetPrice;

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/5/11.
  */
-public class CheckableLayout extends LinearLayout {
+public class SelectableLayout extends LinearLayout {
 
     private View selectedView = null;
     private int selectedPosition = -1;
@@ -28,17 +28,17 @@ public class CheckableLayout extends LinearLayout {
     }
 
 
-    public CheckableLayout(Context context) {
+    public SelectableLayout(Context context) {
         super(context);
         init();
     }
 
-    public CheckableLayout(Context context, AttributeSet attrs) {
+    public SelectableLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CheckableLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SelectableLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -125,5 +125,12 @@ public class CheckableLayout extends LinearLayout {
             return mList.get(selectedPosition);
         }
         return null;
+    }
+
+    public boolean isItemSelected() {
+        if (selectedPosition == -1) {
+            return false;
+        }
+        return true;
     }
 }

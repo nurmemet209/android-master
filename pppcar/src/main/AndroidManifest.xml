@@ -72,6 +72,11 @@
         <activity android:name=".AuctionBid"/>
         <activity android:name=".LoginAct"/>
         <activity android:name=".CollectActTemp"/>
+        <activity android:name=".PaySettlementAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+            />
+        <activity android:name=".PayCenterAct"/>
+        <activity android:name=".InvoiceInfoAct"/>
     </application>
 
 </manifest>

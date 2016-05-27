@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.cn.entity.AppUserInfo;
 import com.cn.entity.CitySelectPage;
+import com.cn.entity.Consignee;
 import com.cn.fragment.SearchListFrag;
 import com.cn.localutils.MD5;
 import com.cn.util.MyLogger;
@@ -41,7 +42,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
     // public final static String HOST = "http://pppcar.f3322.net:8084";
 
-    public final static String HOST = "http://192.168.0.219:8080";
+    public final static String HOST = "http://192.168.0.219:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -211,10 +212,19 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-
-    public void getMyOrder(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = getRootApi().append("/v1/account/order/list").toString();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+    /**
+     * @param listener
+     * @param orderType 1 普通订单，2 预订单
+     */
+    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType) {
+        StringBuilder builder = getRootApi().append("/v1/account/auth");
+        if (orderType == 1) {
+            builder.append("/order/list?");
+        } else {
+            builder.append("/advanceOrder/list?");
+        }
+        setSign(builder, null);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
         addToRequestQueue(request);
     }
 
@@ -370,6 +380,51 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
     /**
+     * @param listener
+     */
+    public void getReceriverAddress(Response.Listener<JSONObject> listener) {
+        if (appUserInfo != null) {
+            StringBuilder builder = getRootApi().append("/v1/account/auth/allConsignee?");
+            setSign(builder, null);
+            CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+            addToRequestQueue(request);
+        }
+
+    }
+
+    /**
+     *
+     * @param listener
+     * @param consignee
+     * @param type 1 新增，2 编辑
+     */
+    public void postReceiveAddr(Response.Listener<JSONObject> listener, final Consignee consignee,int type) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/");
+        if (type==1){
+            builder.append("addConsignee");
+        }else if(type==2){
+            builder.append("updateConsignee");
+        }
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("consignee", consignee.getConsignee());
+                map.put("address", consignee.getAddress());
+                map.put("mobileNumber", consignee.getMobileNumber());
+                map.put("telNumber", consignee.getTelNumber());
+                map.put("isDefault", consignee.getIsDefault() ? "1" : "0");
+                setSign4Post(map);
+                return map;
+            }
+        };
+        addToRequestQueue(request);
+
+
+    }
+
+    /**
      * '
      *
      * @param listener
@@ -411,6 +466,18 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     }
 
+
+    public void getPaySettlementPage(Response.Listener<JSONObject> listener, String proId, String num, String ruleId) {
+        StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
+        Map<String, String> map = new HashMap<>();
+        map.put("productId", proId);
+        map.put("number", num);
+        map.put("ruleId", ruleId);
+        setSign(builder, map);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+        addToRequestQueue(request);
+    }
+
     public void updateCart(Response.Listener<JSONObject> listener, final String cartId, final int num, final boolean isChecked) {
         StringBuilder builder = getRootApi().append("/v1/cart/auth/updateCart");
         CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
@@ -441,6 +508,34 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     public void getSearchPage(Response.Listener<JSONObject> listener, String keyWord) {
         String url = getRootApi().append("/v1/search/product/searchPrompt?searchVal=").append(keyWord).toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        addToRequestQueue(request);
+    }
+
+    /**
+     * @param listener
+     * @param invoiceType
+     * @param ruleId
+     * @param number
+     * @param consigneeId
+     * @param productId
+     * @param remark
+     */
+    public void submitPreOrder(Response.Listener<JSONObject> listener, final String invoiceType, final String ruleId, final String number, final String consigneeId, final String productId, final String remark) {
+        StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoods");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("invoiceType", invoiceType);
+                params.put("ruleId", ruleId);
+                params.put("number", number);
+                params.put("consigneeId", consigneeId);
+                params.put("productId", productId);
+                params.put("remark", remark);
+                setSign4Post(params);
+                return params;
+            }
+        };
         addToRequestQueue(request);
     }
 

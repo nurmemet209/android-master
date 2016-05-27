@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
 
@@ -30,6 +29,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/order_submit_succeed"
+            android:textSize="@dimen/text_size_large"
             />
     </RelativeLayout>
 
@@ -76,6 +76,7 @@
                 android:text="订单号：234234234234"
                 android:paddingLeft="@dimen/padding_big"
                 android:textSize="@dimen/text_size_smaller"
+                android:visibility="gone"
                 />
 
         </LinearLayout>

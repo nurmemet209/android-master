@@ -9,20 +9,26 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.cn.pppcar.R;
+import com.cn.pppcar.widget.SelectableLinearLayoutItem;
+import com.cn.pppcar.widget.SelectecableLinearLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by nurmemet on 2016/4/24.
  */
 public class InvoiceCommonFrag extends Fragment {
 
+    @Bind(R.id.invoice_receiver_name)
+    EditText invoiceReceiverName;
+    @Bind(R.id.invoice_receiver_phone)
+    EditText invoiceReceiverPhone;
+    @Bind(R.id.order_addr_same)
+    SelectableLinearLayoutItem orderAddrSame;
+    @Bind(R.id.product_detail)
+    SelectableLinearLayoutItem productDetail;
     private View mainView;
-
-    private boolean sameAsOrderAddr=false;
-    private boolean productDetail=true;
 
     @Bind(R.id.deliver_addr)
     protected EditText deliverAddr;
@@ -38,18 +44,29 @@ public class InvoiceCommonFrag extends Fragment {
         return mainView;
     }
 
-
-    @OnClick(R.id.order_addr_same)
-    public void SameAsOrderAddr(View view){
-        View img=view.findViewWithTag("selected");
-        img.setSelected(!sameAsOrderAddr);
-        sameAsOrderAddr=!sameAsOrderAddr;
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+        init();
     }
 
-    @OnClick(R.id.product_detail)
-    public void OrderDetail(View view){
-        View img=view.findViewWithTag("selected");
-        img.setSelected(!productDetail);
-        productDetail=!productDetail;
+    private void init() {
+
     }
+
+
+//    @OnClick(R.id.order_addr_same)
+//    public void SameAsOrderAddr(View view){
+//        View img=view.findViewWithTag("selected");
+//        img.setSelected(!sameAsOrderAddr);
+//        sameAsOrderAddr=!sameAsOrderAddr;
+//    }
+//
+//    @OnClick(R.id.product_detail)
+//    public void OrderDetail(View view){
+//        View img=view.findViewWithTag("selected");
+//        img.setSelected(!productDetail);
+//        productDetail=!productDetail;
+//    }
 }

@@ -1,5 +1,6 @@
 package com.cn.pppcar.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.view.Gravity;
@@ -9,19 +10,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.commans.SpanHelper;
 import com.cn.entity.ProductAttrBean;
 import com.cn.entity.ResProductApp;
+import com.cn.entity.ReserveGoodsRuleResBean;
 import com.cn.pppcar.R;
-import com.cn.util.MyLogger;
-import com.cn.util.UIHelper;
-import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.litesuits.android.async.SimpleTask;
 
 import org.json.JSONObject;
 
@@ -53,11 +51,12 @@ public class ProductAttrDlg extends BaseDialog {
     @Bind(R.id.retail_price)
     protected TextView retailPrice;
     @Bind(R.id.checkable_layout)
-    protected CheckableLayout checkableLayout;
+    protected SelectableLayout checkableLayout;
     private ResProductApp productDetail;
     private ArrayList<String> keyList = new ArrayList<>();
 
     private Runnable refreshRun;
+    private Context mContext;
 
 
     public ProductAttrDlg(Context context, ResProductApp productDetail, Runnable refreshRun) {
@@ -65,6 +64,7 @@ public class ProductAttrDlg extends BaseDialog {
         this.productDetail = productDetail;
         this.map = productDetail.getProductAttrs();
         this.refreshRun = refreshRun;
+        this.mContext = context;
         setContentView(R.layout.dlg_product_attr);
         ButterKnife.bind(this);
         set2FullWidth(Gravity.BOTTOM);
@@ -142,11 +142,12 @@ public class ProductAttrDlg extends BaseDialog {
     }
 
     private void setPreOrder() {
+        mActionBtn.setEnabled(true);
         checkableLayout.removeAllViews();
         if (productDetail.getIsFlagGoodsCycle()) {
             mActionBtn.setText("立即预定");
             container.setVisibility(View.VISIBLE);
-            checkableLayout.setItems(productDetail.getReserveGoodsRuleResBeans(), new CheckableLayout.OnBindPropertyListener() {
+            checkableLayout.setItems(productDetail.getReserveGoodsRuleResBeans(), new SelectableLayout.OnBindPropertyListener() {
                 @Override
                 public void OnBindProperty(TextView tv, ImageView img, int position) {
                     img.setImageResource(R.drawable.image_view_checkbox);
@@ -161,6 +162,9 @@ public class ProductAttrDlg extends BaseDialog {
         } else {
             mActionBtn.setText("加入购物车");
             container.setVisibility(View.GONE);
+            if (!productDetail.hasStock()) {
+                mActionBtn.setEnabled(false);
+            }
         }
     }
 
@@ -169,27 +173,74 @@ public class ProductAttrDlg extends BaseDialog {
     public void putIntoCart(View view) {
         int num = numEdit.getNum();
         if (num == 0) {
-            UIHelper.showToast(getContext(), "产品数量不能为零", Toast.LENGTH_SHORT);
+            showToast("产品数量不能为零");
             return;
         }
-        apiHandler.add2Cart(new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-//                if (NetUtil.isSucced(response)) {
-//                    UIHelper.showToast(getContext(), "加入购物车成功", Toast.LENGTH_SHORT);
-//                } else {
-//                    showToast(NetUtil.getMessage(response));
-//                }
-                showToast(NetUtil.getMessage(response));
+        // has stock
+        if (productDetail.hasStock()) {
+            apiHandler.add2Cart(new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    showToast(NetUtil.getMessage(response));
+                }
+            }, productDetail.getId(), num, 1);
+        }
+        //has order regular
+        else if (productDetail.getIsFlagGoodsCycle()) {
+            if (!checkableLayout.isItemSelected()) {
+                showToast("请选择预定规则");
+                return;
+            } else {
+                long ruleId = getOrderRuleId();
+                ActivitySwitcher.toPaySettlementAct((Activity) mContext, productDetail.getId(), num, ruleId);
             }
-        }, productDetail.getId(), num, 1);
+
+        }
+
     }
 
 
-    public void updateData(){
+    public void updateData() {
         setProductData();
         setPreOrder();
     }
 
+    public boolean isProperySubmitable() {
+        if (container.getVisibility() == View.VISIBLE) {
+            if (!container.isProperySelected()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public boolean isNumSubmitable() {
+        int num = numEdit.getNum();
+        return num <= 0 ? false : true;
+    }
+
+    public boolean isOrderRegularSubmitable() {
+
+        if (!productDetail.hasStock() && productDetail.getIsFlagGoodsCycle() && !checkableLayout.isItemSelected()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean submitable() {
+        return isProperySubmitable() && isOrderRegularSubmitable() && isNumSubmitable();
+    }
+
+    public int getNum() {
+        return numEdit.getNum();
+    }
+
+    public long getOrderRuleId() {
+        int selectedPos = checkableLayout.getSelectedPosition();
+        if (selectedPos != -1) {
+            ReserveGoodsRuleResBean bean = productDetail.getReserveGoodsRuleResBeans().get(selectedPos);
+            return bean.getRuleId();
+        }
+        return -1;
+    }
 }

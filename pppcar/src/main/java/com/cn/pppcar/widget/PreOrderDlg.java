@@ -1,11 +1,8 @@
 package com.cn.pppcar.widget;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -20,7 +17,7 @@ import butterknife.ButterKnife;
  */
 public class PreOrderDlg extends BaseDialog {
 
-    private CheckableLayout container;
+    private SelectableLayout container;
     private ImageButton mCancelButton;
     /**
      * 总价
@@ -49,7 +46,7 @@ public class PreOrderDlg extends BaseDialog {
         setContentView(R.layout.dlg_pre_order);
         ButterKnife.bind(this);
         set2FullWidth(Gravity.BOTTOM);
-        container = (CheckableLayout) findViewById(R.id.container);
+        container = (SelectableLayout) findViewById(R.id.container);
         mCancelButton = (ImageButton) findViewById(com.cn.customlibrary.R.id.cancel_btn);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

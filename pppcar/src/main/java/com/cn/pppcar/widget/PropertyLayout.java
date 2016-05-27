@@ -41,10 +41,13 @@ public class PropertyLayout extends TableLayout {
     interface ItemClick {
         void onItemClick(long id);
     }
+
     ItemClick onItemClick;
+
     public void setItemClick(ItemClick itemClick) {
         this.onItemClick = itemClick;
     }
+
     /**
      * 以dp为单位
      */
@@ -130,7 +133,7 @@ public class PropertyLayout extends TableLayout {
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (v.isSelected()){
+                    if (v.isSelected()) {
                         return;
                     }
                     v.setSelected(true);
@@ -166,9 +169,9 @@ public class PropertyLayout extends TableLayout {
                             if (!seletedSet.isEmpty()) {
                                 if (isSelectable(bean.getProductId(), seletedSet)) {
                                     viewList.get(j).setEnabled(true);
-                                    if (viewList.get(j).isSelected()){
+                                    if (viewList.get(j).isSelected()) {
                                         bean.setState("selected");
-                                    }else{
+                                    } else {
                                         bean.setState("can_selected");
                                     }
 
@@ -209,7 +212,7 @@ public class PropertyLayout extends TableLayout {
                             Long l = (Long) id[0];
                             System.out.println(l);
 
-                            if (onItemClick!=null){
+                            if (onItemClick != null) {
                                 onItemClick.onItemClick(l);
                             }
                         }
@@ -328,5 +331,17 @@ public class PropertyLayout extends TableLayout {
             }
             return false;
         }
+    }
+
+
+    public boolean isProperySelected() {
+        boolean isAllSelected = true;
+        for (int i = 0; i < parentList.size(); i++) {
+            if (parentList.get(i).view == null) {
+                isAllSelected = false;
+                break;
+            }
+        }
+        return isAllSelected;
     }
 }

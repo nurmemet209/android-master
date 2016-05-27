@@ -1,22 +1,21 @@
 package com.cn.pppcar;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
-import com.cn.adapter.BaseListAdapter;
+import com.android.volley.Response;
 import com.cn.adapter.CustomItemDecoration;
 import com.cn.adapter.ReceiveAddressListAdapter;
 import com.cn.commans.ActivitySwitcher;
-import com.cn.entity.Item;
+import com.cn.commans.NetUtil;
+import com.cn.entity.Consignee;
+import com.cn.util.Util;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,26 +35,50 @@ public class ReceiveAddressListAct extends BaseAct {
 
     ReceiveAddressListAdapter adapter;
 
+    private List<Consignee> mAddresList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_receive_address_list);
         ButterKnife.bind(this);
-        init();
+        loadData();
+    }
+
+    private void loadData() {
+        apiHandler.getReceriverAddress(new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    mAddresList = apiHandler.JSONArray2List(NetUtil.getArrayData(response), Consignee.class);
+                    if (Util.isNoteEmpty(mAddresList)) {
+                        bindData();
+                    }
+                } else {
+                    showToast(NetUtil.getMessage(response));
+                }
+            }
+        });
     }
 
 
-    private void init() {
-        adapter = new ReceiveAddressListAdapter(this, getList());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new CustomItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
-        recyclerView.setAdapter(adapter);
+    private void bindData() {
+        if (adapter==null){
+            adapter = new ReceiveAddressListAdapter(this, mAddresList, 0);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.addItemDecoration(new CustomItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
+            recyclerView.setAdapter(adapter);
+        }else{
+            adapter.setList(mAddresList);
+        }
+
     }
 
     @OnClick(R.id.add_reveive_addr)
     public void addNewReceiveAddr(View view) {
         ActivitySwitcher.toReceiveAddressEditAct(this);
     }
+
 
 }

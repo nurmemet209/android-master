@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
 
@@ -42,9 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/main_bg_gray"
             >
 
             <LinearLayout
+                android:id="@+id/select_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_big_divider_height"
@@ -58,11 +59,11 @@
                 >
 
                 <RelativeLayout
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal"
+                    android:background="@color/transparent"
 
                     >
 
@@ -70,6 +71,7 @@
                         android:id="@+id/receiver_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/transparent"
                         >
 
                         <TextView
@@ -77,6 +79,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/receiver_"
+                            android:background="@color/transparent"
                             />
 
                         <TextView
@@ -85,6 +88,7 @@
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/receiver_"
                             android:text="买买提"
+                            android:background="@color/transparent"
                             />
 
                         <TextView
@@ -101,6 +105,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/receiver_container"
                         android:paddingTop="@dimen/padding_big"
+                        android:background="@color/transparent"
                         >
 
                         <TextView
@@ -116,6 +121,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/receive_address_"
+                           android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                     </RelativeLayout>
@@ -128,6 +135,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/padding_big"
                     android:src="@mipmap/go"
+                    android:background="@color/transparent"
                     />
 
             </LinearLayout>
@@ -145,6 +153,7 @@
                 >
 
                 <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/title_img"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     />
@@ -157,6 +166,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -168,6 +178,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="@dimen/padding_big"
+                        android:paddingLeft="@dimen/padding_normal"
                         >
 
                         <TextView
@@ -238,6 +249,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/select_invoice_"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
                 android:layout_marginTop="@dimen/main_big_divider_height"
@@ -246,6 +258,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_normal"
                 android:paddingRight="@dimen/padding_normal"
+                android:clickable="true"
                 >
 
                 <TextView
@@ -372,16 +385,48 @@
             </LinearLayout>
 
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/order_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_big_divider_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+                >
+
+               <TextView
+                   android:id="@+id/stage_1_price"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   />
+
+                <TextView
+                    android:id="@+id/stage_2_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_normal"
+                    />
+
+
+            </LinearLayout>
+
+
+            <com.cn.pppcar.widget.SelectableRelaytiveLayoutItem
+                android:id="@+id/buy_clause"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
                 android:layout_marginTop="@dimen/main_big_divider_height"
+                android:layout_marginBottom="@dimen/main_big_divider_height"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_normal"
                 android:paddingRight="@dimen/padding_normal"
                 android:background="@drawable/list_item_bg_"
                 android:clickable="true"
-                android:onClick="selectePayWay"
                 >
 
                 <TextView
@@ -389,8 +434,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:text="@string/stage_buy"
-
+                    android:text="我已同意预付款不退款等相关规则"
                     />
 
                 <ImageView
@@ -400,54 +444,13 @@
                     android:layout_centerVertical="true"
                     android:scaleType="centerInside"
                     android:src="@drawable/image_view_checkbox"
-                    android:tag="selector"
+                    android:tag="selector_"
+                    android:background="@color/transparent"
                     />
 
-            </RelativeLayout>
+            </com.cn.pppcar.widget.SelectableRelaytiveLayoutItem>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/divider_small"
-                />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/item_height"
-                android:background="@drawable/list_item_bg_"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:clickable="true"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/stage_buy"
-                    />
-
-                <ImageView
-                    android:id="@+id/stage_num_"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_width"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/go"
-                    />
-
-                <TextView
-                    android:id="@+id/stage_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/stage_num_"
-                    android:text="@string/select_stage_num"
-                    />
-
-            </RelativeLayout>
         </LinearLayout>
 
     </ScrollView>
@@ -473,12 +476,13 @@
             />
 
         <Button
+            android:id="@+id/submit_order"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/main_red_pressed_sl"
             android:gravity="center"
-            android:text="@string/submit_stage_order"
+            android:text="提交订单"
             android:textColor="@color/white"
             />
     </LinearLayout>

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_bottom_bar_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
 
@@ -40,105 +39,127 @@
         android:background="@color/main_text_color"
         />
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_big"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_big"
+
+
         >
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_big"
+            android:text="@string/invoice_type"
+            />
+
+        <com.cn.pppcar.widget.SelectecableLinearLayout
+            android:id="@+id/selector_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_bg_gray"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/no_invoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_big_divider_height"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
+                android:layout_marginRight="@dimen/padding_small"
+                android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_smallest"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_smallest"
+                android:tag="selector_"
+                android:text="@string/no_invoice"
 
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="@string/invoice_type"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:onClick="InvoiceType"
-                        android:paddingBottom="@dimen/padding_smallest"
-                        android:paddingLeft="@dimen/padding_big"
-                        android:paddingRight="@dimen/padding_big"
-                        android:paddingTop="@dimen/padding_smallest"
-                        android:text="@string/no_invoice"
-                        android:textColor="@color/main_text_color_to_white"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
-
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:onClick="InvoiceType"
-                        android:paddingBottom="@dimen/padding_smallest"
-                        android:paddingLeft="@dimen/padding_big"
-                        android:paddingRight="@dimen/padding_big"
-                        android:paddingTop="@dimen/padding_smallest"
-                        android:text="@string/common_invoice"
-                        android:textColor="@color/main_text_color_to_white"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/padding_small"
-                        android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:onClick="InvoiceType"
-                        android:paddingBottom="@dimen/padding_smallest"
-                        android:paddingLeft="@dimen/padding_big"
-                        android:paddingRight="@dimen/padding_big"
-                        android:paddingTop="@dimen/padding_smallest"
-                        android:text="@string/value_add_tax"
-                        android:textColor="@color/main_text_color_to_white"
-                        />
-                </LinearLayout>
-            </LinearLayout>
-
-            <fragment
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.cn.fragment.InvoiceAddTaxCompanyFrag"
-                android:layout_marginTop="@dimen/main_big_divider_height"
+                android:textColor="@color/main_text_color_to_white"
                 />
 
+            <TextView
+                android:id="@+id/common_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/padding_small"
+                android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
 
-        </LinearLayout>
-    </ScrollView>
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_smallest"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_smallest"
+                android:tag="selector_"
+                android:text="@string/common_invoice"
+                android:textColor="@color/main_text_color_to_white"
+
+                />
+
+            <TextView
+                android:id="@+id/value_add_tax_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/padding_small"
+                android:background="@drawable/circle_stroke_gray_to_fill_red_sl"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_smallest"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_smallest"
+                android:tag="selector_"
+                android:text="@string/value_add_tax"
+                android:textColor="@color/main_text_color_to_white"
+                />
+        </com.cn.pppcar.widget.SelectecableLinearLayout>
+    </LinearLayout>
+
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:layout_marginTop="@dimen/padding_normal"
+        >
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main_bg_gray"
+            />
+
+        <fragment
+            android:id="@+id/no_invoice_frag"
+            android:name="com.cn.fragment.InvoiceCommonFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <!--<fragment-->
+        <!--android:id="@+id/common_invoice_frag"-->
+        <!--android:name="com.cn.fragment.InvoiceAddTaxCompanyFrag"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/main_big_divider_height"-->
+        <!--/>-->
+
+        <fragment
+            android:id="@+id/value_add_tax_invoice_frag"
+            android:name="com.cn.fragment.InvoiceAddTaxCompanyFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </ViewFlipper>
+
 
 </LinearLayout>

@@ -195,7 +195,8 @@
 
     </TableLayout>
 
-    <LinearLayout
+    <com.cn.pppcar.widget.SelectableLinearLayoutItem
+        android:id="@+id/is_default_address"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:gravity="center_vertical"
@@ -216,7 +217,7 @@
             />
 
         <ImageView
-            android:id="@+id/is_default_address"
+
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_width"
             android:src="@drawable/image_view_checkbox"
@@ -224,7 +225,7 @@
             android:tag="selector"
             android:background="@color/transparent"
             />
-    </LinearLayout>
+    </com.cn.pppcar.widget.SelectableLinearLayoutItem>
 
     <TextView
         android:layout_width="match_parent"
@@ -245,6 +246,7 @@
         />
 
     <Button
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_normal"

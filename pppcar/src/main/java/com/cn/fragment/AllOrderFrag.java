@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.cn.adapter.CustomItemDecoration;
 import com.cn.adapter.OrderAdapter;
 import com.cn.commans.NetUtil;
+import com.cn.component.OnListItemWidgetClickedListener;
 import com.cn.entity.PageResPersonalCenterOrder;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
@@ -28,6 +29,9 @@ import butterknife.ButterKnife;
  */
 public class AllOrderFrag extends BaseFrag {
 
+    /**
+     * 1 普通订单，2 预订单
+     */
     private int orderType = 1;
 
 
@@ -64,45 +68,28 @@ public class AllOrderFrag extends BaseFrag {
 
     private void init() {
 
-
-        new Thread(new Runnable() {
+        apiHandler.getMyOrder(new Response.Listener<JSONObject>() {
             @Override
-            public void run() {
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    allOrder = apiHandler.toObject(NetUtil.getData(response), PageResPersonalCenterOrder.class);
+                    if (allOrder != null && Util.isNoteEmpty(allOrder.getResOrders())) {
+                        adapter = new OrderAdapter(allOrder.getResOrders(), getActivity(), orderType, new OnListItemWidgetClickedListener() {
+                            @Override
+                            public void OnItemClicke(int commond, RecyclerView.ViewHolder holder, Object extra) {
 
-
-                apiHandler.getMyOrder(new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (NetUtil.isSucced(response)) {
-                            allOrder = apiHandler.toObject(NetUtil.getArrayData(response), PageResPersonalCenterOrder.class);
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (allOrder != null && Util.isNoteEmpty(allOrder.getResOrders())) {
-                                        adapter = new OrderAdapter(allOrder.getResOrders(), getActivity(), orderType);
-                                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                        CustomItemDecoration decoration = new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
-                                        recyclerView.addItemDecoration(decoration);
-                                        recyclerView.setAdapter(adapter);
-                                    }
-                                }
-                            });
-
-                        } else {
-
-                            showToast(NetUtil.getMessage(response));
-                        }
-
-
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        CustomItemDecoration decoration = new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
+                        recyclerView.addItemDecoration(decoration);
+                        recyclerView.setAdapter(adapter);
                     }
-                }, null);
+                } else {
+                    showToast(NetUtil.getMessage(response));
+                }
             }
-        }).start();
-
+        },orderType);
 
     }
-
-    private Handler mHandler = new android.os.Handler();
-
-
 }

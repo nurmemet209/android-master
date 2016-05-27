@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.cn.adapter.BannerAdapter;
+import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.entity.ResProductApp;
 import com.cn.localutils.EventBusEv;
+import com.cn.pppcar.ProductDetailAct;
 import com.cn.pppcar.R;
 import com.cn.pppcar.widget.PreOrderDlg;
 import com.cn.pppcar.widget.PreferentialPackageDlg;
@@ -74,6 +76,7 @@ public class ProductFrag extends BaseFrag {
     private BannerAdapter bannerAdapter;
     private List bannerViewList;
     private ProductAttrDlg productAttrDlg;
+    private PreferentialPackageDlg preferentialPackageDlg;
 
 
     @Nullable
@@ -152,8 +155,39 @@ public class ProductFrag extends BaseFrag {
         View c = getActivity().findViewById(R.id.collect);
         c.setSelected(productDetail.getIsFlagFavorites());
 
-        if (productAttrDlg!=null&&productAttrDlg.isShowing()) {
+        if (productAttrDlg != null && productAttrDlg.isShowing()) {
             productAttrDlg.updateData();
+        }
+        setActionButton();
+
+        //优惠套餐
+        if (!productDetail.getIsFlagGroup()) {
+            mainView.findViewById(R.id.preferential_valume_rl).setVisibility(View.GONE);
+        } else {
+            mainView.findViewById(R.id.preferential_valume_rl).setVisibility(View.VISIBLE);
+        }
+
+        //规格参数
+        if (!productDetail.getIsFlagProperty()) {
+            mainView.findViewById(R.id.select_product_attr).setVisibility(View.GONE);
+        } else {
+            mainView.findViewById(R.id.select_product_attr).setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setActionButton() {
+        ProductDetailAct act = (ProductDetailAct) getActivity();
+        act.getActionButton().setEnabled(true);
+        if (productDetail.hasStock()) {
+            act.getActionButton().setText("加入购物车");
+        } else {
+            //has stock regular
+            if (productDetail.getIsFlagGoodsCycle()) {
+                act.getActionButton().setText("立即预定");
+            } else {
+                act.getActionButton().setEnabled(false);
+            }
+
         }
     }
 
@@ -166,8 +200,10 @@ public class ProductFrag extends BaseFrag {
 
     @OnClick(R.id.preferential_valume_rl)
     public void preferentialValume(View view) {
-        PreferentialPackageDlg dlg = new PreferentialPackageDlg(getActivity(), productDetail.getResGroupApps());
-        dlg.show();
+        if (preferentialPackageDlg == null) {
+            preferentialPackageDlg = new PreferentialPackageDlg(getActivity(), productDetail.getResGroupApps());
+        }
+        preferentialPackageDlg.show();
 
 //        ShareDialogEx dlg=new ShareDialogEx(getContext());
 //        dlg.show();
@@ -224,9 +260,45 @@ public class ProductFrag extends BaseFrag {
                 }
             }, productDetail != null ? productDetail.getId() : -1);
         } else if (ADD_2_CART.equals(event.getEvent())) {
-            showProductAttrSelectDlg();
-
+            if (productAttrDlg != null && productAttrDlg.submitable()) {
+                //是预定订单
+                if (productDetail.getIsFlagGoodsCycle()) {
+                    //提交预订单
+                    long id=productAttrDlg.getOrderRuleId();
+                    int num=productAttrDlg.getNum();
+                    ActivitySwitcher.toPaySettlementAct(getActivity(),productDetail.getId(),num,id);
+                } else {
+                    //如果有选中套餐,套餐产品加入到购物车
+                    if (isPreferentialSelected()) {
+                        long id = preferentialPackageDlg.getSelectedPreferentialId();
+                        apiHandler.add2Cart(new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (NetUtil.isSucced(response)) {
+                                    showToast(NetUtil.getMessage(response));
+                                } else {
+                                    showToast(NetUtil.getMessage(response));
+                                }
+                            }
+                        }, id, -1, 2);
+                    }
+                    //普通产品加入到购物车
+                    else {
+                        int num = productAttrDlg.getNum();
+                        apiHandler.add2Cart(new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                showToast(NetUtil.getMessage(response));
+                            }
+                        }, productDetail.getId(), num, 1);
+                    }
+                }
+            } else {
+                showProductAttrSelectDlg();
+            }
         }
+
+
     }
 
     private void showProductAttrSelectDlg() {
@@ -254,5 +326,20 @@ public class ProductFrag extends BaseFrag {
     public void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    private boolean isSubmitable() {
+        if (productAttrDlg != null && productAttrDlg.submitable()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isPreferentialSelected() {
+        if (preferentialPackageDlg != null && preferentialPackageDlg.isPrefrentialSelected()) {
+            return true;
+        }
+        return false;
     }
 }

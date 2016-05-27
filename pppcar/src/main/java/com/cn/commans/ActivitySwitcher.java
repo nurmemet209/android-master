@@ -1,10 +1,12 @@
 package com.cn.commans;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 
+import com.cn.entity.Consignee;
 import com.cn.pppcar.AuctionAct;
 import com.cn.pppcar.AuctionBid;
 import com.cn.pppcar.AuctionDetailAct;
@@ -13,9 +15,12 @@ import com.cn.pppcar.CollectActTemp;
 import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.IntegralPaySettelmentAct;
 import com.cn.pppcar.IntegralProductDetail;
+import com.cn.pppcar.InvoiceInfoAct;
 import com.cn.pppcar.LoginAct;
 import com.cn.pppcar.MyOrderAct;
 import com.cn.pppcar.OrderSubmitSuccedAct;
+import com.cn.pppcar.PayCenterAct;
+import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.ProductDetailAct;
 import com.cn.pppcar.R;
 import com.cn.pppcar.ReceiveAddressEditAct;
@@ -64,8 +69,14 @@ public class ActivitySwitcher {
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
-    static public void toOrderSubmitSuccedAct(Activity activity) {
+    /**
+     *
+     * @param activity
+     * @param id 订单id
+     */
+    static public void toOrderSubmitSuccedAct(Activity activity,long id) {
         Intent intent = new Intent(activity, OrderSubmitSuccedAct.class);
+        intent.putExtra("orderId",id);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
@@ -131,6 +142,29 @@ public class ActivitySwitcher {
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
+
+    static public void toPaySettlementAct(Activity activity, long proId, int num, long ruleId) {
+        Intent intent = new Intent(activity, PaySettlementAct.class);
+        intent.putExtra("proId", proId);
+        intent.putExtra("number", num);
+        intent.putExtra("ruleId", ruleId);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+    static public void toPayCenterAct(Activity activity) {
+        Intent intent = new Intent(activity, PayCenterAct.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+    static public void toInvoiceInfoAct(Activity activity) {
+        Intent intent = new Intent(activity, InvoiceInfoAct.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+
 
 
 }

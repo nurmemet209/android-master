@@ -112,7 +112,7 @@
             android:textSize="@dimen/text_size_smallest"
             />
 
-        <TextView
+        <Button
             android:id="@+id/put_into_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"

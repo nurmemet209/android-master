@@ -1,226 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:divider="@drawable/divider_small"
-              android:orientation="vertical"
-              android:showDividers="middle"
+
+
+<ViewFlipper
+    android:id="@+id/view_flipper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/org_name_"
-            />
-
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider_small"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            >
 
-    <LinearLayout
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/org_name_"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/recognize_num"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/register_addr"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/register_tel"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/bank_name"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/invoice_content"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/main_bg_gray"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_biggest_"
+                >
+
+
+                <Button
+                    android:id="@+id/next_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_biggest"
+                    android:layout_marginRight="@dimen/padding_biggest"
+                    android:layout_marginTop="@dimen/padding_biggest"
+                    android:background="@drawable/main_red_pressed_sl"
+                    android:text="下一步"
+                    android:textColor="@color/white"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/recognize_num"
-            />
-
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="@color/main_bg_gray"
+            android:divider="@drawable/divider_small"
+            android:orientation="vertical"
+            android:showDividers="middle"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/register_addr"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/register_tel"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/bank_name"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
+            >
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_big"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
 
-        >
+                >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_big"
-            android:text="@string/invoice_content"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/get_invoice_person_name"
+                    />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_rect_4_edittext"
-            android:paddingBottom="@dimen/padding_big"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:paddingTop="@dimen/padding_big"
-            android:textCursorDrawable="@null"
-            />
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/main_bg_gray"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingTop="@dimen/padding_big"
-        android:text="温馨提示：发票的开票金额不包括趴趴派客优惠券和积分支付部分"
-        android:textSize="@dimen/text_size_small"
-        />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/get_invoice_person_phone"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:text="@string/invoice_deliver_addr"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_rect_4_edittext"
+                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:paddingTop="@dimen/padding_big"
+                    android:textCursorDrawable="@null"
+                    />
+            </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_biggest_"
-        android:background="@color/main_bg_gray"
-        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingTop="@dimen/padding_big"
+                android:text="温馨提示：发票的开票金额不包括趴趴派客优惠券和积分支付部分"
+                android:textSize="@dimen/text_size_small"
+                />
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_biggest"
-            android:layout_marginRight="@dimen/padding_biggest"
-            android:layout_marginTop="@dimen/padding_biggest"
-            android:background="@drawable/main_red_pressed_sl"
-            android:text="@string/sure"
-            android:textColor="@color/white"
+            <Button
+                android:id="@+id/pre_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_biggest"
+                android:layout_marginRight="@dimen/padding_biggest"
+                android:layout_marginTop="@dimen/padding_biggest_"
+                android:background="@drawable/yellow_pressed_sl"
+                android:text="上一步"
+                android:textColor="@color/white"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_biggest"
+                android:layout_marginRight="@dimen/padding_biggest"
+                android:layout_marginTop="@dimen/padding_biggest_"
+                android:background="@drawable/main_red_pressed_sl"
+                android:text="@string/sure"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/padding_biggest_"
 
-            />
+                />
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 
-</LinearLayout>
+</ViewFlipper>
+
+
+
+

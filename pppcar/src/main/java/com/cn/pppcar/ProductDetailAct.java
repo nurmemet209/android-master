@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -34,6 +35,9 @@ public class ProductDetailAct extends BaseAct {
     @Bind(R.id.product_detail_view_pager)
     protected CustomViewPager viewPager;
 
+    @Bind(R.id.put_into_cart)
+    protected Button mActionBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,12 @@ public class ProductDetailAct extends BaseAct {
 
 
     @OnClick(R.id.put_into_cart)
-    public void add2Cart(View view){
+    public void add2Cart(View view) {
         EventBus.getDefault().post(new EventBusEv(ProductFrag.ADD_2_CART, null));
+    }
+
+    public Button getActionButton() {
+        return mActionBtn;
     }
 
 

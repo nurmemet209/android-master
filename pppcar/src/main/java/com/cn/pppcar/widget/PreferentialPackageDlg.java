@@ -92,7 +92,8 @@ public class PreferentialPackageDlg extends BaseDialog implements TagGroupLayout
 
 
     }
-    private void setPrice(){
+
+    private void setPrice() {
         ResGroupApp r = list.get(selectedIndex);
         preferentialPrice.setText(spanHelper.priceSpan(R.string.preferential_price_, r.getTotalRetailPrice()));
         builder.clear();
@@ -111,7 +112,7 @@ public class PreferentialPackageDlg extends BaseDialog implements TagGroupLayout
                 TextView num = (TextView) view.findViewById(R.id.product_num);
                 img.setImageURI(Uri.parse(product.getImgs()));
                 title.setText(product.getName());
-                num.setText(product.getProductNum()+"");
+                num.setText(product.getProductNum() + "");
                 container.addView(view);
             }
         }
@@ -131,17 +132,32 @@ public class PreferentialPackageDlg extends BaseDialog implements TagGroupLayout
     }
 
     @OnClick(R.id.put_into_cart)
-    public void add2Cart(View view){
+    public void add2Cart(View view) {
         ResGroupApp r = list.get(selectedIndex);
         apiHandler.add2Cart(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                if (NetUtil.isSucced(response)){
-                    UIHelper.showToast(getContext(),"加入购物车成功", Toast.LENGTH_SHORT);
-                }else {
+                if (NetUtil.isSucced(response)) {
+                    showToast(NetUtil.getMessage(response));
+                } else {
                     showToast(NetUtil.getMessage(response));
                 }
             }
-        },r.getId(),-1,2);
+        }, r.getId(), -1, 2);
+    }
+
+    public boolean isPrefrentialSelected() {
+
+        if (mTagGroup.getSelectedItem() != null) {
+
+            return true;
+        }
+        return false;
+    }
+
+    public long getSelectedPreferentialId() {
+        ResGroupApp groupApp = (ResGroupApp) mTagGroup.getSelectedItem();
+
+        return groupApp.getId();
     }
 }
