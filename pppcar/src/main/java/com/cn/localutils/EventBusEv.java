@@ -31,9 +31,18 @@ public class EventBusEv {
 
     @Override
     public boolean equals(Object o) {
-        if (o!=null){
-            EventBusEv ev= (EventBusEv) o;
-            if (event.equals(ev.getEvent())){
+        if (o != null) {
+            EventBusEv ev = (EventBusEv) o;
+            if (event.equals(ev.getEvent())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean is(EventBusEv ev, String target) {
+        if (ev != null && target != null) {
+            if (target.equals(ev.getEvent())) {
                 return true;
             }
         }

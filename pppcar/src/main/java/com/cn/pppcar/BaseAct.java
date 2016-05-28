@@ -6,31 +6,38 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cn.commans.SpanHelper;
 import com.cn.entity.Item;
 import com.cn.net.ApiHandler;
+import com.cn.pppcar.widget.ProgressDlg;
+import com.cn.util.MyLogger;
 import com.cn.util.StringBuilderEx;
 import com.cn.util.UIHelper;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 
 /**
  * Created by nurmemet on 2016/3/27.
  */
-public abstract class BaseAct extends FragmentActivity {
+public abstract class BaseAct extends FragmentActivity implements Response.ErrorListener {
 
-    protected  int actFinishAnimInResId=R.anim.activity_exchange_left_in;
-    protected  int actFinishAnimOutResId=R.anim.activity_exchange_right_out;
-    protected StringBuilderEx builderEx=new StringBuilderEx();
+    protected int actFinishAnimInResId = R.anim.activity_exchange_left_in;
+    protected int actFinishAnimOutResId = R.anim.activity_exchange_right_out;
+    protected StringBuilderEx builderEx;
     protected SpanHelper spanHelper;
-    ApiHandler apiHandler ;
+    ApiHandler apiHandler;
+    ProgressDlg mProgressDlg;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        spanHelper=new SpanHelper(this);
-        apiHandler=ApiHandler.getInstance(this);
+        spanHelper = new SpanHelper(this);
+        apiHandler = ApiHandler.getInstance(this);
+        builderEx = new StringBuilderEx();
     }
 
     @Override
@@ -39,7 +46,7 @@ public abstract class BaseAct extends FragmentActivity {
         overridePendingTransition(actFinishAnimInResId, actFinishAnimOutResId);
     }
 
-    public void OnBack(View view){
+    public void OnBack(View view) {
         finish();
     }
 
@@ -69,7 +76,30 @@ public abstract class BaseAct extends FragmentActivity {
     }
 
 
-    protected void showToast(String msg){
-        UIHelper.showToast(this,msg, Toast.LENGTH_LONG);
+    protected void showToast(String msg) {
+        UIHelper.showToast(this, msg, Toast.LENGTH_LONG);
+    }
+
+
+    protected void showProgressDlg() {
+        if (mProgressDlg == null) {
+            mProgressDlg = new ProgressDlg();
+        }
+        mProgressDlg.show(getSupportFragmentManager(), "progressDlg_");
+    }
+
+    ;
+
+    protected void dismissProgressDlg() {
+        if (mProgressDlg != null) {
+            mProgressDlg.dismiss();
+        }
+    }
+
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        MyLogger.showError(error.getMessage());
+        dismissProgressDlg();
     }
 }

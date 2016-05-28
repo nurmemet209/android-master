@@ -29,11 +29,11 @@ import java.util.List;
  * Created by nurmemet on 2016/4/28.
  */
 public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
-    private int selectedPosition = 0;
+    private int selectedPosition = -1;
+    private View selectedView=null;
 
-    public ReceiveAddressListAdapter(Context mContext, List<Consignee> list, int selectedPosition) {
+    public ReceiveAddressListAdapter(Context mContext, List<Consignee> list) {
         super(mContext, list);
-        this.selectedPosition = selectedPosition;
     }
 
     @Override
@@ -56,11 +56,15 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
         name.setText(list.get(position).getConsignee() + "   " + list.get(position).getMobileNumber());
         if (list.get(position).getIsDefault()) {
             address.setText(getFormattedAddress(list.get(position).getAddress()));
+            if (selectedPosition==-1){
+                selectedPosition=position;
+            }
         } else {
             address.setText(list.get(position).getAddress());
         }
 
         if (selectedPosition == position) {
+            selectedView=holder.itemView;
             holder.itemView.setSelected(true);
         } else {
             holder.itemView.setSelected(false);
@@ -73,6 +77,10 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
                 if (position == selectedPosition) {
                     return;
                 }
+                if (selectedView!=null){
+                    selectedView.setSelected(false);
+                }
+                selectedView=v;
                 selectedPosition = position;
                 boolean isSelected = v.isSelected();
                 v.setSelected(!isSelected);
@@ -83,8 +91,9 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
             @Override
             public void onClick(View v) {
                 int adapterPosition = holder.getAdapterPosition();
-                list.remove(adapterPosition);
-                ReceiveAddressListAdapter.this.notifyItemRemoved(adapterPosition);
+                EventBus.getDefault().post(new EventBusEv("deleteConsignee", holder));
+//                list.remove(adapterPosition);
+//                ReceiveAddressListAdapter.this.notifyItemRemoved(adapterPosition);
             }
         });
         holder.itemView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
@@ -109,5 +118,9 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
         builder.setSpan(new BackgroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), 0, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.append(" ").append(addr);
         return builder;
+    }
+
+    public int getSelectedPosition(){
+        return selectedPosition;
     }
 }

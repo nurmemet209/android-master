@@ -40,9 +40,10 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     protected Context mContext;
 
     private static ApiHelper apiHelper;
-    // public final static String HOST = "http://pppcar.f3322.net:8084";
+//     public final static String HOST = "http://pppcar.f3322.net:8088";
 
     public final static String HOST = "http://192.168.0.219:8081";
+    //    public final static String HOST = "http://192.168.0.128:8888";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -382,7 +383,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     /**
      * @param listener
      */
-    public void getReceriverAddress(Response.Listener<JSONObject> listener) {
+    public void getReceriverAddressList(Response.Listener<JSONObject> listener) {
         if (appUserInfo != null) {
             StringBuilder builder = getRootApi().append("/v1/account/auth/allConsignee?");
             setSign(builder, null);
@@ -395,18 +396,40 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     /**
      *
      * @param listener
-     * @param consignee
-     * @param type 1 新增，2 编辑
+     * @param id  收获地址ID
+     * @param errorListener
      */
-    public void postReceiveAddr(Response.Listener<JSONObject> listener, final Consignee consignee,int type) {
+    public void deleteReceriverAddress(Response.Listener<JSONObject> listener, final String id, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/delConsignee");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST,builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("consigneeId", id);
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+
+
+    }
+
+    /**
+     * @param listener
+     * @param consignee
+     * @param type      1 新增，2 编辑
+     */
+    public void addReceiveAddr(Response.Listener<JSONObject> listener, final Consignee consignee, int type, Response.ErrorListener errorListener) {
 
         StringBuilder builder = getRootApi().append("/v1/account/auth/");
-        if (type==1){
+        if (type == 1) {
             builder.append("addConsignee");
-        }else if(type==2){
+        } else if (type == 2) {
             builder.append("updateConsignee");
         }
-        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();

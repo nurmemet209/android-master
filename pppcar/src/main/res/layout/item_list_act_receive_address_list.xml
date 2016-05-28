@@ -37,6 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="张三 13879921613"
+            android:maxLines="2"
+            android:ellipsize="end"
             />
 
         <TextView

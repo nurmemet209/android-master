@@ -23,6 +23,11 @@ import java.util.Map;
  */
 public class CustomJSonRequest extends Request<JSONObject> {
 
+    interface OnBackListener {
+        void OnBack();
+    }
+
+    private OnBackListener onBackListener;
     /**
      * Default charset for JSON request.
      */
@@ -34,6 +39,12 @@ public class CustomJSonRequest extends Request<JSONObject> {
         this.mListener = listener;
     }
 
+    public CustomJSonRequest(int method, String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, OnBackListener onBackListener) {
+        super(method, url, errorListener);
+        this.mListener = listener;
+        this.onBackListener = onBackListener;
+    }
+
     public CustomJSonRequest(String url, Response.Listener<JSONObject> listener,
                              Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
@@ -43,6 +54,9 @@ public class CustomJSonRequest extends Request<JSONObject> {
 
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+        if (onBackListener != null) {
+            onBackListener.OnBack();
+        }
         String jsonString = "";
         try {
             jsonString = new String(response.data,

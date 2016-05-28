@@ -97,8 +97,17 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowSoftInputMode">stateAlwaysHidden|stateHidden</item>
-
     </style>
+
+    <style name="progress_dlg" parent="base_dialog">
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.01</item>
+    </style>
+
     <style name="year_select_dlg" parent="base_dialog">
         <item name="android:background">@drawable/round_rect</item>
         <item name="android:windowBackground">@drawable/round_rect</item>
@@ -121,6 +130,7 @@
     <style name="dlg_pay_stage" parent="base_dialog">
         <item name="android:windowAnimationStyle">@style/window_anim_bottom</item>
     </style>
+
     <style name="dlg_product_attr_select" parent="base_dialog">
         <item name="android:windowAnimationStyle">@style/window_anim_bottom</item>
     </style>

@@ -92,15 +92,18 @@ public class ReceiveAddressEditAct extends BaseAct {
             return;
         }
         packageData();
-        apiHandler.postReceiveAddr(new Response.Listener<JSONObject>() {
+        showProgressDlg();
+        apiHandler.addReceiveAddr(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                dismissProgressDlg();
                 showToast(NetUtil.getMessage(response));
                 if (NetUtil.isSucced(response)) {
+                    EventBus.getDefault().post(new EventBusEv("refresh", null));
                     finish();
                 }
             }
-        }, consignee, type);
+        }, consignee, type, this);
     }
 
     private void packageData() {

@@ -3,17 +3,17 @@ package com.cn.pppcar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
+import com.cn.entity.Consignee;
 import com.cn.entity.ReserveGoodsDetailResBean;
 import com.cn.localutils.EventBusEv;
-import com.cn.pppcar.widget.SelectableRelaytiveLayoutItem;
 import com.facebook.drawee.view.SimpleDraweeView;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,24 +39,7 @@ public class PaySettlementAct extends BaseAct {
     final static int ORDER_TYPE_PREORDER = 2;
     @Bind(R.id.select_address)
     LinearLayout selectAddress;
-//    @Bind(R.id.company_name)
-//    TextView companyName;
-//    @Bind(R.id.invoice_detail)
-//    TextView invoiceDetail;
-//    @Bind(R.id.select_invoice_)
-//    LinearLayout selectInvoice;
-//    @Bind(R.id.product_money_amount)
-//    TextView productMoneyAmount;
-//    @Bind(R.id.stage_1_price)
-//    TextView stage1Price;
-//    @Bind(R.id.stage_2_price)
-//    TextView stage2Price;
-//    @Bind(R.id.buy_clause)
-//    SelectableRelaytiveLayoutItem buyClause;
-//    @Bind(R.id.total_money)
-//    TextView totalMoney;
-//    @Bind(R.id.submit_order)
-//    Button submitOrder;
+
 
     private long proId;
     private ReserveGoodsDetailResBean reserveDetailResBean;
@@ -113,6 +96,8 @@ public class PaySettlementAct extends BaseAct {
 
     private int invoiceType;
 
+    private Consignee mConsignee;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +107,7 @@ public class PaySettlementAct extends BaseAct {
         EventBus.getDefault().register(this);
         getArguments();
         loadData();
+
     }
 
     private void getArguments() {
@@ -152,11 +138,7 @@ public class PaySettlementAct extends BaseAct {
     }
 
     private void bindData() {
-
-        mReceiver.setText(reserveDetailResBean.getConsignee().getConsignee());
-        mPhoneNum.setText(reserveDetailResBean.getConsignee().getMobileNumber());
-        mReceiveAddress.setText(reserveDetailResBean.getConsignee().getAddress());
-
+        setReceiver(reserveDetailResBean.getConsignee());
         mTitle.setText(reserveDetailResBean.getBsProduct().getName());
         mIitleImg.setImageURI(Uri.parse(reserveDetailResBean.getBsProduct().getImgs()));
         mProductNum.setText(reserveDetailResBean.getNumber() + "");
@@ -176,6 +158,13 @@ public class PaySettlementAct extends BaseAct {
 
         mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getTotalPriceStr());
 
+    }
+
+    private void setReceiver(Consignee consignee) {
+        mReceiver.setText(consignee.getConsignee());
+        mPhoneNum.setText(consignee.getMobileNumber());
+        mReceiveAddress.setText(consignee.getAddress());
+        mConsignee = consignee;
     }
 
 
@@ -215,5 +204,25 @@ public class PaySettlementAct extends BaseAct {
     @OnClick(R.id.select_address)
     public void onSelectAddress() {
         ActivitySwitcher.toReceiveAddressListAct(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setmConsignee(EventBusEv ev) {
+        if (EventBusEv.is(ev, "setConsignee")) {
+            setReceiver((Consignee) ev.getData());
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
     }
 }
