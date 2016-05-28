@@ -31,7 +31,7 @@ import butterknife.OnClick;
  */
 public class ReceiveAddressListAct extends BaseAct {
 
-    private int selectedAddressId;
+    private Consignee selectedConsignee;
 
 
     @Bind(R.id.recycle_view)
@@ -71,6 +71,7 @@ public class ReceiveAddressListAct extends BaseAct {
     private void bindData() {
         if (adapter == null) {
             adapter = new ReceiveAddressListAdapter(this, mAddresList);
+            setSelectedConsignee();
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.addItemDecoration(new CustomItemDecoration(this, getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
             recyclerView.setAdapter(adapter);
@@ -122,7 +123,29 @@ public class ReceiveAddressListAct extends BaseAct {
     public void OnBack(View view) {
         int pos = adapter.getSelectedPosition();
         Consignee consignee = mAddresList.get(pos);
-        EventBus.getDefault().post(new EventBusEv("setConsignee", consignee));
+        EventBus.getDefault().post(new EventBusEv("ReceiveAddressListAct_setConsignee", consignee));
         super.OnBack(view);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void setSelectedAddress(EventBusEv ev) {
+        if (EventBusEv.is(ev, "PaySettlementAct_setConsignee")) {
+            selectedConsignee = (Consignee) ev.getData();
+            EventBus.getDefault().removeStickyEvent(ev);
+        }
+    }
+
+    private void setSelectedConsignee() {
+        if (selectedConsignee != null) {
+            int index = mAddresList.indexOf(selectedConsignee);
+            adapter.setSelectedPosition(index);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

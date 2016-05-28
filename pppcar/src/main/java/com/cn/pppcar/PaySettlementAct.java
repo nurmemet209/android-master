@@ -203,26 +203,16 @@ public class PaySettlementAct extends BaseAct {
 
     @OnClick(R.id.select_address)
     public void onSelectAddress() {
+        EventBus.getDefault().postSticky(new EventBusEv("PaySettlementAct_setConsignee", mConsignee));
         ActivitySwitcher.toReceiveAddressListAct(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setmConsignee(EventBusEv ev) {
-        if (EventBusEv.is(ev, "setConsignee")) {
+        if (EventBusEv.is(ev, "ReceiveAddressListAct_setConsignee")) {
             setReceiver((Consignee) ev.getData());
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-    }
 }

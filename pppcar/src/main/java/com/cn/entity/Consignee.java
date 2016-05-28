@@ -2,9 +2,9 @@ package com.cn.entity;
 
 import java.io.Serializable;
 
-public class Consignee implements Serializable{
+public class Consignee implements Serializable {
 
-    private long id=-1;
+    private long id = -1;
     private String mobileNumber;
     private String address;
     private String consignee;
@@ -93,4 +93,14 @@ public class Consignee implements Serializable{
         this.consignee = consignee;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o != null) {
+            Consignee consignee = (Consignee) o;
+            if (consignee.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

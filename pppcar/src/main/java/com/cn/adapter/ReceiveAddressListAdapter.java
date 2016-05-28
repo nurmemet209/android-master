@@ -123,4 +123,7 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
     public int getSelectedPosition(){
         return selectedPosition;
     }
+    public void setSelectedPosition(int position){
+        this.selectedPosition=position;
+    }
 }
