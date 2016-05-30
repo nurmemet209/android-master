@@ -76,7 +76,9 @@
                   android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
             />
         <activity android:name=".PayCenterAct"/>
-        <activity android:name=".InvoiceInfoAct"/>
+        <activity android:name=".InvoiceTypeSelectAct"/>
+        <activity android:name=".InvoiceAct"/>
+        <activity android:name=".InvoiceCommonEditAct"/>
 
     </application>
 

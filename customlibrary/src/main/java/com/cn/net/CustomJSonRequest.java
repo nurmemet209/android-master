@@ -77,5 +77,10 @@ public class CustomJSonRequest extends Request<JSONObject> {
         mListener.onResponse(response);
     }
 
+    @Override
+    public void deliverError(VolleyError error) {
+        super.deliverError(error);
+    }
+
 
 }

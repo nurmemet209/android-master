@@ -11,234 +11,151 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_bg_gray"
         android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:id="@+id/container"
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_bg_gray"
-            android:orientation="vertical"
+            android:divider="@drawable/divider_small"
+            android:showDividers="middle"
+            android:stretchColumns="1"
 
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
+            <TableRow
+
+
                 android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
 
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="right|center_vertical"
+                    android:text="发票抬头："
+                    />
+
+                <EditText
+                    android:id="@+id/invoice_header"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="收票人姓名"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_big"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="right|center_vertical"
+                    android:text="收票人姓名："
                     />
 
                 <EditText
                     android:id="@+id/invoice_receiver_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_rect_4_edittext"
-                    android:hint="@string/please_input_org_name"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:textCursorDrawable="@null"
                     />
-            </LinearLayout>
+            </TableRow>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_big_divider_height"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
+            <TableRow
                 android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
-
+                android:paddingRight="@dimen/padding_big"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="right|center_vertical"
+                    android:text="收票人地址："
+                    />
+
+                <EditText
+                    android:id="@+id/invoice_receiver_addr"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="收票人手机"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_big"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="right|center_vertical"
+                    android:text="收票人电话："
                     />
 
                 <EditText
                     android:id="@+id/invoice_receiver_phone"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_rect_4_edittext"
-                    android:hint="@string/please_input_org_name"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:textCursorDrawable="@null"
                     />
-            </LinearLayout>
+            </TableRow>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_big_divider_height"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
+            <TableRow
                 android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
-
+                android:paddingRight="@dimen/padding_big"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="@string/invoice_header"
+                    android:layout_height="@dimen/item_height"
+                    android:gravity="right|center_vertical"
+                    android:text="发票内容："
                     />
-
-                <EditText
-                    android:id="@+id/org_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/round_rect_4_edittext"
-                    android:hint="@string/please_input_org_name"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:textCursorDrawable="@null"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_big_divider_height"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
-
-                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="@string/invoice_deliver_addr"
+                    android:text="商品明细"
                     />
+            </TableRow>
+        </TableLayout>
 
-                <com.cn.pppcar.widget.SelectableLinearLayoutItem
-                    android:id="@+id/order_addr_same"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/padding_big"
-                    >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_big"
+            android:layout_marginTop="@dimen/padding_big"
+            android:paddingLeft="@dimen/padding_normal"
+            android:text="温馨提示：发票的开票金额不包括趴趴派客优惠券和积分支付部分"
+            android:textSize="@dimen/text_size_small"
+            />
 
-                    <ImageView
-                        android:layout_width="@dimen/icon_width"
-                        android:layout_height="@dimen/icon_width"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/image_view_checkbox"
-                        android:tag="selector_"
-                        />
+        <Button
+            android:id="@+id/select_invoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_tbn_margin"
+            android:layout_marginRight="@dimen/main_tbn_margin"
+            android:layout_marginTop="@dimen/main_tbn_margin"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
+            android:background="@drawable/rect_red_strocke"
+            android:text="选择发票信息"
+            />
+        <Button
+            android:id="@+id/sure_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_tbn_margin"
+            android:layout_marginRight="@dimen/main_tbn_margin"
+            android:layout_marginTop="@dimen/main_tbn_margin"
+            android:layout_marginBottom="@dimen/main_tbn_margin"
+            android:background="@drawable/main_red_pressed_sl"
+            android:text="确定"
+            android:textColor="@color/white"
+            />
 
-                        android:text="@string/same_as_order_addr"
-                        />
-
-                </com.cn.pppcar.widget.SelectableLinearLayoutItem>
-
-                <EditText
-                    android:id="@+id/deliver_addr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/round_rect_4_edittext"
-                    android:hint="@string/please_input_other_addr"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
-                    android:textCursorDrawable="@null"
-                    />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_big_divider_height"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:text="@string/invoice_deliver_addr"
-                    />
-
-                <com.cn.pppcar.widget.SelectableLinearLayoutItem
-                    android:id="@+id/product_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <ImageView
-                        android:layout_width="@dimen/icon_width"
-                        android:layout_height="@dimen/icon_width"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/image_view_checkbox"
-                        android:tag="selector_"
-
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/product_detail"
-                        />
-                </com.cn.pppcar.widget.SelectableLinearLayoutItem>
-
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/padding_big"
-                android:layout_marginTop="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:text="温馨提示：发票的开票金额不包括趴趴派客优惠券和积分支付部分"
-                android:textSize="@dimen/text_size_small"
-                />
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.cn.commans.ActivitySwitcher;
-import com.cn.fragment.BaseFrag;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;
@@ -42,6 +41,6 @@ public class IntegralPaySettelmentAct extends BaseAct {
     }
 
     public void selectAddress(View view){
-        ActivitySwitcher.toReceiveAddressListAct(this);
+        ActivitySwitcher.toReceiveAddressListAct(this, null);
     }
 }

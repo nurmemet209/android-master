@@ -1,5 +1,7 @@
 package com.cn.fragment;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -7,11 +9,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cn.commans.SpanHelper;
 import com.cn.entity.Item;
 import com.cn.net.ApiHandler;
+import com.cn.pppcar.R;
 import com.cn.util.StringBuilderEx;
 import com.cn.util.UIHelper;
 
@@ -27,7 +33,7 @@ public abstract class BaseFrag extends Fragment {
     protected StringBuilderEx builderEx;
     protected SpanHelper spanHelper;
     ApiHandler apiHandler;
-
+    protected boolean isFirstShow = true;
 
 
     @Nullable
@@ -96,18 +102,72 @@ public abstract class BaseFrag extends Fragment {
     }
 
 
-    protected void showToast(final String msg){
-        if (Thread.currentThread() == Looper.getMainLooper().getThread()){
-            UIHelper.showToast(getActivity(),msg, Toast.LENGTH_SHORT);
+    protected void showToast(final String msg) {
+        if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
+            UIHelper.showToast(getActivity(), msg, Toast.LENGTH_SHORT);
 
-        }else{
+        } else {
             new android.os.Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    UIHelper.showToast(getActivity(),msg, Toast.LENGTH_SHORT);
+                    UIHelper.showToast(getActivity(), msg, Toast.LENGTH_SHORT);
                 }
             });
         }
+
+    }
+
+
+    protected void showWithAnimation(final View view) {
+        if (view != null) {
+            view.setVisibility(View.VISIBLE);
+            view.setAlpha(0);
+            view.animate().alpha(1f).setInterpolator(new LinearInterpolator()).setDuration(600).start();
+
+//            ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
+//            animator.setDuration(700);
+//            animator.setInterpolator(new LinearInterpolator());
+//
+//            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                @Override
+//                public void onAnimationUpdate(ValueAnimator animation) {
+//                    float value = (float) animation.getAnimatedValue();
+//                    view.setAlpha(value);
+//                }
+//            });
+//            animator.start();
+        }
+
+    }
+
+    /**
+     * 数据加载完成
+     */
+    protected void dataLoaded(final boolean isSucceed) {
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                if (isFirstShow) {
+                    isFirstShow = false;
+                    View contentView = mainView.findViewById(R.id.content);
+                    if (isSucceed) {
+                        mainView.findViewById(R.id.loading_view).setVisibility(View.GONE);
+
+                        showWithAnimation(contentView);
+
+                    } else {
+
+                        TextView msg = (TextView) mainView.findViewById(R.id.message);
+                        msg.setText("网络错误，请检查你的网络");
+                        ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
+                        progressBar.setVisibility(View.GONE);
+
+                    }
+                }
+            }
+        }, 2000);
 
     }
 }

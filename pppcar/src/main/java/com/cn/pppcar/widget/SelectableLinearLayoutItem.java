@@ -31,10 +31,15 @@ public class SelectableLinearLayoutItem extends LinearLayout {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ImageView imageView = (ImageView) findViewWithTag("selector_");
-                boolean isSelected = v.isSelected();
-                v.setSelected(!isSelected);
+                ImageView imageView = (ImageView) findViewWithTag("selector_");
+                boolean isSelected = imageView.isSelected();
+                imageView.setSelected(!isSelected);
             }
         });
+    }
+
+    public void setSelectedState(boolean isSelected) {
+        ImageView imageView = (ImageView) findViewWithTag("selector_");
+        imageView.setSelected(isSelected);
     }
 }

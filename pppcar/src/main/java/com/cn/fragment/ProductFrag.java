@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cn.adapter.BannerAdapter;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.entity.ResProductApp;
 import com.cn.localutils.EventBusEv;
+import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.ProductDetailAct;
 import com.cn.pppcar.R;
 import com.cn.pppcar.widget.PreOrderDlg;
@@ -102,12 +104,19 @@ public class ProductFrag extends BaseFrag {
                     productDetail = apiHandler.toObject(NetUtil.getData(response), ResProductApp.class);
                     if (productDetail != null) {
                         bindData();
+                        dataLoaded(true);
                     }
                 } else {
                     showToast(NetUtil.getMessage(response));
+                    dataLoaded(false);
                 }
             }
-        }, null, proId);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dataLoaded(false);
+            }
+        }, proId);
 
 
     }
@@ -264,9 +273,9 @@ public class ProductFrag extends BaseFrag {
                 //是预定订单
                 if (productDetail.getIsFlagGoodsCycle()) {
                     //提交预订单
-                    long id=productAttrDlg.getOrderRuleId();
-                    int num=productAttrDlg.getNum();
-                    ActivitySwitcher.toPaySettlementAct(getActivity(),productDetail.getId(),num,id);
+                    long id = productAttrDlg.getOrderRuleId();
+                    int num = productAttrDlg.getNum();
+                    ActivitySwitcher.toPaySettlementAct(getActivity(), productDetail.getId(), num, id,PaySettlementAct.ORDER_TYPE_PREORDER);
                 } else {
                     //如果有选中套餐,套餐产品加入到购物车
                     if (isPreferentialSelected()) {

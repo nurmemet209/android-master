@@ -45,11 +45,17 @@ public class ReceiveAddressListAct extends BaseAct {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getArguments();
         setContentView(R.layout.act_receive_address_list);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         loadData();
     }
+
+    private void getArguments() {
+        selectedConsignee = (Consignee) getIntent().getSerializableExtra("Consignee");
+    }
+
 
     private void loadData() {
         apiHandler.getReceriverAddressList(new Response.Listener<JSONObject>() {
@@ -84,7 +90,7 @@ public class ReceiveAddressListAct extends BaseAct {
 
     @OnClick(R.id.add_reveive_addr)
     public void addNewReceiveAddr(View view) {
-        ActivitySwitcher.toReceiveAddressEditAct(this);
+        ActivitySwitcher.toReceiveAddressEditAct(this, null);
     }
 
 
@@ -122,19 +128,21 @@ public class ReceiveAddressListAct extends BaseAct {
     @Override
     public void OnBack(View view) {
         int pos = adapter.getSelectedPosition();
-        Consignee consignee = mAddresList.get(pos);
-        EventBus.getDefault().post(new EventBusEv("ReceiveAddressListAct_setConsignee", consignee));
+        if (pos != -1) {
+            Consignee consignee = mAddresList.get(pos);
+            EventBus.getDefault().post(new EventBusEv("ReceiveAddressListAct_setConsignee", consignee));
+        }
         super.OnBack(view);
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void setSelectedAddress(EventBusEv ev) {
-        if (EventBusEv.is(ev, "PaySettlementAct_setConsignee")) {
-            selectedConsignee = (Consignee) ev.getData();
-            EventBus.getDefault().removeStickyEvent(ev);
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+//    public void setSelectedAddress(EventBusEv ev) {
+//        if (EventBusEv.is(ev, "PaySettlementAct_setConsignee")) {
+//            selectedConsignee = (Consignee) ev.getData();
+//            EventBus.getDefault().removeStickyEvent(ev);
+//        }
+//    }
 
     private void setSelectedConsignee() {
         if (selectedConsignee != null) {

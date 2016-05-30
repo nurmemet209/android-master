@@ -2,34 +2,35 @@ package com.cn.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cn.adapter.CarFragAdapter;
 import com.cn.adapter.CustomItemDecoration;
+import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.component.OnListItemWidgetClickedListener;
 import com.cn.entity.CartBean;
 import com.cn.entity.CartResBean;
+import com.cn.localutils.EventBusEv;
+import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.R;
-import com.cn.pppcar.widget.NumEditLayout;
+import com.cn.pppcar.widget.CustomRecycleView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**
@@ -41,7 +42,7 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     public final static int COMMOND_NUM_CHANGED = 2;
 
     @Bind(R.id.recycle_view)
-    protected RecyclerView recyclerView;
+    protected CustomRecycleView mRecyclerView;
     @Bind(R.id.view_flipper)
     protected ViewFlipper viewFlipper;
     @Bind(R.id.select_all)
@@ -50,6 +51,9 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     protected CheckBox mCheckBox4Edit;
     private CarFragAdapter adapter;
     private CartResBean cartResBean;
+
+    @Bind(R.id.swipe_refresh_widget)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     private boolean isEditMode = false;
@@ -81,24 +85,49 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
                 if (NetUtil.isSucced(response)) {
                     cartResBean = apiHandler.toObject(NetUtil.getData(response), CartResBean.class);
                     if (cartResBean != null) {
-                        adapter = new CarFragAdapter(cartResBean.getContent(), getActivity(), CartFrag.this);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        recyclerView.addItemDecoration(new CustomItemDecoration(getActivity(), getContext().getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
-                        recyclerView.setAdapter(adapter);
-                        setIsAllSelected();
-                    } else {
-
+                        bindData();
                     }
-
-
                 } else {
                     showToast(NetUtil.getMessage(response));
                 }
+                cancelRefreshState(null);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                cancelRefreshState("刷新失败，请检查你的网络");
             }
         });
 
 
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void bindData() {
+        if (adapter == null) {
+            adapter = new CarFragAdapter(cartResBean.getContent(), getActivity(), CartFrag.this);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecyclerView.addItemDecoration(new CustomItemDecoration(getActivity(), getContext().getResources().getDimensionPixelSize(R.dimen.main_big_divider_height)));
+            mRecyclerView.setAdapter(adapter);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    loadData();
+                }
+            });
+        } else {
+            adapter.setList(cartResBean.getContent());
+            adapter.notifyDataSetChanged();
+        }
+        setIsAllSelected();
+    }
+
 
     private void setIsAllSelected() {
         boolean isAllChecked = true;
@@ -215,9 +244,9 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     }
 
     @OnClick(R.id.move_to_collect)
-    public  void add2Collect(View view){
+    public void add2Collect(View view) {
 
-        if (!adapter.getEditCartList().isEmpty()){
+        if (!adapter.getEditCartList().isEmpty()) {
 
             builderEx.clear();
             for (int i = 0; i < adapter.getEditCartList().size(); i++) {
@@ -241,9 +270,25 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
                     }
                 }
             }, builderEx.toString());
-        }else{
+        } else {
             showToast("至少选择一个项目");
         }
 
+    }
+
+
+    @OnClick(R.id.settle_order)
+    public void toOrderSettelementAct(View view) {
+        ActivitySwitcher.toPaySettlementAct(getActivity(), PaySettlementAct.ORDER_TYPE_COMMON);
+    }
+
+
+    private void cancelRefreshState(String msg) {
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            if (msg != null) {
+                showToast(msg);
+            }
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 }

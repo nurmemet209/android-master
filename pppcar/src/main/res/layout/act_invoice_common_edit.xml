@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/main_bg_gray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+        android:paddingRight="@dimen/padding_normal"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="OnBack"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/invoice_inof"
+            android:textSize="@dimen/text_size_large"
+            />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_normal"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_bg_gray"
+            android:orientation="vertical"
+            >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_small"
+                android:showDividers="middle"
+                android:stretchColumns="1"
+
+                >
+
+                <TableRow
+
+
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_big"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height"
+                        android:gravity="right|center_vertical"
+                        android:text="发票抬头："
+                        />
+
+                    <EditText
+                        android:id="@+id/invoice_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_big"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height"
+                        android:gravity="right|center_vertical"
+                        android:text="收票人姓名："
+                        />
+
+                    <EditText
+                        android:id="@+id/invoice_receiver_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_big"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height"
+                        android:gravity="right|center_vertical"
+                        android:text="收票人地址："
+                        />
+
+                    <EditText
+                        android:id="@+id/invoice_receiver_addr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_big"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height"
+                        android:gravity="right|center_vertical"
+                        android:text="收票人电话："
+                        />
+
+                    <EditText
+                        android:id="@+id/invoice_receiver_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_big"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/item_height"
+                        android:gravity="right|center_vertical"
+                        android:text="发票内容："
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商品明细"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_big"
+                android:layout_marginTop="@dimen/padding_big"
+                android:paddingLeft="@dimen/padding_normal"
+                android:text="温馨提示：发票的开票金额不包括趴趴派客优惠券和积分支付部分"
+                android:textSize="@dimen/text_size_small"
+                />
+
+
+            <Button
+                android:id="@+id/sure_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_tbn_margin"
+                android:layout_marginRight="@dimen/main_tbn_margin"
+                android:layout_marginTop="@dimen/main_tbn_margin"
+                android:layout_marginBottom="@dimen/main_tbn_margin"
+                android:background="@drawable/main_red_pressed_sl"
+                android:text="确定"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+

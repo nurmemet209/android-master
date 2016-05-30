@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.ResIndexBanner;
 import com.cn.entity.ResIndexBrandType;
@@ -40,7 +45,7 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
     public MainPageRecycleAdapter(ResIndexPublicElement mainPage, Context mContext) {
         this.mainPage = mainPage;
         this.mContext = mContext;
-        this.recommonds=mainPage.getPageResRemonmendPro().getResRemonmendPros();
+        this.recommonds = mainPage.getPageResRemonmendPro().getResRemonmendPros();
     }
 
     @Override
@@ -110,32 +115,62 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             return;
         //轮播
         if (Util.isNoteEmpty(mainPage.getResIndexBanners())) {
-            AutoScrollViewPager banner = (AutoScrollViewPager) view.findViewById(R.id.banner);
-            CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
+            ConvenientBanner<ResIndexBanner> banner = (ConvenientBanner) view.findViewById(R.id.convenientBanner);
+            final CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
 
-            ArrayList viewList = new ArrayList();
-            for (int i = 0; i < mainPage.getResIndexBanners().size(); i++) {
-                ResIndexBanner item = mainPage.getResIndexBanners().get(i);
-                SimpleDraweeView img = new SimpleDraweeView(mContext);
-                Uri uri = Uri.parse(item.getImgUrl());
-                img.setImageURI(uri);
-                viewList.add(img);
-                img.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+//            ArrayList viewList = new ArrayList();
+//            for (int i = 0; i < mainPage.getResIndexBanners().size(); i++) {
+//                ResIndexBanner item = mainPage.getResIndexBanners().get(i);
+//                SimpleDraweeView img = new SimpleDraweeView(mContext);
+//                Uri uri = Uri.parse(item.getImgUrl());
+//                img.setImageURI(uri);
+//                viewList.add(img);
+//                img.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
+//            }
+            banner.setPageIndicator(new int[]{R.drawable.indicator_red_radius, R.drawable.indicator_gray_radius});
+            banner.startTurning(5000);
 
-                    }
-                });
-            }
-            BannerAdapter adapter = new BannerAdapter(mContext, viewList);
-            banner.setAdapter(adapter);
-            banner.setInterval(4000);
-            // banner.setScrollDurationFactor(5);
-            banner.setCycle(true);
-            banner.setOffscreenPageLimit(mainPage.getResIndexBanners().size());
-            banner.setBorderAnimation(true);
-            banner.startAutoScroll();
-            indicator.setViewPager(banner);
+            banner.setScrollDuration(1000);
+            banner.setCanLoop(true);
+            banner.setManualPageable(true);
+
+            banner.setPages(new CBViewHolderCreator() {
+                @Override
+                public Object createHolder() {
+
+                    return new LocalImageHolderView();
+                }
+            }, mainPage.getResIndexBanners());
+            banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    //  indicator.se
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+//            BannerAdapter adapter = new BannerAdapter(mContext, viewList);
+//            banner.setAdapter(adapter);
+//            banner.setInterval(4000);
+//            // banner.setScrollDurationFactor(5);
+//            banner.setCycle(true);
+//            banner.setOffscreenPageLimit(mainPage.getResIndexBanners().size());
+//            banner.setBorderAnimation(true);
+//            banner.startAutoScroll();
+//            indicator.setViewPager(banner);
 
         }
         //品牌中心
@@ -182,27 +217,27 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         if (Util.isNoteEmpty(mainPage.getResIndexRecommendTypes())) {
 
             List<ResIndexRecommendType> universalItems = mainPage.getResIndexRecommendTypes();
-            int m=1;
-            for (int i=0;i<universalItems.size();i++){
-                ResIndexRecommendType item=universalItems.get(i);
-                SimpleDraweeView img=null;
+            int m = 1;
+            for (int i = 0; i < universalItems.size(); i++) {
+                ResIndexRecommendType item = universalItems.get(i);
+                SimpleDraweeView img = null;
                 if (!item.getIsLarge()) {
-                    img=(SimpleDraweeView) view.findViewWithTag("universal_big");
-                }else{
-                    img=(SimpleDraweeView) view.findViewWithTag("universal_small_"+m);
+                    img = (SimpleDraweeView) view.findViewWithTag("universal_big");
+                } else {
+                    img = (SimpleDraweeView) view.findViewWithTag("universal_small_" + m);
                     m++;
                 }
                 img.setImageURI(Uri.parse(item.getImgUrl()));
             }
         }
 
-        ViewGroup container=(ViewGroup)view.findViewById(R.id.container);
+        ViewGroup container = (ViewGroup) view.findViewById(R.id.container);
         for (int i = 0; i < mainPage.getResIndexBrandTypes().size(); i++) {
             ResIndexBrandType item = mainPage.getResIndexBrandTypes().get(i);
             View v = LayoutInflater.from(mContext).inflate(R.layout.item_main_page, null);
             TextView title = (TextView) v.findViewById(R.id.title);
             TextView price = (TextView) v.findViewById(R.id.price);
-            TextView productName=(TextView) v.findViewById(R.id.product_name);
+            TextView productName = (TextView) v.findViewById(R.id.product_name);
             SimpleDraweeView leftBig = (SimpleDraweeView) v.findViewById(R.id.left_big);
             SimpleDraweeView rightBig = (SimpleDraweeView) v.findViewById(R.id.right_big);
             SimpleDraweeView leftSmall = (SimpleDraweeView) v.findViewById(R.id.left_small);
@@ -247,9 +282,29 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toProductDetailAct((Activity) mContext,recommonds.get(position).getId());
+                ActivitySwitcher.toProductDetailAct((Activity) mContext, recommonds.get(position).getId());
             }
         });
 
     }
+
+    class LocalImageHolderView implements Holder<ResIndexBanner> {
+        private ImageView img;
+
+        @Override
+        public View createView(Context context) {
+            img = new SimpleDraweeView(mContext);
+            return img;
+        }
+
+        @Override
+        public void UpdateUI(Context context, final int position, ResIndexBanner data) {
+            Uri uri = Uri.parse(data.getImgUrl());
+            img.setImageURI(uri);
+        }
+    }
+
+    ;
+
+
 }

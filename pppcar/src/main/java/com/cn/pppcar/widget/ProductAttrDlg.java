@@ -18,6 +18,7 @@ import com.cn.commans.SpanHelper;
 import com.cn.entity.ProductAttrBean;
 import com.cn.entity.ResProductApp;
 import com.cn.entity.ReserveGoodsRuleResBean;
+import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -192,7 +193,8 @@ public class ProductAttrDlg extends BaseDialog {
                 return;
             } else {
                 long ruleId = getOrderRuleId();
-                ActivitySwitcher.toPaySettlementAct((Activity) mContext, productDetail.getId(), num, ruleId);
+                ActivitySwitcher.toPaySettlementAct((Activity) mContext, productDetail.getId(), num, ruleId, PaySettlementAct.ORDER_TYPE_PREORDER);
+                dismiss();
             }
 
         }

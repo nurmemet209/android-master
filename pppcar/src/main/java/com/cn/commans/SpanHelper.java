@@ -93,7 +93,7 @@ public class SpanHelper {
     }
 
     public SpannableStringBuilder auctionTime(long leftTime) {
-        DateUtil.AuctionTime auctionTime=DateUtil.getAuctionTime(leftTime);
+        DateUtil.AuctionTime auctionTime = DateUtil.getAuctionTime(leftTime);
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.replace(0, builder.length(), "");
         builder.append(" ").append(auctionTime.dayStr).append(" ");
@@ -139,6 +139,14 @@ public class SpanHelper {
         int start = 0;
         ;
         builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, s.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+    }
+
+    public SpannableStringBuilder toRed(String left, String right) {
+        SpannableStringBuilder builder = new SpannableStringBuilder(left);
+        int start = builder.length();
+        builder.append(right);
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
     }
 

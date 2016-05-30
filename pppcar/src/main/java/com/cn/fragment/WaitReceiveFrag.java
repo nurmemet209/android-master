@@ -50,10 +50,10 @@ public class WaitReceiveFrag extends Fragment {
 
     private void init() {
 //        adapter=new OrderAdapter(getList(),getActivity(),1);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        CustomItemDecoration decoration=new CustomItemDecoration(getActivity(),getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
-//        recyclerView.addItemDecoration(decoration);
-//        recyclerView.setAdapter(adapter);
+//        mRecyclerView.addItemDecoration(decoration);
+//        mRecyclerView.setAdapter(adapter);
 
     }
 

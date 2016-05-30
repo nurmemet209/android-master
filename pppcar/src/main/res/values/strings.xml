@@ -110,7 +110,7 @@
     <string name="receiver_">收货人：</string>
     <string name="receiver_address">收获地址</string>
     <string name="receiver_address_">收获地址：</string>
-    <string name="pay_delivery">支付/送货</string>
+    <string name="pay_delivery">支付</string>
     <string name="pay_online">在线支付</string>
     <string name="invoice_information">发票信息</string>
     <string name="order_remark">订单备注</string>

@@ -42,8 +42,8 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
-    public final static String HOST = "http://192.168.0.219:8081";
-    //    public final static String HOST = "http://192.168.0.128:8888";
+    //    public final static String HOST = "http://192.168.0.219:8081";
+    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -243,7 +243,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     public void getProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, long id) {
         String url = getRootApi().append("/v1/app/product/queryProductbyId?proId=").append(id).toString();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, errorListener);
         addToRequestQueue(request);
     }
 
@@ -370,13 +370,23 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      *
      * @param listener
      */
-    public void getCartPage(Response.Listener<JSONObject> listener) {
-        if (appUserInfo != null) {
-            StringBuilder builder = getRootApi().append("/v1/cart/auth/list?");
-            setSign(builder, null);
-            CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
-            addToRequestQueue(request);
-        }
+    public void getCartPage(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/cart/auth/list?");
+        setSign(builder, null);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
+        addToRequestQueue(request);
+
+
+    }
+
+    public void getInvoiceInformationList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/invoiceCommon?");
+        setSign(builder, null);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
+        addToRequestQueue(request);
+
 
     }
 
@@ -393,16 +403,30 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     }
 
+    public void addModifyInvoiceCommon(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/saveInvoiceTitle");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+
+
+    }
+
     /**
-     *
      * @param listener
-     * @param id  收获地址ID
+     * @param id            收获地址ID
      * @param errorListener
      */
     public void deleteReceriverAddress(Response.Listener<JSONObject> listener, final String id, Response.ErrorListener errorListener) {
 
         StringBuilder builder = getRootApi().append("/v1/account/auth/delConsignee");
-        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST,builder.toString(), listener, errorListener) {
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<>();
@@ -421,7 +445,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param consignee
      * @param type      1 新增，2 编辑
      */
-    public void addReceiveAddr(Response.Listener<JSONObject> listener, final Consignee consignee, int type, Response.ErrorListener errorListener) {
+    public void addReceiveAddr(Response.Listener<JSONObject> listener, final Consignee consignee, final int type, Response.ErrorListener errorListener) {
 
         StringBuilder builder = getRootApi().append("/v1/account/auth/");
         if (type == 1) {
@@ -433,6 +457,9 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
+                if (type == 2) {
+                    map.put("id", String.valueOf(consignee.getId()));
+                }
                 map.put("consignee", consignee.getConsignee());
                 map.put("address", consignee.getAddress());
                 map.put("mobileNumber", consignee.getMobileNumber());
@@ -490,14 +517,14 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
 
-    public void getPaySettlementPage(Response.Listener<JSONObject> listener, String proId, String num, String ruleId) {
+    public void getPaySettlementPage(Response.Listener<JSONObject> listener, String proId, String num, String ruleId, Response.ErrorListener errorListener) {
         StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
         Map<String, String> map = new HashMap<>();
         map.put("productId", proId);
         map.put("number", num);
         map.put("ruleId", ruleId);
         setSign(builder, map);
-        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
         addToRequestQueue(request);
     }
 
@@ -536,21 +563,24 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     /**
      * @param listener
-     * @param invoiceType
-     * @param ruleId
-     * @param number
-     * @param consigneeId
-     * @param productId
-     * @param remark
+     * @param orderType   1 普通订单，2 预订单
+     * @param invoiceType 发票类型
+     * @param ruleId      预定规则ID
+     * @param number      产品数量
+     * @param consigneeId 收获地址Id
+     * @param productId   产品ID
+     * @param remark      订单备注
      */
-    public void submitPreOrder(Response.Listener<JSONObject> listener, final String invoiceType, final String ruleId, final String number, final String consigneeId, final String productId, final String remark) {
+    public void submitPreOrder(Response.Listener<JSONObject> listener, final int orderType, final String invoiceType, final String ruleId, final String number, final String consigneeId, final String productId, final String remark, Response.ErrorListener errorListener) {
         StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoods");
-        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, this) {
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                if (orderType == 2) {
+                    params.put("ruleId", ruleId);
+                }
                 params.put("invoiceType", invoiceType);
-                params.put("ruleId", ruleId);
                 params.put("number", number);
                 params.put("consigneeId", consigneeId);
                 params.put("productId", productId);

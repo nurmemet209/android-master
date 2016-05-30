@@ -57,4 +57,9 @@ dependencies {
     compile files('libs/lite-async-1.0.0.jar')
     //materiyal design progressbar
     compile 'com.pnikosis:materialish-progress:1.7'
+    //广告轮播控件
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+
+
+
 }

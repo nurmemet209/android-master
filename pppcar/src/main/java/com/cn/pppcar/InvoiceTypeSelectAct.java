@@ -19,7 +19,7 @@ import butterknife.OnClick;
  * 发票类型
  * Created by nurmemet on 2016/4/23.
  */
-public class InvoiceInfoAct extends BaseAct {
+public class InvoiceTypeSelectAct extends BaseAct {
 
     @Bind(R.id.selector_container)
     protected SelectecableLinearLayout selectorContainer;

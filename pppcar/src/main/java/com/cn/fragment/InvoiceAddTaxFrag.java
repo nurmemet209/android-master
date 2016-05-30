@@ -16,9 +16,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 增值税发票
  * Created by nurmemet on 2016/4/24.
  */
-public class InvoiceAddTaxCompanyFrag extends Fragment {
+public class InvoiceAddTaxFrag extends Fragment {
 
     @Bind(R.id.next_step)
     Button nextStep;
@@ -28,6 +29,11 @@ public class InvoiceAddTaxCompanyFrag extends Fragment {
     Button preStep;
     private View mainView;
 
+
+   static public Fragment getInstance(){
+        InvoiceAddTaxFrag frag=new InvoiceAddTaxFrag();
+        return frag;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

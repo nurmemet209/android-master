@@ -36,7 +36,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/main_text_color"
+        android:background="@color/main_bg_gray"
         />
 
 
@@ -128,7 +128,6 @@
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red"
         android:layout_marginTop="@dimen/padding_normal"
         >
 
@@ -145,17 +144,17 @@
             android:layout_height="wrap_content"
             />
 
-        <!--<fragment-->
-        <!--android:id="@+id/common_invoice_frag"-->
-        <!--android:name="com.cn.fragment.InvoiceAddTaxCompanyFrag"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="@dimen/main_big_divider_height"-->
-        <!--/>-->
+        <fragment
+        android:id="@+id/common_invoice_frag"
+        android:name="com.cn.fragment.InvoiceAddTaxFrag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_big_divider_height"
+        />
 
         <fragment
             android:id="@+id/value_add_tax_invoice_frag"
-            android:name="com.cn.fragment.InvoiceAddTaxCompanyFrag"
+            android:name="com.cn.fragment.InvoiceAddTaxFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

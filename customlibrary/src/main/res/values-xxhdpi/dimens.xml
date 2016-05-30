@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_smallest">9sp</dimen>
+    <dimen name="text_size_smaller">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_largest">18sp</dimen>
+    <dimen name="text_size_largest2">22sp</dimen>
+
+
+    <dimen name="divider">0.5dp</dimen>
+    <dimen name="divider_">1dp</dimen>
+
+    <dimen name="list_padding_rl">6dp</dimen>
+    <dimen name="padding_smallest">4dp</dimen>
+    <dimen name="padding_smallest_">2dp</dimen>
+    <dimen name="padding_small">6dp</dimen>
+    <dimen name="padding_smaller">5dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_big">12dp</dimen>
+    <dimen name="padding_bigger">14dp</dimen>
+    <dimen name="padding_biggest">16dp</dimen>
+    <dimen name="padding_biggest_">23dp</dimen>
+
+</resources>

@@ -39,29 +39,30 @@ public class ReceiveAddressEditAct extends BaseAct {
      */
     private int type;
 
-    private Consignee consignee;
+    private Consignee mConsignee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+        getIntentData();
+//        EventBus.getDefault().register(this);
         setContentView(R.layout.act_receive_address_edit);
         ButterKnife.bind(this);
         bindData();
     }
 
     private void bindData() {
-        if (consignee == null) {
+        if (mConsignee == null) {
             type = 1;
-            consignee = new Consignee();
+            mConsignee = new Consignee();
             return;
         }
         type = 2;
-        receiverName.setText(consignee.getConsignee());
-        phoneNum.setText(consignee.getMobileNumber());
-        telNum.setText(consignee.getTelNumber());
-        detailedAddress.setText(consignee.getAddress());
-        isDefaultAddress.setSelected(consignee.getIsDefault());
+        receiverName.setText(mConsignee.getConsignee());
+        phoneNum.setText(mConsignee.getMobileNumber());
+        telNum.setText(mConsignee.getTelNumber());
+        detailedAddress.setText(mConsignee.getAddress());
+        isDefaultAddress.setSelected(mConsignee.getIsDefault());
 
     }
 
@@ -75,16 +76,16 @@ public class ReceiveAddressEditAct extends BaseAct {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void getEvent(EventBusEv eventBusEv) {
-        if (eventBusEv != null && "consignee".equals(eventBusEv.getEvent())) {
-            consignee = (Consignee) eventBusEv.getData();
-            EventBus.getDefault().removeStickyEvent(eventBusEv);
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+//    public void getEvent(EventBusEv ev) {
+//        if (EventBusEv.is(ev,"mConsignee")) {
+//            mConsignee = (Consignee) ev.getData();
+//            EventBus.getDefault().removeStickyEvent(ev);
+//        }
+//    }
 
     @OnClick(R.id.submit)
     public void onSumbit() {
@@ -103,16 +104,16 @@ public class ReceiveAddressEditAct extends BaseAct {
                     finish();
                 }
             }
-        }, consignee, type, this);
+        }, mConsignee, type, this);
     }
 
     private void packageData() {
 
-        consignee.setAddress(detailedAddress.getText().toString());
-        consignee.setConsignee(receiverName.getText().toString());
-        consignee.setIsDefault(isDefaultAddress.isSelected());
-        consignee.setMobileNumber(phoneNum.getText().toString());
-        consignee.setTelNumber(telNum.getText().toString());
+        mConsignee.setAddress(detailedAddress.getText().toString());
+        mConsignee.setConsignee(receiverName.getText().toString());
+        mConsignee.setIsDefault(isDefaultAddress.isSelected());
+        mConsignee.setMobileNumber(phoneNum.getText().toString());
+        mConsignee.setTelNumber(telNum.getText().toString());
 
     }
 
@@ -121,4 +122,8 @@ public class ReceiveAddressEditAct extends BaseAct {
         return true;
     }
 
+
+    public void getIntentData() {
+        mConsignee = (Consignee) getIntent().getSerializableExtra("Consignee");
+    }
 }

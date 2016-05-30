@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/main_bg_gray"
+    >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/main_bg_gray"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_invoice_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="增加心发票地址"
+        android:background="@drawable/main_red_pressed_sl"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

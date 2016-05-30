@@ -102,7 +102,7 @@ public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
                 int position = holder.getAdapterPosition();
                 Consignee consignee = list.get(position);
                 EventBus.getDefault().postSticky(new EventBusEv("consignee", consignee));
-                ActivitySwitcher.toReceiveAddressEditAct((Activity) mContext);
+                ActivitySwitcher.toReceiveAddressEditAct((Activity) mContext,consignee);
             }
         });
 //        if (selectedPosition==position){

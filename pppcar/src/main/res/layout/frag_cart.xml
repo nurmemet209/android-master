@@ -32,7 +32,6 @@
             />
 
 
-
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/message"
             android:layout_width="30dp"
@@ -43,15 +42,16 @@
             app:placeholderImage="@mipmap/message"
             app:placeholderImageScaleType="centerInside"
             />
+
         <TextView
             android:id="@+id/edit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:gravity="center_vertical"
-            android:text="@string/edit"
             android:layout_toLeftOf="@+id/message"
+            android:gravity="center_vertical"
             android:padding="@dimen/padding_big"
+            android:text="@string/edit"
             />
 
     </RelativeLayout>
@@ -112,7 +112,6 @@
                 >
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -127,12 +126,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="2"
+                        android:background="@color/transparent"
                         android:button="@drawable/checkbox_item_"
                         android:checked="false"
                         android:paddingLeft="@dimen/padding_normal"
                         android:text="@string/selecte_all"
                         android:textColor="@color/white"
-                        android:background="@color/transparent"
 
                         />
 
@@ -140,9 +139,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:background="@color/transparent"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:background="@color/transparent"
                         >
 
                         <TextView
@@ -177,6 +176,7 @@
                         />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -191,12 +191,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="2"
+                        android:background="@color/transparent"
                         android:button="@drawable/checkbox_item_"
                         android:checked="false"
                         android:paddingLeft="@dimen/padding_normal"
                         android:text="@string/selecte_all"
                         android:textColor="@color/white"
-                        android:background="@color/transparent"
 
 
                         />
@@ -225,12 +225,20 @@
                 </LinearLayout>
             </ViewFlipper>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycle_view"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_widget"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/view_flipper"
-                />
+                >
+
+                <com.cn.pppcar.widget.CustomRecycleView
+                    android:id="@+id/recycle_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/view_flipper"
+                    />
+            </android.support.v4.widget.SwipeRefreshLayout>
 
 
         </RelativeLayout>

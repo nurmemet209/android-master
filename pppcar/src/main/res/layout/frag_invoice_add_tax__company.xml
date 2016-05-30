@@ -35,7 +35,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/org_name_"
                     />
 
@@ -43,10 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -65,7 +62,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/recognize_num"
                     />
 
@@ -73,10 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -95,7 +89,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/register_addr"
                     />
 
@@ -103,10 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -125,7 +116,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/register_tel"
                     />
 
@@ -133,10 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -155,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/bank_name"
                     />
 
@@ -163,10 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -186,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/invoice_content"
                     />
 
@@ -194,10 +179,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -216,9 +198,7 @@
                     android:id="@+id/next_step"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding_biggest"
-                    android:layout_marginRight="@dimen/padding_biggest"
-                    android:layout_marginTop="@dimen/padding_biggest"
+                    android:layout_margin="@dimen/main_tbn_margin"
                     android:background="@drawable/main_red_pressed_sl"
                     android:text="下一步"
                     android:textColor="@color/white"
@@ -250,17 +230,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
+                android:padding="@dimen/padding_normal"
 
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/get_invoice_person_name"
                     />
 
@@ -268,10 +245,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -280,17 +254,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
+                android:padding="@dimen/padding_normal"
 
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/get_invoice_person_phone"
                     />
 
@@ -298,10 +269,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -310,17 +278,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/padding_big"
-                android:paddingLeft="@dimen/padding_normal"
-                android:paddingRight="@dimen/padding_normal"
-                android:paddingTop="@dimen/padding_big"
+                android:padding="@dimen/padding_normal"
 
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_big"
+                    android:paddingBottom="@dimen/padding_normal"
                     android:text="@string/invoice_deliver_addr"
                     />
 
@@ -328,10 +293,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_rect_4_edittext"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:padding="@dimen/padding_normal"
                     android:textCursorDrawable="@null"
                     />
             </LinearLayout>
@@ -358,16 +320,17 @@
                 android:text="上一步"
                 android:textColor="@color/white"
                 />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_biggest_"
                 android:layout_marginLeft="@dimen/padding_biggest"
                 android:layout_marginRight="@dimen/padding_biggest"
                 android:layout_marginTop="@dimen/padding_biggest_"
                 android:background="@drawable/main_red_pressed_sl"
                 android:text="@string/sure"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/padding_biggest_"
 
                 />
         </LinearLayout>

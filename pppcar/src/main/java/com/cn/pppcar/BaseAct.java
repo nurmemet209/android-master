@@ -1,9 +1,14 @@
 package com.cn.pppcar;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -30,6 +35,7 @@ public abstract class BaseAct extends FragmentActivity implements Response.Error
     protected SpanHelper spanHelper;
     ApiHandler apiHandler;
     ProgressDlg mProgressDlg;
+    protected boolean isFirstShow = true;
 
 
     @Override
@@ -39,6 +45,7 @@ public abstract class BaseAct extends FragmentActivity implements Response.Error
         apiHandler = ApiHandler.getInstance(this);
         builderEx = new StringBuilderEx();
     }
+
 
     @Override
     public void finish() {
@@ -102,4 +109,44 @@ public abstract class BaseAct extends FragmentActivity implements Response.Error
         MyLogger.showError(error.getMessage());
         dismissProgressDlg();
     }
+
+
+    protected void showWithAnimation(View view) {
+        if (view != null) {
+            view.setAlpha(0);
+            view.animate().alpha(1).setDuration(1000).start();
+        }
+
+    }
+
+    /**
+     * 数据加载完成
+     */
+    protected void dataLoaded(boolean isSucceed) {
+        if (isFirstShow) {
+            View contentView = findViewById(R.id.content);
+            if (isSucceed) {
+                contentView.setVisibility(View.VISIBLE);
+                findViewById(R.id.loading_view).setVisibility(View.GONE);
+                showWithAnimation(contentView);
+
+            } else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView msg = (TextView) findViewById(R.id.message);
+                        msg.setText("网络错误，请检查你的网络");
+                        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                }, 5000);
+
+
+            }
+
+
+        }
+    }
+
+
 }
