@@ -18,13 +18,16 @@ import com.cn.commans.NetUtil;
 import com.cn.entity.ResInvoiceInfo;
 import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.R;
+import com.cn.util.MyLogger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -121,9 +124,31 @@ public class InvoiceCommonListFrag extends BaseFrag {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void deleteInvoiceInformation(EventBusEv ev) {
+    public void deleteInvoiceInformation(final EventBusEv ev) {
         if (EventBusEv.is(ev, "deleteInvoice")) {
+            RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) ev.getData();
+            final int pos = holder.getAdapterPosition();
+            Map<String, String> param = new HashMap<>();
+            param.put("id", String.valueOf(list.get(pos).getId()));
+            showProgressDlg();
+            apiHandler.deleteInvoiceCommon(new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    if (NetUtil.isSucced(response)) {
+                        list.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                    }
+                    showToast(NetUtil.getMessage(response));
+                    dismissProgressDlg();
 
+                }
+            }, param, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    dismissProgressDlg();
+                    MyLogger.showError(error.getMessage());
+                }
+            });
         }
     }
 

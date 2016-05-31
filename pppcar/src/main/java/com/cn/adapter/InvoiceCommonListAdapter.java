@@ -46,6 +46,12 @@ public class InvoiceCommonListAdapter extends BaseSelectableListAdapter<ResInvoi
         TextView lawPerson = (TextView) holder.itemView.findViewById(R.id.law_person);
         TextView phoneNum = (TextView) holder.itemView.findViewById(R.id.phone_num);
         TextView address = (TextView) holder.itemView.findViewById(R.id.address);
+        TextView isDefault = (TextView) holder.itemView.findViewById(R.id.is_default_);
+        if (list.get(position).getIsDefault()) {
+            isDefault.setVisibility(View.VISIBLE);
+        } else {
+            isDefault.setVisibility(View.INVISIBLE);
+        }
         SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) holder.itemView.findViewById(R.id.selectable_item);
         setSelectableView(item, position == selectedPostion, holder);
 

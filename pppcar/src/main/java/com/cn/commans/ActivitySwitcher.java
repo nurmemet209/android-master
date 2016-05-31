@@ -71,27 +71,26 @@ public class ActivitySwitcher {
     }
 
     /**
-     *
      * @param activity
-     * @param id 订单id
+     * @param id       订单id
      */
-    static public void toOrderSubmitSuccedAct(Activity activity,long id) {
+    static public void toOrderSubmitSuccedAct(Activity activity, long id) {
         Intent intent = new Intent(activity, OrderSubmitSuccedAct.class);
-        intent.putExtra("orderId",id);
+        intent.putExtra("orderId", id);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
     static public void toReceiveAddressListAct(Activity activity, Consignee mConsignee) {
         Intent intent = new Intent(activity, ReceiveAddressListAct.class);
-        intent.putExtra("Consignee",mConsignee);
+        intent.putExtra("Consignee", mConsignee);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
     static public void toReceiveAddressEditAct(Activity activity, Consignee consignee) {
         Intent intent = new Intent(activity, ReceiveAddressEditAct.class);
-        intent.putExtra("Consignee",consignee);
+        intent.putExtra("Consignee", consignee);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
@@ -146,18 +145,19 @@ public class ActivitySwitcher {
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
-    static public void toPaySettlementAct(Activity activity, long proId, int num, long ruleId,int orderType) {
+    static public void toPaySettlementAct(Activity activity, long proId, int num, long ruleId, int orderType) {
         Intent intent = new Intent(activity, PaySettlementAct.class);
         intent.putExtra("proId", proId);
         intent.putExtra("number", num);
         intent.putExtra("ruleId", ruleId);
-        intent.putExtra("orderType",orderType);
+        intent.putExtra("orderType", orderType);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
-    static public void toPaySettlementAct(Activity activity,int orderType) {
+
+    static public void toPaySettlementAct(Activity activity, int orderType) {
         Intent intent = new Intent(activity, PaySettlementAct.class);
-        intent.putExtra("orderType",orderType);
+        intent.putExtra("orderType", orderType);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
@@ -168,30 +168,30 @@ public class ActivitySwitcher {
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
-    static public void toInvoiceTypeSelectAct(Activity activity) {
+    static public void toInvoiceTypeSelectAct(Activity activity, InvoiceTypeSelectAct.InvoiceType invoiceType) {
         Intent intent = new Intent(activity, InvoiceTypeSelectAct.class);
+        intent.putExtra("invoiceType", invoiceType);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
+
     static public void toInvoiceAct(Activity activity, ResInvoiceInfo resInvoiceInfo) {
         Intent intent = new Intent(activity, InvoiceAct.class);
-        if (resInvoiceInfo!=null){
-            intent.putExtra("invoice_common",resInvoiceInfo);
+        if (resInvoiceInfo != null) {
+            intent.putExtra("invoice_common", resInvoiceInfo);
         }
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
+
     static public void toInvoiceCommonEditAct(Activity activity, ResInvoiceInfo resInvoiceInfo) {
         Intent intent = new Intent(activity, InvoiceCommonEditAct.class);
-        if (resInvoiceInfo!=null){
-            intent.putExtra("invoice_common",resInvoiceInfo);
+        if (resInvoiceInfo != null) {
+            intent.putExtra("invoice_common", resInvoiceInfo);
         }
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
-
-
-
 
 
 }

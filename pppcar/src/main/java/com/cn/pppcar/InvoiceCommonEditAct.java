@@ -85,6 +85,9 @@ public class InvoiceCommonEditAct extends BaseAct {
             return;
         }
         Map<String, String> param = new HashMap<>();
+        if (resInvoiceInfo != null) {
+            param.put("id", String.valueOf(resInvoiceInfo.getId()));
+        }
         param.put("invoiceTitle", invoiceHeader.getText().toString());
         param.put("takerName", invoiceReceiverName.getText().toString());
         param.put("takerPhone", invoiceReceiverPhone.getText().toString());
@@ -111,15 +114,19 @@ public class InvoiceCommonEditAct extends BaseAct {
 
     private boolean validate() {
         if ("".equals(invoiceHeader.getText().toString())) {
+            showToast("发票抬头不能为空");
             return false;
         }
         if ("".equals(invoiceReceiverName.getText().toString())) {
+            showToast("收票人不能为空");
             return false;
         }
         if ("".equals(invoiceReceiverAddr.getText().toString())) {
+            showToast("收票地址不能为空");
             return false;
         }
         if ("".equals(invoiceReceiverPhone.getText().toString())) {
+            showToast("发票人电话不能为空");
             return false;
         }
         return true;

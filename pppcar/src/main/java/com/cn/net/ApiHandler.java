@@ -419,6 +419,70 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
     /**
+     *
+     * @param listener
+     * @param param
+     * @param errorListener
+     */
+    public void deleteInvoiceCommon(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/delInvoiceCommon");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+
+    }
+
+    /**
+     *
+     * @param listener
+     * @param param
+     */
+    public void getInvoiceCommon(Response.Listener<JSONObject> listener, final Map<String, String> param) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/getInvoiceCommonById?");
+        setSign(builder,param);
+        CustomJSonRequest request = new CustomJSonRequest( builder.toString(), listener, this) ;
+        addToRequestQueue(request);
+
+    }
+
+    /**
+     * 增值税 发票修改，添加
+     * @param listener
+     * @param param
+     * @param errorListener
+     */
+    public void addModifyInvoiceAddTax(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+
+        StringBuilder builder = getRootApi().append("/v1/account/auth/saveInvoiceVAT");
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+
+
+    }
+    public void getInvoiceAddTax(Response.Listener<JSONObject> listener) {
+        if (appUserInfo != null) {
+            StringBuilder builder = getRootApi().append("/v1/account/auth/invoiceVAT?");
+            setSign(builder, null);
+            CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+            addToRequestQueue(request);
+        }
+
+    }
+
+    /**
      * @param listener
      * @param id            收获地址ID
      * @param errorListener

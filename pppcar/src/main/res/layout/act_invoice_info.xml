@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/main_bg_gray"
@@ -127,21 +128,34 @@
     <ViewFlipper
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/padding_normal"
         >
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/main_bg_gray"
-            />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="@color/main_bg_gray"
+           >
+           <Button
+               android:id="@+id/selecte_no_invoice"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="@dimen/main_tbn_margin"
+               android:background="@drawable/main_red_pressed_sl"
+               android:textColor="@color/white"
+               android:layout_alignParentBottom="true"
+               android:text="确定"
+
+               />
+       </RelativeLayout>
 
         <fragment
             android:id="@+id/no_invoice_frag"
             android:name="com.cn.fragment.InvoiceCommonFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:layout="@layout/frag_invoice_common"
             />
 
         <fragment
@@ -150,13 +164,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_big_divider_height"
-        />
+        tools:layout="@layout/frag_invoice_add_tax__company"
+            />
 
         <fragment
             android:id="@+id/value_add_tax_invoice_frag"
             android:name="com.cn.fragment.InvoiceAddTaxFrag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:layout="@layout/frag_invoice_add_tax__company"
             />
     </ViewFlipper>
 

@@ -87,6 +87,8 @@ public class PaySettlementAct extends BaseAct {
     protected LinearLayout preOrderContainer;
 
 
+    @Bind(R.id.invoice_type)
+    TextView invoiceTypeText;
     /**
      * 订单类型
      */
@@ -100,9 +102,9 @@ public class PaySettlementAct extends BaseAct {
      */
     private long ruleId;
     /**
-     * 发票类型
+     * 发票类型,如果
      */
-    private int invoiceType;
+    private InvoiceTypeSelectAct.InvoiceType invoiceType = new InvoiceTypeSelectAct.InvoiceType(InvoiceTypeSelectAct.INVOICE_NO);
     /**
      * 选中的收获地址
      */
@@ -224,7 +226,7 @@ public class PaySettlementAct extends BaseAct {
                                           dismissProgressDlg();
 
                                       }
-                                  }, orderType, "no", String.valueOf(ruleId), String.valueOf(productNum), String.valueOf(mConsignee.getId()), String.valueOf(proId), "",
+                                  }, orderType, getInvoiceWay(), String.valueOf(ruleId), String.valueOf(productNum), String.valueOf(mConsignee.getId()), String.valueOf(proId), "",
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -235,16 +237,36 @@ public class PaySettlementAct extends BaseAct {
 
     }
 
+    private String getInvoiceWay() {
+        if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_COMMON) {
+            return "common";
+
+        } else if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_NO) {
+            return "no";
+        } else if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_ADD_TAX) {
+            return "vat";
+        }
+        return "";
+    }
+
 
     @OnClick(R.id.select_invoice_)
     public void selectInvoiceType(View view) {
-        ActivitySwitcher.toInvoiceTypeSelectAct(this);
+        ActivitySwitcher.toInvoiceTypeSelectAct(this, invoiceType);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setInvoiceType(EventBusEv ev) {
-        if (ev != null && "setInvoiceType_".equals(ev.getEvent())) {
-            invoiceType = (int) ev.getData();
+        if (EventBusEv.is(ev, "setInvoiceType_")) {
+            invoiceType = (InvoiceTypeSelectAct.InvoiceType) ev.getData();
+            if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_COMMON) {
+                invoiceTypeText.setText("普通发票");
+
+            } else if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_NO) {
+                invoiceTypeText.setText("不开发票");
+            } else if (invoiceType.type == InvoiceTypeSelectAct.INVOICE_ADD_TAX) {
+                invoiceTypeText.setText("增值税发票");
+            }
         }
 
     }
@@ -280,10 +302,7 @@ public class PaySettlementAct extends BaseAct {
             showToast("请选择收获地址");
             return false;
         }
-        if (invoiceType == -1) {
-            showToast("请选择发票类型");
-            return false;
-        }
+
         if (orderType == ORDER_TYPE_PREORDER) {
             boolean isSelcted = preOrderClause.isItemSelected();
             if (!isSelcted) {

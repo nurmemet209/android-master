@@ -18,6 +18,7 @@ import com.cn.commans.SpanHelper;
 import com.cn.entity.Item;
 import com.cn.net.ApiHandler;
 import com.cn.pppcar.R;
+import com.cn.pppcar.widget.ProgressDlg;
 import com.cn.util.StringBuilderEx;
 import com.cn.util.UIHelper;
 
@@ -34,6 +35,7 @@ public abstract class BaseFrag extends Fragment {
     protected SpanHelper spanHelper;
     ApiHandler apiHandler;
     protected boolean isFirstShow = true;
+    private ProgressDlg mProgressDlg;
 
 
     @Nullable
@@ -169,5 +171,19 @@ public abstract class BaseFrag extends Fragment {
             }
         }, 2000);
 
+    }
+
+
+    protected void showProgressDlg() {
+        if (mProgressDlg == null) {
+            mProgressDlg = new ProgressDlg();
+        }
+        mProgressDlg.show(getChildFragmentManager(), "progressDlg_");
+    }
+
+    protected void dismissProgressDlg() {
+        if (mProgressDlg != null) {
+            mProgressDlg.dismiss();
+        }
     }
 }

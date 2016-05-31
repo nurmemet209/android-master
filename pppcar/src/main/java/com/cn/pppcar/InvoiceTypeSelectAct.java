@@ -11,6 +11,8 @@ import com.cn.pppcar.widget.SelectecableLinearLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.Serializable;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,6 +22,11 @@ import butterknife.OnClick;
  * Created by nurmemet on 2016/4/23.
  */
 public class InvoiceTypeSelectAct extends BaseAct {
+    public static int INVOICE_NO = 1;
+    public static int INVOICE_COMMON = 2;
+    public static int INVOICE_ADD_TAX = 3;
+
+    private InvoiceType invoiceType;
 
     @Bind(R.id.selector_container)
     protected SelectecableLinearLayout selectorContainer;
@@ -31,13 +38,20 @@ public class InvoiceTypeSelectAct extends BaseAct {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_invoice_info);
+        getIntentData();
         ButterKnife.bind(this);
         init();
     }
 
+    private void getIntentData() {
+        invoiceType = (InvoiceType) getIntent().getSerializableExtra("invoiceType");
+
+    }
+
     private void init() {
         selectorContainer.setCanReverseSelect(false);
-        selectorContainer.setSelectedPosition(0);
+        selectorContainer.setSelectedPosition(invoiceType.type-1);
+        viewFlipper.setDisplayedChild(invoiceType.type-1);
         selectorContainer.init();
         selectorContainer.setItemClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +78,39 @@ public class InvoiceTypeSelectAct extends BaseAct {
 
     @Override
     public void OnBack(View view) {
-        int invoiceType = selectorContainer.getSelectedPosition();
-        EventBus.getDefault().post(new EventBusEv("setInvoiceType_", invoiceType));
+//        int invoiceType = selectorContainer.getSelectedPosition();
+//        EventBus.getDefault().post(new EventBusEv("setInvoiceType_", invoiceType));
         super.OnBack(view);
 
     }
+
+    public void selectAddTaxInvoice() {
+        invoiceType.type = INVOICE_ADD_TAX;
+        EventBus.getDefault().post(new EventBusEv("setInvoiceType_", invoiceType));
+        finish();
+    }
+
+    public void selectInvoiceCommon(long id) {
+        invoiceType.type = INVOICE_COMMON;
+        invoiceType.id = id;
+        EventBus.getDefault().post(new EventBusEv("setInvoiceType_", invoiceType));
+        finish();
+    }
+
+    @OnClick(R.id.selecte_no_invoice)
+    public void selectInoiceNo(View view) {
+        invoiceType.type = INVOICE_NO;
+        EventBus.getDefault().post(new EventBusEv("setInvoiceType_", invoiceType));
+        finish();
+    }
+
+
+    public static class InvoiceType implements Serializable {
+        public InvoiceType(int type) {
+            this.type = type;
+        }
+        public int type;
+        public long id;
+    }
+
 }

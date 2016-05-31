@@ -8,7 +8,7 @@ public class ResInvoiceInfo implements Serializable{
 	private long id;
 	private String type;/*发票类型*/
 	private String invoiceTitle;/*发票抬头，type为普通发票时*/
-	private Integer isDefault;/*发票抬头，type为普通发票时*/
+	private boolean isDefault;/*发票抬头，type为普通发票时*/
 	/*以下是增值税发票信息*/
 	private String companyName;/*单位名称*/
 	private String code;/*纳税人识别码*/
@@ -39,10 +39,10 @@ public class ResInvoiceInfo implements Serializable{
 	public void setInvoiceTitle(String invoiceTitle) {
 		this.invoiceTitle = invoiceTitle;
 	}
-	public Integer getIsDefault() {
+	public boolean getIsDefault() {
 		return isDefault;
 	}
-	public void setIsDefault(Integer isDefault) {
+	public void setIsDefault(boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 	public String getCompanyName() {
