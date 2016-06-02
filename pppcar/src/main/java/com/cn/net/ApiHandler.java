@@ -42,8 +42,8 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
-    //    public final static String HOST = "http://192.168.0.219:8081";
-    public final static String HOST = "http://192.168.0.59:8081";
+        public final static String HOST = "http://192.168.0.128:8088";
+//    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -581,13 +581,21 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
 
-    public void getPaySettlementPage(Response.Listener<JSONObject> listener, String proId, String num, String ruleId, Response.ErrorListener errorListener) {
-        StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
-        Map<String, String> map = new HashMap<>();
-        map.put("productId", proId);
-        map.put("number", num);
-        map.put("ruleId", ruleId);
-        setSign(builder, map);
+    /**
+     *
+     * @param listener
+     * @param param
+     * @param orderType 2 预订单结算，1 普通订单结算
+     * @param errorListener
+     */
+    public void getPaySettlementPage(Response.Listener<JSONObject> listener, Map<String,String> param,int orderType, Response.ErrorListener errorListener) {
+        StringBuilder builder=null ;
+        if (orderType==1){
+            builder= getRootApi().append("/v1/order/auth/generateOrder?");
+        }else if(orderType==2){
+           builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
+        }
+        setSign(builder, param);
         CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
         addToRequestQueue(request);
     }

@@ -14,7 +14,32 @@ public class ReserveGoodsDetailResBean{
 	private Consignee consignee;
 	
 	private CartProduct bsProduct;
-	
+	/**
+	 * 积分
+	 */
+	private int normalIntegral;
+
+	public int getNormalIntegral() {
+		return normalIntegral;
+	}
+
+	public void setNormalIntegral(int normalIntegral) {
+		this.normalIntegral = normalIntegral;
+	}
+
+	public CartResBean getCartResBean() {
+		return cartResBean;
+	}
+
+	public void setCartResBean(CartResBean cartResBean) {
+		this.cartResBean = cartResBean;
+	}
+
+	public boolean isfullAmount() {
+		return isfullAmount;
+	}
+
+	private CartResBean cartResBean;
 
 	/**
 	 * 是否有发票true无

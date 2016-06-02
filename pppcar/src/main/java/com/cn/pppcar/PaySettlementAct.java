@@ -2,7 +2,11 @@ package com.cn.pppcar;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,6 +15,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
+import com.cn.entity.CartBean;
+import com.cn.entity.CartProduct;
 import com.cn.entity.Consignee;
 import com.cn.entity.ReserveGoodsDetailResBean;
 import com.cn.localutils.EventBusEv;
@@ -22,6 +28,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,17 +68,7 @@ public class PaySettlementAct extends BaseAct {
     @Bind(R.id.phone_num)
     protected TextView mPhoneNum;
 
-    @Bind(R.id.title_img)
-    protected SimpleDraweeView mIitleImg;
 
-    @Bind(R.id.title)
-    protected TextView mTitle;
-
-    @Bind(R.id.price)
-    protected TextView mPrice;
-
-    @Bind(R.id.product_num)
-    protected TextView mProductNumber;
     /**
      * 商品总额
      */
@@ -114,9 +114,19 @@ public class PaySettlementAct extends BaseAct {
      */
     @Bind(R.id.integral_part)
     protected RelativeLayout mIntegralPart;
+    @Bind(R.id.integral_num_edite)
+    EditText integralInput;
 
+    @Bind(R.id.available_integral)
+    TextView availableIntegral;
+
+    @Bind(R.id.integral_price)
+    TextView deductedIntegral;
     @Bind(R.id.buy_clause)
     protected SelectableRelaytiveLayoutItem preOrderClause;
+
+    @Bind(R.id.product_detail_container)
+    protected LinearLayout productDetailContainer;
 
 
     @Override
@@ -125,20 +135,29 @@ public class PaySettlementAct extends BaseAct {
         setContentView(R.layout.act_pay_settlement);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-        getArguments();
+        getIntentData();
         loadData();
 
     }
 
-    private void getArguments() {
+    private void getIntentData() {
+
         proId = getIntent().getLongExtra("proId", -1);
         productNum = getIntent().getIntExtra("number", -1);
         ruleId = getIntent().getLongExtra("ruleId", -1);
         orderType = getIntent().getIntExtra("orderType", -1);
+
+
     }
 
 
     private void loadData() {
+        Map<String, String> param = new HashMap<>();
+        if (orderType == ORDER_TYPE_PREORDER) {
+            param.put("productId", String.valueOf(proId));
+            param.put("number", String.valueOf(productNum));
+            param.put("ruleId", String.valueOf(ruleId));
+        }
         apiHandler.getPaySettlementPage(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -154,24 +173,57 @@ public class PaySettlementAct extends BaseAct {
                 }
 
             }
-        }, String.valueOf(proId), String.valueOf(productNum
-        ), String.valueOf(ruleId), new Response.ErrorListener() {
+        }, param, orderType, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                MyLogger.showError(error.getMessage());
                 dataLoaded(false);
             }
         });
     }
 
+    private void setPreOrderProductDetail() {
+
+        View view = LayoutInflater.from(this).inflate(R.layout.item_act_pay_settelment, null);
+        SimpleDraweeView mIitleImg = (SimpleDraweeView) view.findViewById(R.id.title_img);
+        TextView mTitle = (TextView) view.findViewById(R.id.title);
+        TextView mPrice = (TextView) view.findViewById(R.id.price);
+        TextView mProductNumber = (TextView) view.findViewById(R.id.product_num);
+
+        mTitle.setText(reserveDetailResBean.getBsProduct().getName());
+        mIitleImg.setImageURI(Uri.parse(reserveDetailResBean.getBsProduct().getImgs()));
+        mProductNumber.setText("X" + reserveDetailResBean.getNumber());
+        mPrice.setText(String.valueOf(reserveDetailResBean.getTotalPrice()));
+
+        productDetailContainer.addView(view);
+    }
+
+    private void setCommonOrderProduct() {
+        List<CartBean> list = reserveDetailResBean.getCartResBean().getContent();
+        for (int i = 0; i < list.size(); i++) {
+            CartProduct product = list.get(i).getBsProduct();
+
+            View view = LayoutInflater.from(this).inflate(R.layout.item_act_pay_settelment, null);
+            SimpleDraweeView mIitleImg = (SimpleDraweeView) view.findViewById(R.id.title_img);
+            TextView mTitle = (TextView) view.findViewById(R.id.title);
+            TextView mPrice = (TextView) view.findViewById(R.id.price);
+            TextView mProductNumber = (TextView) view.findViewById(R.id.product_num);
+
+            mTitle.setText(product.getName());
+            mIitleImg.setImageURI(Uri.parse(product.getImgs()));
+            mProductNumber.setText("X" + list.get(i).getNumber());
+            mPrice.setText(String.valueOf(list.get(i).getTotalDiscountPrice()));
+
+            productDetailContainer.addView(view);
+        }
+    }
+
     private void bindData() {
 
         setReceiver(reserveDetailResBean.getConsignee());
-        mTitle.setText(reserveDetailResBean.getBsProduct().getName());
-        mIitleImg.setImageURI(Uri.parse(reserveDetailResBean.getBsProduct().getImgs()));
-        mProductNumber.setText(reserveDetailResBean.getNumber() + "");
-        mPrice.setText(String.valueOf(reserveDetailResBean.getTotalPrice()));
 
         if (orderType == ORDER_TYPE_PREORDER) {
+            setPreOrderProductDetail();
             //隐藏积分抵扣模块
             mIntegralPart.setVisibility(View.GONE);
             TextView stage1 = (TextView) findViewById(R.id.stage_1_price);
@@ -185,14 +237,47 @@ public class PaySettlementAct extends BaseAct {
             }
             TextView clause = (TextView) findViewById(R.id.pre_order_cluase_content);
             clause.setText(spanHelper.toRed("我已同意预付款不退款等", "相关规则"));
+            mOrderAmount.setText("￥" + reserveDetailResBean.getTotalPriceStr());
+            mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getDiscountPrice());
         } else if (orderType == ORDER_TYPE_COMMON) {
+            setCommonOrderProduct();
+
             //隐藏预付款模块而
             preOrderContainer.setVisibility(View.GONE);
             //预付款不退款声明
             preOrderClause.setVisibility(View.GONE);
 
+            integralInput.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String integralStr=s.toString();
+                    int integral=Integer.valueOf(integralStr);
+                    if(integral>reserveDetailResBean.getNormalIntegral()){
+                        integralInput.setText(String.valueOf(reserveDetailResBean.getNormalIntegral()));
+                        mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()-reserveDetailResBean.getNormalIntegral()));
+                    }else if (integral<0){
+                        integralInput.setText("0");
+                    }else{
+                        mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()));
+                    }
+                    mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()-integral));
+
+                }
+            });
+            availableIntegral.setText("可用积分"+reserveDetailResBean.getNormalIntegral()+"，使用");
+            mOrderAmount.setText("￥" + reserveDetailResBean.getCartResBean().getTotalRetailPrice());
+            mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice());
         }
-        mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getTotalPriceStr());
 
 
     }

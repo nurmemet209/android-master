@@ -156,68 +156,18 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/product_detail_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_big_divider_height"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/padding_big"
-                    android:paddingLeft="@dimen/padding_normal"
-                    android:paddingRight="@dimen/padding_normal"
-                    android:paddingTop="@dimen/padding_big"
+                    android:background="@color/main_bg_gray"
+                    android:divider="@drawable/divider_big"
+                    android:orientation="vertical"
+                    android:showDividers="middle"
                     >
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/title_img"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingLeft="@dimen/padding_normal"
-                            android:paddingTop="@dimen/padding_big"
-                            >
-
-                            <TextView
-                                android:id="@+id/product_num"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="*12"
-                                />
-
-                            <TextView
-                                android:id="@+id/price"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:text="$23432432"
-                                />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -341,18 +291,21 @@
                             >
 
                             <TextView
+                                android:id="@+id/available_integral"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="可用积分2400， 使用"
+                                android:text=""
                                 android:textSize="@dimen/text_size_small"
                                 />
 
                             <EditText
+                                android:id="@+id/integral_num_edite"
                                 android:layout_width="50dp"
                                 android:layout_height="25dp"
                                 android:background="@drawable/round_rect_4_edittext"
                                 android:text=""
-
+                                android:inputType="number"
+                                android:paddingLeft="@dimen/padding_smallest_"
                                 />
 
                             <TextView
@@ -383,7 +336,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="$%445"
                         android:textSize="@dimen/text_size_small"
 
                         />
@@ -441,7 +393,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:text="$32434"
+                            android:text="到付"
                             />
                     </RelativeLayout>
 
