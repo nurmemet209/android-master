@@ -637,28 +637,28 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param listener
      * @param orderType   1 普通订单，2 预订单
      * @param invoiceType 发票类型
-     * @param ruleId      预定规则ID
-     * @param number      产品数量
-     * @param consigneeId 收获地址Id
-     * @param productId   产品ID
-     * @param remark      订单备注
      */
-    public void submitPreOrder(Response.Listener<JSONObject> listener, final int orderType, final String invoiceType, final String ruleId, final String number, final String consigneeId, final String productId, final String remark, Response.ErrorListener errorListener) {
-        StringBuilder builder = getRootApi().append("/v1/reserve/auth/reserveGoods");
+    public void submitPreOrder(Response.Listener<JSONObject> listener, final int orderType, final Map<String,String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder=null ;
+        if (orderType==2){
+            builder=getRootApi().append("/v1/reserve/auth/reserveGoods");
+        } else if (orderType==1){
+            builder=getRootApi().append("/v1/order/auth/submitOrder");
+        }
         CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                if (orderType == 2) {
-                    params.put("ruleId", ruleId);
-                }
-                params.put("invoiceType", invoiceType);
-                params.put("number", number);
-                params.put("consigneeId", consigneeId);
-                params.put("productId", productId);
-                params.put("remark", remark);
-                setSign4Post(params);
-                return params;
+
+//                if (orderType == 2) {
+//                    params.put("ruleId", ruleId);
+//                }
+//                params.put("invoiceType", invoiceType);
+//                params.put("number", number);
+//                params.put("consigneeId", consigneeId);
+//                params.put("productId", productId);
+//                params.put("remark", remark);
+                setSign4Post(param);
+                return param;
             }
         };
         addToRequestQueue(request);

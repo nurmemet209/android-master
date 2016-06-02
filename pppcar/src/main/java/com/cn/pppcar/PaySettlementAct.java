@@ -68,6 +68,9 @@ public class PaySettlementAct extends BaseAct {
     @Bind(R.id.phone_num)
     protected TextView mPhoneNum;
 
+    @Bind(R.id.remark)
+    EditText remark;
+
 
     /**
      * 商品总额
@@ -260,21 +263,20 @@ public class PaySettlementAct extends BaseAct {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    String integralStr=s.toString();
-                    int integral=Integer.valueOf(integralStr);
-                    if(integral>reserveDetailResBean.getNormalIntegral()){
+                    String integralStr = s.toString();
+                    int integral = Integer.valueOf(integralStr);
+                    if (integral > reserveDetailResBean.getNormalIntegral()) {
                         integralInput.setText(String.valueOf(reserveDetailResBean.getNormalIntegral()));
-                        mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()-reserveDetailResBean.getNormalIntegral()));
-                    }else if (integral<0){
+                        mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice() - reserveDetailResBean.getNormalIntegral()));
+                    } else if (integral < 0) {
                         integralInput.setText("0");
-                    }else{
+                    } else {
                         mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()));
                     }
-                    mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice()-integral));
-
+                    mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice() - integral));
                 }
             });
-            availableIntegral.setText("可用积分"+reserveDetailResBean.getNormalIntegral()+"，使用");
+            availableIntegral.setText("可用积分" + reserveDetailResBean.getNormalIntegral() + "，使用");
             mOrderAmount.setText("￥" + reserveDetailResBean.getCartResBean().getTotalRetailPrice());
             mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice());
         }
@@ -300,6 +302,26 @@ public class PaySettlementAct extends BaseAct {
             return;
         }
         showProgressDlg();
+        Map<String, String> param = new HashMap<>();
+        ;
+        if (orderType == ORDER_TYPE_PREORDER) {
+
+                param.put("ruleId", String.valueOf(ruleId));
+                param.put("invoiceType", getInvoiceWay());
+                param.put("number", String.valueOf(productNum));
+                param.put("consigneeId", String.valueOf(mConsignee.getId()));
+                param.put("productId", String.valueOf(proId));
+                param.put("remark", remark.getText().toString());
+
+
+        }else if (orderType==ORDER_TYPE_COMMON){
+            param.put("integral", integralInput.getText().toString());
+            param.put("addressId ", String.valueOf(mConsignee.getId()));
+            param.put("invoice", getInvoiceWay());
+            param.put("consigneeId", String.valueOf(mConsignee.getId()));
+            param.put("activityId ", "");
+            param.put("remark", remark.getText().toString());
+        }
         apiHandler.submitPreOrder(new Response.Listener<JSONObject>() {
                                       @Override
                                       public void onResponse(JSONObject response) {
@@ -311,7 +333,7 @@ public class PaySettlementAct extends BaseAct {
                                           dismissProgressDlg();
 
                                       }
-                                  }, orderType, getInvoiceWay(), String.valueOf(ruleId), String.valueOf(productNum), String.valueOf(mConsignee.getId()), String.valueOf(proId), "",
+                                  }, orderType, param,
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
