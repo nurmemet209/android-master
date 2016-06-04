@@ -23,15 +23,11 @@ import com.cn.entity.ResIndexPublicElement;
 import com.cn.entity.ResIndexRecommendType;
 import com.cn.entity.ResRemonmendPro;
 import com.cn.pppcar.R;
-import com.cn.util.UIHelper;
+import com.cn.pppcar.widget.RaPageIndicator;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by nurmemet on 2016/3/30.
@@ -116,29 +112,13 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
         //轮播
         if (Util.isNoteEmpty(mainPage.getResIndexBanners())) {
             ConvenientBanner<ResIndexBanner> banner = (ConvenientBanner) view.findViewById(R.id.convenientBanner);
-            final CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.banner_indicator);
+            final RaPageIndicator indicator = (RaPageIndicator) view.findViewById(R.id.banner_indicator);
 
-//            ArrayList viewList = new ArrayList();
-//            for (int i = 0; i < mainPage.getResIndexBanners().size(); i++) {
-//                ResIndexBanner item = mainPage.getResIndexBanners().get(i);
-//                SimpleDraweeView img = new SimpleDraweeView(mContext);
-//                Uri uri = Uri.parse(item.getImgUrl());
-//                img.setImageURI(uri);
-//                viewList.add(img);
-//                img.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
-//            }
-            banner.setPageIndicator(new int[]{R.drawable.indicator_red_radius, R.drawable.indicator_gray_radius});
             banner.startTurning(5000);
-
             banner.setScrollDuration(1000);
             banner.setCanLoop(true);
+            banner.setPointViewVisible(false);
             banner.setManualPageable(true);
-
             banner.setPages(new CBViewHolderCreator() {
                 @Override
                 public Object createHolder() {
@@ -149,12 +129,12 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    //  indicator.se
+
                 }
 
                 @Override
                 public void onPageSelected(int position) {
-
+                    indicator.setCurrentItem(position);
                 }
 
                 @Override
@@ -162,16 +142,9 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
 
                 }
             });
-//            BannerAdapter adapter = new BannerAdapter(mContext, viewList);
-//            banner.setAdapter(adapter);
-//            banner.setInterval(4000);
-//            // banner.setScrollDurationFactor(5);
-//            banner.setCycle(true);
-//            banner.setOffscreenPageLimit(mainPage.getResIndexBanners().size());
-//            banner.setBorderAnimation(true);
-//            banner.startAutoScroll();
-//            indicator.setViewPager(banner);
-
+            indicator.setBackgroundDr( R.drawable.indicator_red_radius,R.drawable.indicator_gray_radius);
+            indicator.init(mainPage.getResIndexBanners().size(), R.dimen.padding_normal, null);
+            indicator.setCurrentItem(banner.getCurrentItem());
         }
         //品牌中心
         View brandCenter = view.findViewById(R.id.brand_center_l);
@@ -236,21 +209,21 @@ public class MainPageRecycleAdapter extends RecyclerView.Adapter<MainPageRecycle
             ResIndexBrandType item = mainPage.getResIndexBrandTypes().get(i);
             View v = LayoutInflater.from(mContext).inflate(R.layout.item_main_page, null);
             TextView title = (TextView) v.findViewById(R.id.title);
-            TextView price = (TextView) v.findViewById(R.id.price);
-            TextView productName = (TextView) v.findViewById(R.id.product_name);
+//            TextView price = (TextView) v.findViewById(R.id.price);
+//            TextView productName = (TextView) v.findViewById(R.id.product_name);
             SimpleDraweeView leftBig = (SimpleDraweeView) v.findViewById(R.id.left_big);
             SimpleDraweeView rightBig = (SimpleDraweeView) v.findViewById(R.id.right_big);
             SimpleDraweeView leftSmall = (SimpleDraweeView) v.findViewById(R.id.left_small);
             SimpleDraweeView rightSmall = (SimpleDraweeView) v.findViewById(R.id.right_small);
 
             leftBig.setImageURI(Uri.parse(item.getImgUrl()));
-            rightBig.setImageURI(Uri.parse(item.getBsProduct().getImgs()));
-            leftSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(0).getBrandImg()));
-            rightSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(1).getBrandImg()));
+            rightBig.setImageURI(Uri.parse(item.getIndexBrandLists().get(0).getBrandImg()));
+            leftSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(1).getBrandImg()));
+            rightSmall.setImageURI(Uri.parse(item.getIndexBrandLists().get(2).getBrandImg()));
 
             title.setText(item.getTitle());
-            price.setText(String.valueOf(item.getBsProduct().getRetailPrice()));
-            productName.setText(item.getBsProduct().getName());
+//            price.setText(String.valueOf(item.getBsProduct().getRetailPrice()));
+//            productName.setText(item.getBsProduct().getName());
 
             container.addView(v);
 

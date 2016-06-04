@@ -84,10 +84,10 @@ public class SearchAct extends BaseAct {
     }
 
     private void init() {
-        viewPager.setCanScroll(false);
         adapter = new SearchClassificationViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
+        viewPager.setCanScroll(true);
         tabLayout.setDrawablePadding(getResources().getDimensionPixelSize(R.dimen.padding_smallest_));
         tabLayout.setViewPager(viewPager, new CustomTabLayout.BindView() {
             @Override
@@ -99,7 +99,7 @@ public class SearchAct extends BaseAct {
                     img.setBackgroundResource(R.mipmap.bottom_selected);
 
                 }
-
+                tv.setTextColor(ContextCompat.getColorStateList(SearchAct.this,R.color.main_text_color_to_main_red_sl));
 
             }
         }, new CustomTabLayout.CustomOnItemClick() {
@@ -130,8 +130,6 @@ public class SearchAct extends BaseAct {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-
-
                     search();
                     return true;
                 }

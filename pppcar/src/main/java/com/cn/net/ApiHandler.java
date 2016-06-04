@@ -42,8 +42,9 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
-        public final static String HOST = "http://192.168.0.128:8088";
-//    public final static String HOST = "http://192.168.0.59:8081";
+    public final static String HOST = "http://192.168.0.212:8081";
+    //    public final static String HOST = "http://192.168.0.62:8080";
+    //    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
     private final static String LG_UG = "ug";
@@ -97,8 +98,10 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = getDefaultPosData();
-                params.put("username", "15520138623");
+                params.put("username", "testb");
                 params.put("password", "123456");
+//                params.put("username", "15520138623");
+//                params.put("password", "123456");
                 params.put("captcha", "123456");
                 params.put("captchaToken", "123456");
 //                params.put("captcha", verifycationCode);
@@ -229,15 +232,34 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-    public void getIntegralProduct(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = getRootApi().append("/v1/integral/queryIntegralProductall").toString();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+    public void getIntegralProduct(Response.Listener<JSONObject> listener, Map<String, String> param) {
+        StringBuilder builder = getRootApi().append("/v1/integral/auth/queryIntegralProductall?");
+        setSign(builder, param);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
         addToRequestQueue(request);
     }
 
-    public void getIntegralProductDetail(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = getRootApi().append("/v1/integral/queryIntegralProductDetailById?proId=1").toString();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+    public void getIntegralProductDetail(Response.Listener<JSONObject> listener, String proId, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/integral/auth/queryIntegralProductDetailById?");
+        Map<String, String> param = new HashMap<>();
+        param.put("proId", proId);
+        setSign(builder, param);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+        addToRequestQueue(request);
+    }
+
+    public void getIntegralProductPaySettlementPage(Response.Listener<JSONObject> listener, final String proId, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/integral/auth/exchange?");
+
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST,builder.toString(), listener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("proId", proId);
+                setSign4Post(param);
+                return param;
+            }
+        };
         addToRequestQueue(request);
     }
 
@@ -419,7 +441,6 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
     /**
-     *
      * @param listener
      * @param param
      * @param errorListener
@@ -439,21 +460,21 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
     /**
-     *
      * @param listener
      * @param param
      */
     public void getInvoiceCommon(Response.Listener<JSONObject> listener, final Map<String, String> param) {
 
         StringBuilder builder = getRootApi().append("/v1/account/auth/getInvoiceCommonById?");
-        setSign(builder,param);
-        CustomJSonRequest request = new CustomJSonRequest( builder.toString(), listener, this) ;
+        setSign(builder, param);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
         addToRequestQueue(request);
 
     }
 
     /**
      * 增值税 发票修改，添加
+     *
      * @param listener
      * @param param
      * @param errorListener
@@ -472,6 +493,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
 
     }
+
     public void getInvoiceAddTax(Response.Listener<JSONObject> listener) {
         if (appUserInfo != null) {
             StringBuilder builder = getRootApi().append("/v1/account/auth/invoiceVAT?");
@@ -582,18 +604,17 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
 
     /**
-     *
      * @param listener
      * @param param
-     * @param orderType 2 预订单结算，1 普通订单结算
+     * @param orderType     2 预订单结算，1 普通订单结算
      * @param errorListener
      */
-    public void getPaySettlementPage(Response.Listener<JSONObject> listener, Map<String,String> param,int orderType, Response.ErrorListener errorListener) {
-        StringBuilder builder=null ;
-        if (orderType==1){
-            builder= getRootApi().append("/v1/order/auth/generateOrder?");
-        }else if(orderType==2){
-           builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
+    public void getPaySettlementPage(Response.Listener<JSONObject> listener, Map<String, String> param, int orderType, Response.ErrorListener errorListener) {
+        StringBuilder builder = null;
+        if (orderType == 1) {
+            builder = getRootApi().append("/v1/order/auth/generateOrder?");
+        } else if (orderType == 2) {
+            builder = getRootApi().append("/v1/reserve/auth/reserveGoodsOrderDetail?");
         }
         setSign(builder, param);
         CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
@@ -607,8 +628,11 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("cartId", cartId);
+
                 params.put("checked", isChecked ? "1" : "0");
-                params.put("number", String.valueOf(num));
+                if (num != -1) {
+                    params.put("number", String.valueOf(num));
+                }
                 setSign4Post(params);
                 return params;
             }
@@ -635,15 +659,14 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 
     /**
      * @param listener
-     * @param orderType   1 普通订单，2 预订单
-     * @param invoiceType 发票类型
+     * @param orderType 1 普通订单，2 预订单
      */
-    public void submitPreOrder(Response.Listener<JSONObject> listener, final int orderType, final Map<String,String> param, Response.ErrorListener errorListener) {
-        StringBuilder builder=null ;
-        if (orderType==2){
-            builder=getRootApi().append("/v1/reserve/auth/reserveGoods");
-        } else if (orderType==1){
-            builder=getRootApi().append("/v1/order/auth/submitOrder");
+    public void submitPreOrder(Response.Listener<JSONObject> listener, final int orderType, final Map<String, String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder = null;
+        if (orderType == 2) {
+            builder = getRootApi().append("/v1/reserve/auth/reserveGoods");
+        } else if (orderType == 1) {
+            builder = getRootApi().append("/v1/order/auth/submitOrder");
         }
         CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
@@ -825,6 +848,9 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     }
 
     private void setSign(StringBuilder builder, Map<String, String> map) {
+        if (appUserInfo == null) {
+            return;
+        }
         List<String> aa = new ArrayList<String>();
         if (map == null) {
             map = new HashMap<>();
@@ -847,5 +873,18 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         //url后面带上一个sig的值
         return;
     }
+
+    private void setParam(StringBuilder builder, Map<String, String> param) {
+        if (!param.isEmpty()) {
+            builder.append("?");
+            for (String key : param.keySet()) {
+                builder.append(key).append("=").append(param.get(key)).append("&");
+            }
+            builder.replace(builder.length() - 1, builder.length(), "");
+        }
+
+
+    }
+
 
 }

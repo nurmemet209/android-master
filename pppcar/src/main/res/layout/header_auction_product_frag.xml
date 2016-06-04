@@ -11,25 +11,21 @@
         android:layout_height="370dp"
         >
 
-        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-            android:id="@+id/banner"
+        <com.bigkoo.convenientbanner.ConvenientBanner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/convenientBanner"
             android:layout_width="match_parent"
             android:layout_height="370dp"
-            android:background="@color/red"
+            app:canLoop="true"
             />
 
-        <me.relex.circleindicator.CircleIndicator
+        <com.cn.pppcar.widget.RaPageIndicator
             android:id="@+id/banner_indicator"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
-            app:ci_animator="@anim/indicator_no_animator"
-            app:ci_drawable="@drawable/indicator_red_radius"
-            app:ci_drawable_unselected="@drawable/indicator_gray_radius"
-            app:ci_height="8dp"
-            app:ci_width="8dp"
             />
     </RelativeLayout>
 

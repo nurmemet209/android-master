@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/5/20.
  */
-public class SearchHistoryAdapter extends BaseListAdapter<String> {
+public class SearchHistoryAdapter extends BaseListAdapter<RecyclerView.ViewHolder,String> {
 
     private int paddingLeftRight;
     private int padddingTopBottom;

@@ -38,7 +38,7 @@ public class ProductAttrDlg extends BaseDialog {
 
     private Map<String, Map<String, ProductAttrBean>> map;
     @Bind(R.id.container)
-    protected PropertyLayout container;
+    protected PropertyLayout properyContainer;
     @Bind(R.id.cancel_btn)
     protected ImageButton mCancelButton;
     @Bind(R.id.title_img)
@@ -51,8 +51,11 @@ public class ProductAttrDlg extends BaseDialog {
     protected NumEditLayout numEdit;
     @Bind(R.id.retail_price)
     protected TextView retailPrice;
+    /**
+     * 预定规则
+     */
     @Bind(R.id.checkable_layout)
-    protected SelectableLayout checkableLayout;
+    protected SelectableLayout preOrderRule;
     private ResProductApp productDetail;
     private ArrayList<String> keyList = new ArrayList<>();
 
@@ -94,12 +97,12 @@ public class ProductAttrDlg extends BaseDialog {
 
     private void setProductAttr() {
         if (map == null || map.isEmpty()) {
-            container.setVisibility(View.GONE);
+            properyContainer.setVisibility(View.GONE);
             return;
         }
-        container.init(productDetail.getId());
+        properyContainer.init(productDetail.getId());
         int pd = getContext().getResources().getDimensionPixelSize(R.dimen.padding_normal);
-        container.setPad(pd, pd);
+        properyContainer.setPad(pd, pd);
         keyList.add("尺寸");
         keyList.add("宽度");
         keyList.add("ET值");
@@ -107,20 +110,20 @@ public class ProductAttrDlg extends BaseDialog {
         keyList.add("圆心距");
         int index = 0;
         for (String key : keyList) {
-            container.addItem(key, map.get(key), index);
+            properyContainer.addItem(key, map.get(key), index);
             index++;
         }
-        container.setItemClick(new PropertyLayout.ItemClick() {
-                                   @Override
-                                   public void onItemClick(final long id) {
+        properyContainer.setItemClick(new PropertyLayout.ItemClick() {
+                                          @Override
+                                          public void onItemClick(final long id) {
 
-                                       apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
-                                           @Override
-                                           public void onResponse(JSONObject response) {
-                                               if (NetUtil.isSucced(response)) {
-                                                   ResProductApp detail = apiHandler.toObject(NetUtil.getData(response), ResProductApp.class);
-                                                   if (detail != null) {
-                                                       productDetail = detail;
+                                              apiHandler.getProductDetail(new Response.Listener<JSONObject>() {
+                                                  @Override
+                                                  public void onResponse(JSONObject response) {
+                                                      if (NetUtil.isSucced(response)) {
+                                                          ResProductApp detail = apiHandler.toObject(NetUtil.getData(response), ResProductApp.class);
+                                                          if (detail != null) {
+                                                              productDetail = detail;
 //                                                       productDetail.setId(detail.getId());
 //                                                       productDetail.setImgs(detail.getImgs());
 //                                                       productDetail.setName(detail.getName());
@@ -128,27 +131,27 @@ public class ProductAttrDlg extends BaseDialog {
 //                                                       titleImg.setImageURI(Uri.parse(urls[0]));
 //                                                       title.setText(productDetail.getName());
 
-                                                       if (refreshRun != null) {
-                                                           refreshRun.run();
-                                                       }
-                                                   }
-                                               } else {
-                                                   showToast(NetUtil.getMessage(response));
-                                               }
-                                           }
-                                       }, null, id);
-                                   }
-                               }
+                                                              if (refreshRun != null) {
+                                                                  refreshRun.run();
+                                                              }
+                                                          }
+                                                      } else {
+                                                          showToast(NetUtil.getMessage(response));
+                                                      }
+                                                  }
+                                              }, null, id);
+                                          }
+                                      }
         );
     }
 
     private void setPreOrder() {
         mActionBtn.setEnabled(true);
-        checkableLayout.removeAllViews();
+        preOrderRule.removeAllViews();
         if (productDetail.getIsFlagGoodsCycle()) {
             mActionBtn.setText("立即预定");
-            container.setVisibility(View.VISIBLE);
-            checkableLayout.setItems(productDetail.getReserveGoodsRuleResBeans(), new SelectableLayout.OnBindPropertyListener() {
+            properyContainer.setVisibility(View.VISIBLE);
+            preOrderRule.setItems(productDetail.getReserveGoodsRuleResBeans(), new SelectableLayout.OnBindPropertyListener() {
                 @Override
                 public void OnBindProperty(TextView tv, ImageView img, int position) {
                     img.setImageResource(R.drawable.image_view_checkbox);
@@ -161,8 +164,9 @@ public class ProductAttrDlg extends BaseDialog {
                 }
             });
         } else {
+            preOrderRule.setVisibility(View.GONE);
             mActionBtn.setText("加入购物车");
-            container.setVisibility(View.GONE);
+            properyContainer.setVisibility(View.GONE);
             if (!productDetail.hasStock()) {
                 mActionBtn.setEnabled(false);
             }
@@ -183,12 +187,13 @@ public class ProductAttrDlg extends BaseDialog {
                 @Override
                 public void onResponse(JSONObject response) {
                     showToast(NetUtil.getMessage(response));
+                    dismiss();
                 }
             }, productDetail.getId(), num, 1);
         }
         //has order regular
         else if (productDetail.getIsFlagGoodsCycle()) {
-            if (!checkableLayout.isItemSelected()) {
+            if (!preOrderRule.isItemSelected()) {
                 showToast("请选择预定规则");
                 return;
             } else {
@@ -208,8 +213,8 @@ public class ProductAttrDlg extends BaseDialog {
     }
 
     public boolean isProperySubmitable() {
-        if (container.getVisibility() == View.VISIBLE) {
-            if (!container.isProperySelected()) {
+        if (properyContainer.getVisibility() == View.VISIBLE) {
+            if (!properyContainer.isProperySelected()) {
                 return false;
             }
         }
@@ -223,7 +228,7 @@ public class ProductAttrDlg extends BaseDialog {
 
     public boolean isOrderRegularSubmitable() {
 
-        if (!productDetail.hasStock() && productDetail.getIsFlagGoodsCycle() && !checkableLayout.isItemSelected()) {
+        if (!productDetail.hasStock() && productDetail.getIsFlagGoodsCycle() && !preOrderRule.isItemSelected()) {
             return false;
         }
         return true;
@@ -238,7 +243,7 @@ public class ProductAttrDlg extends BaseDialog {
     }
 
     public long getOrderRuleId() {
-        int selectedPos = checkableLayout.getSelectedPosition();
+        int selectedPos = preOrderRule.getSelectedPosition();
         if (selectedPos != -1) {
             ReserveGoodsRuleResBean bean = productDetail.getReserveGoodsRuleResBeans().get(selectedPos);
             return bean.getRuleId();

@@ -1,16 +1,21 @@
 package com.cn.fragment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.cn.adapter.BannerAdapter;
 import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
@@ -19,9 +24,9 @@ import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.ProductDetailAct;
 import com.cn.pppcar.R;
-import com.cn.pppcar.widget.PreOrderDlg;
 import com.cn.pppcar.widget.PreferentialPackageDlg;
 import com.cn.pppcar.widget.ProductAttrDlg;
+import com.cn.pppcar.widget.RaPageIndicator;
 import com.cn.pppcar.widget.StagePayDlg;
 import com.cn.widget.CustomTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -31,13 +36,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by nurmemet on 2016/3/31.
@@ -46,23 +50,20 @@ public class ProductFrag extends BaseFrag {
 
     public static final String COLLECT = "collect_";
     public static final String ADD_2_CART = "add2cart_";
-
-    @Bind(R.id.banner)
-    protected AutoScrollViewPager banner;
+    @Bind(R.id.convenientBanner)
+    protected ConvenientBanner banner;
     @Bind(R.id.banner_indicator)
-    protected CircleIndicator indicator;
-
+    protected RaPageIndicator indicator;
     @Bind(R.id.title)
     protected TextView mTitle;
-
     @Bind(R.id.sub_title)
     protected TextView mSubTitle;
-    @Bind(R.id.retail_price)
-    protected CustomTextView mRetailPrice;
-    @Bind(R.id.whole_sale_price)
-    protected CustomTextView mWholeSalePrice;
-    @Bind(R.id.pre_order_price)
-    protected CustomTextView mPreOrderPrice;
+    @Bind(R.id.left_price)
+    protected CustomTextView mLeftPrice;
+    @Bind(R.id.right_price)
+    protected CustomTextView mRightPrice;
+    @Bind(R.id.bottom_price)
+    protected CustomTextView mBottomPrice;
     @Bind(R.id.factory_number)
     protected TextView mFactoryNumber;
     @Bind(R.id.brand)
@@ -71,12 +72,8 @@ public class ProductFrag extends BaseFrag {
     protected TextView mStockNum;
     @Bind(R.id.freight)
     protected TextView mFreight;
-
     private ResProductApp productDetail;
-
     private long proId;
-    private BannerAdapter bannerAdapter;
-    private List bannerViewList;
     private ProductAttrDlg productAttrDlg;
     private PreferentialPackageDlg preferentialPackageDlg;
 
@@ -123,39 +120,59 @@ public class ProductFrag extends BaseFrag {
 
     private void bindData() {
 
-        if (bannerViewList == null) {
-            bannerViewList = new ArrayList();
-        } else {
-            bannerViewList.clear();
-        }
+
         String[] imgList = productDetail.getImgs().split(",");
-        for (int i = 0; i < imgList.length; i++) {
-            SimpleDraweeView img = new SimpleDraweeView(getActivity());
-            Uri uri = Uri.parse(imgList[i]);
-            img.setImageURI(uri);
-            bannerViewList.add(img);
-        }
-        if (bannerAdapter == null) {
-            bannerAdapter = new BannerAdapter(getActivity(), bannerViewList);
-            banner.setAdapter(bannerAdapter);
-            banner.setInterval(4000);
-            // banner.setScrollDurationFactor(5);
-            banner.setCycle(true);
-            banner.setOffscreenPageLimit(bannerViewList.size());
-            banner.setBorderAnimation(true);
-            banner.startAutoScroll();
-            indicator.setViewPager(banner);
-        } else {
-            bannerAdapter.setViewList(bannerViewList);
-            bannerAdapter.notifyDataSetChanged();
-        }
+        List<String> bannerList = new ArrayList<>();
+        Collections.addAll(bannerList, imgList);
+        banner.startTurning(5000);
+        banner.setScrollDuration(1000);
+        banner.setCanLoop(true);
+        banner.setPointViewVisible(false);
+        banner.setManualPageable(true);
+        banner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+
+                return new LocalImageHolderView();
+            }
+        }, bannerList);
+        banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                indicator.setCurrentItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        indicator.setBackgroundDr(R.drawable.indicator_red_radius, R.drawable.indicator_gray_radius);
+        indicator.init(bannerList.size(), R.dimen.padding_normal, null);
+        indicator.setCurrentItem(banner.getCurrentItem());
+
 
         mTitle.setText(productDetail.getName());
         mSubTitle.setText(productDetail.getBriefDescribe());
-        mRetailPrice.setText(String.valueOf(productDetail.getRetailPrice()));
-        mRetailPrice.setLine(true);
-        mWholeSalePrice.setText(String.valueOf(productDetail.getTradePrice()));
-        mPreOrderPrice.setText(String.valueOf(productDetail.getActivityPrice()));
+        if (productDetail.getIsFlagBorC()){
+
+            mLeftPrice.setText(spanHelper.priceSpan("零售价：","￥"+productDetail.getRetailPrice()));
+
+
+        }else{
+            mLeftPrice.setText(spanHelper.priceSpan("批发价：","￥"+productDetail.getTradePrice()));
+            mBottomPrice.setLine(true);
+            mBottomPrice.setText("零售价：￥"+productDetail.getRetailPrice());
+
+            if (productDetail.hasStock()){
+
+            }
+        }
         mFactoryNumber.setText(productDetail.getManufacturingCode());
         mBrand.setText(productDetail.getBrandName());
         mStockNum.setText(String.valueOf(productDetail.getStockNumber()));
@@ -275,7 +292,7 @@ public class ProductFrag extends BaseFrag {
                     //提交预订单
                     long id = productAttrDlg.getOrderRuleId();
                     int num = productAttrDlg.getNum();
-                    ActivitySwitcher.toPaySettlementAct(getActivity(), productDetail.getId(), num, id,PaySettlementAct.ORDER_TYPE_PREORDER);
+                    ActivitySwitcher.toPaySettlementAct(getActivity(), productDetail.getId(), num, id, PaySettlementAct.ORDER_TYPE_PREORDER);
                 } else {
                     //如果有选中套餐,套餐产品加入到购物车
                     if (isPreferentialSelected()) {
@@ -350,5 +367,22 @@ public class ProductFrag extends BaseFrag {
             return true;
         }
         return false;
+    }
+
+
+    class LocalImageHolderView implements Holder<String> {
+        private ImageView img;
+
+        @Override
+        public View createView(Context context) {
+            img = new SimpleDraweeView(getActivity());
+            return img;
+        }
+
+        @Override
+        public void UpdateUI(Context context, final int position, String data) {
+            Uri uri = Uri.parse(data);
+            img.setImageURI(uri);
+        }
     }
 }

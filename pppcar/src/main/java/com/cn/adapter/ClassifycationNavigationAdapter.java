@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/5/3.
  */
-public class ClassifycationNavigationAdapter extends BaseListAdapter<Child> {
+public class ClassifycationNavigationAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Child> {
     private int selectedIndex = 0;
 
     private OnItemSelected onItemSelected;

@@ -24,7 +24,6 @@ public abstract class BaseViewPagerAct extends BaseAct {
         }
         viewPager.setAdapter(adapter);
         tabLayout.setViewPager(viewPager);
-
     }
 
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchListFragAdapter extends BaseListAdapter<ProductBean>{
+public class SearchListFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ProductBean>{
 
 
     public SearchListFragAdapter( Context mContext,ArrayList<ProductBean> list) {

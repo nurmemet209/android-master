@@ -1,41 +1,49 @@
 package com.cn.fragment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.cn.adapter.BannerAdapter;
-import com.cn.commans.ActivitySwitcher;
+import com.android.volley.VolleyError;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.cn.commans.NetUtil;
+import com.cn.dialog.ConfirmDialog;
 import com.cn.entity.ResIntegralProductDetail;
 import com.cn.pppcar.R;
+import com.cn.pppcar.widget.RaPageIndicator;
+import com.cn.util.MyLogger;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
-import me.relex.circleindicator.CircleIndicator;
+
 
 /**
  * Created by nurmemet on 2016/4/28.
  */
 public class IntegralProductDetailFrag extends BaseFrag {
 
-    @Bind(R.id.banner)
-    protected AutoScrollViewPager banner;
+    @Bind(R.id.convenientBanner)
+    protected ConvenientBanner banner;
     @Bind(R.id.banner_indicator)
-    protected CircleIndicator indicator;
+    protected RaPageIndicator indicator;
     //商品名称
     @Bind(R.id.title)
     protected TextView mTitle;
@@ -62,6 +70,9 @@ public class IntegralProductDetailFrag extends BaseFrag {
     protected TextView mFreight;
 
 
+    private long proId = -1;
+
+
     private ResIntegralProductDetail integralProductDetail;
 
     static public IntegralProductDetailFrag getInstance() {
@@ -74,70 +85,72 @@ public class IntegralProductDetailFrag extends BaseFrag {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, mainView);
-        init();
+        getIntentData();
+        loadData();
         return mainView;
     }
 
-    private void init() {
+    private void getIntentData() {
+        proId = getActivity().getIntent().getLongExtra("proId", -1);
+    }
 
+    private void loadData() {
 
-        new Thread(new Runnable() {
+        apiHandler.getIntegralProductDetail(new Response.Listener<JSONObject>() {
             @Override
-            public void run() {
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    integralProductDetail = apiHandler.toObject(NetUtil.getData(response), ResIntegralProductDetail.class);
+                    if (integralProductDetail != null) {
+                        String[] imgList = integralProductDetail.getDetailImg().split(",");
+                        List<String> bannerList = new ArrayList<>();
+                        Collections.addAll(bannerList, imgList);
+                        banner.setScrollDuration(1000);
+                        banner.setCanLoop(true);
+                        banner.setPointViewVisible(false);
+                        banner.setManualPageable(true);
+                        banner.setPages(new CBViewHolderCreator() {
+                            @Override
+                            public Object createHolder() {
 
-                apiHandler.getIntegralProductDetail(new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (NetUtil.isSucced(response)) {
-                            integralProductDetail = apiHandler.toObject(NetUtil.getData(response), ResIntegralProductDetail.class);
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ArrayList viewList = new ArrayList();
-                                    String[] imgList = integralProductDetail.getDetailImg().split(",");
-                                    for (int i = 0; i < imgList.length; i++) {
+                                return new LocalImageHolderView();
+                            }
+                        }, bannerList);
+                        banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                            @Override
+                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                                        SimpleDraweeView img = new SimpleDraweeView(getActivity());
-                                        Uri uri = Uri.parse(imgList[i]);
-                                        img.setImageURI(uri);
-                                        viewList.add(img);
-                                    }
-                                    if (integralProductDetail != null) {
+                            }
 
+                            @Override
+                            public void onPageSelected(int position) {
+                                indicator.setCurrentItem(position);
+                            }
 
-                                        BannerAdapter adapter = new BannerAdapter(getActivity(), viewList);
-                                        banner.setAdapter(adapter);
-                                        banner.setInterval(4000);
-                                        // banner.setScrollDurationFactor(5);
-                                        banner.setCycle(true);
-                                        banner.setOffscreenPageLimit(viewList.size());
-                                        banner.setBorderAnimation(true);
-                                        banner.startAutoScroll();
-                                        indicator.setViewPager(banner);
+                            @Override
+                            public void onPageScrollStateChanged(int state) {
+
+                            }
+                        });
+                        indicator.setBackgroundDr(R.drawable.indicator_red_radius, R.drawable.indicator_gray_radius);
+                        indicator.init(bannerList.size(), R.dimen.padding_normal, null);
+                        indicator.setCurrentItem(banner.getCurrentItem());
 
 
-                                        mTitle.setText(integralProductDetail.getName());
-                                        mSubTitle.setText(integralProductDetail.getBriefDescripe());
-                                        mIntegralPrice.setText(String.valueOf(integralProductDetail.getIntegralPrice()));
-                                        //mRetailPrice.setText(integralProductDetail.get);
-                                        mFactoryNumber.setText(integralProductDetail.getProductNumber());
-                                        mBrand.setText(integralProductDetail.getTypeName());
-                                        mStockNum.setText(String.valueOf(integralProductDetail.getStockNumber()));
-                                        mFreight.setText("到付");
-
-                                    }
-                                }
-                            });
-
-                        } else {
-
-                            showToast(NetUtil.getMessage(response));
-                        }
+                        mTitle.setText(integralProductDetail.getName());
+                        mSubTitle.setText(integralProductDetail.getBriefDescripe());
+                        mIntegralPrice.setText(spanHelper.priceSpan("兑换积分", String.valueOf(integralProductDetail.getIntegralPrice())));
+                        //mRetailPrice.setText(integralProductDetail.get);
+                        mFactoryNumber.setText(integralProductDetail.getProductNumber());
+                        mBrand.setText(integralProductDetail.getTypeName());
+                        mStockNum.setText(String.valueOf(integralProductDetail.getStockNumber()));
+                        mFreight.setText("到付");
+                    } else {
+                        showToast(NetUtil.getMessage(response));
                     }
-                }, null);
+                }
             }
-        }).start();
-
+        }, String.valueOf(proId), null);
     }
 
     @Override
@@ -146,12 +159,56 @@ public class IntegralProductDetailFrag extends BaseFrag {
     }
 
 
-
-
     @OnClick(R.id.exchange_quickly)
     public void exchangeQuickly(View view) {
-        ActivitySwitcher.toIntegralPaySettelmentAct(getActivity());
+        ConfirmDialog dlg = new ConfirmDialog(getActivity(), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tag = (int) v.getTag();
+                if (tag == ConfirmDialog.CANCEL) {
+                    return;
+                } else if (tag == ConfirmDialog.SURE) {
+
+                    showProgressDlg();
+                    apiHandler.getIntegralProductPaySettlementPage(new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            dismissProgressDlg();
+                            if (NetUtil.isSucced(response)) {
+
+                            }
+                            showToast(NetUtil.getMessage(response));
+                        }
+                    }, String.valueOf(proId), new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            dismissProgressDlg();
+                            MyLogger.showError(error.getMessage());
+                        }
+                    });
+
+                }
+            }
+        });
+
+        dlg.setTitleText("确定兑换");
+        dlg.show();
+        //ActivitySwitcher.toIntegralPaySettelmentAct(getActivity(),proId);
     }
 
-    private Handler mHandler = new Handler();
+    class LocalImageHolderView implements Holder<String> {
+        private ImageView img;
+
+        @Override
+        public View createView(Context context) {
+            img = new SimpleDraweeView(getActivity());
+            return img;
+        }
+
+        @Override
+        public void UpdateUI(Context context, final int position, String data) {
+            Uri uri = Uri.parse(data);
+            img.setImageURI(uri);
+        }
+    }
 }

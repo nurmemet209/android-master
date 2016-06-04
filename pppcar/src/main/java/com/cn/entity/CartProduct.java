@@ -2,19 +2,19 @@ package com.cn.entity;
 
 public class CartProduct {
 	
-	private Long id;
+	private long id;
 	private String name;
 	private String imgs;
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	/**

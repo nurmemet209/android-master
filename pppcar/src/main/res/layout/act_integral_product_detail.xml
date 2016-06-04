@@ -32,6 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_toLeftOf="@+id/filer_container"
             android:fillViewport="false"
+            android:background="@color/red"
 
             />
     </RelativeLayout>

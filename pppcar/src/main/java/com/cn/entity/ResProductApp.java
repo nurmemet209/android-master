@@ -34,15 +34,15 @@ public class ResProductApp {
     /**
      * 是否有预定规则
      */
-    private Boolean isFlagGoodsCycle;
+    private boolean isFlagGoodsCycle;
 
-    private Boolean isFlagGroup;//是否有优惠套餐 true、表示有 false、表示没有
+    private boolean isFlagGroup;//是否有优惠套餐 true、表示有 false、表示没有
 
-    private Boolean isFlagProperty;//是否有属性规格 true、表示有 false、表示没有
+    private boolean isFlagProperty;//是否有属性规格 true、表示有 false、表示没有
 
-    private Boolean isFlagBorC;//true、是B端，false、是C端
+    private boolean isFlagBorC;//true、是B端，false、是C端
 
-    private Boolean isFlagFavorites;//是否已经收藏  true、表示是 false、表示否
+    private boolean isFlagFavorites;//是否已经收藏  true、表示是 false、表示否
 
     private Map<String, Map<String, ProductAttrBean>> productAttrs;//属性规格
 
@@ -111,11 +111,11 @@ public class ResProductApp {
         this.brandName = brandName;
     }
 
-    public Boolean getIsFlagGoodsCycle() {
+    public boolean getIsFlagGoodsCycle() {
         return isFlagGoodsCycle;
     }
 
-    public void setIsFlagGoodsCycle(Boolean isFlagGoodsCycle) {
+    public void setIsFlagGoodsCycle(boolean isFlagGoodsCycle) {
         this.isFlagGoodsCycle = isFlagGoodsCycle;
     }
 
@@ -168,36 +168,36 @@ public class ResProductApp {
         this.reserveGoodsRuleResBeans = reserveGoodsRuleResBeans;
     }
 
-    public Boolean getIsFlagGroup() {
+    public boolean getIsFlagGroup() {
         return isFlagGroup;
     }
 
-    public void setIsFlagGroup(Boolean isFlagGroup) {
+    public void setIsFlagGroup(boolean isFlagGroup) {
         this.isFlagGroup = isFlagGroup;
     }
 
-    public Boolean getIsFlagProperty() {
+    public boolean getIsFlagProperty() {
         return isFlagProperty;
     }
 
-    public void setIsFlagProperty(Boolean isFlagProperty) {
+    public void setIsFlagProperty(boolean isFlagProperty) {
         this.isFlagProperty = isFlagProperty;
     }
 
 
-    public Boolean getIsFlagBorC() {
+    public boolean getIsFlagBorC() {
         return isFlagBorC;
     }
 
-    public void setIsFlagBorC(Boolean isFlagBorC) {
+    public void setIsFlagBorC(boolean isFlagBorC) {
         this.isFlagBorC = isFlagBorC;
     }
 
-    public Boolean getIsFlagFavorites() {
+    public boolean getIsFlagFavorites() {
         return isFlagFavorites;
     }
 
-    public void setIsFlagFavorites(Boolean isFlagFavorites) {
+    public void setIsFlagFavorites(boolean isFlagFavorites) {
         this.isFlagFavorites = isFlagFavorites;
     }
 

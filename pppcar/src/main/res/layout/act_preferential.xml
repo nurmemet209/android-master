@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_bg_gray"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_bottom_bar_height"
+        android:background="@color/white"
+
+        >
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:onClick="OnBack"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="选择优惠卷"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_"
+            android:layout_alignParentBottom="true"
+            android:background="@color/main_bg_gray"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/preferential_valume_num"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:gravity="center"
+
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/main_bg_gray"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/sure_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="确定"
+        android:layout_margin="@dimen/main_tbn_margin"
+        android:background="@drawable/main_red_pressed_sl"
+        />
+</LinearLayout>

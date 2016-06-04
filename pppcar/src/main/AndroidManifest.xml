@@ -41,6 +41,7 @@
 
         <activity android:name=".MainPageAct"
                   android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+                  android:launchMode="singleInstance"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -57,7 +58,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".SearchAct"/>
         <!--<activity android:name=".AuctionAct"/>-->
-        <activity android:name=".IntegralProductDetail"/>
+        <activity android:name=".IntegralProductDetailAct"/>
         <activity android:name=".IntegralPaySettelmentAct"
                   android:windowSoftInputMode="stateAlwaysHidden"
             />
@@ -81,6 +82,7 @@
             />
         <activity android:name=".InvoiceAct"/>
         <activity android:name=".InvoiceCommonEditAct"/>
+        <activity android:name=".SelectPreferentialAct"/>
 
     </application>
 

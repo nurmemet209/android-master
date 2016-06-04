@@ -8,7 +8,7 @@ public class ResIndexBrandType {
 	
 	private String title;//标题
 	
-	private ResIndexBrandTypeProduct bsProduct;//产品
+	//private ResIndexBrandTypeProduct bsProduct;//产品
 	
 	private String imgUrl;//图片url
 	
@@ -24,13 +24,13 @@ public class ResIndexBrandType {
 		this.title = title;
 	}
 
-	public ResIndexBrandTypeProduct getBsProduct() {
-		return bsProduct;
-	}
-
-	public void setBsProduct(ResIndexBrandTypeProduct bsProduct) {
-		this.bsProduct = bsProduct;
-	}
+//	public ResIndexBrandTypeProduct getBsProduct() {
+//		return bsProduct;
+//	}
+//
+//	public void setBsProduct(ResIndexBrandTypeProduct bsProduct) {
+//		this.bsProduct = bsProduct;
+//	}
 
 
 	public String getImgUrl() {
@@ -57,11 +57,7 @@ public class ResIndexBrandType {
 		this.indexBrandLists = indexBrandLists;
 	}
 
-	@Override
-	public String toString() {
-		return "ResIndexBrandType [title=" + title + ", bsProduct=" + bsProduct + ", imgUrl=" + imgUrl + ", imgLinkUrl="
-				+ imgLinkUrl + ", indexBrandLists=" + indexBrandLists + "]";
-	}
+
 	
 	
 }

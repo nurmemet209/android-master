@@ -25,6 +25,9 @@ public class CustomTabLayout extends LinearLayout {
     private BindView bindView;
     private CustomOnItemClick itemClick;
     private int drawablePadding;
+    private int mCurrentPosition = 0;
+
+
     ;
 
     public CustomTabLayout(Context context) {
@@ -45,8 +48,8 @@ public class CustomTabLayout extends LinearLayout {
         setBackgroundColor(ContextCompat.getColor(getContext(), R.color.main_bg_gray));
     }
 
-    public void setDrawablePadding(int padding){
-        this.drawablePadding=padding;
+    public void setDrawablePadding(int padding) {
+        this.drawablePadding = padding;
     }
 
     public void setViewPager(ViewPager viewPager, BindView bindView, CustomOnItemClick onItemClick) {
@@ -58,6 +61,25 @@ public class CustomTabLayout extends LinearLayout {
         this.bindView = bindView;
         this.itemClick = onItemClick;
 
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                getChildAt(mCurrentPosition).findViewWithTag("title").setSelected(false);
+                getChildAt(position).findViewWithTag("title").setSelected(true);
+                mCurrentPosition = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         for (int i = 0; i < adapter.getCount(); i++) {
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -65,7 +87,7 @@ public class CustomTabLayout extends LinearLayout {
             RelativeLayout container = new RelativeLayout(getContext());
             container.setLayoutParams(params);
             container.setClickable(true);
-            View v = getTab(i, adapter.getPageTitle(i).toString(),container);
+            View v = getTab(i, adapter.getPageTitle(i).toString(), container);
             container.addView(v);
             addView(container);
 
@@ -74,32 +96,38 @@ public class CustomTabLayout extends LinearLayout {
     }
 
 
-    private View getTab(final int position, String title,View container) {
+    private View getTab(final int position, String title, View container) {
         LinearLayout tab = new LinearLayout(getContext());
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         param.addRule(RelativeLayout.CENTER_IN_PARENT);
         tab.setLayoutParams(param);
         final TextView text = new TextView(getContext());
         text.setText(title);
+        text.setTag("title");
         text.setGravity(Gravity.CENTER);
+        if (mCurrentPosition == position) {
+            text.setSelected(true);
+        }
+        text.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
         tab.addView(text);
+        tab.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
         final ImageView img = new ImageView(getContext());
 
-        LinearLayout.LayoutParams  params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.leftMargin=drawablePadding;
-        params.gravity= Gravity.CENTER;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.leftMargin = drawablePadding;
+        params.gravity = Gravity.CENTER;
         img.setLayoutParams(params);
         tab.addView(img);
         if (bindView != null) {
             bindView.OnBindView(text, img, position);
         }
+        container.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
         container.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 int oldPosition = viewPager.getCurrentItem();
                 if (viewPager.getCurrentItem() != position) {
-
-                    viewPager.setCurrentItem(position);
+                    viewPager.setCurrentItem(position, false);
                     if (itemClick != null) {
                         itemClick.OnItemClicked(text, img, position, oldPosition, true);
                     }
@@ -120,5 +148,6 @@ public class CustomTabLayout extends LinearLayout {
     public interface CustomOnItemClick {
         void OnItemClicked(TextView tv, ImageView img, int newPosition, int oldPosition, boolean state);
     }
+
 
 }

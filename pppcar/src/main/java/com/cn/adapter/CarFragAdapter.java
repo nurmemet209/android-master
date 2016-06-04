@@ -31,7 +31,7 @@ import butterknife.OnCheckedChanged;
 /**
  * Created by nurmemet on 2016/4/3.
  */
-public class CarFragAdapter extends BaseListAdapter<CartBean> {
+public class CarFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,CartBean> {
 
 
     private OnListItemWidgetClickedListener onListItemWidgetClickedListener;
@@ -71,9 +71,9 @@ public class CarFragAdapter extends BaseListAdapter<CartBean> {
         TextView size = (TextView) view.findViewById(R.id.item_item_size);
         SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
         title.setText(list.get(position).getBsProduct().getName());
-        price.setText(String.valueOf(1234));
+        price.setText("￥"+String.valueOf(list.get(position).getTotalDiscountPrice()));
         img.setImageURI(Uri.parse(list.get(position).getBsProduct().getImgs()));
-        size.setText("黑色");
+
 
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.cart_item);
         if (!isEditMode) {

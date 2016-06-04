@@ -83,7 +83,7 @@ public class YearSelectDlg extends BaseDialog {
     }
 
 
-    class YearAdapter extends BaseListAdapter<String> {
+    class YearAdapter extends BaseListAdapter<RecyclerView.ViewHolder,String> {
         private int padding;
         private int height;
         private int selectedPostion = 0;

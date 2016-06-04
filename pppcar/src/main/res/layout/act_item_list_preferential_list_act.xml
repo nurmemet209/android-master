@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cn.pppcar.widget.SelectableLinearLayoutItem xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="@dimen/padding_normal"
+    >
+
+    <ImageView
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_width"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/image_view_checkbox"
+        android:layout_marginRight="@dimen/padding_normal"
+        android:tag="selector_"
+        android:scaleType="centerInside"
+
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:text="sdfdsfdsf"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/property"
+            android:layout_marginTop="@dimen/padding_normal"
+            android:text="sfsdfds"
+            android:textSize="@dimen/text_size_small"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:textColor="@color/main_red"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="sdfsd"
+            android:textSize="@dimen/text_size_small"
+            />
+    </LinearLayout>
+
+
+</com.cn.pppcar.widget.SelectableLinearLayoutItem>

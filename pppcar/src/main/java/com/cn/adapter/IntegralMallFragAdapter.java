@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/27.
  */
-public class IntegralMallFragAdapter extends BaseListAdapter<ResIntegralProduct> {
+public class IntegralMallFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResIntegralProduct> {
 
     public IntegralMallFragAdapter(Context mContext, ArrayList<ResIntegralProduct> list) {
         super(mContext, list);
@@ -36,19 +36,21 @@ public class IntegralMallFragAdapter extends BaseListAdapter<ResIntegralProduct>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         View view = holder.itemView;
         SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView price = (TextView) view.findViewById(R.id.price);
+        TextView retailPrice= (TextView) view.findViewById(R.id.retail_price);
         img.setImageURI(Uri.parse(list.get(position).getShowImg()));
         title.setText(list.get(position).getName());
-        price.setText("1213.3432");
+        price.setText(String.valueOf(list.get(position).getIntegralPrice()));
+       // retailPrice.setText(list.get(position).get);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toIntegralProductDetailAct((Activity) mContext);
+                ActivitySwitcher.toIntegralProductDetailAct((Activity) mContext,list.get(position).getId());
             }
         });
     }

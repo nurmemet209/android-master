@@ -1,7 +1,11 @@
 package com.cn.pppcar;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -10,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.cn.adapter.ProductDetailAdapter;
+import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.NetUtil;
 import com.cn.fragment.ProductFrag;
 import com.cn.localutils.EventBusEv;
@@ -68,5 +73,14 @@ public class ProductDetailAct extends BaseAct {
         return mActionBtn;
     }
 
+   @OnClick(R.id.to_cart)
+    public void toCart(View view){
+       ActivitySwitcher.toMainPageAct(this,getIntentPosition());
+       finish();
+    }
 
+   private int getIntentPosition(){
+
+       return 3;
+   }
 }

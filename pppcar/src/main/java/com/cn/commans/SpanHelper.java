@@ -55,6 +55,18 @@ public class SpanHelper {
         return builder;
 
     }
+    public SpannableStringBuilder priceSpan(String left, String right) {
+
+        SpannableStringBuilder builder = new SpannableStringBuilder(left);
+        int start = 0;
+        builder.setSpan(new AbsoluteSizeSpan(mContext.getResources().getDimensionPixelSize(R.dimen.text_size_normal), false), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        start = builder.length();
+        builder.append(right);
+        builder.setSpan(new AbsoluteSizeSpan(mContext.getResources().getDimensionPixelSize(R.dimen.text_size_large), false), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.main_red)), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+
+    }
 
     public SpannableStringBuilder priceSpanSmaller(int resId, float price) {
 

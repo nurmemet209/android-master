@@ -4,29 +4,38 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.cn.commans.SpanHelper;
 import com.cn.pppcar.widget.SelectableLinearLayoutItem;
+import com.cn.util.StringBuilderEx;
 
 import java.util.List;
 
 /**
+ *
+ *
  * Created by nurmemet on 5/30/2016.
  */
-public abstract class BaseSelectableListAdapter<T> extends BaseListAdapter<T> {
+public abstract class BaseSelectableListAdapter<M extends RecyclerView.ViewHolder, T> extends BaseListAdapter<M,T> {
+
+
+
     protected View selectedView;
     protected int selectedPostion = -1;
     protected OnSelectedListener onSelectedListener;
 
-   public interface OnSelectedListener {
+    public interface OnSelectedListener {
         void OnSelected(int position);
     }
 
-    public BaseSelectableListAdapter(Context mContext, List<T> list) {
-        super(mContext, list);
+    public BaseSelectableListAdapter(Context mContext, List<T> list,int selectedPostion,OnSelectedListener onSelectedListener) {
+        super(mContext,list);
+        this.selectedPostion=selectedPostion;
+        this.onSelectedListener=onSelectedListener;
     }
 
-
-    protected void setSelectableView(View view, boolean isSelected, final RecyclerView.ViewHolder holder) {
-        view.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onBindViewHolder(final M holder, int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (selectedView == v) {
@@ -48,21 +57,31 @@ public abstract class BaseSelectableListAdapter<T> extends BaseListAdapter<T> {
                 }
             }
         });
-        if (view instanceof SelectableLinearLayoutItem) {
-            if (isSelected) {
-                SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) view;
+        if (holder.itemView instanceof SelectableLinearLayoutItem) {
+            int pos=holder.getAdapterPosition();
+            if (pos==selectedPostion) {
+                SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) holder.itemView;
                 item.setSelectedState(true);
-                selectedView = view;
+                selectedView = holder.itemView;
             }
 
+        }else{
+            throw  new IllegalStateException("item 最外层的布局应该是 SelectableLinearLayoutItem");
         }
     }
 
-    protected int getSelectedPostion() {
+
+
+    public int getSelectedPostion() {
         return selectedPostion;
     }
 
-    protected void addOnSelectedListener(OnSelectedListener onSelectedListener) {
-        this.onSelectedListener = onSelectedListener;
+
+    @Override
+    public int getItemCount() {
+        if (list != null) {
+            return list.size();
+        }
+        return 0;
     }
 }

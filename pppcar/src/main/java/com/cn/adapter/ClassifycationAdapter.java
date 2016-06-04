@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/5/1.
  */
-public class ClassifycationAdapter extends BaseListAdapter<Object> {
+public class ClassifycationAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Object> {
 
 
     public ClassifycationAdapter(Context mContext, ArrayList<Object> list) {

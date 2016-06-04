@@ -137,10 +137,9 @@ public class PreferentialPackageDlg extends BaseDialog implements TagGroupLayout
         apiHandler.add2Cart(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                showToast(NetUtil.getMessage(response));
                 if (NetUtil.isSucced(response)) {
-                    showToast(NetUtil.getMessage(response));
-                } else {
-                    showToast(NetUtil.getMessage(response));
+                    dismiss();
                 }
             }
         }, r.getId(), -1, 2);

@@ -2,6 +2,7 @@ package com.cn.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class ConfirmDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 v.setTag(SURE);
+                onClickListener.onClick(v);
                 dismiss();
             }
         });
@@ -54,8 +56,11 @@ public class ConfirmDialog extends Dialog {
         }
     }
 
-    public void SetTitle(String title){
+    public void setTitleText(String title){
         mTitleStr=title;
+        if (mTitleTv!=null){
+            mTitleTv.setText(mTitleStr);
+        }
     }
     public float getTranslationX() {
         return translationX;

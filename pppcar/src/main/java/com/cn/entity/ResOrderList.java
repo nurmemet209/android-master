@@ -1,6 +1,5 @@
 package com.cn.entity;
 
-import org.dozer.Mapping;
 
 
 public class ResOrderList {
@@ -36,21 +35,21 @@ public class ResOrderList {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	@Mapping(value="bsProduct.id")
+
 	public Long getProductId() {
 		return productId;
 	}
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
-	@Mapping(value="bsProduct.imgs")
+
 	public String getImgs() {
 		return imgs.split(",")[0];
 	}
 	public void setImgs(String imgs) {
 		this.imgs = imgs;
 	}
-	@Mapping(value="bsProduct.name")
+
 	public String getName() {
 		return name;
 	}

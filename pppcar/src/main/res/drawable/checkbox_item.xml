@@ -4,7 +4,11 @@
         <bitmap android:src="@mipmap/checked">
         </bitmap>
     </item>
+
+
     <item android:state_checked="false">
-      <bitmap android:src="@mipmap/unchecked"/>
+
+        <bitmap android:src="@mipmap/unchecked"/>
+
     </item>
 </selector>

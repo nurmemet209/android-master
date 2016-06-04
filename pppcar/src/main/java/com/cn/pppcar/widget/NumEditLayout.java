@@ -94,6 +94,7 @@ public class NumEditLayout extends LinearLayout {
         editText.setCursorVisible(false);
         editText.setText("0");
         editText.setEnabled(isInputEnabled);
+        editText.setTextColor(ContextCompat.getColorStateList(getContext(),R.color.edit_text_));
 
 
         LinearLayout.LayoutParams paramsMinus = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);

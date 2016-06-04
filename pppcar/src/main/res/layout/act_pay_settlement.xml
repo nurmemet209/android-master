@@ -237,6 +237,57 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/preferential_valume"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_height"
+                    android:layout_marginTop="@dimen/main_big_divider_height"
+                    android:background="@drawable/list_item_bg_"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:paddingRight="@dimen/padding_normal"
+                    android:clickable="true"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="优惠卷"
+                        />
+
+                    <TextView
+                        android:id="@+id/preferential_valume_num"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:background="@drawable/circle_red"
+                        android:layout_marginLeft="@dimen/padding_normal"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_size_small"
+
+                        />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/preferential_value"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_width"
+                        android:src="@mipmap/go"
+                        android:scaleType="centerInside"
+                        android:background="@color/transparent"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -265,6 +316,8 @@
                         />
 
                 </LinearLayout>
+
+
 
                 <RelativeLayout
                     android:id="@+id/integral_part"

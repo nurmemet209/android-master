@@ -26,13 +26,13 @@ public class IntegralMallViewPagerAdapter extends FragmentPagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = IntegralMallFrag.getInstance(1);
+                frag = IntegralMallFrag.getInstance(0);
                 break;
             case 1:
                 frag = IntegralMallFrag.getInstance(1);
                 break;
             case 2:
-                frag = IntegralMallFrag.getInstance(1);
+                frag = IntegralMallFrag.getInstance(2);
                 break;
             default:
                 break;

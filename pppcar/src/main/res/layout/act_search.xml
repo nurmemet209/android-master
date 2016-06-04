@@ -400,6 +400,7 @@
                     android:layout_height="@dimen/main_bottom_bar_height"
                     android:layout_toLeftOf="@+id/filer_container"
                     android:fillViewport="false"
+                    android:background="@color/transparent"
 
                     />
 

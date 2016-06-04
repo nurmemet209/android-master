@@ -1,5 +1,6 @@
 package com.cn.pppcar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.cn.commans.SharedPreferenceHelper;
 import com.cn.entity.AppUserInfo;
 import com.cn.net.ApiHandler;
 import com.cn.util.IOUtils;
+import com.cn.viewpager.CustomViewPager;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 
 import org.json.JSONObject;
@@ -24,7 +26,7 @@ import butterknife.ButterKnife;
  */
 public class MainPageAct extends BaseAct {
     @Bind(R.id.vp_view)
-    protected ViewPager mViewPager;
+    protected CustomViewPager mViewPager;
 
 
     @Bind(R.id.bottom_tab)
@@ -51,6 +53,7 @@ public class MainPageAct extends BaseAct {
         mViewPager.setAdapter(mAdapter);//给ViewPager设置适配器
         mViewPager.setOffscreenPageLimit(mAdapter.getCount());
         tabStrip.setViewPager(mViewPager);
+
 
 
     }
@@ -103,4 +106,14 @@ public class MainPageAct extends BaseAct {
         }, null, null, null, null);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getIntExtra("position", -1) != -1) {
+            int position = intent.getIntExtra("position", -1);
+            mViewPager.setCurrentItem(position, false);
+        }
+
+
+    }
 }

@@ -21,13 +21,11 @@ import java.util.List;
 /**
  * Created by nurmemet on 5/30/2016.
  */
-public class InvoiceCommonListAdapter extends BaseSelectableListAdapter<ResInvoiceInfo> {
+public class InvoiceCommonListAdapter extends BaseSelectableListAdapter<RecyclerView.ViewHolder,ResInvoiceInfo> {
 
 
     public InvoiceCommonListAdapter(Context mContext, List list, int selectedPosotion, OnSelectedListener onSelectedListener) {
-        super(mContext, list);
-        this.selectedPostion = selectedPosotion;
-        this.onSelectedListener = onSelectedListener;
+        super(mContext, list,selectedPosotion,onSelectedListener);
     }
 
     @Override
@@ -42,6 +40,7 @@ public class InvoiceCommonListAdapter extends BaseSelectableListAdapter<ResInvoi
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        super.onBindViewHolder(holder,position);
         TextView companyName = (TextView) holder.itemView.findViewById(R.id.company_name);
         TextView lawPerson = (TextView) holder.itemView.findViewById(R.id.law_person);
         TextView phoneNum = (TextView) holder.itemView.findViewById(R.id.phone_num);
@@ -53,7 +52,7 @@ public class InvoiceCommonListAdapter extends BaseSelectableListAdapter<ResInvoi
             isDefault.setVisibility(View.INVISIBLE);
         }
         SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) holder.itemView.findViewById(R.id.selectable_item);
-        setSelectableView(item, position == selectedPostion, holder);
+        //setSelectableView(item, position == selectedPostion, holder);
 
         companyName.setText(list.get(position).getInvoiceTitle());
         lawPerson.setText(list.get(position).getTakerName());

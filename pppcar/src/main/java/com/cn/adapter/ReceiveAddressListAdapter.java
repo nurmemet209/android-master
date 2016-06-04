@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/4/28.
  */
-public class ReceiveAddressListAdapter extends BaseListAdapter<Consignee> {
+public class ReceiveAddressListAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Consignee> {
     private int selectedPosition = -1;
     private View selectedView=null;
 

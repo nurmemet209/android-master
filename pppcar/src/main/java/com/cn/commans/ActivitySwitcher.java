@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.cn.entity.Consignee;
+import com.cn.entity.FavourableActivityBean;
 import com.cn.entity.ResInvoiceInfo;
 import com.cn.pppcar.AuctionAct;
 import com.cn.pppcar.AuctionBid;
@@ -13,11 +14,12 @@ import com.cn.pppcar.BrandAct;
 import com.cn.pppcar.CollectActTemp;
 import com.cn.pppcar.IntegralMallAct;
 import com.cn.pppcar.IntegralPaySettelmentAct;
-import com.cn.pppcar.IntegralProductDetail;
+import com.cn.pppcar.IntegralProductDetailAct;
 import com.cn.pppcar.InvoiceAct;
 import com.cn.pppcar.InvoiceCommonEditAct;
 import com.cn.pppcar.InvoiceTypeSelectAct;
 import com.cn.pppcar.LoginAct;
+import com.cn.pppcar.MainPageAct;
 import com.cn.pppcar.MyOrderAct;
 import com.cn.pppcar.OrderSubmitSuccedAct;
 import com.cn.pppcar.PayCenterAct;
@@ -27,6 +29,9 @@ import com.cn.pppcar.R;
 import com.cn.pppcar.ReceiveAddressEditAct;
 import com.cn.pppcar.ReceiveAddressListAct;
 import com.cn.pppcar.SearchAct;
+import com.cn.pppcar.SelectPreferentialAct;
+
+import java.util.ArrayList;
 
 /**
  * Created by nurmemet on 2016/4/9.
@@ -58,14 +63,16 @@ public class ActivitySwitcher {
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
-    static public void toIntegralProductDetailAct(Activity activity) {
-        Intent intent = new Intent(activity, IntegralProductDetail.class);
+    static public void toIntegralProductDetailAct(Activity activity,long proId) {
+        Intent intent = new Intent(activity, IntegralProductDetailAct.class);
+        intent.putExtra("proId",proId);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
 
-    static public void toIntegralPaySettelmentAct(Activity activity) {
+    static public void toIntegralPaySettelmentAct(Activity activity,long proId) {
         Intent intent = new Intent(activity, IntegralPaySettelmentAct.class);
+        intent.putExtra("proId",proId);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }
@@ -189,6 +196,21 @@ public class ActivitySwitcher {
         if (resInvoiceInfo != null) {
             intent.putExtra("invoice_common", resInvoiceInfo);
         }
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+    public static void toSelectPreferentialAct(Activity activity, ArrayList<FavourableActivityBean> list, int selectedPos) {
+        Intent intent = new Intent(activity, SelectPreferentialAct.class);
+        intent.putParcelableArrayListExtra("list", list);
+        intent.putExtra("selected", selectedPos);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+    public static void toMainPageAct(Activity activity, int position) {
+        Intent intent = new Intent(activity, MainPageAct.class);
+        intent.putExtra("position", position);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }

@@ -18,10 +18,12 @@ import com.cn.commans.NetUtil;
 import com.cn.entity.CartBean;
 import com.cn.entity.CartProduct;
 import com.cn.entity.Consignee;
+import com.cn.entity.FavourableActivityBean;
 import com.cn.entity.ReserveGoodsDetailResBean;
 import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.widget.SelectableRelaytiveLayoutItem;
 import com.cn.util.MyLogger;
+import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -130,6 +132,25 @@ public class PaySettlementAct extends BaseAct {
 
     @Bind(R.id.product_detail_container)
     protected LinearLayout productDetailContainer;
+    /**
+     * 优惠卷
+     */
+    @Bind(R.id.preferential_valume)
+    LinearLayout preferentialValume;
+    /**
+     * 优惠卷个数
+     */
+    @Bind(R.id.preferential_valume_num)
+    TextView preferentioalNum;
+    /**
+     * 优惠金额
+     */
+    @Bind(R.id.preferential_value)
+    TextView preferentionlValue;
+    /**
+     * 当前被选中的优惠卷
+     */
+    FavourableActivityBean selectedPreferentionlBean;
 
 
     @Override
@@ -242,9 +263,11 @@ public class PaySettlementAct extends BaseAct {
             clause.setText(spanHelper.toRed("我已同意预付款不退款等", "相关规则"));
             mOrderAmount.setText("￥" + reserveDetailResBean.getTotalPriceStr());
             mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getDiscountPrice());
+
+            //隐藏优惠卷
+            preferentialValume.setVisibility(View.GONE);
         } else if (orderType == ORDER_TYPE_COMMON) {
             setCommonOrderProduct();
-
             //隐藏预付款模块而
             preOrderContainer.setVisibility(View.GONE);
             //预付款不退款声明
@@ -276,9 +299,16 @@ public class PaySettlementAct extends BaseAct {
                     mTotalMoney.setText("实付款：￥" + (reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice() - integral));
                 }
             });
+
             availableIntegral.setText("可用积分" + reserveDetailResBean.getNormalIntegral() + "，使用");
             mOrderAmount.setText("￥" + reserveDetailResBean.getCartResBean().getTotalRetailPrice());
             mTotalMoney.setText("实付款：￥" + reserveDetailResBean.getCartResBean().getTotalAllDiscountPrice());
+
+            if (Util.isNoteEmpty(reserveDetailResBean.getCoupons())) {
+                preferentioalNum.setText("" + reserveDetailResBean.getCoupons().size());
+            } else {
+                preferentialValume.setVisibility(View.GONE);
+            }
         }
 
 
@@ -306,20 +336,22 @@ public class PaySettlementAct extends BaseAct {
         ;
         if (orderType == ORDER_TYPE_PREORDER) {
 
-                param.put("ruleId", String.valueOf(ruleId));
-                param.put("invoiceType", getInvoiceWay());
-                param.put("number", String.valueOf(productNum));
-                param.put("consigneeId", String.valueOf(mConsignee.getId()));
-                param.put("productId", String.valueOf(proId));
-                param.put("remark", remark.getText().toString());
-
-
-        }else if (orderType==ORDER_TYPE_COMMON){
-            param.put("integral", integralInput.getText().toString());
-            param.put("addressId ", String.valueOf(mConsignee.getId()));
-            param.put("invoice", getInvoiceWay());
+            param.put("ruleId", String.valueOf(ruleId));
+            param.put("invoiceType", getInvoiceWay());
+            param.put("number", String.valueOf(productNum));
             param.put("consigneeId", String.valueOf(mConsignee.getId()));
-            param.put("activityId ", "");
+            param.put("productId", String.valueOf(proId));
+            param.put("remark", remark.getText().toString());
+
+
+        } else if (orderType == ORDER_TYPE_COMMON) {
+            param.put("integral", integralInput.getText().toString());
+            param.put("addressId", String.valueOf(mConsignee.getId()));
+            param.put("invoice", getInvoiceWay());
+            //param.put("consigneeId", String.valueOf(mConsignee.getId()));
+            if (selectedPreferentionlBean!=null){
+                param.put("activityId", String.valueOf(selectedPreferentionlBean.getActivitiId()));
+            }
             param.put("remark", remark.getText().toString());
         }
         apiHandler.submitPreOrder(new Response.Listener<JSONObject>() {
@@ -419,6 +451,25 @@ public class PaySettlementAct extends BaseAct {
         }
         return true;
     }
+
+    @OnClick(R.id.preferential_valume)
+    public void toSelectPreferential(View view){
+        int selectedPos=0 ;
+        if (selectedPreferentionlBean!=null){
+            selectedPos= reserveDetailResBean.getCoupons().indexOf(selectedPreferentionlBean);
+        }
+        ActivitySwitcher.toSelectPreferentialAct(this,reserveDetailResBean.getCoupons(),selectedPos);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setPreferentional(EventBusEv ev){
+        if (EventBusEv.is(ev,"setPreferentional")){
+            selectedPreferentionlBean= (FavourableActivityBean) ev.getData();
+            preferentionlValue.setText("￥"+String.valueOf(selectedPreferentionlBean.getMinAmount()));
+        }
+    }
+
 
 
 }

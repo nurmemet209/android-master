@@ -44,7 +44,7 @@ dependencies {
     //  汉字转拼音
     compile 'com.belerweb:pinyin4j:2.5.1'
     //viewpagerindicator
-    compile 'me.relex:circleindicator:1.1.8@aar'
+//    compile 'me.relex:circleindicator:1.1.8@aar'
     compile 'com.android.support:design:23.2.1'
     //支持消息提示的viewpager
     compile 'homhomlin.lib:apsts:1.3.0'

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/5.
  */
-public class OrderAdapter extends BaseListAdapter<ResOrder> {
+public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrder> {
     //全部订单
     public final static int ALLORDER = 1;
     //待审核

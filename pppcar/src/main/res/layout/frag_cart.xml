@@ -54,6 +54,13 @@
             android:text="@string/edit"
             />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_"
+            android:background="@color/main_bg_gray"
+            android:layout_alignParentBottom="true"
+            />
+
     </RelativeLayout>
 
 
@@ -127,7 +134,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="2"
                         android:background="@color/transparent"
-                        android:button="@drawable/checkbox_item_"
+                        android:button="@drawable/checkbox_item"
                         android:checked="false"
                         android:paddingLeft="@dimen/padding_normal"
                         android:text="@string/selecte_all"
@@ -145,15 +152,17 @@
                         >
 
                         <TextView
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/amount_of_money_of_product"
+                            android:text="商品金额合计"
                             android:textColor="@color/white"
                             android:textSize="@dimen/text_size_smallest"
                             />
 
                         <TextView
+                            android:id="@+id/total_money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -237,6 +246,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/view_flipper"
+                    android:background="@color/main_bg_gray"
                     />
             </android.support.v4.widget.SwipeRefreshLayout>
 

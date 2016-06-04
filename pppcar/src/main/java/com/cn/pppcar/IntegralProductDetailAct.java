@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 /**
  * Created by nurmemet on 2016/4/28.
  */
-public class IntegralProductDetail extends BaseViewPagerAct {
+public class IntegralProductDetailAct extends BaseViewPagerAct {
 
     IntegralProductDetailViewPagerAdapter adapter;
 
@@ -30,11 +30,9 @@ public class IntegralProductDetail extends BaseViewPagerAct {
         setUpViewPager(adapter);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
-    }
+
+
+
 
 
 }

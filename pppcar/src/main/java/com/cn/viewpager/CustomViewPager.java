@@ -10,7 +10,7 @@ import android.view.MotionEvent;
  */
 public class CustomViewPager extends ViewPager {
 
-    private boolean canScroll;
+    private boolean canScroll=true;
 
     public CustomViewPager(Context context) {
         super(context);
@@ -21,13 +21,24 @@ public class CustomViewPager extends ViewPager {
     }
 
 
-    @Override
-    public void scrollTo(int x, int y) {
-        if (!canScroll)
-            super.scrollTo(x, y);
-    }
 
     public void setCanScroll(boolean canScroll) {
         this.canScroll = canScroll;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (canScroll){
+            return super.onTouchEvent(ev);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (canScroll){
+            return super.onInterceptTouchEvent(ev);
+        }
+        return false;
     }
 }

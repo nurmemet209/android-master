@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/25.
  */
-public class BrandAdapter extends BaseListAdapter<Item> {
+public class BrandAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Item> {
 
     public BrandAdapter(Context mContext, ArrayList<Item> list) {
         super(mContext, list);

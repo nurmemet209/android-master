@@ -11,6 +11,16 @@ public class ResIndexBrandList {
 	
 	private Integer isShow;//是否显示
 
+	public Integer getIsLarge() {
+		return isLarge;
+	}
+
+	public void setIsLarge(Integer isLarge) {
+		this.isLarge = isLarge;
+	}
+
+	private Integer isLarge;
+
 	public String getBrandImg() {
 		return brandImg;
 	}
@@ -42,5 +52,7 @@ public class ResIndexBrandList {
 	public void setIsShow(Integer isShow) {
 		this.isShow = isShow;
 	}
+
+
 
 }

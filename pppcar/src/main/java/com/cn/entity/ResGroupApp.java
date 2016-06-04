@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class ResGroupApp {
 	
-	private Long id;//套餐ID
+	private long id;//套餐ID
 	
 	private String title;//标题
 	
@@ -18,11 +18,11 @@ public class ResGroupApp {
 	private double totalTradePrice;
 
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

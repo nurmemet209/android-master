@@ -54,7 +54,6 @@ public class IntegralProductDetailViewPagerAdapter extends FragmentPagerAdapter 
             case 1:
                 str = mContext.getString(R.string.image_letter_introduce);
                 break;
-
             default:
                 break;
         }

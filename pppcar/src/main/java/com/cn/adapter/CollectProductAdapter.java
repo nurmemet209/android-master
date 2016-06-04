@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/5/23.
  */
-public class CollectProductAdapter extends BaseListAdapter<ResFavorites> {
+public class CollectProductAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResFavorites> {
 
     private OnItemClicked onAddToCartBtnClicked;
     private OnItemClicked onUnCollectBtnClicked;

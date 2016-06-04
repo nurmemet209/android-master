@@ -62,7 +62,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         >
 
         <com.bigkoo.convenientbanner.ConvenientBanner
@@ -73,21 +73,13 @@
             app:canLoop="true"
         />
 
-        <me.relex.circleindicator.CircleIndicator
+        <com.cn.pppcar.widget.RaPageIndicator
             android:id="@+id/banner_indicator"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
-            app:ci_animator="@anim/indicator_no_animator"
-            app:ci_drawable="@drawable/indicator_red_radius"
-            app:ci_drawable_unselected="@drawable/indicator_white_radius"
-            app:ci_height="6dp"
-            app:ci_width="6dp"
-
             />
     </RelativeLayout>
 

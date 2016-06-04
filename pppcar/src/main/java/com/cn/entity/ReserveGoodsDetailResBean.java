@@ -1,6 +1,8 @@
 package com.cn.entity;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReserveGoodsDetailResBean{
 	/**
@@ -40,6 +42,16 @@ public class ReserveGoodsDetailResBean{
 	}
 
 	private CartResBean cartResBean;
+
+	public ArrayList<FavourableActivityBean> getCoupons() {
+		return coupons;
+	}
+
+	public void setCoupons(ArrayList<FavourableActivityBean> coupons) {
+		this.coupons = coupons;
+	}
+
+	private ArrayList<FavourableActivityBean> coupons;
 
 	/**
 	 * 是否有发票true无

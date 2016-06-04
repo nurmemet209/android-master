@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -52,11 +54,17 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     private CarFragAdapter adapter;
     private CartResBean cartResBean;
 
+    @Bind(R.id.total_money)
+    protected TextView totalMoney;
+
     @Bind(R.id.swipe_refresh_widget)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     private boolean isEditMode = false;
+
+    @Bind(R.id.settle_order)
+    protected Button submit;
 
 
     public static CartFrag getInstance() {
@@ -125,7 +133,20 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
             adapter.setList(cartResBean.getContent());
             adapter.notifyDataSetChanged();
         }
+        int checkedNum=0;
+        for (int i=0;i<cartResBean.getContent().size();i++){
+            if (cartResBean.getContent().get(i).getChecked()){
+                checkedNum++;
+            }
+        }
+        if (checkedNum!=0){
+            submit.setText("去结算"+"("+checkedNum+")");
+        }else{
+            submit.setText("去结算");
+        }
+        totalMoney.setText("￥"+cartResBean.getTotalAllDiscountPrice());
         setIsAllSelected();
+
     }
 
 
@@ -167,21 +188,22 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     public void checkAll(View view) {
         CheckBox checkBox = (CheckBox) view;
         boolean isChecked = checkBox.isChecked();
-        if (!isEditMode) {
-            for (CartBean bean : cartResBean.getContent()) {
-                bean.setChecked(isChecked);
-            }
-            cartUpdate(0, -1, isChecked, null);
-            adapter.notifyDataSetChanged();
-        } else {
-            if (isChecked) {
-                adapter.getEditCartList().clear();
-                adapter.getEditCartList().addAll(cartResBean.getContent());
-            } else {
-                adapter.getEditCartList().clear();
-            }
-            adapter.notifyDataSetChanged();
-        }
+        cartUpdate(0, -1, isChecked, null);
+//        if (!isEditMode) {
+//            for (CartBean bean : cartResBean.getContent()) {
+//                bean.setChecked(isChecked);
+//            }
+//
+//            adapter.notifyDataSetChanged();
+//        } else {
+//            if (isChecked) {
+//                adapter.getEditCartList().clear();
+//                adapter.getEditCartList().addAll(cartResBean.getContent());
+//            } else {
+//                adapter.getEditCartList().clear();
+//            }
+//            adapter.notifyDataSetChanged();
+//        }
     }
 
     @OnClick(R.id.delete_from_cart)
@@ -197,11 +219,12 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
             public void onResponse(JSONObject response) {
                 if (NetUtil.isSucced(response)) {
                     showToast(NetUtil.getMessage(response));
-                    for (int i = 0; i < adapter.getEditCartList().size(); i++) {
-                        int position = cartResBean.getContent().indexOf(adapter.getEditCartList().get(i));
-                        cartResBean.getContent().remove(position);
-                        adapter.notifyItemRemoved(position);
-                    }
+//                    for (int i = 0; i < adapter.getEditCartList().size(); i++) {
+//                        int position = cartResBean.getContent().indexOf(adapter.getEditCartList().get(i));
+//                        cartResBean.getContent().remove(position);
+//                        adapter.notifyItemRemoved(position);
+//                    }
+                    loadData();
                     adapter.getEditCartList().clear();
                 } else {
                     showToast(NetUtil.getMessage(response));
@@ -234,9 +257,12 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
             @Override
             public void onResponse(JSONObject response) {
                 if (NetUtil.isSucced(response)) {
-                    if (holder != null) {
-                        adapter.setCheckedState(holder, isChecked);
-                    }
+//                    if (holder != null) {
+//                        adapter.setCheckedState(holder, isChecked);
+//                        int pos=holder.getAdapterPosition();
+//                        cartResBean.getContent().get(pos).setChecked(isChecked);
+//                    }
+                    loadData();
                 }
                 showToast(NetUtil.getMessage(response));
             }
@@ -259,12 +285,13 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
                 public void onResponse(JSONObject response) {
                     if (NetUtil.isSucced(response)) {
                         showToast(NetUtil.getMessage(response));
-                        for (int i = 0; i < adapter.getEditCartList().size(); i++) {
-                            int position = cartResBean.getContent().indexOf(adapter.getEditCartList().get(i));
-                            cartResBean.getContent().remove(position);
-                            adapter.notifyItemRemoved(position);
-                        }
+//                        for (int i = 0; i < adapter.getEditCartList().size(); i++) {
+//                            int position = cartResBean.getContent().indexOf(adapter.getEditCartList().get(i));
+//                            cartResBean.getContent().remove(position);
+//                            adapter.notifyItemRemoved(position);
+//                        }
                         adapter.getEditCartList().clear();
+                        loadData();
                     } else {
                         showToast(NetUtil.getMessage(response));
                     }

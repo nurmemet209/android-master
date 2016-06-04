@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchSeggestAdapter extends BaseListAdapter<String> {
+public class SearchSeggestAdapter extends BaseListAdapter<RecyclerView.ViewHolder,String> {
     private View.OnClickListener onClickListener;
 
     public SearchSeggestAdapter(Context mContext, List<String> list, View.OnClickListener onClickListener) {

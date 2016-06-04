@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by nurmemet on 2016/4/18.
  */
-public class AuctionCenterAdapter extends BaseListAdapter<AuctionResBean> {
+public class AuctionCenterAdapter extends BaseListAdapter<RecyclerView.ViewHolder,AuctionResBean> {
 
     private int ACUTION_ING = 0;
     private int AUCTION_OVER = 1;
