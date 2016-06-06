@@ -34,6 +34,8 @@ public class AllOrderFrag extends BaseFrag {
      */
     private int orderType = 1;
 
+    private String orderState;
+
 
     @Bind(R.id.recycle_view)
     protected RecyclerView recyclerView;
@@ -41,10 +43,11 @@ public class AllOrderFrag extends BaseFrag {
     private OrderAdapter adapter;
     PageResPersonalCenterOrder allOrder;
 
-    public static AllOrderFrag getInstance(int orderType) {
+    public static AllOrderFrag getInstance(int orderType, String state) {
         AllOrderFrag frag = new AllOrderFrag();
         Bundle bd = new Bundle();
         bd.putInt("orderType", orderType);
+        bd.putString("orderState", state);
         frag.setArguments(bd);
         return frag;
     }
@@ -54,11 +57,15 @@ public class AllOrderFrag extends BaseFrag {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        orderType=getArguments().getInt("orderType");
+        orderType = getArguments().getInt("orderType");
         ButterKnife.bind(this, mainView);
+        if (getArguments() != null) {
+            orderType = getArguments().getInt("orderType");
+        }
         init();
         return mainView;
     }
+
 
     @Override
     protected int getLayoutResId() {
@@ -89,7 +96,9 @@ public class AllOrderFrag extends BaseFrag {
                     showToast(NetUtil.getMessage(response));
                 }
             }
-        },orderType);
+        }, orderType, orderState, String.valueOf(allOrder != null ? allOrder.getPage() + 1 : 0));
 
     }
+
+
 }

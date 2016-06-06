@@ -42,8 +42,8 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
-    public final static String HOST = "http://192.168.0.212:8081";
-    //    public final static String HOST = "http://192.168.0.62:8080";
+//    public final static String HOST = "http://192.168.0.212:8081";
+        public final static String HOST = "http://192.168.0.62:8080";
     //    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
@@ -98,10 +98,14 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = getDefaultPosData();
-                params.put("username", "testb");
-                params.put("password", "123456");
+//                params.put("username", "testb");
+//                params.put("password", "123456");
+                //东东
 //                params.put("username", "15520138623");
 //                params.put("password", "123456");
+                //刘文中
+                params.put("username", "15021917166");
+                params.put("password", "15021917166");
                 params.put("captcha", "123456");
                 params.put("captchaToken", "123456");
 //                params.put("captcha", verifycationCode);
@@ -220,10 +224,13 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param listener
      * @param orderType 1 普通订单，2 预订单
      */
-    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType) {
+    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType,String state,String page) {
         StringBuilder builder = getRootApi().append("/v1/account/auth");
+        Map<String,String> param=new HashMap<>();
+        param.put("page",page);
         if (orderType == 1) {
             builder.append("/order/list?");
+            param.put("state",state);
         } else {
             builder.append("/advanceOrder/list?");
         }
@@ -356,6 +363,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap();
+
                 params.put("auctionId", String.valueOf(id));
                 params.put("bidPrice ", String.valueOf(price));
                 return params;

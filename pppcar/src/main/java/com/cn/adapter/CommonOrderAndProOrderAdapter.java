@@ -13,20 +13,19 @@ import com.cn.pppcar.MyOrderFrag;
 public class CommonOrderAndProOrderAdapter extends FragmentPagerAdapter {
 
 
-
     public CommonOrderAndProOrderAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment=null;
+        Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment= MyOrderFrag.getInstance();
+                fragment = MyOrderFrag.getInstance();
                 break;
             case 1:
-                fragment= AllOrderFrag.getInstance(2);
+                fragment = AllOrderFrag.getInstance(2, "all");
                 break;
 
             default:
@@ -42,13 +41,13 @@ public class CommonOrderAndProOrderAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String title="";
-        switch (position){
+        String title = "";
+        switch (position) {
             case 0:
-                title="普通订单";
+                title = "普通订单";
                 break;
             case 1:
-                title="预订单";
+                title = "预订单";
                 break;
 
             default:

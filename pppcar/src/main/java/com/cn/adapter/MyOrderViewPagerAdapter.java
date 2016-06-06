@@ -23,7 +23,7 @@ public class MyOrderViewPagerAdapter extends FragmentPagerAdapter {
 
     public MyOrderViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        mContext=context;
+        mContext = context;
     }
 
     @Override
@@ -31,19 +31,19 @@ public class MyOrderViewPagerAdapter extends FragmentPagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = AllOrderFrag.getInstance(1);
+                frag = AllOrderFrag.getInstance(1, "all");
                 break;
             case 1:
-                frag = AllOrderFrag.getInstance(1);
+                frag = AllOrderFrag.getInstance(1, "audit");
                 break;
             case 2:
-                frag = AllOrderFrag.getInstance(1);
+                frag = AllOrderFrag.getInstance(1, "paying");
                 break;
             case 3:
-                frag = AllOrderFrag.getInstance(1);
+                frag = AllOrderFrag.getInstance(1, "payed");
                 break;
             case 4:
-                frag = AllOrderFrag.getInstance(1);
+                frag = AllOrderFrag.getInstance(1, "deliver");
                 break;
             default:
                 break;
