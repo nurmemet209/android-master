@@ -58,7 +58,7 @@ public class ImageHandler {
 
         String filename = String.format("%d_%s", Calendar.getInstance().getTimeInMillis(), "crop%d%s");
         Uri mDestinationUri = Uri.fromFile(new File(activity.getCacheDir(), filename));
-        UCrop uCrop = UCrop.of(uri, mDestinationUri);
+        UCrop uCrop = UCrop.of(uri, mDestinationUri).withOptions(new UCrop.Options());
         uCrop.start(activity);
     }
 
