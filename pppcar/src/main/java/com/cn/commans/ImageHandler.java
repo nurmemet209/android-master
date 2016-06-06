@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.cn.pppcar.R;
 import com.yalantis.ucrop.UCrop;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,18 +34,19 @@ public class ImageHandler {
      */
     private Uri capturedImageUri;
 
-    public void openCamera(Activity activity,int code){
+    public void openCamera(Activity activity, int code) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        capturedImageUri=getOutputMediaFileUri();
+        capturedImageUri = getOutputMediaFileUri();
         intent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
         activity.startActivityForResult(intent, code);
-        return ;
+        return;
     }
-    public Uri getCapturedImageUri(){
+
+    public Uri getCapturedImageUri() {
         return capturedImageUri;
     }
 
-    public void openGalary(Activity activity,int code){
+    public void openGalary(Activity activity, int code) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -51,7 +54,7 @@ public class ImageHandler {
         activity.startActivityForResult(Intent.createChooser(intent, activity.getString(R.string.select_head_portrait)), code);
     }
 
-    public void startCropActivity(@NonNull Uri uri,Activity activity) {
+    public void startCropActivity(@NonNull Uri uri, Activity activity) {
 
         String filename = String.format("%d_%s", Calendar.getInstance().getTimeInMillis(), "crop%d%s");
         Uri mDestinationUri = Uri.fromFile(new File(activity.getCacheDir(), filename));
@@ -60,18 +63,18 @@ public class ImageHandler {
     }
 
 
-    public void handleCropResult(@NonNull Intent result,Activity activity) {
+    public void handleCropResult(@NonNull Intent result, Activity activity) {
 
     }
 
-    public  void startWithUri(@NonNull Context context, @NonNull Uri uri, Class zz) {
+    public void startWithUri(@NonNull Context context, @NonNull Uri uri, Class zz) {
         Intent intent = new Intent(context, zz);
         intent.setData(uri);
         context.startActivity(intent);
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
-    public void handleCropError(@NonNull Intent result,Activity activity) {
+    public void handleCropError(@NonNull Intent result, Activity activity) {
         final Throwable cropError = UCrop.getError(result);
         if (cropError != null) {
             Toast.makeText(activity, cropError.getMessage(), Toast.LENGTH_LONG).show();
@@ -80,8 +83,10 @@ public class ImageHandler {
         }
     }
 
-    /** Create a File for saving an image or video */
-    private  Uri getOutputMediaFileUri(){
+    /**
+     * Create a File for saving an image or video
+     */
+    private Uri getOutputMediaFileUri() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
@@ -90,8 +95,8 @@ public class ImageHandler {
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
         // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Log.d("MyCameraApp", "failed to create directory");
                 return null;
             }
@@ -100,7 +105,7 @@ public class ImageHandler {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp + ".jpg");
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
 
 
         return Uri.fromFile(mediaFile);
@@ -109,17 +114,17 @@ public class ImageHandler {
 
     /**
      * 图像缩略图，不是图像本身
+     *
      * @param activity
      * @param code
      */
-    public void takePhoto(Activity activity,int code) {
+    public void takePhoto(Activity activity, int code) {
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         activity.startActivityForResult(cameraIntent, Constants.REQUEST_OPEN_CAMERA_FOR_BUSINESS_LICENSE);
     }
 
 
-    public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight)
-    {
+    public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
         // BEST QUALITY MATCH
         //First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -131,15 +136,13 @@ public class ImageHandler {
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
         int inSampleSize = 1;
-        if (height > reqHeight)
-        {
-            inSampleSize = Math.round((float)height / (float)reqHeight);
+        if (height > reqHeight) {
+            inSampleSize = Math.round((float) height / (float) reqHeight);
         }
         int expectedWidth = width / inSampleSize;
-        if (expectedWidth > reqWidth)
-        {
+        if (expectedWidth > reqWidth) {
             //if(Math.round((float)width / (float)reqWidth) > inSampleSize) // If bigger SampSize..
-            inSampleSize = Math.round((float)width / (float)reqWidth);
+            inSampleSize = Math.round((float) width / (float) reqWidth);
         }
         options.inSampleSize = inSampleSize;
         // Decode bitmap with inSampleSize set
@@ -147,13 +150,13 @@ public class ImageHandler {
         return BitmapFactory.decodeFile(path, options);
     }
 
-    public Uri compress(Activity activity,Bitmap bmp){
+    public Uri compress(Activity activity, Bitmap bmp) {
         String filename = String.format("%d_%s", Calendar.getInstance().getTimeInMillis(), "crop%d%s");
         Uri mDestinationUri = Uri.fromFile(new File(activity.getCacheDir(), filename));
-        OutputStream outputStream= null;
+        OutputStream outputStream = null;
         try {
             outputStream = activity.getContentResolver().openOutputStream(mDestinationUri);
-            bmp.compress(Bitmap.CompressFormat.JPEG,80,outputStream);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
             outputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -166,6 +169,13 @@ public class ImageHandler {
 
     }
 
+
+    public String Bitmap2StrByBase64(Bitmap bit) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bit.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
+        byte[] bytes = bos.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
 
 
 }
