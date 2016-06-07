@@ -1,12 +1,15 @@
 package com.cn.net;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.cn.entity.AppUserInfo;
@@ -15,6 +18,7 @@ import com.cn.entity.Consignee;
 import com.cn.fragment.SearchListFrag;
 import com.cn.localutils.MD5;
 import com.cn.util.MyLogger;
+import com.cn.util.StringBuilderEx;
 import com.google.gson.Gson;
 
 
@@ -42,8 +46,8 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     private static ApiHelper apiHelper;
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
-//    public final static String HOST = "http://192.168.0.212:8081";
-        public final static String HOST = "http://192.168.0.62:8080";
+    //    public final static String HOST = "http://192.168.0.212:8081";
+    public final static String HOST = "http://192.168.0.62:8080";
     //    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
@@ -224,17 +228,19 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param listener
      * @param orderType 1 普通订单，2 预订单
      */
-    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType,String state,String page) {
+    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType, String state, String page) {
         StringBuilder builder = getRootApi().append("/v1/account/auth");
-        Map<String,String> param=new HashMap<>();
-        param.put("page",page);
+        Map<String, String> param = new HashMap<>();
+        param.put("page", page);
         if (orderType == 1) {
             builder.append("/order/list?");
-            param.put("state",state);
+            if (state != null) {
+                param.put("state", state);
+            }
         } else {
             builder.append("/advanceOrder/list?");
         }
-        setSign(builder, null);
+        setSign(builder, param);
         CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
         addToRequestQueue(request);
     }
@@ -258,7 +264,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     public void getIntegralProductPaySettlementPage(Response.Listener<JSONObject> listener, final String proId, Response.ErrorListener errorListener) {
         StringBuilder builder = getRootApi().append("/v1/integral/auth/exchange?");
 
-        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST,builder.toString(), listener, errorListener){
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> param = new HashMap<>();
@@ -665,6 +671,12 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
+    public void getImageValidationCode(Response.Listener<Bitmap> listener) {
+        StringBuilder builder = getRootApi().append("/v1/code/captcha?captchaToken=123456789");
+        ImageRequest request = new ImageRequest(builder.toString(), listener, 100, 100, ImageView.ScaleType.CENTER_INSIDE, null, this);
+        addToRequestQueue(request);
+    }
+
     /**
      * @param listener
      * @param orderType 1 普通订单，2 预订单
@@ -688,6 +700,58 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 //                params.put("consigneeId", consigneeId);
 //                params.put("productId", productId);
 //                params.put("remark", remark);
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+    }
+
+    public void cancelCommonOrder(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/account/auth/order/cancel");
+
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+    }
+
+    public void cancelPreOrder(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/order/auth/submitOrder");
+
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+    }
+
+    public void deletePreOrder(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/order/auth/submitOrder");
+
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                setSign4Post(param);
+                return param;
+            }
+        };
+        addToRequestQueue(request);
+    }
+
+    public void deleteCommonOrder(Response.Listener<JSONObject> listener, final Map<String, String> param, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/account/auth/order/delete");
+
+        CustomJSonRequest request = new CustomJSonRequest(Request.Method.POST, builder.toString(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
                 setSign4Post(param);
                 return param;
             }
