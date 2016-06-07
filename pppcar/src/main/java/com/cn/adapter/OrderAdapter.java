@@ -2,14 +2,13 @@ package com.cn.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cn.commans.SpanHelper;
@@ -17,6 +16,7 @@ import com.cn.component.OnListItemWidgetClickedListener;
 import com.cn.entity.ResOrder;
 import com.cn.entity.ResOrderProduct;
 import com.cn.pppcar.R;
+import com.cn.util.MyLogger;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/5.
  */
-public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrder> {
+public class OrderAdapter extends BaseLoadMoreAdapter<RecyclerView.ViewHolder, ResOrder> {
     //全部订单
     public final static int ALLORDER = 1;
     //待审核
@@ -45,44 +45,40 @@ public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrd
     /**
      * 删除订单
      */
-    private final static int DELETE_BTN = 1;
+    public final static int DELETE_BTN = 1;
     /**
      * 取消订单
      */
-    private final static int CANCEL_BTN = 2;
+    public final static int CANCEL_BTN = 2;
     /**
      * 付款
      */
-    private final static int PAY_BTN = 3;
+    public final static int PAY_BTN = 3;
     /**
      * 申请退款
      */
-    private final static int REFUND_BTN = 4;
+    public final static int REFUND_BTN = 4;
     /**
      * 查看物流
      */
-    private final static int SEE_LOGISTIC_BTN = 5;
+    public final static int SEE_LOGISTIC_BTN = 5;
 
 
     private int adapterType = 1;
 
     private OnListItemWidgetClickedListener onListItemWidgetClickedListener;
 
-    public OrderAdapter(ArrayList<ResOrder> list, Context mContext, int adapterType, OnListItemWidgetClickedListener onListItemWidgetClickedListener) {
+    public OrderAdapter(ArrayList<ResOrder> list, Context mContext,int adapterType, OnListItemWidgetClickedListener onListItemWidgetClickedListener) {
         super(mContext, list);
         this.list = list;
         this.mContext = mContext;
         this.adapterType = adapterType;
         spanHelper = new SpanHelper(mContext);
-        WindowManager wm = (WindowManager) mContext
-                .getSystemService(Context.WINDOW_SERVICE);
-        imgWidth = (wm.getDefaultDisplay().getWidth() - 5 * mContext.getResources().getDimensionPixelSize(R.dimen.padding_normal)) / 4;
         this.onListItemWidgetClickedListener = onListItemWidgetClickedListener;
-
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    protected RecyclerView.ViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_list_order, null);
         RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(view) {
         };
@@ -90,26 +86,15 @@ public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrd
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    protected void onBindItemHolder(RecyclerView.ViewHolder holder, int position) {
         View view = holder.itemView;
-        ViewGroup container = (ViewGroup) view.findViewById(R.id.container);
-        int count = container.getChildCount();
-        if (container.getChildCount() > 2) {
-            for (int i = 0; i < container.getChildCount(); i++) {
-                if (container.getChildAt(i).getId() == R.id.item_title || container.getChildAt(i).getId() == R.id.title_img) {
-                    continue;
-                }
-                container.removeViewAt(i);
-                i = i - 1;
-                count = container.getChildCount();
-
-            }
-        }
-        count = container.getChildCount();
-        SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
-        TextView title = (TextView) view.findViewById(R.id.item_title);
         int productNum = 0;
         if (list.get(position).getOrderProducts().size() == 1) {
+            view.findViewById(R.id.image_container).setVisibility(View.GONE);
+            view.findViewById(R.id.img_title_container).setVisibility(View.VISIBLE);
+
+            SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
+            TextView title = (TextView) view.findViewById(R.id.item_title);
             ResOrderProduct pro = list.get(position).getOrderProducts().get(0);
             img.setImageURI(Uri.parse(pro.getImgs()));
             img.setVisibility(View.VISIBLE);
@@ -124,22 +109,17 @@ public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrd
             productNum = pro.getProNum();
 
         } else if (list.get(position).getOrderProducts().size() > 1) {
-            img.setVisibility(View.GONE);
-            title.setVisibility(View.GONE);
-            for (int i = 0; i < list.get(position).getOrderProducts().size(); i++) {
-                ResOrderProduct pro = list.get(position).getOrderProducts().get(i);
-                if (i < 4) {
-                    SimpleDraweeView proImg = new SimpleDraweeView(mContext);
-                    int w = mContext.getResources().getDimensionPixelSize(R.dimen.list_item_img_height);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(w, w);
-
-                    proImg.setLayoutParams(params);
-                    proImg.setImageURI(Uri.parse(pro.getImgs()));
-                    proImg.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.padding_normal), 0, 0, 0);
-                    container.addView(proImg);
+            view.findViewById(R.id.image_container).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.img_title_container).setVisibility(View.GONE);
+            ViewGroup imgGroup = (ViewGroup) view.findViewById(R.id.image_container);
+            for (int i = 0; i < imgGroup.getChildCount(); i++) {
+                SimpleDraweeView img = (SimpleDraweeView) imgGroup.getChildAt(i);
+                if (i >= list.get(position).getOrderProducts().size()) {
+                    break;
                 }
-
-                productNum += pro.getProNum();
+                ResOrderProduct product = list.get(position).getOrderProducts().get(i);
+                img.setImageURI(Uri.parse(product.getImgs()));
+                productNum += product.getProNum();
             }
         }
         TextView state = (TextView) view.findViewById(R.id.tarde_result);
@@ -179,82 +159,96 @@ public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrd
                 stateStr = "完结";
                 break;
             default:
+                MyLogger.showError(list.get(position).getState());
                 break;
 
         }
         state.setText(stateStr);
+        //保留
         TextView result = (TextView) view.findViewById(R.id.sub_trade_result);
         TextView price = (TextView) view.findViewById(R.id.price);
-        //price.setText();
         price.setText(spanHelper.getProductNumAndTotalPrice(String.valueOf(productNum), "￥" + String.valueOf(list.get(position).getTotalPrice())));
-
-        setActionButton(holder,position);
-
-
+        setActionButton(holder, position);
     }
 
+
+
+
     @Override
-    public int getItemCount() {
-        if (Util.isNoteEmpty(list)) {
-            return list.size();
-        }
-        return 0;
+    protected RecyclerView.ViewHolder getLoadingMoreViewHolder(View loadingMoreView) {
+        RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(loadingMoreView) {
+        };
+        return holder;
     }
 
     private void setActionButton(RecyclerView.ViewHolder holder, int position) {
         ViewGroup actionContainer = (ViewGroup) holder.itemView.findViewById(R.id.container_button);
         actionContainer.removeAllViews();
+
         switch (list.get(position).getState()) {
-            case "payed":
-                break;
+//            case "payed":
+//                break;
             case "cancel":
-                actionContainer.addView(getLabelButton("删除",holder,DELETE_BTN));
+                addLabelButton(actionContainer, "删除", holder, DELETE_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
             case "paying":
-                actionContainer.addView(getLabelButton("取消",holder,CANCEL_BTN));
-                actionContainer.addView(getLabelButton("付款",holder,PAY_BTN));
+                addLabelButton(actionContainer, "取消", holder, CANCEL_BTN);
+                addLabelButton(actionContainer, "付款", holder, PAY_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
             case "finish":
-                actionContainer.addView(getLabelButton("删除",holder,DELETE_BTN));
+                addLabelButton(actionContainer, "删除", holder, DELETE_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
             case "audit":
-                actionContainer.addView(getLabelButton("取消",holder,CANCEL_BTN));
+                addLabelButton(actionContainer, "取消", holder, CANCEL_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
-            case "deliver":
-                break;
-            case "receive":
-                break;
+//            case "deliver":
+//                break;
+//            case "receive":
+//                break;
             case "prepaying":
-                actionContainer.addView(getLabelButton("付款",holder,PAY_BTN));
+                addLabelButton(actionContainer, "付款", holder, PAY_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
-            case "ordered"://订货中
-                break;
+//            case "ordered"://订货中
+//                break;
             case "arrive"://待付尾款
-                actionContainer.addView(getLabelButton("付款",holder,PAY_BTN));
+                addLabelButton(actionContainer, "付款", holder, PAY_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
             case "prepayed"://完结
-                actionContainer.addView(getLabelButton("删除",holder,DELETE_BTN));
+                addLabelButton(actionContainer, "删除", holder, DELETE_BTN);
+                actionContainer.setVisibility(View.VISIBLE);
                 break;
             default:
+                actionContainer.setVisibility(View.GONE);
                 break;
-
         }
 
 
     }
 
-    private TextView getLabelButton(String title, final RecyclerView.ViewHolder holder, final int actionType) {
+    private void addLabelButton(ViewGroup container, String title, final RecyclerView.ViewHolder holder, final int actionType) {
         TextView action = new TextView(mContext);
-        int lr = mContext.getResources().getDimensionPixelSize(R.dimen.padding_normal);
-        int tb = mContext.getResources().getDimensionPixelSize(R.dimen.padding_smallest_);
+        int lr = mContext.getResources().getDimensionPixelSize(R.dimen.padding_big);
+        int tb = mContext.getResources().getDimensionPixelSize(R.dimen.padding_smallest);
         action.setPadding(lr, tb, lr, tb);
         int textSize = mContext.getResources().getDimensionPixelSize(R.dimen.text_size_small);
         action.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         action.setText(title);
-        action.setBackgroundResource(R.drawable.rectangle);
-        LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        action.setClickable(true);
+        if (actionType == PAY_BTN) {
+            action.setTextColor(ContextCompat.getColor(mContext, R.color.main_red));
+            action.setBackgroundResource(R.drawable.round_rect_stroke_main_red);
+        } else {
+            action.setBackgroundResource(R.drawable.round_rect_stroke_main_text_color);
+        }
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.leftMargin = mContext.getResources().getDimensionPixelSize(R.dimen.padding_normal);
-        action.setLayoutParams(params);
         action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,8 +257,9 @@ public class OrderAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ResOrd
 
             }
         });
-
-        return action;
+        container.addView(action, params);
+        // action.setLayoutParams(params);
+        return;
     }
 
 }

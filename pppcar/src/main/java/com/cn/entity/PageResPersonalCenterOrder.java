@@ -9,19 +9,8 @@ import java.util.List;
  * @author chendongdong
  */
 
-public class PageResPersonalCenterOrder extends BaseEntity {
+public class PageResPersonalCenterOrder extends BasePageableItem<ResOrder> {
     private ArrayList<ResOrder> resOrders;
-
-    @Override
-    public long getId() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
 
     public ArrayList<ResOrder> getResOrders() {
         return resOrders;
@@ -32,4 +21,8 @@ public class PageResPersonalCenterOrder extends BaseEntity {
     }
 
 
+    @Override
+    protected List getList() {
+        return resOrders;
+    }
 }

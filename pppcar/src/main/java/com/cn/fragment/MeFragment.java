@@ -66,9 +66,9 @@ public class MeFragment extends BaseFrag {
 
     @OnClick(R.id.head_img)
     public void toUserBaseInformation(View view) {
-//        Intent it = new Intent(getActivity(), UserBaseInformationAct.class);
-//        getActivity().startActivity(it);
-        ActivitySwitcher.toLoginAct(getActivity());
+        Intent it = new Intent(getActivity(), UserBaseInformationAct.class);
+        getActivity().startActivity(it);
+        //ActivitySwitcher.toLoginAct(getActivity());
     }
 
     @OnClick(R.id.my_order)

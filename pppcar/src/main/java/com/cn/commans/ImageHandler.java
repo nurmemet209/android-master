@@ -147,12 +147,14 @@ public class ImageHandler {
         options.inSampleSize = inSampleSize;
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
+
         return BitmapFactory.decodeFile(path, options);
     }
 
     public Uri compress(Activity activity, Bitmap bmp) {
         String filename = String.format("%d_%s", Calendar.getInstance().getTimeInMillis(), "crop%d%s");
         Uri mDestinationUri = Uri.fromFile(new File(activity.getCacheDir(), filename));
+
         OutputStream outputStream = null;
         try {
             outputStream = activity.getContentResolver().openOutputStream(mDestinationUri);

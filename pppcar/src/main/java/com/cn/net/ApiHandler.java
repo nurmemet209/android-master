@@ -15,12 +15,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.cn.entity.AppUserInfo;
 import com.cn.entity.CitySelectPage;
 import com.cn.entity.Consignee;
-import com.cn.fragment.SearchListFrag;
 import com.cn.localutils.MD5;
 import com.cn.util.MyLogger;
-import com.cn.util.StringBuilderEx;
 import com.google.gson.Gson;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +44,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
     //    public final static String HOST = "http://192.168.0.212:8081";
-    public final static String HOST = "http://192.168.0.62:8080";
+    public final static String HOST = "http://192.168.0.219:8081";
     //    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
@@ -228,7 +225,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
      * @param listener
      * @param orderType 1 普通订单，2 预订单
      */
-    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType, String state, String page) {
+    public void getMyOrder(Response.Listener<JSONObject> listener, int orderType, String state, String page, Response.ErrorListener errorListener) {
         StringBuilder builder = getRootApi().append("/v1/account/auth");
         Map<String, String> param = new HashMap<>();
         param.put("page", page);
@@ -241,7 +238,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
             builder.append("/advanceOrder/list?");
         }
         setSign(builder, param);
-        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, this);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
         addToRequestQueue(request);
     }
 

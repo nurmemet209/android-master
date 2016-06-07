@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -23,12 +22,10 @@ import com.cn.commans.NetUtil;
 import com.cn.component.OnListItemWidgetClickedListener;
 import com.cn.entity.CartBean;
 import com.cn.entity.CartResBean;
-import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.PaySettlementAct;
 import com.cn.pppcar.R;
-import com.cn.pppcar.widget.CustomRecycleView;
+import com.cn.pppcar.widget.LoadMoreRecycleView;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import butterknife.Bind;
@@ -44,7 +41,7 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     public final static int COMMOND_NUM_CHANGED = 2;
 
     @Bind(R.id.recycle_view)
-    protected CustomRecycleView mRecyclerView;
+    protected LoadMoreRecycleView mRecyclerView;
     @Bind(R.id.view_flipper)
     protected ViewFlipper viewFlipper;
     @Bind(R.id.select_all)

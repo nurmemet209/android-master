@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
 
 
@@ -10,7 +11,7 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height"
+        android:layout_height="@dimen/item_height_small"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
@@ -32,6 +33,7 @@
             android:textSize="@dimen/text_size_smaller"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:visibility="invisible"
             />
 
     </RelativeLayout>
@@ -51,24 +53,68 @@
                 android:paddingRight="@dimen/padding_normal"
                 android:orientation="horizontal"
                 >
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/title_img"
-                    android:layout_width="@dimen/list_item_img_height"
-                    android:layout_height="@dimen/list_item_img_height"
-                    />
-
-                <TextView
-                    android:id="@+id/item_title"
+                <LinearLayout
+                    android:id="@+id/image_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ldksfjslfjkdslfkjkld"
-                    android:layout_toRightOf="@+id/title_img"
-                    android:layout_toLeftOf="@+id/deal_result_container"
-                    android:paddingLeft="@dimen/part_normal"
-                    android:paddingRight="@dimen/part_normal"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+                    <com.facebook.drawee.view.SimpleDraweeView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/list_item_img_height"
+                        app:actualImageScaleType="centerInside"
+                        />
+                    <com.facebook.drawee.view.SimpleDraweeView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/list_item_img_height"
+                        app:actualImageScaleType="centerInside"
+                        />
+                    <com.facebook.drawee.view.SimpleDraweeView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/list_item_img_height"
+                        app:actualImageScaleType="centerInside"
+                        />
+                    <com.facebook.drawee.view.SimpleDraweeView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/list_item_img_height"
+                        app:actualImageScaleType="centerInside"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/img_title_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/title_img"
+                        android:layout_width="@dimen/list_item_img_height"
+                        android:layout_height="@dimen/list_item_img_height"
+                        />
+
+                    <TextView
+                        android:id="@+id/item_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ldksfjslfjkdslfkjkld"
+                        android:layout_toRightOf="@+id/title_img"
+                        android:layout_toLeftOf="@+id/deal_result_container"
+                        android:paddingLeft="@dimen/part_normal"
+                        android:paddingRight="@dimen/part_normal"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 
@@ -79,7 +125,7 @@
     <TextView
         android:id="@+id/price"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height"
+        android:layout_height="@dimen/item_height_small"
         android:gravity="right|center_vertical"
         android:text="商品总1件 总价：￥3434 （含运费：￥454）"
         android:maxLines="1"
@@ -91,72 +137,72 @@
     <LinearLayout
         android:id="@+id/container_button"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height"
+        android:layout_height="@dimen/item_height_small"
         android:orientation="horizontal"
         android:gravity="right|center_vertical"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel_order"
-            android:background="@drawable/rectangle"
-            android:paddingTop="@dimen/padding_smallest_"
-            android:paddingBottom="@dimen/padding_smallest_"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_small"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel_order"
-            android:background="@drawable/rectangle"
-            android:paddingTop="@dimen/padding_smallest_"
-            android:paddingBottom="@dimen/padding_smallest_"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_small"
-            android:layout_marginLeft="@dimen/padding_small"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_order"
-            android:background="@drawable/rectangle"
-            android:paddingTop="@dimen/padding_smallest_"
-            android:paddingBottom="@dimen/padding_smallest_"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:layout_marginLeft="@dimen/padding_small"
-            android:textSize="@dimen/text_size_small"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pay"
-            android:background="@color/main_red"
-            android:paddingTop="@dimen/padding_smallest_"
-            android:paddingBottom="@dimen/padding_smallest_"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:layout_marginLeft="@dimen/padding_small"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_refund"
-            android:background="@drawable/rectangle"
-            android:paddingTop="@dimen/padding_smallest_"
-            android:paddingBottom="@dimen/padding_smallest_"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:layout_marginLeft="@dimen/padding_small"
-            android:textSize="@dimen/text_size_small"
-            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/cancel_order"-->
+            <!--android:background="@drawable/rectangle"-->
+            <!--android:paddingTop="@dimen/padding_smallest_"-->
+            <!--android:paddingBottom="@dimen/padding_smallest_"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--android:textSize="@dimen/text_size_small"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/cancel_order"-->
+            <!--android:background="@drawable/rectangle"-->
+            <!--android:paddingTop="@dimen/padding_smallest_"-->
+            <!--android:paddingBottom="@dimen/padding_smallest_"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--android:textSize="@dimen/text_size_small"-->
+            <!--android:layout_marginLeft="@dimen/padding_small"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/delete_order"-->
+            <!--android:background="@drawable/rectangle"-->
+            <!--android:paddingTop="@dimen/padding_smallest_"-->
+            <!--android:paddingBottom="@dimen/padding_smallest_"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--android:layout_marginLeft="@dimen/padding_small"-->
+            <!--android:textSize="@dimen/text_size_small"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/pay"-->
+            <!--android:background="@color/main_red"-->
+            <!--android:paddingTop="@dimen/padding_smallest_"-->
+            <!--android:paddingBottom="@dimen/padding_smallest_"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--android:layout_marginLeft="@dimen/padding_small"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/text_size_small"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/apply_refund"-->
+            <!--android:background="@drawable/rectangle"-->
+            <!--android:paddingTop="@dimen/padding_smallest_"-->
+            <!--android:paddingBottom="@dimen/padding_smallest_"-->
+            <!--android:paddingLeft="@dimen/padding_normal"-->
+            <!--android:paddingRight="@dimen/padding_normal"-->
+            <!--android:layout_marginLeft="@dimen/padding_small"-->
+            <!--android:textSize="@dimen/text_size_small"-->
+            <!--/>-->
 
 
     </LinearLayout>

@@ -1,17 +1,16 @@
-package com.cn.pppcar.widget;
+package com.cn.commans;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-
-import com.cn.util.MyLogger;
 
 /**
- * Created by nurmemet on 5/29/2016.
+ * Created by nurmemet on 6/6/2016.
  */
 public class CustomRecycleView extends RecyclerView {
+
+
     public CustomRecycleView(Context context) {
         super(context);
     }
@@ -25,16 +24,7 @@ public class CustomRecycleView extends RecyclerView {
     }
 
     @Override
-    public void onScrolled(int dx, int dy) {
-        super.onScrolled(dx, dy);
-
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent e) {
-        if (canScrollVertically(-1)){
-
-        }
-        return super.onInterceptTouchEvent(e);
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
     }
 }

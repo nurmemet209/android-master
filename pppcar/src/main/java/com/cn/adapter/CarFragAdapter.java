@@ -31,7 +31,7 @@ import butterknife.OnCheckedChanged;
 /**
  * Created by nurmemet on 2016/4/3.
  */
-public class CarFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,CartBean> {
+public class CarFragAdapter extends BaseLoadMoreAdapter<ViewHolder, CartBean> {
 
 
     private OnListItemWidgetClickedListener onListItemWidgetClickedListener;
@@ -53,8 +53,9 @@ public class CarFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Cart
         this.onListItemWidgetClickedListener = onListItemWidgetClickedListener;
     }
 
+
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    protected ViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
         View mainView = LayoutInflater.from(mContext).inflate(R.layout.item_list_cart, null);
         NumEditLayout numEditLayout = (NumEditLayout) mainView.findViewById(R.id.num_eidt);
         numEditLayout.setIsInputEnabled(false);
@@ -64,14 +65,14 @@ public class CarFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Cart
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    protected void onBindItemHolder(final ViewHolder holder, int position) {
         final View view = holder.itemView;
         TextView title = (TextView) view.findViewById(R.id.item_title);
         TextView price = (TextView) view.findViewById(R.id.item_price);
         TextView size = (TextView) view.findViewById(R.id.item_item_size);
         SimpleDraweeView img = (SimpleDraweeView) view.findViewById(R.id.title_img);
         title.setText(list.get(position).getBsProduct().getName());
-        price.setText("￥"+String.valueOf(list.get(position).getTotalDiscountPrice()));
+        price.setText("￥" + String.valueOf(list.get(position).getTotalDiscountPrice()));
         img.setImageURI(Uri.parse(list.get(position).getBsProduct().getImgs()));
 
 
@@ -122,15 +123,14 @@ public class CarFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,Cart
         });
         numEditLayout.setNum(list.get(position).getNumber());
 
-
     }
 
+
     @Override
-    public int getItemCount() {
-        if (Util.isNoteEmpty(list)) {
-            return list.size();
-        }
-        return 0;
+    protected ViewHolder getLoadingMoreViewHolder(View loadingMoreView) {
+        RecyclerView.ViewHolder holder = new ViewHolder(loadingMoreView) {
+        };
+        return holder;
     }
 
     public void setCheckedState(ViewHolder holder, boolean isChecked) {
