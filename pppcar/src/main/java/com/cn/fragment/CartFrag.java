@@ -41,7 +41,7 @@ public class CartFrag extends BaseFrag implements OnListItemWidgetClickedListene
     public final static int COMMOND_NUM_CHANGED = 2;
 
     @Bind(R.id.recycle_view)
-    protected LoadMoreRecycleView mRecyclerView;
+    protected RecyclerView mRecyclerView;
     @Bind(R.id.view_flipper)
     protected ViewFlipper viewFlipper;
     @Bind(R.id.select_all)

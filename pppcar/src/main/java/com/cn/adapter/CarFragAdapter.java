@@ -31,7 +31,7 @@ import butterknife.OnCheckedChanged;
 /**
  * Created by nurmemet on 2016/4/3.
  */
-public class CarFragAdapter extends BaseLoadMoreAdapter<ViewHolder, CartBean> {
+public class CarFragAdapter extends BaseListAdapter<ViewHolder, CartBean> {
 
 
     private OnListItemWidgetClickedListener onListItemWidgetClickedListener;
@@ -52,10 +52,14 @@ public class CarFragAdapter extends BaseLoadMoreAdapter<ViewHolder, CartBean> {
         this.list = list;
         this.onListItemWidgetClickedListener = onListItemWidgetClickedListener;
     }
+    public void setCheckedState(ViewHolder holder, boolean isChecked) {
+        CheckBox checkBox = (CheckBox) holder.itemView.findViewById(R.id.cart_item);
+        checkBox.setChecked(isChecked);
+    }
 
 
     @Override
-    protected ViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mainView = LayoutInflater.from(mContext).inflate(R.layout.item_list_cart, null);
         NumEditLayout numEditLayout = (NumEditLayout) mainView.findViewById(R.id.num_eidt);
         numEditLayout.setIsInputEnabled(false);
@@ -65,7 +69,7 @@ public class CarFragAdapter extends BaseLoadMoreAdapter<ViewHolder, CartBean> {
     }
 
     @Override
-    protected void onBindItemHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final View view = holder.itemView;
         TextView title = (TextView) view.findViewById(R.id.item_title);
         TextView price = (TextView) view.findViewById(R.id.item_price);
@@ -124,19 +128,4 @@ public class CarFragAdapter extends BaseLoadMoreAdapter<ViewHolder, CartBean> {
         numEditLayout.setNum(list.get(position).getNumber());
 
     }
-
-
-    @Override
-    protected ViewHolder getLoadingMoreViewHolder(View loadingMoreView) {
-        RecyclerView.ViewHolder holder = new ViewHolder(loadingMoreView) {
-        };
-        return holder;
-    }
-
-    public void setCheckedState(ViewHolder holder, boolean isChecked) {
-        CheckBox checkBox = (CheckBox) holder.itemView.findViewById(R.id.cart_item);
-        checkBox.setChecked(isChecked);
-    }
-
-
 }

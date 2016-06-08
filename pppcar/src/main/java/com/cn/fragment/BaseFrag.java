@@ -22,7 +22,11 @@ import com.cn.pppcar.widget.ProgressDlg;
 import com.cn.util.StringBuilderEx;
 import com.cn.util.UIHelper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Handler;
 
 /**
@@ -186,4 +190,9 @@ public abstract class BaseFrag extends Fragment {
             mProgressDlg.dismiss();
         }
     }
+
+
+
+
+
 }

@@ -13,6 +13,7 @@ import com.cn.commans.ActivitySwitcher;
 import com.cn.entity.Item;
 import com.cn.entity.PageProductBean;
 import com.cn.entity.ProductBean;
+import com.cn.fragment.LoadMoreRefreshFrag;
 import com.cn.pppcar.R;
 import com.cn.util.Util;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchListFragAdapter extends BaseListAdapter<RecyclerView.ViewHolder,ProductBean>{
+public class SearchListFragAdapter extends BaseLoadMoreAdapter<RecyclerView.ViewHolder, ProductBean> {
 
 
     public SearchListFragAdapter( Context mContext,ArrayList<ProductBean> list) {
@@ -31,8 +32,10 @@ public class SearchListFragAdapter extends BaseListAdapter<RecyclerView.ViewHold
         this.mContext = mContext;
     }
 
+
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    protected RecyclerView.ViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(mContext).inflate(R.layout.item_list_frag_search,null);
         view.setClickable(true);
         RecyclerView.ViewHolder holder=new RecyclerView.ViewHolder(view) {
@@ -42,7 +45,7 @@ public class SearchListFragAdapter extends BaseListAdapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    protected void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
         View view=holder.itemView;
         TextView title=(TextView)view.findViewById(R.id.title);
         SimpleDraweeView img=(SimpleDraweeView)view.findViewById(R.id.title_img);
@@ -53,16 +56,20 @@ public class SearchListFragAdapter extends BaseListAdapter<RecyclerView.ViewHold
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivitySwitcher.toProductDetailAct((Activity) mContext,list.get(position).getId());
+                int pos=holder.getAdapterPosition();
+                ActivitySwitcher.toProductDetailAct((Activity) mContext,list.get(pos).getId());
             }
         });
     }
 
+
+
+
+
     @Override
-    public int getItemCount() {
-        if (Util.isNoteEmpty(list)){
-            return list.size();
-        }
-        return 0;
+    protected RecyclerView.ViewHolder getLoadingMoreViewHolder(View loadingMoreView) {
+        RecyclerView.ViewHolder holder=new RecyclerView.ViewHolder(loadingMoreView) {
+        };
+        return holder;
     }
 }

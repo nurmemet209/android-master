@@ -180,5 +180,9 @@ public abstract class BaseLoadMoreAdapter<M extends RecyclerView.ViewHolder, T> 
 
     }
 
+    public boolean isLoadMoreViewRemoved(){
+        return isLoadMoreViewRemoved;
+    }
+
 
 }

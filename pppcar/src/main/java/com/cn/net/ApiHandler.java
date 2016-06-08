@@ -19,6 +19,7 @@ import com.cn.localutils.MD5;
 import com.cn.util.MyLogger;
 import com.google.gson.Gson;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -279,23 +280,52 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
         addToRequestQueue(request);
     }
 
-    public void getProductList(Response.Listener<JSONObject> listener, String keyWord, String sortType) {
-        StringBuilder builder = getRootApi().append("/v1/search/product/list?search_searchContent=").append(keyWord);
-        if (sortType != null && !"".equals(sortType)) {
-            builder.append("&search_sortType=").append(sortType);
-        }
-//        if (SearchListFrag.SORT_TYPE_MOST_NEW ==searchType){//最新
-//            builder.append("putWayTime_desc");
-//        }else if (SearchListFrag.SORT_TYPE_PRICE_DESC ==searchType){//价格降序
-//            builder.append("putWayTime_desc");
+    public void getProductList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map param) {
+        //, String keyWord, String sortType, String page,
+//        StringBuilder builder = getRootApi().append("/v1/search/product/list?search_searchContent=").append(keyWord);
+//        if (sortType != null && !"".equals(sortType)) {
+//            builder.append("&search_sortType=").append(sortType);
 //        }
-//        else if (SearchListFrag.SORT_TYPE_PRICE_ASC ==searchType){//价格升序
-//            builder.append("putWayTime_desc");
-//        }else {
-//            builder.append("recommond");
-//        }
-        JsonObjectRequest request = new JsonObjectRequest(builder.toString(), null, listener, this);
+
+        StringBuilder builder = getRootApi().append("/v1/search/product/list");
+        setParam4NoLogin(builder, param);
+        JsonObjectRequest request = new JsonObjectRequest(builder.toString(), null, listener, errorListener);
         addToRequestQueue(request);
+    }
+
+    private void setParam4NoLogin(StringBuilder builder, Map<String, String> param) {
+        if (param != null && !param.isEmpty()) {
+            builder.append("?");
+            for (String key : param.keySet()) {
+                builder.append(key).append("=").append(param.get(key)).append("&");
+            }
+            builder.replace(builder.length() - 1, builder.length(), "");
+        }
+        MyLogger.showLog(builder.toString());
+
+    }
+
+    public static class ParamBuilder {
+        Map<String, String> paramContainer;
+
+        public ParamBuilder() {
+            paramContainer = new HashMap<>();
+        }
+
+        public ParamBuilder putParam(String key, String value) {
+            if (StringUtils.isNotEmpty(value)) {
+                paramContainer.put(key, value);
+            }
+            return this;
+        }
+
+        public Map<String, String> getMap() {
+            return paramContainer;
+        }
+    }
+
+    public ParamBuilder getParamBuilder() {
+        return new ParamBuilder();
     }
 
 

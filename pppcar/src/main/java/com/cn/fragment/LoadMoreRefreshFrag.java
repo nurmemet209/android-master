@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -34,16 +36,16 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
     Response.Listener<JSONObject> mLoadMoreResponseListener;
     Response.Listener<JSONObject> mLoadFirstResponseListener;
 
-    private final static int EMPTY_STATE_NETWORK_ERROR = 1;
-    private final static int EMPTY_STATE_NO_DATA = 2;
-    private final static int EMPTY_STATE_HAS_DATA = 3;
+     final static int EMPTY_STATE_NETWORK_ERROR = 1;
+     final static int EMPTY_STATE_NO_DATA = 2;
+     final static int EMPTY_STATE_HAS_DATA = 3;
 
-    private int emptyState = EMPTY_STATE_HAS_DATA;
+    protected int emptyState = EMPTY_STATE_HAS_DATA;
 
     protected T pageContent;
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected LoadMoreRecycleView recyclerView;
-    protected View emptyView;
+    private View emptyView;
     protected D adapter;
 
     @Override
@@ -55,6 +57,8 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
         setListener();
         init();
     }
+
+
 
     private void init() {
         recyclerView.setHasFixedSize(true);
@@ -112,6 +116,9 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
                 error.printStackTrace();
                 mSwipeRefreshLayout.setRefreshing(false);
                 isRefreshing = false;
+                if (emptyState!=EMPTY_STATE_HAS_DATA){
+                    setEmptyViewNetworkErrorState();
+                }
             }
         };
         mLoadmoreErrorListener = new Response.ErrorListener() {
@@ -238,30 +245,44 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
         if (emptyState != EMPTY_STATE_HAS_DATA) {
             emptyView.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
+            emptyState=EMPTY_STATE_HAS_DATA;
         }
+
     }
 
     private void setEmptyViewNetworkErrorState() {
-        if (emptyState != EMPTY_STATE_HAS_DATA) {
+        if (emptyState != EMPTY_STATE_NETWORK_ERROR) {
             if (emptyState == EMPTY_STATE_HAS_DATA) {
                 emptyView.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.INVISIBLE);
             }
-            TextView tv = (TextView) emptyView;
-            tv.setText("网络错误");
+            setNetworkErrorUi(emptyView);
 
+            emptyState=EMPTY_STATE_NETWORK_ERROR;
         }
     }
 
+    protected void setNetworkErrorUi(View emptyView){
+        TextView tv = (TextView) emptyView;
+        tv.setText("网络错误");
+    }
     private void setEmptyViewNoDataState() {
         if (emptyState != EMPTY_STATE_NO_DATA) {
             if (emptyState == EMPTY_STATE_HAS_DATA) {
                 emptyView.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.INVISIBLE);
             }
-            TextView tv = (TextView) emptyView;
-            tv.setText("无数据");
+            setNoDataUi(emptyView);
+            emptyState=EMPTY_STATE_NO_DATA;
 
         }
+    }
+    protected void setNoDataUi(View emptyView){
+        TextView tv = (TextView) emptyView;
+        tv.setText("网络错误");
+    }
+
+    protected String getNextPage(){
+        return String.valueOf(pageContent.getPage()+1);
     }
 }

@@ -2,10 +2,12 @@ package com.cn.pppcar;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -45,9 +47,8 @@ import butterknife.OnClick;
 public class SearchAct extends BaseAct {
 
     final static int SEARCH_STATE = 0;
-    final static int SEARCH_ERROR_STATE = 1;
-    final static int SEARCH_RESULT_STATE = 2;
-    final static int SEARCH_SUGGEST_STATE = 3;
+    final static int SEARCH_RESULT_STATE = 1;
+    final static int SEARCH_SUGGEST_STATE = 2;
 
     @Bind(R.id.view_pager)
     protected CustomViewPager viewPager;
@@ -69,6 +70,9 @@ public class SearchAct extends BaseAct {
 
     @Bind(R.id.hot_search)
     protected TagGroupLayout hotSearch;
+
+    @Bind(R.id.drawer_layout)
+    protected DrawerLayout drawerLayout;
 
     private SearchClassificationViewPagerAdapter adapter;
     private int state = SEARCH_STATE;
@@ -99,13 +103,13 @@ public class SearchAct extends BaseAct {
                     img.setBackgroundResource(R.mipmap.bottom_selected);
 
                 }
-                tv.setTextColor(ContextCompat.getColorStateList(SearchAct.this,R.color.main_text_color_to_main_red_sl));
+                tv.setTextColor(ContextCompat.getColorStateList(SearchAct.this, R.color.main_text_color_to_main_red_sl));
 
             }
         }, new CustomTabLayout.CustomOnItemClick() {
             @Override
             public void OnItemClicked(TextView tv, ImageView img, int newPosition, int oldPosition, boolean state) {
-                if (!state&&newPosition==2) {
+                if (!state && newPosition == 2) {
                     String tag = (String) img.getTag();
                     if ("down".equals(tag)) {
                         img.setBackgroundResource(R.mipmap.to_selected);
@@ -116,9 +120,9 @@ public class SearchAct extends BaseAct {
                     }
                     //价格
                     SearchListFrag.keyWord = searchEditText.getText().toString();
-                    Map<String,String> map=new HashMap<>();
-                    map.put("sortType",tag);
-                    map.put("fragType","3");
+                    Map<String, String> map = new HashMap<>();
+                    map.put("sortType", tag);
+                    map.put("fragType", "3");
                     EventBusEv ev = new EventBusEv("sort", map);
                     EventBus.getDefault().post(ev);
 
@@ -232,63 +236,6 @@ public class SearchAct extends BaseAct {
 
     }
 
-//    private void setDrawables() {
-//
-//        Drawable d = getResources().getDrawable(R.mipmap.top_bottom);
-//        d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-//        int drawablePadding = getResources().getDimensionPixelOffset(R.dimen.padding_smallest_);
-//        TextView time = (TextView) tabLayout.getTabAt(2).findViewById(R.id.id_tab_txt);
-//        time.setCompoundDrawablePadding(drawablePadding);
-//        time.setCompoundDrawables(null, null, d, null);
-//        time.setTag("up");
-//        priceSortView = time;
-//        time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView tv = (TextView) v;
-//                //Toast.makeText(IntegralMallAct.this,"clicked",Toast.LENGTH_LONG).show();
-//                viewPager.setCurrentItem(2);
-//
-//
-//
-//            }
-//        });
-//        View mostNew = tabLayout.getTabAt(1);
-//        mostNew.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EventBusEv ev = new EventBusEv("sort", "new");
-//                EventBus.getDefault().post(ev);
-//
-//            }
-//        });
-//        View universal = tabLayout.getTabAt(0);
-//        universal.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EventBusEv ev = new EventBusEv("sort", "universal");
-//                EventBus.getDefault().post(ev);
-//
-//            }
-//        });
-//    }
-
-//    public void search(View view) {
-////        if (state==SEARCH_STATE)
-////        {
-////            viewFlipper.setDisplayedChild(2);
-////
-////        }
-//
-//    }
-
-//
-//    @Override
-//    public void finish() {
-//        super.finish();
-//        overridePendingTransition(actFinishAnimInResId,actFinishAnimOutResId);
-//    }
-
 
     private List<String> getHotSearch() {
 
@@ -324,6 +271,12 @@ public class SearchAct extends BaseAct {
         if (state != SEARCH_RESULT_STATE) {
             viewFlipper.setDisplayedChild(SEARCH_RESULT_STATE);
         }
+    }
+
+
+    @OnClick(R.id.filter)
+    public void openDrawer(View view){
+        drawerLayout.openDrawer(Gravity.RIGHT);
     }
 
 }

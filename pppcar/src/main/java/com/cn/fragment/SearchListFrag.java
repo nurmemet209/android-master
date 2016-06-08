@@ -7,29 +7,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.cn.adapter.GridItemDecoration;
 import com.cn.adapter.SearchListFragAdapter;
-import com.cn.commans.NetUtil;
 import com.cn.entity.PageProductBean;
 import com.cn.localutils.EventBusEv;
 import com.cn.pppcar.R;
-import com.cn.util.Util;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.json.JSONObject;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Created by nurmemet on 2016/4/8.
  */
-public class SearchListFrag extends BaseFrag {
+public class SearchListFrag extends LoadMoreRefreshFrag<PageProductBean, SearchListFragAdapter> {
 
     public static String keyWord = "";
 
@@ -51,11 +48,13 @@ public class SearchListFrag extends BaseFrag {
      */
     private int searchType = 0;
 
-    @Bind(R.id.recycle_view)
-    protected RecyclerView recyclerView;
+    private String sortType;
 
-    SearchListFragAdapter adapter;
-    private PageProductBean pageProductBean;
+    //@Bind(R.id.recycle_view)
+    // protected RecyclerView recyclerView;
+
+    // SearchListFragAdapter adapter;
+    //private PageProductBean pageProductBean;
 
     public static SearchListFrag getInstance(int type) {
         SearchListFrag frag = new SearchListFrag();
@@ -73,8 +72,13 @@ public class SearchListFrag extends BaseFrag {
             searchType = getArguments().getInt("type");
         }
         ButterKnife.bind(this, mainView);
-        init();
         return mainView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -82,21 +86,40 @@ public class SearchListFrag extends BaseFrag {
         return R.layout.frag_search_list;
     }
 
-    private void init() {
 
+    @Override
+    protected Class<PageProductBean> getClazz() {
+        return PageProductBean.class;
+    }
 
+    @Override
+    protected void bindData() {
+        adapter = new SearchListFragAdapter(getActivity(), pageContent.getProductBean());
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void callRefresh() {
+        Map param = apiHandler.getParamBuilder().putParam("search_searchContent", keyWord).putParam("search_sortType", sortType).putParam("page", "1").getMap();
+        apiHandler.getProductList(mRefreshResponseListener, mRefreshErrorListener, param);
+    }
+
+    @Override
+    protected void callLoadMore() {
+        Map param = apiHandler.getParamBuilder().putParam("search_searchContent", keyWord).putParam("search_sortType", sortType).putParam("page", getNextPage()).getMap();
+        apiHandler.getProductList(mLoadMoreResponseListener, mLoadmoreErrorListener, param);
     }
 
 
-    @Subscribe
-    public void onEventMainThread(EventBusEv event) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSearch(EventBusEv event) {
         String st = null;
         if ("sort".equals(event.getEvent())) {
-            Map<String,String> map=(Map<String,String>)event.getData();
+            Map<String, String> map = (Map<String, String>) event.getData();
 
             String sortType = map.get("sortType");
-            String fragType=map.get("fragType");
-            if (!fragType.equals(String.valueOf(searchType))){
+            String fragType = map.get("fragType");
+            if (!fragType.equals(String.valueOf(searchType))) {
                 return;
             }
             if ("up".equals(sortType)) {
@@ -104,44 +127,68 @@ public class SearchListFrag extends BaseFrag {
             } else if ("down".equals(sortType)) {
                 st = SORT_TYPE_PRICE_DESC;
             }
-            priceSort=st;
+            priceSort = st;
             // Toast.makeText(getActivity(), "refresh", Toast.LENGTH_SHORT).show();
         } else if ("search".equals(event.getEvent())) {
             //最新
             if (searchType == 1) {
                 st = SORT_TYPE_MOST_NEW;
-            }else if (searchType==2){
-                st=priceSort;
+            } else if (searchType == 2) {
+                st = priceSort;
             }
         }
-        apiHandler.getProductList(new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                if (NetUtil.isSucced(response)) {
-                    pageProductBean = apiHandler.toObject(NetUtil.getData(response), PageProductBean.class);
-
-                    if (pageProductBean != null && Util.isNoteEmpty(pageProductBean.getProductBean())) {
-
-                        if (adapter == null) {
-                            adapter = new SearchListFragAdapter(getActivity(), pageProductBean.getProductBean());
-                            GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
-                            recyclerView.setLayoutManager(manager);
-                            //suggestRecyclerView.setBackgroundColor(getResources().getColor(R.color.main_bg_gray));
-                            GridItemDecoration decoration = new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
-                            recyclerView.addItemDecoration(decoration);
-                            recyclerView.setAdapter(adapter);
-                        } else {
-                            adapter.setList(pageProductBean.getProductBean());
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                } else {
-                    showToast(NetUtil.getMessage(response));
-                }
-            }
-        }, keyWord, st);
+        sortType = st;
+        Map param = apiHandler.getParamBuilder().putParam("search_searchContent", keyWord).putParam("search_sortType", sortType).putParam("page", "1").getMap();
+        apiHandler.getProductList(mLoadFirstResponseListener, mLoadFirstErrorListener, param);
+//        apiHandler.getProductList(new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                if (NetUtil.isSucced(response)) {
+//                    pageProductBean = apiHandler.toObject(NetUtil.getData(response), PageProductBean.class);
+//
+//                    if (pageProductBean != null && Util.isNoteEmpty(pageProductBean.getProductBean())) {
+//
+//                        if (adapter == null) {
+//                            adapter = new SearchListFragAdapter(getActivity(), pageProductBean.getProductBean());
+//                            GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+//                            recyclerView.setLayoutManager(manager);
+//                            //suggestRecyclerView.setBackgroundColor(getResources().getColor(R.color.main_bg_gray));
+//                           // GridItemDecoration decoration = new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
+//                           // recyclerView.addItemDecoration(decoration);
+//                            recyclerView.setAdapter(adapter);
+//                        } else {
+//                            adapter.setList(pageProductBean.getProductBean());
+//                            adapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                } else {
+//                    showToast(NetUtil.getMessage(response));
+//                }
+//            }
+//        }, keyWord, st);
     }
 
+    @Override
+    RecyclerView.LayoutManager getLayoutManager() {
+        GridLayoutManager manager=new GridLayoutManager(getActivity(), 2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (!adapter.isLoadMoreViewRemoved()){
+                    if (adapter.getItemCount()-1==position){
+                        return 2;
+                    }
+                }
+                return 1;
+            }
+        });
+        return manager;
+    }
+
+    @Override
+    RecyclerView.ItemDecoration getItemDecoration() {
+        return new GridItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height) / 2, 2);
+    }
 
     @Override
     public void onResume() {
@@ -150,13 +197,22 @@ public class SearchListFrag extends BaseFrag {
     }
 
     @Override
+    protected void setNetworkErrorUi(View emptyView) {
+        TextView tv = (TextView) emptyView.findViewById(R.id.message);
+        tv.setText("网络错误");
+    }
+
+    @Override
+    protected void setNoDataUi(View emptyView) {
+        TextView tv = (TextView) emptyView.findViewById(R.id.message);
+        tv.setText("没搜到相关内容");
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
     }
-
-
-
 
 
 }
