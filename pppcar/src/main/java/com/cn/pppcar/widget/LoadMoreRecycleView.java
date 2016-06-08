@@ -61,7 +61,7 @@ public class LoadMoreRecycleView extends RecyclerView {
                         int lastOne = layoutManager.findLastVisibleItemPosition();
                         int count=getAdapter().getItemCount() - 1;
                         if (dy > 0 && lastOne == count) {
-                            adapter.setLoadingMoreState();
+
                             if (onLoadMoreListener != null) {
                                 onLoadMoreListener.onLoadMore();
                             }

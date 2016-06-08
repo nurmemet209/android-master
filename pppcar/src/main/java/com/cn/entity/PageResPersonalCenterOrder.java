@@ -22,7 +22,7 @@ public class PageResPersonalCenterOrder extends BasePageableItem<ResOrder> {
 
 
     @Override
-    protected List getList() {
+    public List getList() {
         return resOrders;
     }
 }

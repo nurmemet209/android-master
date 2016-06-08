@@ -1,5 +1,6 @@
 package com.cn.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cn.commans.ActivitySwitcher;
 import com.cn.commans.SpanHelper;
 import com.cn.component.OnListItemWidgetClickedListener;
 import com.cn.entity.ResOrder;
@@ -68,7 +70,7 @@ public class OrderAdapter extends BaseLoadMoreAdapter<RecyclerView.ViewHolder, R
 
     private OnListItemWidgetClickedListener onListItemWidgetClickedListener;
 
-    public OrderAdapter(ArrayList<ResOrder> list, Context mContext,int adapterType, OnListItemWidgetClickedListener onListItemWidgetClickedListener) {
+    public OrderAdapter(ArrayList<ResOrder> list, Context mContext, int adapterType, OnListItemWidgetClickedListener onListItemWidgetClickedListener) {
         super(mContext, list);
         this.list = list;
         this.mContext = mContext;
@@ -80,14 +82,22 @@ public class OrderAdapter extends BaseLoadMoreAdapter<RecyclerView.ViewHolder, R
     @Override
     protected RecyclerView.ViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_list_order, null);
+        view.setClickable(true);
         RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(view) {
         };
         return holder;
     }
 
     @Override
-    protected void onBindItemHolder(RecyclerView.ViewHolder holder, int position) {
+    protected void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
         View view = holder.itemView;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = holder.getAdapterPosition();
+                ActivitySwitcher.toOrderDetail((Activity) mContext, list.get(pos).getId());
+            }
+        });
         int productNum = 0;
         if (list.get(position).getOrderProducts().size() == 1) {
             view.findViewById(R.id.image_container).setVisibility(View.GONE);
@@ -170,8 +180,6 @@ public class OrderAdapter extends BaseLoadMoreAdapter<RecyclerView.ViewHolder, R
         price.setText(spanHelper.getProductNumAndTotalPrice(String.valueOf(productNum), "￥" + String.valueOf(list.get(position).getTotalPrice())));
         setActionButton(holder, position);
     }
-
-
 
 
     @Override

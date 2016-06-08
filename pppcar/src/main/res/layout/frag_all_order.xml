@@ -5,17 +5,31 @@
               android:orientation="vertical"
     >
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_widget"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
-        <com.cn.pppcar.widget.LoadMoreRecycleView
-            android:id="@+id/recycle_view"
+        <TextView
+            android:id="@+id/empty_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/main_bg_gray"
-            ></com.cn.pppcar.widget.LoadMoreRecycleView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
+            android:gravity="center"
+            android:text="无数据"
+            android:textSize="@dimen/text_size_small"
+            />
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_widget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            >
+            <com.cn.pppcar.widget.LoadMoreRecycleView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_bg_gray"
+                ></com.cn.pppcar.widget.LoadMoreRecycleView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -83,6 +83,7 @@
         <activity android:name=".InvoiceAct"/>
         <activity android:name=".InvoiceCommonEditAct"/>
         <activity android:name=".SelectPreferentialAct"/>
+        <activity android:name=".OrderDetail"/>
 
     </application>
 

@@ -21,6 +21,7 @@ import com.cn.pppcar.InvoiceTypeSelectAct;
 import com.cn.pppcar.LoginAct;
 import com.cn.pppcar.MainPageAct;
 import com.cn.pppcar.MyOrderAct;
+import com.cn.pppcar.OrderDetail;
 import com.cn.pppcar.OrderSubmitSuccedAct;
 import com.cn.pppcar.PayCenterAct;
 import com.cn.pppcar.PaySettlementAct;
@@ -211,6 +212,13 @@ public class ActivitySwitcher {
     public static void toMainPageAct(Activity activity, int position) {
         Intent intent = new Intent(activity, MainPageAct.class);
         intent.putExtra("position", position);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
+    }
+
+    public static void toOrderDetail(Activity activity, long orderId) {
+        Intent intent = new Intent(activity, OrderDetail.class);
+        intent.putExtra("orderId", orderId);
         activity.startActivity(intent);
         activity.overridePendingTransition(actStartAnimInResId, actStartAnimOutResId);
     }

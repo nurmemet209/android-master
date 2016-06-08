@@ -77,16 +77,6 @@ public class AllOrderFrag extends LoadMoreRefreshFrag<PageResPersonalCenterOrder
     }
 
     @Override
-    RecyclerView.LayoutManager getLayoutManager() {
-        return new LinearLayoutManager(getActivity());
-    }
-
-    @Override
-    RecyclerView.ItemDecoration getItemDecoration() {
-        return new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
-    }
-
-    @Override
     protected int getLayoutResId() {
         return R.layout.frag_all_order;
     }

@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,9 +34,16 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
     Response.Listener<JSONObject> mLoadMoreResponseListener;
     Response.Listener<JSONObject> mLoadFirstResponseListener;
 
+    private final static int EMPTY_STATE_NETWORK_ERROR = 1;
+    private final static int EMPTY_STATE_NO_DATA = 2;
+    private final static int EMPTY_STATE_HAS_DATA = 3;
+
+    private int emptyState = EMPTY_STATE_HAS_DATA;
+
     protected T pageContent;
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected LoadMoreRecycleView recyclerView;
+    protected View emptyView;
     protected D adapter;
 
     @Override
@@ -43,6 +51,7 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
         super.onViewCreated(view, savedInstanceState);
         mSwipeRefreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_widget);
         recyclerView = (LoadMoreRecycleView) mainView.findViewById(R.id.recycle_view);
+        emptyView = mainView.findViewById(R.id.empty_view);
         setListener();
         init();
     }
@@ -58,18 +67,15 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
 
     }
 
-    abstract RecyclerView.LayoutManager getLayoutManager();
-
-    abstract RecyclerView.ItemDecoration getItemDecoration();
-
-
-    protected void resetSate() {
-        if (isRefreshing) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
-        isLoadingMore = false;
-        isRefreshing = false;
+    RecyclerView.LayoutManager getLayoutManager() {
+        return new LinearLayoutManager(getActivity());
     }
+
+    RecyclerView.ItemDecoration getItemDecoration() {
+        return new CustomItemDecoration(getActivity(), getResources().getDimensionPixelSize(R.dimen.main_big_divider_height));
+    }
+
+
 
 
     protected boolean hasNextPage() {
@@ -84,10 +90,6 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
         adapter.removeLoadMoreView();
     }
 
-    protected void setLoadedMoreData(T moreContent) {
-        pageContent.addNewPage(moreContent);
-        adapter.notifyDataSetChanged();
-    }
 
     protected boolean canRefresh() {
         if (isRefreshing || isLoadingMore) {
@@ -117,6 +119,7 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 isLoadingMore = false;
+                adapter.setNetworkErrorState();
             }
         };
 
@@ -133,6 +136,13 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
                             removeLoadingView();
                         }
                         adapter.notifyDataSetChanged();
+                        if (pageContent.getTotalPage() == 0) {
+                            setEmptyViewNoDataState();
+                        } else {
+                            setEmptyViewHasDataState();
+                        }
+
+
                     }
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -145,8 +155,12 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
                 if (NetUtil.isSucced(response)) {
                     T moreContent = apiHandler.toObject(NetUtil.getData(response), getClazz());
                     if (moreContent != null) {
+                        int start = pageContent.getList().size();
                         pageContent.addNewPage(moreContent);
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyItemRangeInserted(start, moreContent.getList().size());
+                        if (!hasNextPage()) {
+                            adapter.setNoMoreStateState();
+                        }
                     }
                 }
                 isLoadingMore = false;
@@ -159,10 +173,14 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
                 if (NetUtil.isSucced(response)) {
                     pageContent = apiHandler.toObject(NetUtil.getData(response), getClazz());
                     if (pageContent != null) {
+                        bindData();
                         if (!hasNextPage()) {
                             removeLoadingView();
                         }
-                        bindData();
+                        if (pageContent.getTotalPage()== 0) {
+                            setEmptyViewNoDataState();
+                        }
+
                     }
                 }
             }
@@ -171,6 +189,7 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                setEmptyViewNetworkErrorState();
             }
         };
     }
@@ -182,10 +201,11 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
 
     @Override
     public void onLoadMore() {
-        if (isRefreshing || isLoadingMore) {
+        if (isRefreshing || isLoadingMore || !hasNextPage()) {
             return;
         }
         isLoadingMore = true;
+        adapter.setLoadingMoreState();
         callLoadMore();
     }
 
@@ -203,4 +223,45 @@ public abstract class LoadMoreRefreshFrag<T extends BasePageableItem, D extends 
 
     abstract protected void callLoadMore();
 
+//    private void showEpmtyView(String message){
+//        emptyView.setVisibility(View.VISIBLE);
+//        TextView tv= (TextView) emptyView;
+//        tv.setText(message);
+//        recyclerView.setVisibility(View.INVISIBLE);
+//    }
+//    private void showRecycleView(){
+//        emptyView.setVisibility(View.INVISIBLE);
+//        recyclerView.setVisibility(View.VISIBLE);
+//    }
+
+    private void setEmptyViewHasDataState() {
+        if (emptyState != EMPTY_STATE_HAS_DATA) {
+            emptyView.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setEmptyViewNetworkErrorState() {
+        if (emptyState != EMPTY_STATE_HAS_DATA) {
+            if (emptyState == EMPTY_STATE_HAS_DATA) {
+                emptyView.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            TextView tv = (TextView) emptyView;
+            tv.setText("网络错误");
+
+        }
+    }
+
+    private void setEmptyViewNoDataState() {
+        if (emptyState != EMPTY_STATE_NO_DATA) {
+            if (emptyState == EMPTY_STATE_HAS_DATA) {
+                emptyView.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            TextView tv = (TextView) emptyView;
+            tv.setText("无数据");
+
+        }
+    }
 }
