@@ -34,7 +34,7 @@ public abstract class BaseSelectableListAdapter<M extends RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(final M holder, int position) {
+     public void onBindViewHolder(final M holder, int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +63,9 @@ public abstract class BaseSelectableListAdapter<M extends RecyclerView.ViewHolde
                 SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) holder.itemView;
                 item.setSelectedState(true);
                 selectedView = holder.itemView;
+            }else{
+                SelectableLinearLayoutItem item = (SelectableLinearLayoutItem) holder.itemView;
+                item.setSelectedState(false);
             }
 
         }else{
@@ -77,11 +80,5 @@ public abstract class BaseSelectableListAdapter<M extends RecyclerView.ViewHolde
     }
 
 
-    @Override
-    public int getItemCount() {
-        if (list != null) {
-            return list.size();
-        }
-        return 0;
-    }
+
 }

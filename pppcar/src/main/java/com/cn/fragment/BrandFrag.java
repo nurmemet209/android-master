@@ -55,36 +55,27 @@ public class BrandFrag extends BaseFrag {
     }
 
     private void init() {
-        new Thread(new Runnable() {
+        apiHandler.getAllBrand(new Response.Listener<JSONObject>() {
             @Override
-            public void run() {
-
-
-                apiHandler.getAllBrand(new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (NetUtil.isSucced(response)) {
-                            ArrayList<Item> list = (ArrayList<Item>) apiHandler.JSONArray2List(NetUtil.getArrayData(response), Item.class);
-
-                            if (Util.isNoteEmpty(list)) {
-                                adapter = new BrandAdapter(getActivity(),list);
-                                GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
-                                int w = getResources().getDimensionPixelSize(R.dimen.main_big_divider_height);
-                                recyclerView.setLayoutManager(manager);
-                                recyclerView.addItemDecoration(new GridItemDecoration(getActivity(), w, manager.getSpanCount()));
-                                recyclerView.setAdapter(adapter);
-                            }
-
-                        } else {
-                            showToast(NetUtil.getMessage(response));
-                        }
-
-
+            public void onResponse(JSONObject response) {
+                if (NetUtil.isSucced(response)) {
+                    ArrayList<Item> list = (ArrayList<Item>) apiHandler.JSONArray2List(NetUtil.getArrayData(response), Item.class);
+                    if (Util.isNoteEmpty(list)) {
+                        adapter = new BrandAdapter(getActivity(),list);
+                        GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
+                        int w = getResources().getDimensionPixelSize(R.dimen.main_big_divider_height);
+                        recyclerView.setLayoutManager(manager);
+                        recyclerView.addItemDecoration(new GridItemDecoration(getActivity(), w, manager.getSpanCount()));
+                        recyclerView.setAdapter(adapter);
                     }
-                }, null);
-            }
-        }).start();
 
+                } else {
+                    showToast(NetUtil.getMessage(response));
+                }
+
+
+            }
+        }, null);
 
 
 

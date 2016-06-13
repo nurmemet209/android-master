@@ -1,1 +1,1 @@
-include ':app', ':musicplayer', ':animaitonmaster', ':sharesdk', ':autoupgrade', ':customlibrary', ':test', 'pppcar'
+include ':app', ':musicplayer', ':animaitonmaster', ':sharesdk', ':autoupgrade', ':customlibrary', ':test', ':smalltest', 'pppcar'

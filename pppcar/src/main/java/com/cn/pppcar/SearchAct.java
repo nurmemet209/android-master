@@ -275,8 +275,14 @@ public class SearchAct extends BaseAct {
 
 
     @OnClick(R.id.filter)
-    public void openDrawer(View view){
+    public void openDrawer(View view) {
         drawerLayout.openDrawer(Gravity.RIGHT);
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+    }
+
+    public void shutDownDrawer() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        drawerLayout.closeDrawer(Gravity.RIGHT);
     }
 
 }

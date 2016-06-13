@@ -45,7 +45,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
 //     public final static String HOST = "http://pppcar.f3322.net:8088";
 
     //    public final static String HOST = "http://192.168.0.212:8081";
-    public final static String HOST = "http://192.168.0.219:8081";
+    public final static String HOST = "http://192.168.0.128:8088";
     //    public final static String HOST = "http://192.168.0.59:8081";
     public final static String API_STRING_PRE_REMOTE = "http://job.erqal.com/api.php?m=";
     private static int appVersion;
@@ -207,6 +207,7 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
     public void getClassifycation(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         String url = getRootApi().append("/v1/product/classify/parents").toString();
         JsonObjectRequest request = new JsonObjectRequest(url, null, listener, this);
+
         addToRequestQueue(request);
     }
 
@@ -783,6 +784,31 @@ public class ApiHandler implements CookieHandler, Response.ErrorListener {
                 return param;
             }
         };
+        addToRequestQueue(request);
+    }
+
+    public void getCarBrandList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        StringBuilder builder = getRootApi().append("/v1/car/queryA2ZAndChildren");
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
+        //request.shouldCache();
+        addToRequestQueue(request);
+    }
+
+    public void getCarSeriesList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, String id) {
+        StringBuilder builder = getRootApi().append("/v1/car/queryByCarSeriesId?carSeriesId=").append(id);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
+        addToRequestQueue(request);
+    }
+
+    public void getCarYearList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, String id) {
+        StringBuilder builder = getRootApi().append("/v1/car/queryYearlistByCarSeriesId?carSeriesId=").append(id);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
+        addToRequestQueue(request);
+    }
+
+    public void getCarTypeList(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, String id,String year) {
+        StringBuilder builder = getRootApi().append("/v1/car/queryByYearAndCarSerieId?carSeriesId=").append(id).append("&year=").append(year);
+        CustomJSonRequest request = new CustomJSonRequest(builder.toString(), listener, errorListener);
         addToRequestQueue(request);
     }
 
