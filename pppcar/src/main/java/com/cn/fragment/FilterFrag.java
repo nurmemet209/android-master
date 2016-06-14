@@ -139,7 +139,6 @@ public class FilterFrag extends BaseFrag {
 
         transition.setCustomAnimations(R.anim.activity_no_anim, R.anim.activity_exchange_right_out);
         transition.remove(fragment).commit();
-        // getFragmentManager().popBackStackImmediate();
 
     }
 
