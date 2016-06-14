@@ -60,19 +60,21 @@ public class FilterFrag extends BaseFrag {
      */
     @OnClick(R.id.part_brand_container)
     public void toSelectPartBrand(View view) {
-        FragmentTransaction transition = getFragmentManager().beginTransaction();
+
         fragment = new FilterPartsBrandFrag();
-        transition.add(R.id.fragment_container, fragment).commit();
+        openSecondFilterFrag(fragment);
 
     }
 
+
     /**
      * 选择价格价格区间
+     *
      * @param view
      */
     @OnClick(R.id.price_container)
     public void toSelectPrice(View view) {
-        fragment =FilterItemSelectFrag.getInstance(carPriceSelected,5,-1,null);
+        fragment = FilterItemSelectFrag.getInstance(carPriceSelected, 5, -1, null);
         openSecondFilterFrag(fragment);
 
     }
@@ -84,10 +86,9 @@ public class FilterFrag extends BaseFrag {
      */
     @OnClick(R.id.car_brand_container)
     public void toSelectCarBrand(View view) {
-        fragment = FilterItemSelectFrag.getInstance(carBrandSelected, 1,-1,null);
+        fragment = FilterItemSelectFrag.getInstance(carBrandSelected, 1, -1, null);
         openSecondFilterFrag(fragment);
     }
-
 
 
     /**
@@ -97,7 +98,7 @@ public class FilterFrag extends BaseFrag {
      */
     @OnClick(R.id.car_series_container)
     public void toSelectCarSeries(View view) {
-        fragment = FilterItemSelectFrag.getInstance(carSeriesSelected, 2,carBrandSelected.getId(),null);
+        fragment = FilterItemSelectFrag.getInstance(carSeriesSelected, 2, carBrandSelected.getId(), null);
         openSecondFilterFrag(fragment);
 
     }
@@ -109,7 +110,7 @@ public class FilterFrag extends BaseFrag {
      */
     @OnClick(R.id.car_year_container)
     public void toSelectCarYear(View view) {
-        fragment = FilterItemSelectFrag.getInstance(carYearSelected, 3,carSeriesSelected.getId(),null);
+        fragment = FilterItemSelectFrag.getInstance(carYearSelected, 3, carSeriesSelected.getId(), null);
         openSecondFilterFrag(fragment);
     }
 
@@ -120,20 +121,33 @@ public class FilterFrag extends BaseFrag {
      */
     @OnClick(R.id.car_type_container)
     public void toSelectCarType(View view) {
-        fragment = FilterItemSelectFrag.getInstance(carTypeSelected, 4,carSeriesSelected.getId(),carYearSelected.getName());
+        fragment = FilterItemSelectFrag.getInstance(carTypeSelected, 4, carSeriesSelected.getId(), carYearSelected.getName());
         openSecondFilterFrag(fragment);
 
     }
 
-    private void openSecondFilterFrag(Fragment frag){
+
+    private void openSecondFilterFrag(Fragment frag) {
+        //viewHolder.fragmentContainer.setVisibility(View.INVISIBLE);
         FragmentTransaction transition = getFragmentManager().beginTransaction();
-        transition.add(R.id.fragment_container, frag).commit();
-        viewHolder.fragmentContainer.setVisibility(View.VISIBLE);
+        transition.setCustomAnimations(R.anim.activity_exchange_right_in, R.anim.activity_no_anim);
+        transition.add(R.id.filter_second_frag_container, frag).commit();
     }
+
+    private void shutDownFilterSecondFrag() {
+        FragmentTransaction transition = getFragmentManager().beginTransaction();
+
+        transition.setCustomAnimations(R.anim.activity_no_anim, R.anim.activity_exchange_right_out);
+        transition.remove(fragment).commit();
+        // getFragmentManager().popBackStackImmediate();
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPartBrandSelected(EventBusEv ev) {
         if (EventBusEv.is(ev, "part_brand_selected")) {
             selectedPartBrand = (Item) ev.getData();
+            viewHolder.selectedPartsBrand.setText(selectedPartBrand.getName());
             shutDownFilterSecondFrag();
         }
     }
@@ -155,6 +169,15 @@ public class FilterFrag extends BaseFrag {
             carBrandSelected = (CarSeriesBean) ev.getData();
             shutDownFilterSecondFrag();
             viewHolder.selectedCarBrand.setText(carBrandSelected.getName());
+            viewHolder.selectedCarSeries.setText("");
+            viewHolder.carSeriesContainer.setVisibility(View.VISIBLE);
+            carSeriesSelected = null;
+            viewHolder.selectedCarYear.setText("");
+            //viewHolder.carYearContainer.setVisibility(View.VISIBLE);
+            carYearSelected = null;
+            viewHolder.selectedCarType.setText("");
+            //viewHolder.carTypeContainer.setVisibility(View.VISIBLE);
+            carTypeSelected = null;
         }
     }
 
@@ -164,6 +187,12 @@ public class FilterFrag extends BaseFrag {
             carSeriesSelected = (CarSeriesBean) ev.getData();
             shutDownFilterSecondFrag();
             viewHolder.selectedCarSeries.setText(carSeriesSelected.getName());
+            viewHolder.selectedCarYear.setText("");
+            viewHolder.carYearContainer.setVisibility(View.VISIBLE);
+            carYearSelected = null;
+            viewHolder.selectedCarType.setText("");
+            //viewHolder.carTypeContainer.setVisibility(View.VISIBLE);
+            carTypeSelected = null;
         }
     }
 
@@ -173,6 +202,9 @@ public class FilterFrag extends BaseFrag {
             carYearSelected = (CarSeriesBean) ev.getData();
             shutDownFilterSecondFrag();
             viewHolder.selectedCarYear.setText(carYearSelected.getName());
+            viewHolder.selectedCarType.setText("");
+            viewHolder.carTypeContainer.setVisibility(View.VISIBLE);
+            carTypeSelected = null;
         }
     }
 
@@ -192,18 +224,14 @@ public class FilterFrag extends BaseFrag {
             shutDownFilterSecondFrag();
         }
     }
-    private void shutDownFilterSecondFrag(){
-        FragmentTransaction transition = getFragmentManager().beginTransaction();
-        transition.remove(fragment).commit();
-        viewHolder.fragmentContainer.setVisibility(View.INVISIBLE);
-    }
 
 
     @OnClick(R.id.on_back)
     public void onShutdownDrawerView(View view) {
         shutdownDrawerView();
     }
-    public void shutdownDrawerView(){
+
+    public void shutdownDrawerView() {
         SearchAct act = (SearchAct) getActivity();
         act.shutDownDrawer();
     }
@@ -235,7 +263,7 @@ public class FilterFrag extends BaseFrag {
         TextView selectedCarType;
         @Bind(R.id.car_type_container)
         LinearLayout carTypeContainer;
-        @Bind(R.id.fragment_container)
+        @Bind(R.id.filter_second_frag_container)
         FrameLayout fragmentContainer;
 
         ViewHolder(View view) {

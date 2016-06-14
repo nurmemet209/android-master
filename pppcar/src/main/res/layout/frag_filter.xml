@@ -1,275 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-
     >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".SearchAct"
-        android:showDividers="middle"
-        android:divider="@drawable/divider_small"
-        android:background="@color/main_bg_gray"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_bottom_bar_height"
-            android:background="@color/white"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <ImageView
-                android:id="@+id/on_back"
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:layout_centerVertical="true"
-                android:clickable="true"
-                android:scaleType="centerInside"
-                android:src="@mipmap/back"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="筛选"
-                />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/part_brand_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="配件品牌"
-                />
-
-            <TextView
-                android:id="@+id/selected_parts_brand"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/price_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="选择价格"
-                />
-
-            <TextView
-                android:id="@+id/selected_price"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                android:gravity="right"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/car_brand_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="汽车品牌"
-                />
-
-            <TextView
-                android:id="@+id/selected_car_brand"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                android:gravity="right"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/car_series_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="车系"
-                />
-
-            <TextView
-                android:id="@+id/selected_car_series"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                android:gravity="right"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/car_year_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="年款"
-                />
-
-            <TextView
-                android:id="@+id/selected_car_year"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                android:gravity="right"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/car_type_container"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:background="@drawable/list_item_bg_"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="车型"
-                />
-
-            <TextView
-                android:id="@+id/selected_car_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/padding_normal"
-                android:gravity="right"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_width"
-                android:background="@color/transparent"
-                android:scaleType="centerInside"
-                android:src="@mipmap/go"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
     <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/filter_second_frag_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:clickable="true"
-        android:visibility="gone"
-        android:background="@color/transparent"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_bg_gray"
+            android:divider="@drawable/divider_small"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            tools:context=".SearchAct"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/main_bottom_bar_height"
+                android:background="@color/white"
+                android:paddingRight="@dimen/padding_normal"
+                >
+
+                <ImageView
+                    android:id="@+id/on_back"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/back"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="筛选"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/part_brand_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="配件品牌"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_parts_brand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/padding_normal"
+                    android:gravity="right"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/price_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择价格"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_normal"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/car_brand_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="汽车品牌"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_car_brand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_normal"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/car_series_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:visibility="invisible"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车系"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_car_series"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_normal"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/car_year_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:visibility="invisible"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="年款"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_car_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_normal"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/car_type_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/list_item_bg_"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:visibility="invisible"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车型"
+                    />
+
+                <TextView
+                    android:id="@+id/selected_car_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/padding_normal"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_width"
+                    android:background="@color/transparent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/go"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </FrameLayout>
+
+
+
 </FrameLayout>
